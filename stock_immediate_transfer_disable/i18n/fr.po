@@ -37,11 +37,6 @@ msgstr "Transfert immédiat"
 
 #. module: stock_immediate_transfer_disable
 #: model:ir.ui.view,arch_db:stock_immediate_transfer_disable.view_immediate_transfer
-msgid "No Quantities Selected"
-msgstr "Aucune quantité sélectionnée"
-
-#. module: stock_immediate_transfer_disable
-#: model:ir.ui.view,arch_db:stock_immediate_transfer_disable.view_immediate_transfer
 msgid "Return"
 msgstr "Retour"
 
@@ -49,18 +44,3 @@ msgstr "Retour"
 #: model:ir.model,name:stock_immediate_transfer_disable.model_stock_picking_type
 msgid "The picking type determines the picking view"
 msgstr "Le type de préparation détermine la vue de préparation"
-
-#. module: stock_immediate_transfer_disable
-#: model:ir.ui.view,arch_db:stock_immediate_transfer_disable.view_immediate_transfer
-msgid ""
-"You haven't set processed (<i>done</i>) quantities. Click <i>apply</i> "
-"and\n"
-"                            Odoo will process all quantities to do."
-msgstr ""
-"Vous n'avez pas indiqué les quantités à transférer. Cliquez sur "
-"<i>appliquer</i> afin que Odoo transfère tous les articles."
-
-#. module: stock_immediate_transfer_disable
-#: model:ir.ui.view,arch_db:stock_immediate_transfer_disable.view_immediate_transfer
-msgid "_Apply"
-msgstr "_Appliquer"
