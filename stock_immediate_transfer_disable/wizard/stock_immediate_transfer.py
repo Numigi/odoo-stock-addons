@@ -9,4 +9,5 @@ class StockImmediateTransfer(models.TransientModel):
     _inherit = 'stock.immediate.transfer'
 
     allow_imediate_transfer = fields.Boolean(
-        related='pick_id.picking_type_id.allow_imediate_transfer')
+        related='pick_id.picking_type_id.allow_imediate_transfer',
+        readonly=True)
