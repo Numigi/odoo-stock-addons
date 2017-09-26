@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_immediate_transfer" model="ir.ui.view">
+        <field name="name">stock.immediate.transfer.view.form</field>
+        <field name="model">stock.immediate.transfer</field>
+        <field name="inherit_id" ref="stock.view_immediate_transfer"/>
+        <field name="arch" type="xml">
+            <form position="replace">
+                <form string="No Quantities Selected">
+                    <field name="allow_imediate_transfer" invisible="1"/>
+                    <group attrs="{'invisible': [('allow_imediate_transfer', '=', False)]}">
+                        <p>
+                            You haven't set processed (<i>done</i>) quantities. Click <i>apply</i> and
+                            Odoo will process all quantities to do.
+                        </p>
+                    </group>
+                    <group attrs="{'invisible': [('allow_imediate_transfer', '=', True)]}">
+                        <p>Before processing the transfer, you must set quantities to process.</p>
+                    </group>
+                    <footer>
+                        <button name="process" string="_Apply" type="object" class="btn-primary"
+                            attrs="{'invisible': [('allow_imediate_transfer', '=', False)]}"/>
+                        <button string="Return" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+            </form>
+        </field>
+    </record>
+</odoo>
