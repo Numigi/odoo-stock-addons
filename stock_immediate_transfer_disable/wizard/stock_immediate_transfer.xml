@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_immediate_transfer" model="ir.ui.view">
+        <field name="name">stock.immediate.transfer.view.form</field>
+        <field name="model">stock.immediate.transfer</field>
+        <field name="inherit_id" ref="stock.view_immediate_transfer"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/group" position="attributes">
+                <attribute name="attrs">{'invisible': [('allow_imediate_transfer', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//form/group" position="after">
+                <field name="allow_imediate_transfer" invisible="1"/>
+                <group attrs="{'invisible': [('allow_imediate_transfer', '=', True)]}">
+                    <p>Before processing the transfer, you must set quantities to process.</p>
+                </group>
+            </xpath>
+            <button name="process" position="attributes">
+                <attribute name="attrs">{'invisible': [('allow_imediate_transfer', '=', False)]}</attribute>
+            </button>
+            <button special="cancel" position="attributes">
+                <attribute name="attrs">{'invisible': [('allow_imediate_transfer', '=', False)]}</attribute>
+            </button>
+            <button special="cancel" position="after">
+                <button special="cancel" string="Return"
+                    attrs="{'invisible': [('allow_imediate_transfer', '=', True)]}"
+                    class="oe_highlight"/>
+            </button>
+        </field>
+    </record>
+</odoo>
