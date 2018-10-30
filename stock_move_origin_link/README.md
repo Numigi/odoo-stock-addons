@@ -1,10 +1,10 @@
 # Stock Move Origin Link
 
-This module add the `Source Document` in the list view of stock pickings and stock moves.
+This module adds the `Source Document` to the list view of stock pickings and stock moves.
 
 ![Stock Move List](static/description/stock_move_list.png?raw=true)
 
-The field is clickable if it refers to an object within the supported types.
+The text is clickable if it refers to an object within the supported types.
 
 For example, in the example above, when clicking on `MO/00003`, the user is redirected to the
 form view of the production order.
