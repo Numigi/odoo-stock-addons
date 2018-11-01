@@ -178,14 +178,14 @@ require("web.ListRenderer").include({
             return;
         }
         var tdContent = td.contents();
-        var link = $("<a></a>")
+        var link = $("<a></a>");
         link.attr("href", _.str.sprintf("#id=%s&model=%s", originRecord.id, originRecord.model));
         link.append(tdContent);
         link.click(async (event) => {
             event.preventDefault();
             event.stopPropagation();
             var action = await getRecordFormViewAction(originRecord);
-            this.trigger_up("do_action", {action: action});
+            this.trigger_up("do_action", {action});
         });
         td.empty().append(link);
     },
@@ -218,7 +218,7 @@ require("web.FormRenderer").include({
             event.preventDefault();
             event.stopPropagation();
             var action = await getRecordFormViewAction(originRecord);
-            this.trigger_up("do_action", {action: action});
+            this.trigger_up("do_action", {action});
         });
         originFieldWidget.$el.empty().append(link);
     },
