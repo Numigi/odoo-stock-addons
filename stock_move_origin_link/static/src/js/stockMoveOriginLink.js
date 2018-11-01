@@ -34,7 +34,8 @@ var AccessVerifier = Class.extend({
         }
         return this._accessCache.get(model);
     },
-})
+});
+
 var accessVerifier = new AccessVerifier();
 
 var OriginDocumentCache = Class.extend({
@@ -48,6 +49,7 @@ var OriginDocumentCache = Class.extend({
         return this._cache.get(originType);
     },
 });
+
 var originDocumentCache = new OriginDocumentCache();
 
 function isModuleInstalled(moduleName){
@@ -211,7 +213,7 @@ require("web.FormRenderer").include({
             return;
         }
         var widgetContent = originFieldWidget.$el.contents();
-        var link = $("<a></a>")
+        var link = $("<a></a>");
         link.attr("href", _.str.sprintf("#id=%s&model=%s", originRecord.id, originRecord.model));
         link.append(widgetContent);
         link.click(async (event) => {
