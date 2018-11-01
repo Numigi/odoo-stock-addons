@@ -22,6 +22,12 @@ When clicking on `SO020`, the user is redirected to the sale order.
 
 ![Sale Order Form](static/description/sale_order_form.png?raw=true)
 
+## Form Views
+
+The feature is also available on form views of stock pickings and stock moves.
+
+![Delivery Order Form](static/description/delivery_order_form.png?raw=true)
+
 ## Supported Origin Documents
 
 The module supports the following documents as origin of a stock move:

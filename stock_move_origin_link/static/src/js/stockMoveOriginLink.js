@@ -37,6 +37,19 @@ var AccessVerifier = Class.extend({
 })
 var accessVerifier = new AccessVerifier();
 
+var OriginDocumentCache = Class.extend({
+    init(){
+        this._cache = new Map();
+    },
+    getOriginDocumentMapping(originType){
+        if(!this._cache.has(originType)){
+            this._cache.set(originType, new Map());
+        }
+        return this._cache.get(originType);
+    },
+});
+var originDocumentCache = new OriginDocumentCache();
+
 function isModuleInstalled(moduleName){
     return odoo._modules.indexOf(moduleName) !== -1;
 }
@@ -59,15 +72,31 @@ async function searchDocumentsFromOrigins(model, module_, origins){
         return new Map();
     }
 
-    var domain = [["name", "in", origins]];
-    var data = await rpc.query({model, method: "search_read", args: [domain, ["name"]]});
-    var recordMapping = new Map();
-    data.forEach((document_) => {
-        document_.model = model;
-        recordMapping.set(document_.name, document_);
-    });
+    var recordMapping = originDocumentCache.getOriginDocumentMapping(model);
+
+    var missingOrigins = origins.filter((o) => !recordMapping.has(o));
+    if(missingOrigins.length){
+        var domain = [["name", "in", origins]];
+        var data = await rpc.query({model, method: "search_read", args: [domain, ["name"]]});
+        data.forEach((document_) => {
+            document_.model = model;
+            recordMapping.set(document_.name, document_);
+        });
+        missingOrigins.forEach((origin) => {
+            if(!recordMapping.has(origin)){
+                recordMapping.set(origin, null);
+            }
+        });
+    }
+
     return recordMapping;
 }
+
+
+async function getRecordFormViewAction(record){
+    return await rpc.query({model: record.model, method: "get_formview_action", args: [[record.id]]});
+}
+
 
 require("web.ListRenderer").include({
     _renderView(){
@@ -121,18 +150,18 @@ require("web.ListRenderer").include({
      * @param {Object} record - the current record
      * @returns {Object} - the origin record
      */
-    _getStockMoveRelatedObject(record){
+    _getStockMoveOriginRecord(record){
         var origin = record.data.origin;
         if(!origin){
             return null;
         }
-        if(this._purchaseOrderOriginMapping.has(origin)){
+        if(this._purchaseOrderOriginMapping.get(origin)){
             return this._purchaseOrderOriginMapping.get(origin);
         }
-        if(this._saleOrderOriginMapping.has(origin)){
+        if(this._saleOrderOriginMapping.get(origin)){
             return this._saleOrderOriginMapping.get(origin);
         }
-        if(this._manufacturingOrderOriginMapping.has(origin)){
+        if(this._manufacturingOrderOriginMapping.get(origin)){
             return this._manufacturingOrderOriginMapping.get(origin);
         }
         return null;
@@ -144,25 +173,81 @@ require("web.ListRenderer").include({
      * @param {JQueryElement} td - the table cell on which to display the link.
      */
     _addStockMoveOriginLinkToBodyCell(record, td){
-        var relatedObject = this._getStockMoveRelatedObject(record);
-        if(!relatedObject){
+        var originRecord = this._getStockMoveOriginRecord(record);
+        if(!originRecord){
             return;
         }
         var tdContent = td.contents();
         var link = $("<a></a>")
-        link.attr("href", _.str.sprintf("#id=%s&model=%s", relatedObject.id, relatedObject.model));
+        link.attr("href", _.str.sprintf("#id=%s&model=%s", originRecord.id, originRecord.model));
         link.append(tdContent);
         link.click(async (event) => {
             event.preventDefault();
             event.stopPropagation();
-            var action = await this._rpc({
-                model: relatedObject.model,
-                method: "get_formview_action",
-                args: [[relatedObject.id]],
-            });
+            var action = await getRecordFormViewAction(originRecord);
             this.trigger_up("do_action", {action: action});
         });
         td.empty().append(link);
+    },
+});
+
+require("web.FormRenderer").include({
+    _renderView() {
+        var result = this._super.apply(this, arguments);
+        if(
+            stockMoveModels.indexOf(this.state.model) !== -1 &&
+            this.mode === "readonly"
+        ){
+            var originFieldWidget = this.allFieldWidgets[this.state.id].filter((w) => w.name === "origin")[0];
+            if(originFieldWidget){
+                this._addStockMoveOriginLinkToFieldNode(originFieldWidget);
+            }
+        }
+        return result;
+    },
+    async _addStockMoveOriginLinkToFieldNode(originFieldWidget){
+        var originRecord = await this._searchStockMoveOriginRecord();
+        if(!originRecord){
+            return;
+        }
+        var widgetContent = originFieldWidget.$el.contents();
+        var link = $("<a></a>")
+        link.attr("href", _.str.sprintf("#id=%s&model=%s", originRecord.id, originRecord.model));
+        link.append(widgetContent);
+        link.click(async (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            var action = await getRecordFormViewAction(originRecord);
+            this.trigger_up("do_action", {action: action});
+        });
+        originFieldWidget.$el.empty().append(link);
+    },
+    /**
+     * Search the origin document related to the form record.
+     *
+     * In a form view, the related documents does not need to be cached,
+     * because only one origin field is rendered.
+     *
+     * @returns {Object} - the origin record
+     */
+    async _searchStockMoveOriginRecord(){
+        var origin = this.state.data.origin;
+        if(!origin){
+            return null;
+        }
+        var poMapping = await searchDocumentsFromOrigins("purchase.order", "purchase", [origin]);
+        if(poMapping.get(origin)){
+            return poMapping.get(origin);
+        }
+        var soMapping = await searchDocumentsFromOrigins("sale.order", "sale", [origin]);
+        if(soMapping.get(origin)){
+            return soMapping.get(origin);
+        }
+        var moMapping = await searchDocumentsFromOrigins("mrp.production", "mrp", [origin]);
+        if(moMapping.get(origin)){
+            return moMapping.get(origin);
+        }
+        return null;
     },
 });
 
