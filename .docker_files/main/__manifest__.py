@@ -12,6 +12,7 @@
     'summary': 'Install all addons required for testing.',
     'depends': [
         'stock_immediate_transfer_disable',
+        'stock_move_list_cost',
         'stock_move_origin_link',
         'stock_picking_show_address',
     ],
