@@ -7,7 +7,7 @@
         <field name="type">tree</field>
         <field name="inherit_id" ref="stock.view_move_tree"/>
         <field name="arch" type="xml">
-            <field name="product_uom_qty" position="after">
+            <field name="product_uom_qty" position="before">
                 <field name="value" readonly="1" string="Cost"/>
             </field>
         </field>
