@@ -100,6 +100,14 @@ async function getRecordFormViewAction(record){
 }
 
 
+/**
+ * Load web.EditableListRenderer before extending web.ListRenderer.
+ *
+ * Otherwise, there is a conflict in the method _renderView which
+ * breaks the behavior of the editable list.
+ */
+require("web.EditableListRenderer");
+
 require("web.ListRenderer").include({
     _renderView(){
         if(stockMoveModels.indexOf(this.state.model) !== -1){
