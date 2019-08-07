@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_warehouse_access
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-08 15:00+0000\n"
+"PO-Revision-Date: 2019-08-08 15:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_warehouse_access
+#: model:ir.model.fields,field_description:stock_warehouse_access.field_res_users__all_warehouses
+msgid "All Warehouses"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_quant_package
+msgid "Packages"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model:ir.model,name:stock_warehouse_access.model_stock_warehouse
+#: model:ir.model.fields,field_description:stock_warehouse_access.field_res_users__warehouse_ids
+msgid "Warehouse"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: model_terms:ir.ui.view,arch_db:stock_warehouse_access.user_form_with_authorized_warehouses
+msgid "Warehouses"
+msgstr ""
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_inventory.py:12
+#, python-format
+msgid "You are not authorized to access the inventory line {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder à la ligne d'inventaire {record} car celle-ci est liée à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_inventory.py:7
+#, python-format
+msgid "You are not authorized to access the inventory {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder à l'inventaire {record} car celui-ci est lié à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_quant.py:12
+#, python-format
+msgid "You are not authorized to access the package {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder au colis {record} car celui-ci est lié à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_scrap.py:7
+#, python-format
+msgid "You are not authorized to access the scrap entry {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder à l'entrée de rebut {record} car celle-ci est liée à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_location.py:19
+#, python-format
+msgid "You are not authorized to access the stock location {}."
+msgstr "Vous n'êtes pas autorisé à accéder à l'emplacement {}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_move.py:12
+#, python-format
+msgid "You are not authorized to access the stock move line {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder à la ligne de mouvement {record} car celle-ci est liée à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_move.py:7
+#, python-format
+msgid "You are not authorized to access the stock move {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder au mouvement d'inventaire {record} car celui-ci est lié à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_picking_type.py:19
+#, python-format
+msgid "You are not authorized to access the stock picking type {type_} because it is related to the warehouse {warehouse}."
+msgstr "Vous n'êtes pas autorisé à accéder au type d'opération {type_} car celui-ci est lié à l'entrepôt {warehouse}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_move.py:17
+#, python-format
+msgid "You are not authorized to access the stock picking {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder à l'opération d'inventaire {record} car celle-ci est lié à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_quant.py:7
+#, python-format
+msgid "You are not authorized to access the stock quant {record} because it is bound to the location {location}."
+msgstr "Vous n'êtes pas autorisé à accéder au quant {record} car celui-ci est lié à l'emplacement {location}."
+
+#. module: stock_warehouse_access
+#: code:addons/stock_warehouse_access/models/stock_warehouse.py:18
+#, python-format
+msgid "You are not authorized to access the warehouse {}."
+msgstr "Vous n'êtes pas autorisé à accéder à l'entrepôt {}."

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="user_form_with_authorized_warehouses" model="ir.ui.view">
+        <field name="name">User Form: add authorized warehouses</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_ids']/.." position="after">
+                <group string="Warehouses">
+                    <field name="all_warehouses"/>
+                    <field name="warehouse_ids" widget="many2many_tags" options="{'no_create': True}"
+                        attrs="{'invisible': [('all_warehouses', '=', True)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
