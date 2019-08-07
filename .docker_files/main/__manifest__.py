@@ -11,10 +11,10 @@
     'category': 'Other',
     'summary': 'Install all addons required for testing.',
     'depends': [
-        'stock_immediate_transfer_disable',
-        'stock_move_list_cost',
-        'stock_move_origin_link',
-        'stock_picking_show_address',
+        # 'stock_immediate_transfer_disable',  # not ported to 12.0
+        # 'stock_move_list_cost',  # not ported to 12.0
+        # 'stock_move_origin_link',  # not ported to 12.0
+        # 'stock_picking_show_address',  # not ported to 12.0
     ],
     'installable': True,
 }

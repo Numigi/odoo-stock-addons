@@ -50,7 +50,7 @@ jobs:
           name: Set tag
           command: |
             ./nws circleci create-tag -t odoo-base
-            
+
 workflows:
   version: 2
   odoo:

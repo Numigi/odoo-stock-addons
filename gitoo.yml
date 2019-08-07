@@ -1,0 +1,2 @@
+- url: https://{{GIT_TOKEN}}@github.com/Numigi/odoo-base-addons
+  branch: "12.0"
