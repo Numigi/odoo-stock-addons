@@ -12,8 +12,10 @@ They can only access inventory objects from their assigned warehouse.
 
 These objects include:
 
+* Inventories
 * Locations
 * Packages
+* Scrap Entries
 * Stock Move Lines
 * Stock Moves
 * Stock Picking Types

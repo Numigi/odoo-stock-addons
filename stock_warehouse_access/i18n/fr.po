@@ -18,7 +18,12 @@ msgstr ""
 #. module: stock_warehouse_access
 #: model:ir.model.fields,field_description:stock_warehouse_access.field_res_users__all_warehouses
 msgid "All Warehouses"
-msgstr ""
+msgstr "Tous les entrepôts"
+
+#. module: stock_warehouse_access
+#: model:ir.model.fields,field_description:stock_warehouse_access.field_res_users__warehouse_ids
+msgid "Authorized Warehouses"
+msgstr "Entrepôts autorisés"
 
 #. module: stock_warehouse_access
 #: model:ir.model,name:stock_warehouse_access.model_stock_location
@@ -62,14 +67,13 @@ msgstr ""
 
 #. module: stock_warehouse_access
 #: model:ir.model,name:stock_warehouse_access.model_stock_warehouse
-#: model:ir.model.fields,field_description:stock_warehouse_access.field_res_users__warehouse_ids
 msgid "Warehouse"
 msgstr ""
 
 #. module: stock_warehouse_access
 #: model_terms:ir.ui.view,arch_db:stock_warehouse_access.user_form_with_authorized_warehouses
 msgid "Warehouses"
-msgstr ""
+msgstr "Entrepôts"
 
 #. module: stock_warehouse_access
 #: code:addons/stock_warehouse_access/models/stock_inventory.py:12

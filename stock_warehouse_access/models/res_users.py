@@ -14,6 +14,7 @@ class User(models.Model):
         'res_users_warehouse_rel',
         'user_id',
         'warehouse_id',
+        string='Authorized Warehouses',
     )
 
     def has_warehouse_access(self, warehouse):
