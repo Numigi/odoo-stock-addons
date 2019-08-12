@@ -11,10 +11,14 @@
     'category': 'Other',
     'summary': 'Install all addons required for testing.',
     'depends': [
+        'stock_dropshipping',  # Used for testing stock_warehouse_access
+
         # 'stock_immediate_transfer_disable',  # not ported to 12.0
         # 'stock_move_list_cost',  # not ported to 12.0
         # 'stock_move_origin_link',  # not ported to 12.0
         # 'stock_picking_show_address',  # not ported to 12.0
+
+        'stock_warehouse_access',
     ],
     'installable': True,
 }

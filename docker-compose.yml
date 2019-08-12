@@ -4,11 +4,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - GIT_TOKEN=${GIT_TOKEN}
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./.log:/var/log/odoo
-      - ./stock_warehouse_access:/mnt/extra-addons/stock_warehouse_access
-      - ../base-addons/base_extended_security:/mnt/third-party-addons/base_extended_security
     ports:
       - "8069:8069"
       - "8071:8071"
