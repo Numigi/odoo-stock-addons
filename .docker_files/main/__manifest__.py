@@ -18,6 +18,7 @@
         # 'stock_move_origin_link',  # not ported to 12.0
         # 'stock_picking_show_address',  # not ported to 12.0
 
+        'purchase_warehouse_access',
         'stock_warehouse_access',
     ],
     'installable': True,
