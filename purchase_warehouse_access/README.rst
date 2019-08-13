@@ -21,13 +21,13 @@ Usage
 -----
 As member of the group ``Purchase / User``, I go to the ``Purchase`` app.
 
-I notice that only quotations of my own warehouse are displayed.
+I notice that only quotations / orders of my own warehouse are displayed.
 
-.. image:: static/description/purchase_quotation_list.png
+.. image:: static/description/purchase_order_list.png
 
-If I go to the list of purchase orders, I notice the same behavior.
+I can see the warehouse related to my order in the ``Other Information`` tab:
 
-.. image:: static/description/purchase_qorder_list.png
+.. image:: static/description/purchase_order_form.png
 
 Contributors
 ------------
