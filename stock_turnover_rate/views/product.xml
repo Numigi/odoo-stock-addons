@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="product_list_with_turnover_fields" model="ir.ui.view">
+        <field name="name">Product List Form: Add turnover fields</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="target_turnover_rate"/>
+                <field name="turnover_rate"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

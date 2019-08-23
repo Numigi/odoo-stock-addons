@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="product_category_form_with_target_turnover" model="ir.ui.view">
+        <field name="name">Product Category Form: Add target turnover rate</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <group name="stock_turnover_group">
+                    <field name="target_turnover_rate"/>
+                </group>
+            </sheet>
+        </field>
+    </record>
+
+    <record id="product_category_list_with_target_turnover" model="ir.ui.view">
+        <field name="name">Product Category List: Add target turnover rate</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_list_view"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="target_turnover_rate"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
