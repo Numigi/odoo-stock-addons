@@ -5,6 +5,9 @@ USER root
 
 ARG GIT_TOKEN
 
+COPY .docker_files/test-requirements.txt ./test-requirements.txt
+RUN pip3 install -r ./test-requirements.txt && rm ./test-requirements.txt
+
 ENV THIRD_PARTY_ADDONS /mnt/third-party-addons
 RUN mkdir -p "${THIRD_PARTY_ADDONS}" && chown -R odoo "${THIRD_PARTY_ADDONS}"
 COPY ./gitoo.yml /gitoo.yml
@@ -14,6 +17,7 @@ USER odoo
 
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
 COPY stock_inventory_internal_location /mnt/extra-addons/stock_inventory_internal_location
+COPY stock_turnover_rate /mnt/extra-addons/stock_turnover_rate
 COPY stock_warehouse_access /mnt/extra-addons/stock_warehouse_access
 
 COPY .docker_files/main /mnt/extra-addons/main

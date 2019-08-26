@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="product_template_form_with_turnover_fields" model="ir.ui.view">
+        <field name="name">Product Template Form: Add turnover fields</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_information']/group[1]" position="after">
+                <group name="stock_turnover_group" attrs="{'invisible': [('type', '!=', 'product')]}">
+                    <field name="turnover_rate_active"
+                        attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"/>
+                    <field name="target_turnover_rate"/>
+                    <field name="turnover_rate"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_list_with_turnover_fields" model="ir.ui.view">
+        <field name="name">Product Template List: Add turnover fields</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="target_turnover_rate"/>
+                <field name="turnover_rate"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_search_view_with_turnover_filter" model="ir.ui.view">
+        <field name="name">Product Template Search: Add turnover filter</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//separator[4]" position="after">
+                <filter string="Turnover Rate Active" name="turnover_rate_active" domain="[('turnover_rate_active', '=', True)]"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
