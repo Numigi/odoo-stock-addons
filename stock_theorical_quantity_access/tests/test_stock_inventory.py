@@ -11,6 +11,23 @@ class TestStockInventory(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+        # Create and validate an initial inventory
+        # to make sure at least one products has theoretical quantities.
+        initial_inventory = cls.env['stock.inventory'].create({
+            'name': 'Initial Inventory',
+            'filter': 'none',
+            'exhausted': True,
+        })
+        product = cls.env['product.product'].create({
+            'name': 'Product A',
+            'type': 'product',
+        })
+        initial_inventory.action_start()
+        line = next(l for l in initial_inventory.line_ids if l.product_id == product)
+        line.product_qty = 1
+        initial_inventory.action_validate()
+
         cls.inventory = cls.env['stock.inventory'].create({
             'name': 'My Inventory',
             'exhausted': False,

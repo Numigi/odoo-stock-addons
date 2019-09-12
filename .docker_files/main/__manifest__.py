@@ -20,6 +20,7 @@
 
         'purchase_warehouse_access',
         'stock_inventory_internal_location',
+        'stock_theorical_quantity_access',
         'stock_turnover_rate',
         'stock_warehouse_access',
     ],

@@ -48,4 +48,65 @@
         </field>
     </record>
 
+    <record id="stock_inventory_form_without_lines_colors" model="ir.ui.view">
+        <field name="name">Stock Inventory Form: make the inventory lines uncolored</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree" position="attributes">
+                <attribute name="decoration-info"></attribute>
+                <attribute name="decoration-danger"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_inventory_form_with_lines_colors" model="ir.ui.view">
+        <field name="name">Stock Inventory Form: make the inventory lines uncolored</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory_form_without_lines_colors"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree" position="attributes">
+                <attribute name="decoration-info">product_qty != theoretical_qty</attribute>
+                <attribute name="decoration-danger">theoretical_qty &lt; 0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_inventory_line_list_without_colors" model="ir.ui.view">
+        <field name="name">Stock Inventory Line List: remove colors</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree2"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="decoration-info"></attribute>
+                <attribute name="decoration-danger"></attribute>
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_inventory_line_list_with_colors" model="ir.ui.view">
+        <field name="name">Stock Inventory Line List: remove colors</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock_inventory_line_list_without_colors"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="decoration-info">product_qty != theoretical_qty</attribute>
+                <attribute name="decoration-danger">theoretical_qty &lt; 0</attribute>
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_inventory_form_with_stock_moves_hidden" model="ir.ui.view">
+        <field name="name">Stock Inventory Form: hide stock moves to basic inventory users</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[2]" position="attributes">
+                <attribute name="groups">stock.group_stock_manager</attribute>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>

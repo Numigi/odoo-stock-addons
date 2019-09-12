@@ -8,6 +8,7 @@ class StockInventory(models.Model):
 
     _inherit = 'stock.inventory'
 
+    @api.onchange('filter')
     def _onchange_filter_set_exhausted(self):
         """When selecting multiple products or a whole category, check the exausted field.
 
@@ -16,17 +17,10 @@ class StockInventory(models.Model):
         if self.filter in ('none', 'category'):
             self.exhausted = True
 
-    def _get_inventory_lines_values(self):
-        """When the inventory line is created, the product quantity is set to 0.
-
-        The super method sets the product_qty equal to the theoretical_qty.
-
-        We do not want the user to figure the theoritical quantity based on the
-        new product_qty value.
-        """
-        res = super()._get_inventory_lines_values()
-        for line in res:
-            line['product_qty'] = 0
+    def action_start(self):
+        """When the inventory is started, reset the quantities to zero."""
+        res = super().action_start()
+        self.action_reset_product_qty()
         return res
 
 
