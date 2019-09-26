@@ -19,6 +19,7 @@
         # 'stock_picking_show_address',  # not ported to 12.0
 
         'purchase_warehouse_access',
+        'stock_inventory_category_domain',
         'stock_inventory_internal_location',
         'stock_theorical_quantity_access',
         'stock_turnover_rate',

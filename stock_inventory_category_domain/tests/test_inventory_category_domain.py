@@ -16,6 +16,7 @@ class TestStockInventoryCategoryDomain(TransactionCase):
             'groups_id': [(6, 0, [self.group_stock_manager.id])]
         })
         self.company = self.env.ref('stock.res_company_1')
+        self.company_2 = self.env['res.company'].create({'name': 'Company 2'})
 
     def test_check_category_company_for_product(self):
         # create product without company and category with company.
@@ -26,7 +27,16 @@ class TestStockInventoryCategoryDomain(TransactionCase):
         # update product abc to set the company  to category_super should have message:
         # You can not associate category {category} for the product {product} because this category is related to the company {company} but this product is not related to a company.
         with self.assertRaises(ValidationError):
-            product_abc.categ_id = category_super.id
+            product_abc.categ_id = category_super
+
+    def test_check_product_and_category_can_not_have_different_companies(self):
+        product_abc = self.env['product.template'].sudo(self.user_stock_manager).create(
+            {'name': 'ABC', 'company_id': self.company.id})
+        category_super = self.env['product.category'].sudo(self.user_stock_manager).create(
+            {'name': 'Super Category', 'company_id': self.company_2.id})
+
+        with self.assertRaises(ValidationError):
+            product_abc.categ_id = category_super
 
     def test_check_product_company_for_category(self):
         # create two products without company and category without company.

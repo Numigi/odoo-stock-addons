@@ -21,7 +21,11 @@ class ProductCategory(models.Model):
                      ('company_id', '!=', category.company_id.id)])
                 if product_without_company:
                     raise ValidationError(_(
-                        'A products not related to a company are part of this category. products of a category on which a company is defined must be defined on the same company.'))
+                        'A products not related to a company are part of this '
+                        'category ({category}). '
+                        'Products of a category on which a company is defined must be defined '
+                        'on the same company.'
+                    ).format(category.display_name))
 
 
 class ProductTemplate(models.Model):
@@ -31,7 +35,26 @@ class ProductTemplate(models.Model):
     def _check_category_company(self):
         """Check products of a category have same company."""
         for product in self:
-            if not product.company_id and product.categ_id.company_id:
+            product_company = product.company_id
+            categ_company = product.categ_id.company_id
+
+            if not product_company and categ_company:
                 raise ValidationError(_(
-                    'You can not associate category {category} for the product {product} because this category is related to the company {company} but this product is not related to a company.').format(
-                    category=product.categ_id.name, product=product.name, company=product.categ_id.company_id.name))
+                    'You can not associate category {category} for the product {product} '
+                    'because this category is related to the company {company} '
+                    'but this product is not related to a company.').format(
+                    category=product.categ_id.display_name,
+                    product=product.display_name,
+                    company=categ_company.display_name
+                ))
+
+            if product_company and categ_company and product_company != categ_company:
+                raise ValidationError(_(
+                    'You can not associate category {category} for the product {product} '
+                    'because this category is related to the company {categ_company}. '
+                    'This product is related to the company {product_company}.').format(
+                    category=product.categ_id.display_name,
+                    product=product.display_name,
+                    categ_company=categ_company.display_name,
+                    product_company=product_company.display_name,
+                ))
