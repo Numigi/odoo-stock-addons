@@ -1,0 +1,54 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_category_domain
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-13 10:09+0000\n"
+"PO-Revision-Date: 2019-09-13 10:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_category_domain
+#: code:addons/stock_inventory_category_domain/models/product.py:23
+#, python-format
+msgid "A products not related to a company are part of this category. products of a category on which a company is defined must be defined on the same company."
+msgstr "Des articles non liés à une compagnie font partie de cette catégorie. Les articles d'une catégorie sur laquelle est définie une compagnie doivent être définis sur la même compagnie."
+
+#. module: stock_inventory_category_domain
+#: model:ir.model.fields,field_description:stock_inventory_category_domain.field_product_category__available_in_inventory
+msgid "Available in inventory"
+msgstr "Disponible Prise d’inventaire"
+
+#. module: stock_inventory_category_domain
+#: model:ir.model.fields,field_description:stock_inventory_category_domain.field_product_category__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: stock_inventory_category_domain
+#: model_terms:ir.ui.view,arch_db:stock_inventory_category_domain.product_category_form_view_inherit_inventory_domain
+msgid "Inventory settings"
+msgstr "Paramètres de prise d'inventaire"
+
+#. module: stock_inventory_category_domain
+#: model:ir.model,name:stock_inventory_category_domain.model_product_category
+msgid "Product Category"
+msgstr "Catégorie d'article"
+
+#. module: stock_inventory_category_domain
+#: model:ir.model,name:stock_inventory_category_domain.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: stock_inventory_category_domain
+#: code:addons/stock_inventory_category_domain/models/product.py:35
+#, python-format
+msgid "You can not associate category {category} for the product {product} because this category is related to the company {company} but this product is not related to a company."
+msgstr "Vous ne pouvez pas associer la catégorie {category} pour le produit {product} car la catégorie appartient à la compagnie {company} et l'article n'est pas lié à une compagnie."
+
