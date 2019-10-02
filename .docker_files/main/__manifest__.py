@@ -11,7 +11,7 @@
     'category': 'Other',
     'summary': 'Install all addons required for testing.',
     'depends': [
-        'sale',  # Required to test stock_previous_step_return
+        'sale_stock',  # Required to test stock_previous_step_return
 
         'stock_immediate_transfer_disable',
         'stock_move_list_cost',
