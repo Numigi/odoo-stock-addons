@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="backorder_confirmation_form_with_return_products" model="ir.ui.view">
+        <field name="name">Backorder Confirmation Wizard: Return Products button</field>
+        <field name="model">stock.backorder.confirmation</field>
+        <field name="inherit_id" ref="stock.view_backorder_confirmation"/>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <field name="show_return_products_button" invisible="1"/>
+            </form>
+            <button name="process" position="after">
+                <button name="return_products" string="Return Products" type="object" class="oe_highlight"
+                    attrs="{'invisible': [('show_return_products_button', '=', True)]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="backorder_confirmation_form_with_no_backorder_hidden" model="ir.ui.view">
+        <field name="name">Backorder Confirmation Wizard: Optionaly hide the No Backorder button</field>
+        <field name="model">stock.backorder.confirmation</field>
+        <field name="inherit_id" ref="stock.view_backorder_confirmation"/>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <field name="show_no_backorder_button" invisible="1"/>
+            </form>
+            <button name="process_cancel_backorder" position="attributes">
+                <attribute name="attrs">{'invisible': [('show_no_backorder_button', '=', True)]}</attribute>
+            </button>
+        </field>
+    </record>
+
+</odoo>

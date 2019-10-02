@@ -105,6 +105,12 @@ I could select to partially return products.
 
 In such case, a back order is created for the quantities that were not returned.
 
+Known Issues
+------------
+For now, this module does not support 3-steps routes, such as ``Pick + Pack + Ship``.
+The reason is that supporting this case adds extra complexity to the module.
+This is not currently required by any of Numigi's clients.
+
 Contributors
 ------------
 * Numigi (tm) and all its contributors (https://bit.ly/numigiens)

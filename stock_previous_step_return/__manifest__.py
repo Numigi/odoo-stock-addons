@@ -12,6 +12,8 @@
     'summary': 'Return stock pickings of the previous step',
     'depends': ['stock'],
     'data': [
+        'views/stock_picking_type.xml',
+        'wizard/stock_backorder_confirmation.xml',
     ],
     'installable': True,
 }
