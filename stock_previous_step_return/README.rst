@@ -1,12 +1,12 @@
-Stock Return From Next Step
-===========================
-This module allows to generate a stock picking return from the next step.
+Stock Previous Step Return
+==========================
+This module allows to automatically generate a stock picking return when validating a further step.
 
 .. contents:: Table of Contents
 
 Context
 -------
-In vanilla Odoo, you may choose to process your stock operations in one or multiple steps.
+In vanilla Odoo, per warehouse, you may choose to process your stock operations in one or multiple steps.
 
 For example, the delivery route offers 3 options:
 
@@ -29,12 +29,12 @@ This is very error prone and not much convenient for the user.
 Summary
 -------
 In the above case, it would be more convenient for the user to simply generate a stock return
-when completing the second step.
+when validating the second step.
 
-When asked whether to create a ``Back Order``, the user would instead select to return the products
+When asked whether to create a ``Back Order``, the user would instead choose to return the products
 to their original location.
 
-This is how the module behaves.
+This is what the module offers.
 
 Configuration
 -------------
@@ -51,11 +51,21 @@ Delivery Step
 ~~~~~~~~~~~~~
 I go to the ``Delivery`` picking type related to the ``(Pick + Ship)`` route.
 
-I notice a new checkbox ``Enable Return Unprocessed Quantities``.
+I notice 2 new checkboxes.
 
 .. image:: static/description/delivery_picking_type_form.png
 
-This box allows to enable the new feature on this type of operation.
+Enable Previous Step Return
+***************************
+Checking this box displays the ``Create a Return`` button on the backorder confirmation wizard for this type of operation.
+
+.. image:: static/description/return_products_button.png
+
+Enable No Backorder
+*******************
+Checking this box displays the ``No Backorder`` button on the backorder confirmation wizard for this type of operation.
+
+.. image:: static/description/no_backorder_button.png
 
 Usage
 -----
@@ -64,9 +74,9 @@ Pick Step
 ~~~~~~~~~
 As member of the group ``Stock / User``, I process a ``Pick`` operation.
 
-.. image:: static/description/pick_operation_ready.png
+I select the quantity, then I validate the picking.
 
-I select all quantities, then I validate the picking.
+.. image:: static/description/pick_operation_ready.png
 
 .. image:: static/description/pick_operation_done.png
 
@@ -76,39 +86,36 @@ Later, when the order is ready to ship, I go to the related ``Delivery Order``.
 
 .. image:: static/description/ship_operation_ready.png
 
-I notice that one of the items to ship is the wrong product (there is a labelling error).
+Now, let's suppose that, since the ``pick`` step was done, my customer called and asked to ship only 2 of the 3 items.
 
-I fill the quantities for every other item, then I click on ``Validate``.
+I fill the quantity to ship, then I click on ``Validate``.
 
 .. image:: static/description/ship_operation_validate.png
 
-A wizard is opened, asking whether to ``Create a Back Order`` or ``Create a Return``.
+A wizard is opened, asking whether to ``Create a Backorder`` or ``Create a Return``.
 
 I click on ``Create a Return``.
 
-A wizard appears, asking to validate the quantities to return.
-
-I click on ``Return``.
-
-.. image:: static/description/return_wizard.png
+.. image:: static/description/backorder_wizard.png
 
 A new stock picking is open.
 
-.. image:: static/description/return_wizard.png
+.. image:: static/description/return_stock_picking.png
 
 This picking is a return operation of the initial ``Pick`` operation.
 
-Partial Returns
-~~~~~~~~~~~~~~~
-In the above example, when asked to confirm the quantities to return,
-I could select to partially return products.
+Advanced Use Cases
+------------------
+The module supports serial numbers and production lots.
 
-In such case, a back order is created for the quantities that were not returned.
+It also supports the case where there are multiple ``Pick`` operations related to the ``Ship`` operations.
+As much as possible, the module will generate a single return operation.
+However, it may in some edge cases create more than one return pickings.
 
 Known Issues
 ------------
 For now, this module does not support 3-steps routes, such as ``Pick + Pack + Ship``.
-The reason is that supporting this case adds extra complexity to the module.
+The reason is that supporting this case would add extra complexity to the module.
 This is not currently required by any of Numigi's clients.
 
 Contributors

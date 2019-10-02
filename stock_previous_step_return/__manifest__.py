@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
-    'name': 'Stock Return From Next Step',
+    'name': 'Stock Previous Step Return',
     'version': '11.0.1.0.0',
     'author': 'Numigi',
     'maintainer': 'Numigi',

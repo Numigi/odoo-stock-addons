@@ -105,17 +105,17 @@ class BackorderConfirmationWizard(models.TransientModel):
     def _get_returned_pickings_action(self, return_pickings):
         action = {
             'name': _('Returned Pickings'),
-            'view_mode': 'form,tree,calendar',
+            'view_type': 'form',
+            'view_mode': 'tree,calendar,form',
             'res_model': 'stock.picking',
             'type': 'ir.actions.act_window',
             'context': dict(self.env.context),
         }
 
         if len(return_pickings) == 1:
-            action['view_type'] = 'form'
+            action['view_mode'] = 'form'
             action['res_id'] = return_pickings.id
         else:
-            action['view_type'] = 'tree'
             action['domain'] = [('id', 'in', return_pickings.ids)]
 
         return action

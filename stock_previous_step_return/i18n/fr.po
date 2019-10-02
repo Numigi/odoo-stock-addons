@@ -1,0 +1,75 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_previous_step_return
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-02 16:22+0000\n"
+"PO-Revision-Date: 2019-10-02 12:28-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: stock_previous_step_return
+#: model:ir.model,name:stock_previous_step_return.model_stock_backorder_confirmation
+msgid "Backorder Confirmation"
+msgstr ""
+
+#. module: stock_previous_step_return
+#: model:ir.model.fields,help:stock_previous_step_return.field_stock_picking_type_enable_previous_step_return
+msgid "Checking this box displays the `Create a Return` button on the backorder confirmation wizard of a stock picking. When clicking on the button, a return picking is created with the undelivered products. This return picking allows to put the products back in stock."
+msgstr "En cochant cette case, le bouton `Créer un retour` sera affiché sur le wizard de confirmation de backorder. En cliquant sur ce bouton, un picking de retour est créé pour les articles non-traités. Ce picking de retour permet de remettre les articles en stock."
+
+#. module: stock_previous_step_return
+#: model:ir.model.fields,help:stock_previous_step_return.field_stock_picking_type_enable_no_backorder
+msgid "Checking this box displays the `No Backorder` button on the backorder confirmation wizard of a stock picking."
+msgstr "En cochant cette case, le bouton `Pas de reliquat` sera affiché. sur le wizard de confirmation de backorder."
+
+#. module: stock_previous_step_return
+#: model:ir.ui.view,arch_db:stock_previous_step_return.backorder_confirmation_form_with_return_products
+msgid "Create a Return"
+msgstr "Créer un retour"
+
+#. module: stock_previous_step_return
+#: model:ir.model.fields,field_description:stock_previous_step_return.field_stock_picking_type_enable_no_backorder
+msgid "Enable No Backorder"
+msgstr "Permettre Pas de reliquat"
+
+#. module: stock_previous_step_return
+#: model:ir.model.fields,field_description:stock_previous_step_return.field_stock_picking_type_enable_previous_step_return
+msgid "Enable Previous Step Return"
+msgstr "Permettre Créer un retour"
+
+#. module: stock_previous_step_return
+#: code:addons/stock_previous_step_return/wizard/stock_backorder_confirmation.py:59
+#, python-format
+msgid "Return of %s"
+msgstr "Retour de %s"
+
+#. module: stock_previous_step_return
+#: code:addons/stock_previous_step_return/wizard/stock_backorder_confirmation.py:107
+#, python-format
+msgid "Returned Pickings"
+msgstr "Retours"
+
+#. module: stock_previous_step_return
+#: model:ir.model.fields,field_description:stock_previous_step_return.field_stock_backorder_confirmation_show_no_backorder_button
+msgid "Show No Backorder Button"
+msgstr ""
+
+#. module: stock_previous_step_return
+#: model:ir.model.fields,field_description:stock_previous_step_return.field_stock_backorder_confirmation_show_return_products_button
+msgid "Show Return Products Button"
+msgstr ""
+
+#. module: stock_previous_step_return
+#: model:ir.model,name:stock_previous_step_return.model_stock_picking_type
+msgid "The operation type determines the picking view"
+msgstr ""

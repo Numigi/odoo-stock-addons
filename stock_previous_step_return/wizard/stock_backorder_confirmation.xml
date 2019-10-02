@@ -10,8 +10,8 @@
                 <field name="show_return_products_button" invisible="1"/>
             </form>
             <button name="process" position="after">
-                <button name="return_products" string="Return Products" type="object" class="oe_highlight"
-                    attrs="{'invisible': [('show_return_products_button', '=', True)]}"/>
+                <button name="button_return_products" string="Create a Return" type="object" class="oe_highlight"
+                    attrs="{'invisible': [('show_return_products_button', '=', False)]}"/>
             </button>
         </field>
     </record>
@@ -25,7 +25,7 @@
                 <field name="show_no_backorder_button" invisible="1"/>
             </form>
             <button name="process_cancel_backorder" position="attributes">
-                <attribute name="attrs">{'invisible': [('show_no_backorder_button', '=', True)]}</attribute>
+                <attribute name="attrs">{'invisible': [('show_no_backorder_button', '=', False)]}</attribute>
             </button>
         </field>
     </record>

@@ -9,7 +9,7 @@ class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
     enable_previous_step_return = fields.Boolean(
-        help="Checking this box displays the `Return Products` button "
+        help="Checking this box displays the `Create a Return` button "
         "on the backorder confirmation wizard of a stock picking. "
         "When clicking on the button, a return picking is created "
         "with the undelivered products. "
@@ -19,5 +19,5 @@ class StockPickingType(models.Model):
     enable_no_backorder = fields.Boolean(
         default=True,
         help="Checking this box displays the `No Backorder` button "
-        "on the backorder confirmation wizard of a stock picking. ",
+        "on the backorder confirmation wizard of a stock picking.",
     )
