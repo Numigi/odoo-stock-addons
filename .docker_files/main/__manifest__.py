@@ -11,13 +11,13 @@
     'category': 'Other',
     'summary': 'Install all addons required for testing.',
     'depends': [
-        'sale',  # Required to test stock_return_from_next_step
+        'sale',  # Required to test stock_previous_step_return
 
         'stock_immediate_transfer_disable',
         'stock_move_list_cost',
         'stock_move_origin_link',
         'stock_picking_show_address',
-        'stock_return_from_next_step',
+        'stock_previous_step_return',
     ],
     'installable': True,
 }
