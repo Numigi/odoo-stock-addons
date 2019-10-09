@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-26 15:48+0000\n"
-"PO-Revision-Date: 2019-09-26 11:51-0400\n"
+"POT-Creation-Date: 2019-10-09 20:11+0000\n"
+"PO-Revision-Date: 2019-10-09 16:12-0400\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -16,18 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 2.0.6\n"
-
-#. module: stock_inventory_category_domain
-#: code:addons/stock_inventory_category_domain/models/product.py:23
-#, python-format
-msgid ""
-"A products not related to a company are part of this category ({category}). "
-"Products of a category on which a company is defined must be defined on the "
-"same company."
-msgstr ""
-"Des articles non liés à une compagnie font partie de cette catégorie "
-"({category}). Les articles d'une catégorie sur laquelle est définie une "
-"compagnie doivent être définis sur la même compagnie."
 
 #. module: stock_inventory_category_domain
 #: model:ir.model.fields,field_description:stock_inventory_category_domain.field_product_category__available_in_inventory
@@ -55,7 +43,29 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: stock_inventory_category_domain
-#: code:addons/stock_inventory_category_domain/models/product.py:52
+#: code:addons/stock_inventory_category_domain/models/product.py:26
+#, python-format
+msgid ""
+"Products not related to a company belong to this category ({category}). "
+"Products of a category on which a company is defined must be defined on the "
+"same company."
+msgstr ""
+"Des articles non liés à une compagnie font partie de cette catégorie "
+"({category}). Les articles d'une catégorie sur laquelle est définie une "
+"compagnie doivent être définis sur la même compagnie."
+
+#. module: stock_inventory_category_domain
+#: code:addons/stock_inventory_category_domain/models/product.py:41
+#, python-format
+msgid ""
+"The parent category {parent} belongs to the company {company}. The child "
+"category {child} must belong to the same company."
+msgstr ""
+"La catégorie parente {parent} appartient à la société {company}. La "
+"catégorie enfant {child} doit appartenir à cette même société."
+
+#. module: stock_inventory_category_domain
+#: code:addons/stock_inventory_category_domain/models/product.py:72
 #, python-format
 msgid ""
 "You can not associate category {category} for the product {product} because "
@@ -67,7 +77,7 @@ msgstr ""
 "L'article est lié la compagnie {product_company}."
 
 #. module: stock_inventory_category_domain
-#: code:addons/stock_inventory_category_domain/models/product.py:42
+#: code:addons/stock_inventory_category_domain/models/product.py:62
 #, python-format
 msgid ""
 "You can not associate category {category} for the product {product} because "

@@ -16,16 +16,36 @@ class ProductCategory(models.Model):
         """Check products of a category should have same company."""
         for category in self:
             if category.company_id:
-                product_without_company = self.env['product.template'].search_count(
-                    [('categ_id', '=', category.id), '|', ('company_id', '=', False),
-                     ('company_id', '!=', category.company_id.id)])
+                product_without_company = self.env['product.template'].sudo().search_count([
+                    ('categ_id', 'child_of', category.id),
+                    '|',
+                    ('company_id', '=', False),
+                    ('company_id', '!=', category.company_id.id),
+                ])
                 if product_without_company:
                     raise ValidationError(_(
-                        'A products not related to a company are part of this '
+                        'Products not related to a company belong to this '
                         'category ({category}). '
                         'Products of a category on which a company is defined must be defined '
                         'on the same company.'
                     ).format(category.display_name))
+
+    @api.constrains('company_id', 'parent_id', 'parent_id.company_id')
+    def _check_parent_company(self):
+        """Check that if the parent category has a company, the child category has the same."""
+        for category in self:
+            parent_company = category.parent_id.company_id
+            category_company = category.company_id
+
+            if parent_company and parent_company != category_company:
+                raise ValidationError(_(
+                    "The parent category {parent} belongs to the company {company}. "
+                    "The child category {child} must belong to the same company."
+                ).format(
+                    parent=category.parent_id.display_name,
+                    child=category.display_name,
+                    company=parent_company.display_name,
+                ))
 
 
 class ProductTemplate(models.Model):
@@ -35,8 +55,8 @@ class ProductTemplate(models.Model):
     def _check_category_company(self):
         """Check products of a category have same company."""
         for product in self:
-            product_company = product.company_id
-            categ_company = product.categ_id.company_id
+            product_company = product.company_id.sudo()
+            categ_company = product.categ_id.company_id.sudo()
 
             if not product_company and categ_company:
                 raise ValidationError(_(
