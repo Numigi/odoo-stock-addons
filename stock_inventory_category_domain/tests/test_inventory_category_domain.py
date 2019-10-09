@@ -18,38 +18,66 @@ class TestStockInventoryCategoryDomain(TransactionCase):
         self.company = self.env.ref('stock.res_company_1')
         self.company_2 = self.env['res.company'].create({'name': 'Company 2'})
 
+    def _create_category(self, company=None, parent=None):
+        return self.env['product.category'].sudo(self.user_stock_manager).create({
+            'name': 'Super Category',
+            'company_id': company.id if company else None,
+            'parent_id': parent.id if parent else None,
+        })
+
+    def _create_product(self, company=None, category=None):
+        vals = {
+            'name': 'Super Product',
+            'company_id': company.id if company else None,
+        }
+        if category:
+            vals['categ_id'] = category.id
+        return self.env['product.product'].sudo(self.user_stock_manager).create(vals)
+
     def test_check_category_company_for_product(self):
-        # create product without company and category with company.
-        product_abc = self.env['product.template'].sudo(self.user_stock_manager).create(
-            {'name': 'ABC', 'company_id': False})
-        category_super = self.env['product.category'].sudo(self.user_stock_manager).create(
-            {'name': 'Super Category', 'company_id': self.company.id})
-        # update product abc to set the company  to category_super should have message:
-        # You can not associate category {category} for the product {product} because this category is related to the company {company} but this product is not related to a company.
-        with self.assertRaises(ValidationError):
-            product_abc.categ_id = category_super
-
-    def test_check_product_and_category_can_not_have_different_companies(self):
-        product_abc = self.env['product.template'].sudo(self.user_stock_manager).create(
-            {'name': 'ABC', 'company_id': self.company.id})
-        category_super = self.env['product.category'].sudo(self.user_stock_manager).create(
-            {'name': 'Super Category', 'company_id': self.company_2.id})
+        category_super = self._create_category(company=self.company)
+        product_abc = self._create_product()
 
         with self.assertRaises(ValidationError):
             product_abc.categ_id = category_super
 
-    def test_check_product_company_for_category(self):
-        # create two products without company and category without company.
-        category = self.env['product.category'].sudo(self.user_stock_manager).create(
-            {'name': 'Category', 'company_id': False})
-        self.env['product.template'].sudo(self.user_stock_manager).create([
-            {'name': 'Product 1', 'categ_id': category.id, 'company_id': False},
-            {'name': 'Product 2', 'categ_id': category.id, 'company_id': False}
-        ])
-        # update category to set the company should have message:
-        # A products not related to a company are part of this category. products of a category on which a company is defined must be defined on the same company.
+    def test_on_change_company_on_category__category_company_must_be_the_same(self):
+        product_abc = self._create_product(company=self.company)
+        category_super = self._create_category(company=self.company_2)
+
+        with self.assertRaises(ValidationError):
+            product_abc.categ_id = category_super
+
+    def test_parent_category_company_must_be_the_same(self):
+        parent_category = self._create_category(company=self.company_2)
+
+        with self.assertRaises(ValidationError):
+            self._create_category(parent=parent_category)
+
+    def test_on_change_company_on_category__products_company_can_not_be_empty(self):
+        category = self._create_category()
+        self._create_product(category=category)
+        self._create_product(category=category)
+
         with self.assertRaises(ValidationError):
             category.company_id = self.company
+
+    def test_on_change_company_on_category__products_must_have_same_company(self):
+        category = self._create_category()
+        self._create_product(category=category, company=self.company)
+        self._create_product(category=category, company=self.company)
+
+        with self.assertRaises(ValidationError):
+            category.company_id = self.company_2
+
+    def test_on_change_company_on_parent_category__products_must_have_same_company(self):
+        parent_category = self._create_category()
+        category = self._create_category(parent=parent_category)
+        self._create_product(category=category, company=self.company)
+        self._create_product(category=category, company=self.company)
+
+        with self.assertRaises(ValidationError):
+            parent_category.company_id = self.company_2
 
     def test_available_category_in_inventory(self):
         # test category available in inventory
