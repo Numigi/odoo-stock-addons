@@ -130,6 +130,12 @@ class TestStockReturn(StockReturnCase):
         assert len(picking.move_lines) == 1
         assert picking.move_lines.product_id == self.product_b
 
+    def test_delivery_backorder_is_cancelled(self):
+        self.select_quantities(self.delivery, self.product_a, 20)
+        self.return_products()
+        backorder = self.env['stock.picking'].search([('backorder_id', '=', self.delivery.id)])
+        assert backorder.state == 'cancel'
+
     def test_if_one_product_partially_processed__return_picking_has_two_lines(self):
         self.select_quantities(self.delivery, self.product_a, 19)
         self.return_products()
