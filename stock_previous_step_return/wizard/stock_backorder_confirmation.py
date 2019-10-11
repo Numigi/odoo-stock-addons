@@ -132,4 +132,6 @@ class BackorderConfirmationWizard(models.TransientModel):
         for origin_picking, moves in groupby(moves_to_return, _get_origin_picking_from_move):
             return_pickings |= _return_products_from_origin_picking(origin_picking, list(moves))
 
+        backorders.action_cancel()
+
         return self._get_returned_pickings_action(return_pickings)
