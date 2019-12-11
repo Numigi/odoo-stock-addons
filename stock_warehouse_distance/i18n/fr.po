@@ -60,7 +60,6 @@ msgstr "Distance"
 
 #. module: stock_warehouse_distance
 #: model:ir.actions.act_window,name:stock_warehouse_distance.action_distances_from_warehouse
-#: model:ir.ui.menu,name:stock_warehouse_distance.menu_warehouse_distance
 #: model_terms:ir.ui.view,arch_db:stock_warehouse_distance.warehouse_form_with_distances
 msgid "Distances"
 msgstr "Distances"
@@ -133,6 +132,7 @@ msgstr "Distance d'entrepôt"
 
 #. module: stock_warehouse_distance
 #: model:ir.actions.act_window,name:stock_warehouse_distance.action_warehouse_distance
+#: model:ir.ui.menu,name:stock_warehouse_distance.menu_warehouse_distance
 #: model_terms:ir.ui.view,arch_db:stock_warehouse_distance.warehouse_distance_list
 msgid "Warehouse Distances"
 msgstr "Distances des entrepôts"
