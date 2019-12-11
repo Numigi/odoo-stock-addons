@@ -21,6 +21,7 @@ COPY stock_inventory_internal_location /mnt/extra-addons/stock_inventory_interna
 COPY stock_theorical_quantity_access /mnt/extra-addons/stock_theorical_quantity_access
 COPY stock_turnover_rate /mnt/extra-addons/stock_turnover_rate
 COPY stock_warehouse_access /mnt/extra-addons/stock_warehouse_access
+COPY stock_warehouse_distance /mnt/extra-addons/stock_warehouse_distance
 
 COPY .docker_files/main /mnt/extra-addons/main
 COPY .docker_files/odoo.conf /etc/odoo
