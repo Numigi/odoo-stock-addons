@@ -18,7 +18,7 @@ Units
 ~~~~~~~~~~
 Distances are defined in kilometers.
 
-Reflexive
+Reflexivity
 ~~~~~~~~~
 Distances are reflexive.
 Whether some warehouse is defined as ``Warehouse 1`` or ``Warehouse 2`` has no importance.
