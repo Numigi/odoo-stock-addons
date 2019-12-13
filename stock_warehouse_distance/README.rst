@@ -14,7 +14,7 @@ When clicking on the menu entry, the list of all distances between warehouses is
 
 .. image:: static/description/warehouse_distance_list.png
 
-Kilometers
+Units
 ~~~~~~~~~~
 Distances are defined in kilometers.
 
