@@ -24,6 +24,7 @@
         'stock_theorical_quantity_access',
         'stock_turnover_rate',
         'stock_warehouse_access',
+        'stock_warehouse_distance',
     ],
     'installable': True,
 }

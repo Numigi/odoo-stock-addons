@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="warehouse_distance_multi_company_rule" model="ir.rule">
+        <field name="name">Warehouse Distance Multi-Company Rule</field>
+        <field name="model_id" ref="model_stock_warehouse_distance"/>
+        <field name="domain_force">[
+            ('warehouse_1_id.company_id', 'child_of', [user.company_id.id]),
+        ]</field>
+        <field name="global" eval="True"/>
+    </record>
+
+</odoo>
