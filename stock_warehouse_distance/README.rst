@@ -15,11 +15,11 @@ When clicking on the menu entry, the list of all distances between warehouses is
 .. image:: static/description/warehouse_distance_list.png
 
 Units
-~~~~~~~~~~
+~~~~~
 Distances are defined in kilometers.
 
 Reflexivity
-~~~~~~~~~
+~~~~~~~~~~~
 Distances are reflexive.
 Whether some warehouse is defined as ``Warehouse 1`` or ``Warehouse 2`` has no importance.
 
