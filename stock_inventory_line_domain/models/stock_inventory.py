@@ -11,7 +11,8 @@ class StockInventory(models.Model):
 
     def action_validate(self):
         for line in self.mapped('line_ids'):
-            line._check_product_domain_filters()
+            line.check_selected_product()
+            line.check_selected_lot()
         return super().action_validate()
 
 
@@ -19,14 +20,12 @@ class StockInventoryLine(models.Model):
 
     _inherit = 'stock.inventory.line'
 
-    def _check_product_domain_filters(self):
-        self._check_single_product_filter()
-        self._check_product_category_filter()
-        self._check_product_lot_filter()
-
-    def _check_single_product_filter(self):
+    def check_selected_product(self):
         if self.inventory_id.product_id:
             self._check_is_the_inventored_product()
+
+        if self.inventory_id.category_id:
+            self._check_product_belongs_to_inventory_category()
 
     def _check_is_the_inventored_product(self):
         if self.inventory_id.product_id != self.product_id:
@@ -37,10 +36,6 @@ class StockInventoryLine(models.Model):
                 product=self.product_id.display_name,
                 inventory_product=self.inventory_id.product_id.display_name,
             ))
-
-    def _check_product_category_filter(self):
-        if self.inventory_id.category_id:
-            self._check_product_belongs_to_inventory_category()
 
     def _check_product_belongs_to_inventory_category(self):
         product_categories = _get_category_and_all_parents(self.product_id.categ_id)
@@ -53,7 +48,7 @@ class StockInventoryLine(models.Model):
                 category=self.inventory_id.category_id.display_name,
             ))
 
-    def _check_product_lot_filter(self):
+    def check_selected_lot(self):
         if self.inventory_id.lot_id:
             self._check_is_the_inventored_lot()
 

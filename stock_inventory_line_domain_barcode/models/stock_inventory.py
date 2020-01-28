@@ -15,4 +15,4 @@ class StockInventory(models.Model):
         lines_after = self.line_ids
         new_lines = lines_after - lines_before
         for line in new_lines:
-            line._check_product_domain_filters()
+            line.check_selected_product()
