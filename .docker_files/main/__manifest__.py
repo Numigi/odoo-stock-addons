@@ -21,6 +21,8 @@
         'purchase_warehouse_access',
         'stock_inventory_category_domain',
         'stock_inventory_internal_location',
+        'stock_inventory_line_domain',
+        'stock_inventory_line_domain_barcode',
         'stock_theorical_quantity_access',
         'stock_turnover_rate',
         'stock_warehouse_access',
