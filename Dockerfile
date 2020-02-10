@@ -16,6 +16,7 @@ RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS
 USER odoo
 
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
+COPY stock_inventory_accounting_date_editable /mnt/extra-addons/stock_inventory_accounting_date_editable
 COPY stock_inventory_category_domain /mnt/extra-addons/stock_inventory_category_domain
 COPY stock_inventory_internal_location /mnt/extra-addons/stock_inventory_internal_location
 COPY stock_inventory_line_domain /mnt/extra-addons/stock_inventory_line_domain
