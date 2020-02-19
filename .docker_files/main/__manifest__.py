@@ -24,6 +24,7 @@
         'stock_inventory_internal_location',
         'stock_inventory_line_domain',
         'stock_inventory_line_domain_barcode',
+        'stock_location_position_alphanum',
         'stock_theorical_quantity_access',
         'stock_turnover_rate',
         'stock_warehouse_access',
