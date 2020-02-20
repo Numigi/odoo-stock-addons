@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_location_position_alphanum
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-19 21:23+0000\n"
+"PO-Revision-Date: 2020-02-19 21:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_position_alphanum
+#: model:ir.model.fields,field_description:stock_location_position_alphanum.field_stock_location__posx_alphanum
+msgid "Corridor (X)"
+msgstr "Rangée (X)"
+
+#. module: stock_location_position_alphanum
+#: model:ir.model.fields,field_description:stock_location_position_alphanum.field_stock_location__posx
+msgid "Corridor (X) (Integer)"
+msgstr "Rangée (X) (Entier)"
+
+#. module: stock_location_position_alphanum
+#: model:ir.model.fields,field_description:stock_location_position_alphanum.field_stock_location__posz_alphanum
+msgid "Height (Z)"
+msgstr "Élévation (Z) (Entier)"
+
+#. module: stock_location_position_alphanum
+#: model:ir.model.fields,field_description:stock_location_position_alphanum.field_stock_location__posz
+msgid "Height (Z) (Integer)"
+msgstr "Élévation (Z) (Entier)"
+
+#. module: stock_location_position_alphanum
+#: model:ir.model,name:stock_location_position_alphanum.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_position_alphanum
+#: model:ir.model.fields,help:stock_location_position_alphanum.field_stock_location__posx
+#: model:ir.model.fields,help:stock_location_position_alphanum.field_stock_location__posy
+#: model:ir.model.fields,help:stock_location_position_alphanum.field_stock_location__posz
+msgid "Optional localization details, for information purpose only"
+msgstr ""
+
+#. module: stock_location_position_alphanum
+#: model:ir.model.fields,field_description:stock_location_position_alphanum.field_stock_location__posy_alphanum
+msgid "Shelves (Y)"
+msgstr "Étagères (Y)"
+
+#. module: stock_location_position_alphanum
+#: model:ir.model.fields,field_description:stock_location_position_alphanum.field_stock_location__posy
+msgid "Shelves (Y) (Integer)"
+msgstr "Étagères (Y) (Entier)"
+
