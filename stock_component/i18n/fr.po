@@ -1,0 +1,203 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_warranty
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-26 19:29+0000\n"
+"PO-Revision-Date: 2020-03-26 15:39-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__component_id
+msgid "Component"
+msgstr "Composante"
+
+#. module: stock_component
+#: model:ir.model,name:stock_component.model_stock_component_line
+msgid "Component Line on Serial Number"
+msgstr "Ligne de composante sur numéro de série"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_production_lot__component_line_ids
+msgid "Component Lines"
+msgstr "Lignes de composantes"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_production_lot__component_ids
+#: model_terms:ir.ui.view,arch_db:stock_component.stock_production_lot_form
+msgid "Components"
+msgstr "Composantes"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_component
+#: model:ir.model,name:stock_component.model_stock_location
+msgid "Inventory Locations"
+msgstr "Emplacements d'inventaire"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: stock_component
+#: model:ir.model,name:stock_component.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Lot / Numéro de série"
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:235
+#, python-format
+msgid "Move component {serial} as part of equipment {parent}"
+msgstr "Déplacer la composante {serial} vers l'équipement {parent}"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_production_lot__parent_component_id
+msgid "Parent Component"
+msgstr "Composante parente"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__product_id
+msgid "Product"
+msgstr "Article"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: stock_component
+#: model:ir.model.fields,field_description:stock_component.field_stock_component_line__parent_component_id
+msgid "Serial Number"
+msgstr "Numéro de série"
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:154
+#, python-format
+msgid "The selected serial number has the owner ({owner})."
+msgstr "Le numéro de série sélectionné a un propriétaire ({owner})."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:161
+#, python-format
+msgid ""
+"The selected serial number has the owner {owner}.\n"
+"The equipment has a different owner ({parent_owner})."
+msgstr ""
+"Le numéro de série sélectionné a un propriétaire ({owner}).\n"
+"L'équipement a un propriétaire différent ({parent_owner})."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:132
+#, python-format
+msgid "The selected serial number is in a package ({package})."
+msgstr "Le numéro de série sélectionné est dans un colis ({package})."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:117
+#, python-format
+msgid ""
+"The selected serial number is in the location {serial_location}.\n"
+"The equipment is in another location ({parent_location})."
+msgstr ""
+"Le numéro de série sélectionné est dans l'emplacement ({serial_location}).\n"
+"L'équipement est dans un emplacement différent ({parent_location})."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:139
+#, python-format
+msgid ""
+"The selected serial number is in the package {package}.\n"
+"The equipment is in a different package ({parent_package})."
+msgstr ""
+"Le numéro de série sélectionné est dans un colis ({package}).\n"
+"L'équipement est dans un colis différent ({parent_package})."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:173
+#, python-format
+msgid ""
+"The selected serial number is reserved by a stock move.\n"
+"It can not be added as a component."
+msgstr ""
+"Le numéro de série est réservé par un mouvement de stock. Il ne peut pas "
+"être ajouté comme composante."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:49
+#, python-format
+msgid ""
+"The serial number {serial} can not be added as component to the equipment "
+"{parent}."
+msgstr ""
+"Le numéro de série {serial} ne peut pas être ajouté comme composante à "
+"l'équipement {parent}."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:79
+#, python-format
+msgid ""
+"The serial number {serial} is already a component of an equipment "
+"({parent}). A component can not be part of 2 different equipments."
+msgstr ""
+"Le numéro de série {serial} est déjà défini en tant que composante sur un "
+"équipement ({parent}). Une composante ne peut pas être sur deux équipements "
+"différents."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:68
+#, python-format
+msgid "The serial number {serial} is already part of the equipment ({parent})."
+msgstr ""
+"Le numéro de série {serial} est déjà défini comme composante sur "
+"l'équipement ({parent})."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:91
+#, python-format
+msgid "The serial number {serial} is linked to more than one quant:"
+msgstr "Le numéro de série {serial} est lié à plus d'un quant."
+
+#. module: stock_component
+#: code:addons/stock_component/models/stock_production_lot.py:101
+#, python-format
+msgid "The serial number {serial} is not linked to a quant."
+msgstr "Le numéro de série {serial} n'est pas lié à un quant."
