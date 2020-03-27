@@ -91,7 +91,7 @@ class StockPickingChangeDestLocation(models.TransientModel):
     def set_location_destination(self):
 
         if self.location_dest_id and self.picking_id:
-            picking = self.env["stock.picking"].search([("id", "=", self.picking_id.id)])
+            picking = self.env["stock.picking"].browse(self.picking_id.id)
 
             if picking:
                 picking.set_location_destination(self.location_dest_id)
