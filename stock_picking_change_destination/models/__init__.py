@@ -2,5 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from . import (
+    stock_location,
     stock_picking,
+    stock_picking_change_destination,
 )

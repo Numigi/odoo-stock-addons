@@ -40,6 +40,10 @@ class TestStockPickingLocationDestination(SavepointCase):
             self.location == move.location_dest_id
             for move in self.picking.move_lines
         )
+        assert all(
+            self.location == move_line.location_dest_id
+            for move_line in self.picking.mapped("move_lines").mapped("move_line_ids")
+        )
 
     def test_whenMovesHaveDestinationMoves_thenRaiseError(self):
         with pytest.raises(UserError):
@@ -48,9 +52,6 @@ class TestStockPickingLocationDestination(SavepointCase):
     def test_whenLocationWarehousesAreDifferent_thenRaiseError(self):
         with pytest.raises(UserError):
             self.picking_moves_destination_moves.set_location_destination(self.location3)
-
-    def test_dev_not_finished(self):
-        assert False  ## Just to be sure the merge is not done automatically ;)
 
 
 class TestStockLocationHasIsInTheSameWareHouseThan(SavepointCase):

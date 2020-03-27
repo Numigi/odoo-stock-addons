@@ -42,7 +42,7 @@ class StockPicking(models.Model):
                     "The picking destination could not be updated "
                     "as it is linked to the picking(s): {destination_moves}"
                 ).format(
-                    destination_moves=", ".join(destination_moves.mapped('display_name'))
+                    destination_moves=", ".join(destination_moves.mapped("display_name"))
                 )
             )
 
@@ -52,16 +52,19 @@ class StockPicking(models.Model):
         else:
             raise UserError(
                 _(
-                    # TODO: en attente du message final
-                    "Not the same warehouse: {current_location} -> {new_location}"
-                ).format(
-                    current_location=self.location_dest_id.display_name,
-                    new_location=stock_location.display_name,
+                    "The picking destination could not be updated, "
+                    "as the move between warehouses are not allowed."
+                    " You should use a replenishment or a transit warehouse."
                 )
             )
 
     def _get_stock_moves_destination_moves(self):
-        return self.mapped('move_lines.move_dest_ids')
+        return self.mapped("move_lines.move_dest_ids")
 
     def _set_stock_moves_location_destination(self):
-        self.move_lines.write({'location_dest_id': self.location_dest_id.id})
+        self.move_lines.write({"location_dest_id": self.location_dest_id.id})
+        self._set_stock_move_lines_location_destination()
+
+    def _set_stock_move_lines_location_destination(self):
+        stock_move_lines = self.move_lines.mapped("move_line_ids")
+        stock_move_lines.write({'location_dest_id': self.location_dest_id.id})
