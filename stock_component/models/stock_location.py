@@ -2,7 +2,6 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
 
 
 class StockLocation(models.Model):
