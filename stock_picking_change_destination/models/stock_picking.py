@@ -6,6 +6,13 @@ from odoo.exceptions import UserError
 wizard_model = "stock.picking.change.destination"
 
 
+class StockLocation(models.Model):
+    _inherit = "stock.location"
+
+    def is_in_the_same_warehouse_than(self, location):
+        return self.get_warehouse() == location.get_warehouse()
+
+
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
@@ -40,15 +47,26 @@ class StockPicking(models.Model):
         if destination_moves:
             raise UserError(
                 _(
-                    "L'emplacement de destination du picking ne peut être modifiée,"
-                    " car ce dernier est lié au picking {destination_moves}."
+                    "The picking destination could not be updated "
+                    "as it is linked to the picking(s): {destination_moves}"
                 ).format(
-                    destination_moves=", ".join(destination_moves.mapped('name'))
+                    destination_moves=", ".join(destination_moves.mapped('display_name'))
                 )
             )
 
-        self.write({"location_dest_id": stock_location.id})
-        self._set_stock_moves_location_destination()
+        if self.location_dest_id.is_in_the_same_warehouse_than(stock_location):
+            self.write({"location_dest_id": stock_location.id})
+            self._set_stock_moves_location_destination()
+        else:
+            raise UserError(
+                _(
+                    # TODO: en attente du message final
+                    "Not the same warehouse: {current_location} -> {new_location}"
+                ).format(
+                    current_location=self.location_dest_id.display_name,
+                    new_location=stock_location.display_name,
+                )
+            )
 
     def _get_stock_moves_destination_moves(self):
         return self.move_lines.move_dest_ids
