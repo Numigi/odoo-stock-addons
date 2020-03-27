@@ -1,16 +1,7 @@
 # © 2020 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
-from odoo import models, fields, api, _
+from odoo import models, fields, _
 from odoo.exceptions import UserError
-
-wizard_model = "stock.picking.change.destination"
-
-
-class StockLocation(models.Model):
-    _inherit = "stock.location"
-
-    def is_in_the_same_warehouse_than(self, location):
-        return self.get_warehouse() == location.get_warehouse()
 
 
 class StockPicking(models.Model):
@@ -23,6 +14,7 @@ class StockPicking(models.Model):
         view = self.env.ref(
             "stock_picking_change_destination.stock_picking_change_destination_form"
         )
+        wizard_model = "stock.picking.change.destination"
         wiz = self.env[wizard_model].create(
             {
                 "location_dest_id": self.location_dest_id.id,
@@ -69,29 +61,7 @@ class StockPicking(models.Model):
             )
 
     def _get_stock_moves_destination_moves(self):
-        return self.move_lines.move_dest_ids
+        return self.mapped('move_lines.move_dest_ids')
 
     def _set_stock_moves_location_destination(self):
-        for move in self.move_lines:
-            move.location_dest_id = self.location_dest_id.id
-
-
-class StockPickingChangeDestLocation(models.TransientModel):
-    _name = wizard_model
-
-    location_dest_id = fields.Many2one(
-        "stock.location", "Destination Location Zone", required=True
-    )
-
-    picking_id = fields.Many2one(
-        "stock.picking", "Picking", required=True, ondelete="cascade"
-    )
-
-    @api.multi
-    def set_location_destination(self):
-
-        if self.location_dest_id and self.picking_id:
-            picking = self.env["stock.picking"].browse(self.picking_id.id)
-
-            if picking:
-                picking.set_location_destination(self.location_dest_id)
+        self.move_lines.write({'location_dest_id': self.location_dest_id.id})

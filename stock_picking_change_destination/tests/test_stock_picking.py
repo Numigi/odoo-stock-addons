@@ -50,7 +50,8 @@ class TestStockPickingLocationDestination(SavepointCase):
             self.picking_moves_destination_moves.set_location_destination(self.location3)
 
     def test_dev_not_finished(self):
-        assert False ## Just to be sure the merge is not done automatically ;)
+        assert False  ## Just to be sure the merge is not done automatically ;)
+
 
 class TestStockLocationHasIsInTheSameWareHouseThan(SavepointCase):
 
