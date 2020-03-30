@@ -39,10 +39,12 @@ class StockPicking(models.Model):
         if destination_moves:
             raise UserError(
                 _(
-                    "The picking destination could not be updated "
-                    "as it is linked to the picking(s): {destination_moves}"
+                    "The picking destination could not be updated"
+                    " as it is linked to the picking(s): {destination_moves}"
                 ).format(
-                    destination_moves=", ".join(destination_moves.mapped("display_name"))
+                    destination_moves=", ".join(
+                        destination_moves.mapped("picking_id").mapped("display_name")
+                    )
                 )
             )
 
@@ -52,8 +54,8 @@ class StockPicking(models.Model):
         else:
             raise UserError(
                 _(
-                    "The picking destination could not be updated, "
-                    "as the move between warehouses are not allowed."
+                    "The picking destination could not be updated,"
+                    " as the move between warehouses are not allowed."
                     " You should use a replenishment or a transit warehouse."
                 )
             )
