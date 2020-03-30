@@ -8,12 +8,7 @@
     "category": "Inventory",
     "author": "Numigi",
     "license": "LGPL-3",
-    "depends": [
-        "stock",
-    ],
-    'data': [
-        "security/ir.model.access.csv",
-        "views/stock_production_lot.xml",
-    ],
+    "depends": ["stock_serial_single_quant"],
+    "data": ["security/ir.model.access.csv", "views/stock_production_lot.xml"],
     "installable": True,
 }
