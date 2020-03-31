@@ -24,7 +24,7 @@ However, the error message is not very explicit:
 
 ..
 
-	A serial number should only be linked to a single product.
+    A serial number should only be linked to a single product.
 
 Constraints
 -----------
@@ -39,13 +39,19 @@ Locations
 If the serial number has a quant,
 the source location of the move must be that quant's location (or any children location).
 
+.. image:: static/description/wrong_location_message.png
+
 Packages
 ~~~~~~~~
 If the serial number has a quant, the source package of the move must match the quant's source package.
 
+.. image:: static/description/wrong_package_message.png
+
 Owners (Consignment)
 ~~~~~~~~~~~~~~~~~~~~
 If the serial number has a quant, the owner of the stock move line must match the quant's owner.
+
+.. image:: static/description/wrong_owner_message.png
 
 Contributors
 ------------

@@ -1,19 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_serial_single_quant
+# 	* stock_serial_single_quant
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-30 15:20+0000\n"
-"PO-Revision-Date: 2020-03-30 15:20+0000\n"
+"POT-Creation-Date: 2020-03-31 13:47+0000\n"
+"PO-Revision-Date: 2020-03-31 09:49-0400\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. module: stock_serial_single_quant
 #: model:ir.model,name:stock_serial_single_quant.model_stock_production_lot
@@ -31,22 +33,80 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_serial_single_quant
-#: code:addons/stock_serial_single_quant/models/stock_move_line.py:22
+#: code:addons/stock_serial_single_quant/models/stock_move_line.py:8
 #, python-format
-msgid "The product {product} with the serial number {serial} can not be moved from the source location {location}. It is currently located in {serial_location}."
-msgstr "L'article {product} avec le numéro de série {serial} ne peut pas être déplacé de l'emplacement source {location}. "
-"Il est présentement situé dans l'emplacement {serial_location}."
+msgid ""
+"The product {product} with the serial number {serial} can not be moved from "
+"the source location {location}. It is currently located in {serial_location}."
+msgstr ""
+"L'article {product} avec le numéro de série {serial} ne peut pas être "
+"déplacé de l'emplacement source {location}. Il est présentement situé dans "
+"l'emplacement {serial_location}."
+
+#. module: stock_serial_single_quant
+#: code:addons/stock_serial_single_quant/models/stock_move_line.py:14
+#, python-format
+msgid ""
+"The product {product} with the serial number {serial} can not be moved from "
+"the source package {package}. It is currently located in the package "
+"{serial_package}."
+msgstr ""
+"L'article {product} avec le numéro de série {serial} ne peut pas être "
+"déplacé du colis source {package}. Il est présentement situé dans le colis "
+"{serial_package}."
+
+#. module: stock_serial_single_quant
+#: code:addons/stock_serial_single_quant/models/stock_move_line.py:26
+#, python-format
+msgid ""
+"The product {product} with the serial number {serial} can not be moved from "
+"the source package {package}. It is not currently located in a package."
+msgstr ""
+"L'article {product} avec le numéro de série {serial} ne peut pas être "
+"déplacé du colis source {package}. Il n'est présentement pas dans un colis."
+
+#. module: stock_serial_single_quant
+#: code:addons/stock_serial_single_quant/models/stock_move_line.py:32
+#, python-format
+msgid ""
+"The product {product} with the serial number {serial} can not be moved with "
+"the selected owner ({owner}). It is currently bound to the owner "
+"{serial_owner}."
+msgstr ""
+"L'article {product} avec le numéro de série {serial} ne peut pas être "
+"déplacé avec le propriétaire sélectionné ({owner}). Il est présentement lié "
+"au propriétaire {serial_owner}."
+
+#. module: stock_serial_single_quant
+#: code:addons/stock_serial_single_quant/models/stock_move_line.py:44
+#, python-format
+msgid ""
+"The product {product} with the serial number {serial} can not be moved with "
+"the selected owner ({owner}). It is currently not bound to any owner."
+msgstr ""
+"L'article {product} avec le numéro de série {serial} ne peut pas être "
+"déplacé avec le propriétaire sélectionné ({owner}). Il n'est présentement "
+"pas lié à un propriétaire."
 
 #. module: stock_serial_single_quant
 #: code:addons/stock_serial_single_quant/models/stock_move_line.py:38
 #, python-format
-msgid "The product {product} with the serial number {serial} can not be moved from the source package {package}. It is currently located in the package {serial_package}."
-msgstr "L'article {product} avec le numéro de série {serial} ne peut pas être déplacé du colis source {package}. "
-"Il est présentement situé dans le colis {serial_package}."
+msgid ""
+"The product {product} with the serial number {serial} can not be moved "
+"without a source owner. It is currently bound to the owner {serial_owner}."
+msgstr ""
+"L'article {product} avec le numéro de série {serial} ne peut pas être "
+"déplacé sans propriétaire. Il est présentement lié au propriétaire "
+"{serial_owner}."
 
 #. module: stock_serial_single_quant
-#: code:addons/stock_serial_single_quant/models/stock_move_line.py:54
+#: code:addons/stock_serial_single_quant/models/stock_move_line.py:20
 #, python-format
-msgid "The product {product} with the serial number {serial} can not be moved with the selected owner ({owner}). It is currently bound to the owner {serial_owner}."
-msgstr "L'article {product} avec le numéro de série {serial} ne peut pas être déplacé avec le propriétaire sélectionné ({owner}). "
-"Il est présentement lié au propriétaire {serial_owner}."
+msgid ""
+"The product {product} with the serial number {serial} can not be moved "
+"without a source package. It is currently located in the package "
+"{serial_package}."
+msgstr ""
+"L'article {product} avec le numéro de série {serial} ne peut pas être "
+"déplacé sans colis source. Il est présentement situé dans le colis "
+"{serial_package}."

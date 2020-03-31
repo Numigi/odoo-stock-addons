@@ -54,6 +54,26 @@ class TestStockMoves(StockMoveCase):
                 package_dest=self.package_2,
             )
 
+    def test_unexpected_source_package(self):
+        with pytest.raises(ValidationError):
+            self.move_serial_number(
+                self.serial_1,
+                self.location_1,
+                self.location_2,
+                package_src=self.package_1,
+                package_dest=self.package_2,
+            )
+
+    def test_expected_source_package(self):
+        self.quant_1.package_id = self.package_1
+        with pytest.raises(ValidationError):
+            self.move_serial_number(
+                self.serial_1,
+                self.location_1,
+                self.location_2,
+                package_dest=self.package_2,
+            )
+
     def test_correct_source_owner(self):
         self.quant_1.owner_id = self.owner_1
         self.move_serial_number(
@@ -67,3 +87,14 @@ class TestStockMoves(StockMoveCase):
             self.move_serial_number(
                 self.serial_1, self.location_1, self.location_2, owner_src=self.owner_2
             )
+
+    def test_unexpected_source_owner(self):
+        with pytest.raises(ValidationError):
+            self.move_serial_number(
+                self.serial_1, self.location_1, self.location_2, owner_src=self.owner_1
+            )
+
+    def test_expected_source_owner(self):
+        self.quant_1.owner_id = self.owner_1
+        with pytest.raises(ValidationError):
+            self.move_serial_number(self.serial_1, self.location_1, self.location_2)
