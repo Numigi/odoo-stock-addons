@@ -19,7 +19,7 @@ class StockComponentLineAdd(models.TransientModel):
     )
 
     @api.onchange("product_id")
-    def _onchange_product(self):
+    def _empty_component_if_not_match_product(self):
         if self.component_id.product_id != self.product_id:
             self.component_id = False
 
