@@ -10,13 +10,11 @@ class StockProductionLot(models.Model):
     _inherit = "stock.production.lot"
 
     component_ids = fields.Many2many(
-        "stock.production.lot",
-        string="Components",
-        compute="_compute_child_components",
+        "stock.production.lot", string="Components", compute="_compute_child_components"
     )
 
     component_line_ids = fields.One2many(
-        "stock.component.line", "parent_component_id", "Component Lines",
+        "stock.component.line", "parent_component_id", "Component Lines"
     )
 
     parent_component_id = fields.Many2one(
@@ -37,9 +35,13 @@ class StockProductionLot(models.Model):
             [("component_line_ids.component_id", "=", self.id)], limit=1
         )
 
+    def pull_components(self):
+        for component in self.component_ids:
+            self._pull_component(component)
+
     def add_component(self, serial):
         self._check_component_can_be_added(serial)
-        self._move_component_if_in_child_location(serial)
+        self._pull_component_if_in_child_location(serial)
         self._create_component_line(serial)
 
     def _check_component_can_be_added(self, serial):
@@ -68,9 +70,7 @@ class StockProductionLot(models.Model):
                 _(
                     "The serial number {serial} is already part of the equipment "
                     "({parent})."
-                ).format(
-                    serial=serial.display_name, parent=self.display_name,
-                )
+                ).format(serial=serial.display_name, parent=self.display_name)
             )
 
     def _check_has_no_parent_component(self):
@@ -86,7 +86,7 @@ class StockProductionLot(models.Model):
             )
 
     def _check_has_one_non_null_quant(self):
-        quants = self.get_non_zero_quants()
+        quants = self.get_positive_quants()
         if len(quants) > 1:
             message = _(
                 "The serial number {serial} is linked to more than one quant:"
@@ -124,13 +124,13 @@ class StockProductionLot(models.Model):
             )
 
     def _check_component_not_in_different_package(self, serial):
-        parent_package = self.get_non_zero_quants().package_id
-        serial_package = serial.get_non_zero_quants().package_id
+        parent_package = self.get_positive_quants().package_id
+        serial_package = serial.get_positive_quants().package_id
 
         if not parent_package and serial_package:
             raise ValidationError(
                 _("The selected serial number is in a package ({package}).").format(
-                    package=serial_package.display_name,
+                    package=serial_package.display_name
                 )
             )
 
@@ -146,13 +146,13 @@ class StockProductionLot(models.Model):
             )
 
     def _check_component_has_not_different_owner(self, serial):
-        parent_owner = self.get_non_zero_quants().owner_id
-        serial_owner = serial.get_non_zero_quants().owner_id
+        parent_owner = self.get_positive_quants().owner_id
+        serial_owner = serial.get_positive_quants().owner_id
 
         if not parent_owner and serial_owner:
             raise ValidationError(
                 _("The selected serial number has the owner ({owner}).").format(
-                    owner=serial_owner.display_name,
+                    owner=serial_owner.display_name
                 )
             )
 
@@ -168,7 +168,7 @@ class StockProductionLot(models.Model):
             )
 
     def _check_is_not_reserved(self):
-        if self.get_non_zero_quants().reserved_quantity:
+        if self.get_positive_quants().reserved_quantity:
             raise ValidationError(
                 _(
                     "The selected serial number is reserved by a stock move.\n"
@@ -178,19 +178,19 @@ class StockProductionLot(models.Model):
 
     def _create_component_line(self, serial):
         self.env["stock.component.line"].create(
-            {"parent_component_id": self.id, "component_id": serial.id,}
+            {"parent_component_id": self.id, "component_id": serial.id}
         )
 
-    def _move_component_if_in_child_location(self, serial):
+    def _pull_component_if_in_child_location(self, serial):
         if self._is_component_in_child_location(serial):
-            self._move_component_to_equipment_location(serial)
+            self._pull_component(serial)
 
     def _is_component_in_child_location(self, serial):
         serial_location = serial.get_current_location()
         parent_location = self.get_current_location()
         return serial_location.is_child_of(parent_location)
 
-    def _move_component_to_equipment_location(self, serial):
+    def _pull_component(self, serial):
         move = self.env["stock.move"].create(self._get_component_move_vals(serial))
         self.env["stock.move.line"].create(
             self._get_component_move_line_vals(move, serial)
@@ -224,6 +224,8 @@ class StockProductionLot(models.Model):
                 "qty_done": 1,
                 "product_uom_qty": 0,
                 "product_uom_id": self._get_component_uom().id,
+                "package_id": serial.get_current_package().id,
+                "result_package_id": self.get_current_package().id,
             }
         )
         return vals
@@ -235,9 +237,3 @@ class StockProductionLot(models.Model):
         return _("Move component {serial} as part of equipment {parent}").format(
             serial=serial.display_name, parent=self.display_name
         )
-
-    def get_current_location(self):
-        return self.get_non_zero_quants().location_id
-
-    def get_non_zero_quants(self):
-        return self.mapped("quant_ids").filtered(lambda q: q.quantity)

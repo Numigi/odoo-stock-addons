@@ -2,13 +2,12 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
-    "name": "Stock Component",
-    "summary": "Define components on serial numbers",
+    "name": "Stock Serial Single Quant",
+    "summary": "Add constraints on serial numbers",
     "version": "1.0.0",
     "category": "Inventory",
     "author": "Numigi",
     "license": "LGPL-3",
-    "depends": ["stock_serial_single_quant"],
-    "data": ["security/ir.model.access.csv", "views/stock_production_lot.xml"],
+    "depends": ["stock"],
     "installable": True,
 }
