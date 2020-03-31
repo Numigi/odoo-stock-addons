@@ -9,6 +9,11 @@
     "author": "Numigi",
     "license": "LGPL-3",
     "depends": ["stock_serial_single_quant"],
-    "data": ["security/ir.model.access.csv", "views/stock_production_lot.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/stock_production_lot.xml",
+        "wizard/stock_component_line_add.xml",
+        "wizard/stock_component_line_remove.xml",
+    ],
     "installable": True,
 }

@@ -73,3 +73,7 @@ class TestShadowMoves(StockMoveCase):
                 self.location_2,
                 package_src=self.package_2,
             )
+
+    def test_can_not_move_component_directly(self):
+        with pytest.raises(ValidationError):
+            self.move_serial_number(self.serial_2, self.location_1, self.location_2)

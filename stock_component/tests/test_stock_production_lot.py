@@ -32,6 +32,17 @@ class TestStockProductionLot(StockMoveCase):
         assert self.serial_2.get_current_location() == self.location_1
         assert old_quant.quantity == 0
 
+    def test_add_component_with_child_component(self):
+        self.make_quant(self.location_1a, self.serial_2)
+        self.make_quant(self.location_1aa, self.serial_3)
+        self.serial_2.add_component(self.serial_3)
+        self.serial_1.add_component(self.serial_2)
+        assert self.serial_1.component_ids == self.serial_2
+        assert self.serial_2.component_ids == self.serial_3
+        assert self.serial_1.get_current_location() == self.location_1
+        assert self.serial_2.get_current_location() == self.location_1
+        assert self.serial_3.get_current_location() == self.location_1
+
     def test_add_serial__different_location(self):
         self.make_quant(self.location_2, self.serial_2)
         with pytest.raises(ValidationError):
@@ -98,3 +109,28 @@ class TestStockProductionLot(StockMoveCase):
         self.serial_1.add_component(self.serial_2)
         with pytest.raises(ValidationError):
             self.serial_1.add_component(self.serial_2)
+
+    def test_add_component_wizard(self):
+        self.make_quant(self.location_1, self.serial_2)
+        wizard = self.env["stock.component.line.add"].create({})
+        wizard.parent_component_id = self.serial_1
+        wizard.component_id = self.serial_2
+        wizard.action_confirm()
+        assert self.serial_1.component_ids == self.serial_2
+
+    def test_remove_component_wizard(self):
+        self.make_quant(self.location_1, self.serial_2)
+        self.make_quant(self.location_1, self.serial_3)
+        self.serial_1.add_component(self.serial_2)
+        self.serial_1.add_component(self.serial_3)
+        wizard = self.env["stock.component.line.remove"].create({})
+        wizard.parent_component_id = self.serial_1
+        wizard.component_ids = self.serial_2
+        wizard.action_confirm()
+        assert self.serial_1.component_ids == self.serial_3
+
+    def test_no_recursion(self):
+        self.make_quant(self.location_1, self.serial_2)
+        self.serial_1.add_component(self.serial_2)
+        with pytest.raises(ValidationError):
+            self.serial_2.add_component(self.serial_1)

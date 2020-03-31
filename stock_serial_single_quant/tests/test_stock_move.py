@@ -13,12 +13,23 @@ class TestStockMoves(StockMoveCase):
         cls.quant_1 = cls.make_quant(cls.location_1, cls.serial_1)
 
     def test_non_serialized_product(self):
-        product = self.env["product.product"].create(
-            {"name": "Product Tracked By Lot", "type": "product", "tracking": "lot"}
-        )
+        product = self._make_non_serialized_product()
         lot = self.make_serial_number("LOT-1", product)
         self.make_quant(self.location_1, lot)
         self.move_serial_number(lot, self.location_2, self.location_3)
+
+    def test_is_serial(self):
+        assert self.serial_1.is_serial
+
+    def test_is_not_serial(self):
+        product = self._make_non_serialized_product()
+        lot = self.make_serial_number("LOT-1", product)
+        assert not lot.is_serial
+
+    def _make_non_serialized_product(self):
+        return self.env["product.product"].create(
+            {"name": "Product Tracked By Lot", "type": "product", "tracking": "lot"}
+        )
 
     def test_serial_number_with_no_quant(self):
         self.move_serial_number(self.serial_2, self.location_1, self.location_2)

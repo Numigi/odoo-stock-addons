@@ -1,7 +1,9 @@
 # © 2020 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
+from .stock_production_lot import PULLING_COMPONENTS
 
 
 class StockMove(models.Model):
@@ -9,9 +11,13 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _action_done(self):
+        self_sudo = self.sudo().with_context(lang=self.env.user.lang)
+        if not self_sudo._is_pulling_components():
+            self_sudo._check_no_component_moved()
+
         res = super()._action_done()
 
-        moves_with_components = self.filtered(lambda m: m._has_components())
+        moves_with_components = self_sudo.filtered(lambda m: m._has_components())
         for move in moves_with_components:
             move.generate_component_moves()
 
@@ -25,3 +31,33 @@ class StockMove(models.Model):
 
     def generate_component_moves(self):
         self.mapped("move_line_ids.lot_id").pull_components()
+
+    def _is_pulling_components(self):
+        return self._context.get(PULLING_COMPONENTS, False)
+
+    def _check_no_component_moved(self):
+        serials = self.mapped("move_line_ids.lot_id")
+        component_serials = serials.filtered(lambda s: s.is_component)
+
+        if component_serials:
+            message = _(
+                "You are attempting to move products that are components "
+                "of an equipment."
+            )
+            details = "\n".join(
+                [
+                    self._get_component_serial_not_movable_message(s)
+                    for s in component_serials
+                ]
+            )
+            raise ValidationError("\n".join((message, details)))
+
+    def _get_component_serial_not_movable_message(self, serial):
+        return _(
+            "The product {product} with serial number {serial} is a "
+            "component of {parent}."
+        ).format(
+            product=serial.product_id.display_name,
+            serial=serial.display_name,
+            parent=serial.parent_component_id.display_name,
+        )

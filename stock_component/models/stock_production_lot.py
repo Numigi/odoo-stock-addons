@@ -4,22 +4,55 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
+PULLING_COMPONENTS = "stock_component__is_pulling"
+
 
 class StockProductionLot(models.Model):
 
     _inherit = "stock.production.lot"
 
     component_ids = fields.Many2many(
-        "stock.production.lot", string="Components", compute="_compute_child_components"
+        "stock.production.lot",
+        "stock_production_lot_component_rel",
+        "parent_id",
+        "child_id",
+        string="Components",
+        compute="_compute_child_components",
+        store=True,
     )
 
     component_line_ids = fields.One2many(
         "stock.component.line", "parent_component_id", "Component Lines"
     )
 
-    parent_component_id = fields.Many2one(
-        "stock.production.lot", "Parent Component", compute="_compute_parent_component"
-    )
+    parent_component_id = fields.Many2one("stock.production.lot", "Parent Component")
+
+    is_component = fields.Boolean()
+
+    @api.constrains("component_ids")
+    def _check_no_component_recursion(self):
+        for parent in self:
+            child_with_recursion = parent._find_component_with_recursion()
+            if child_with_recursion:
+                raise ValidationError(
+                    _(
+                        "The serial number {child} could not be added as component to {parent}. "
+                        "A loop was found in the component structure."
+                    ).format(
+                        child=child_with_recursion.display_name,
+                        parent=parent.display_name,
+                    )
+                )
+
+    def _find_component_with_recursion(self):
+        return next(
+            (
+                c
+                for c in self.component_ids
+                if not c._check_m2m_recursion("component_ids")
+            ),
+            None,
+        )
 
     @api.depends("component_line_ids.component_id")
     def _compute_child_components(self):
@@ -43,6 +76,21 @@ class StockProductionLot(models.Model):
         self._check_component_can_be_added(serial)
         self._pull_component_if_in_child_location(serial)
         self._create_component_line(serial)
+        serial.write({"is_component": True, "parent_component_id": self.id})
+        self.message_post(
+            body=_("Added the component {number} (Product: {product})").format(
+                number=serial.name, product=serial.product_id.display_name
+            )
+        )
+
+    def remove_component(self, serial):
+        self._remove_component_line(serial)
+        serial.write({"is_component": False, "parent_component_id": False})
+        self.message_post(
+            body=_("Removed the component {number} (Product: {product})").format(
+                number=serial.name, product=serial.product_id.display_name
+            )
+        )
 
     def _check_component_can_be_added(self, serial):
         try:
@@ -69,7 +117,7 @@ class StockProductionLot(models.Model):
             raise ValidationError(
                 _(
                     "The serial number {serial} is already part of the equipment "
-                    "({parent})."
+                    "{parent}."
                 ).format(serial=serial.display_name, parent=self.display_name)
             )
 
@@ -181,6 +229,12 @@ class StockProductionLot(models.Model):
             {"parent_component_id": self.id, "component_id": serial.id}
         )
 
+    def _remove_component_line(self, serial):
+        line_to_remove = self.component_line_ids.filtered(
+            lambda l: l.component_id == serial
+        )
+        line_to_remove.unlink()
+
     def _pull_component_if_in_child_location(self, serial):
         if self._is_component_in_child_location(serial):
             self._pull_component(serial)
@@ -195,7 +249,7 @@ class StockProductionLot(models.Model):
         self.env["stock.move.line"].create(
             self._get_component_move_line_vals(move, serial)
         )
-        move._action_done()
+        move.with_context(**{PULLING_COMPONENTS: True})._action_done()
 
     def _get_common_component_move_vals(self, serial):
         return {
