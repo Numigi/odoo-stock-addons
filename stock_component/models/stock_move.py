@@ -37,18 +37,15 @@ class StockMove(models.Model):
 
     def _check_no_component_moved(self):
         serials = self.mapped("move_line_ids.lot_id")
-        component_serials = serials.filtered(lambda s: s.is_component)
+        components = serials.filtered(lambda s: s.is_component)
 
-        if component_serials:
+        if components:
             message = _(
                 "You are attempting to move products that are components "
                 "of an equipment."
             )
             details = "\n".join(
-                [
-                    self._get_component_serial_not_movable_message(s)
-                    for s in component_serials
-                ]
+                [self._get_component_serial_not_movable_message(s) for s in components]
             )
             raise ValidationError("\n".join((message, details)))
 
