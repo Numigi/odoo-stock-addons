@@ -9,16 +9,16 @@ class StockProductionLot(models.Model):
     _inherit = "stock.production.lot"
 
     def get_current_location(self):
-        quants = self.get_non_zero_quants()
+        quants = self.get_positive_quants()
         return quants.mapped("location_id")
 
     def get_current_package(self):
-        quants = self.get_non_zero_quants()
+        quants = self.get_positive_quants()
         return quants.mapped("package_id")
 
     def get_current_owner(self):
-        quants = self.get_non_zero_quants()
+        quants = self.get_positive_quants()
         return quants.mapped("owner_id")
 
-    def get_non_zero_quants(self):
-        return self.mapped("quant_ids").filtered(lambda q: q.quantity)
+    def get_positive_quants(self):
+        return self.mapped("quant_ids").filtered(lambda q: q.quantity > 0)

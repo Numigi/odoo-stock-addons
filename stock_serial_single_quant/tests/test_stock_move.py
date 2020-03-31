@@ -20,6 +20,10 @@ class TestStockMoves(StockMoveCase):
         self.make_quant(self.location_1, lot)
         self.move_serial_number(lot, self.location_2, self.location_3)
 
+    def test_serial_number_with_no_quant(self):
+        self.move_serial_number(self.serial_2, self.location_1, self.location_2)
+        assert self.serial_2.get_current_location() == self.location_2
+
     def test_correct_source_location(self):
         self.move_serial_number(self.serial_1, self.location_1, self.location_3)
         assert self.serial_1.get_current_location() == self.location_3

@@ -46,7 +46,7 @@ class TestStockProductionLot(StockMoveCase):
         self.quant_1.package_id = self.package_1
         self.make_quant(self.location_1, self.serial_2, package=self.package_1)
         self.serial_1.add_component(self.serial_2)
-        assert self.serial_2.get_non_zero_quants().package_id == self.package_1
+        assert self.serial_2.get_positive_quants().package_id == self.package_1
 
     def test_add_serial__quant_with_owner(self):
         self.make_quant(self.location_1, self.serial_2, owner=self.owner_1)
@@ -57,7 +57,7 @@ class TestStockProductionLot(StockMoveCase):
         self.quant_1.owner_id = self.owner_1
         self.make_quant(self.location_1, self.serial_2, owner=self.owner_1)
         self.serial_1.add_component(self.serial_2)
-        assert self.serial_2.get_non_zero_quants().owner_id == self.owner_1
+        assert self.serial_2.get_positive_quants().owner_id == self.owner_1
 
     def test_add_serial__quant_with_reserved_quantity(self):
         quant = self.make_quant(self.location_1, self.serial_2)

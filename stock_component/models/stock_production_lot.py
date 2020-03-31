@@ -86,7 +86,7 @@ class StockProductionLot(models.Model):
             )
 
     def _check_has_one_non_null_quant(self):
-        quants = self.get_non_zero_quants()
+        quants = self.get_positive_quants()
         if len(quants) > 1:
             message = _(
                 "The serial number {serial} is linked to more than one quant:"
@@ -124,8 +124,8 @@ class StockProductionLot(models.Model):
             )
 
     def _check_component_not_in_different_package(self, serial):
-        parent_package = self.get_non_zero_quants().package_id
-        serial_package = serial.get_non_zero_quants().package_id
+        parent_package = self.get_positive_quants().package_id
+        serial_package = serial.get_positive_quants().package_id
 
         if not parent_package and serial_package:
             raise ValidationError(
@@ -146,8 +146,8 @@ class StockProductionLot(models.Model):
             )
 
     def _check_component_has_not_different_owner(self, serial):
-        parent_owner = self.get_non_zero_quants().owner_id
-        serial_owner = serial.get_non_zero_quants().owner_id
+        parent_owner = self.get_positive_quants().owner_id
+        serial_owner = serial.get_positive_quants().owner_id
 
         if not parent_owner and serial_owner:
             raise ValidationError(
@@ -168,7 +168,7 @@ class StockProductionLot(models.Model):
             )
 
     def _check_is_not_reserved(self):
-        if self.get_non_zero_quants().reserved_quantity:
+        if self.get_positive_quants().reserved_quantity:
             raise ValidationError(
                 _(
                     "The selected serial number is reserved by a stock move.\n"

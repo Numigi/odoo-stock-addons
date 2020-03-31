@@ -19,6 +19,8 @@ class StockMove(models.Model):
         return self.product_id.tracking == "serial"
 
     def _check_serial_number_constraints(self):
-        lines_with_serial_number = self.move_line_ids.filtered(lambda l: l.lot_id)
-        for line in lines_with_serial_number:
+        lines_with_existing_quants = self.move_line_ids.filtered(
+            lambda l: bool(l.lot_id.sudo().get_positive_quants())
+        )
+        for line in lines_with_existing_quants:
             line.check_serial_number_constraints()
