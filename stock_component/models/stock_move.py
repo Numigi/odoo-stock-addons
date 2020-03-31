@@ -45,7 +45,7 @@ class StockMove(models.Model):
                 "of an equipment."
             )
             details = "\n".join(
-                [self._get_component_serial_not_movable_message(s) for s in components]
+                self._get_component_serial_not_movable_message(s) for s in components
             )
             raise ValidationError("\n".join((message, details)))
 
