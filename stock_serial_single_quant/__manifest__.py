@@ -9,5 +9,6 @@
     "author": "Numigi",
     "license": "LGPL-3",
     "depends": ["stock"],
+    "data": ["views/stock_production_lot.xml"],
     "installable": True,
 }

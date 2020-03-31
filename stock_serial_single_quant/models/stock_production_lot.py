@@ -1,12 +1,21 @@
 # © 2020 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import models
+from odoo import api, fields, models
 
 
 class StockProductionLot(models.Model):
 
     _inherit = "stock.production.lot"
+
+    is_serial = fields.Boolean(
+        "Is Serial Number", compute="_compute_is_serial", compute_sudo=True, store=True
+    )
+
+    @api.depends("product_id", "product_id.tracking")
+    def _compute_is_serial(self):
+        for lot in self:
+            lot.is_serial = lot.product_id.tracking == "serial"
 
     def get_current_location(self):
         quants = self.get_positive_quants()
