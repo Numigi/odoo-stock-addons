@@ -10,6 +10,10 @@ class StockMove(models.Model):
 
     _inherit = "stock.move"
 
+    child_ids = fields.One2many("stock.move", "parent_id", "Component Moves")
+
+    parent_id = fields.Many2one("stock.move", "Parent Move")
+
     def _action_done(self):
         self_sudo = self.sudo().with_context(lang=self.env.user.lang)
         if not self_sudo._is_pulling_components():
@@ -30,7 +34,8 @@ class StockMove(models.Model):
         )
 
     def generate_component_moves(self):
-        self.mapped("move_line_ids.lot_id").pull_components()
+        for line in self.mapped("move_line_ids"):
+            line.generate_component_moves()
 
     def _is_pulling_components(self):
         return self._context.get(PULLING_COMPONENTS, False)

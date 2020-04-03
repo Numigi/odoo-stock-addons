@@ -11,6 +11,8 @@ class StockMoveCase(common.SavepointCase):
 
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
 
+        cls.product_category = cls.env.ref("product.product_category_all")
+
         cls.warehouse_1 = cls.make_warehouse("W1")
         cls.warehouse_2 = cls.make_warehouse("W2")
         cls.warehouse_3 = cls.make_warehouse("W3")
@@ -21,7 +23,7 @@ class StockMoveCase(common.SavepointCase):
 
         cls.serial_1 = cls.make_serial_number("S1", cls.product_1)
         cls.serial_2 = cls.make_serial_number("S2", cls.product_2)
-        cls.serial_3 = cls.make_serial_number("S3", cls.product_2)
+        cls.serial_3 = cls.make_serial_number("S3", cls.product_3)
 
         cls.location_1 = cls.warehouse_1.lot_stock_id
         cls.location_2 = cls.warehouse_2.lot_stock_id
@@ -71,11 +73,17 @@ class StockMoveCase(common.SavepointCase):
             }
         )
         move._action_done()
+        return move
 
     @classmethod
     def make_product(cls, name):
         return cls.env["product.product"].create(
-            {"name": name, "type": "product", "tracking": "serial"}
+            {
+                "name": name,
+                "type": "product",
+                "tracking": "serial",
+                "categ_id": cls.product_category.id,
+            }
         )
 
     @classmethod

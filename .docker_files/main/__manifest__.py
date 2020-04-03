@@ -18,6 +18,7 @@
         # 'stock_picking_show_address',  # not ported to 12.0
         "purchase_warehouse_access",
         "stock_component",
+        "stock_component_account",
         "stock_inventory_accounting_date_editable",
         "stock_inventory_category_domain",
         "stock_inventory_internal_location",

@@ -245,11 +245,15 @@ class StockProductionLot(models.Model):
         return serial_location.is_child_of(parent_location)
 
     def _pull_component(self, serial):
+        parent_move_line = self._get_last_stock_move_line()
         move = self.env["stock.move"].create(self._get_component_move_vals(serial))
-        self.env["stock.move.line"].create(
+        move.parent_id = parent_move_line.move_id
+        move_line = self.env["stock.move.line"].create(
             self._get_component_move_line_vals(move, serial)
         )
+        move_line.parent_id = parent_move_line
         move.with_context(**{PULLING_COMPONENTS: True})._action_done()
+        return move_line
 
     def _get_common_component_move_vals(self, serial):
         return {
@@ -290,4 +294,9 @@ class StockProductionLot(models.Model):
     def _get_component_move_name(self, serial):
         return _("Move component {serial} as part of equipment {parent}").format(
             serial=serial.display_name, parent=self.display_name
+        )
+
+    def _get_last_stock_move_line(self):
+        return self.env["stock.move.line"].search(
+            [("lot_id", "=", self.id)], order="id desc", limit=1
         )
