@@ -9,7 +9,7 @@ The module ``stock_component`` generates ``shadow moves`` in order to move
 an equipment (a parent serial number) with all its components (child serial numbers)
 in a transparent way.
 
-However, if an equipment is delivered to a customer, the cost recorded for this equipment
+If an equipment is delivered to a customer, the cost recorded for this equipment
 should include the cost of its components (recursively).
 
 The complete cost of the equipment must be matched with the related revenue (the customer invoice).

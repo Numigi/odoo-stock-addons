@@ -246,54 +246,52 @@ class StockProductionLot(models.Model):
 
     def _pull_component(self, serial):
         parent_move_line = self._get_last_stock_move_line()
-        move = self.env["stock.move"].create(self._get_component_move_vals(serial))
-        move.parent_id = parent_move_line.move_id
-        move_line = self.env["stock.move.line"].create(
-            self._get_component_move_line_vals(move, serial)
+        parent_move = parent_move_line.move_id
+        move = self.env["stock.move"].create(
+            self._get_component_move_vals(serial, parent_move)
         )
-        move_line.parent_id = parent_move_line
+        move_line = self.env["stock.move.line"].create(
+            self._get_component_move_line_vals(move, serial, parent_move_line)
+        )
         move.with_context(**{PULLING_COMPONENTS: True})._action_done()
         return move_line
 
-    def _get_common_component_move_vals(self, serial):
+    def _get_component_move_vals(self, serial, parent_move):
+        location = self.get_current_location()
+        company = parent_move.company_id or location.company_id
         return {
-            "product_id": serial.product_id.id,
-            "location_id": serial.get_current_location().id,
+            "company_id": company.id,
             "location_dest_id": self.get_current_location().id,
+            "location_id": serial.get_current_location().id,
+            "name": self._get_component_move_name(serial, parent_move),
+            "parent_id": parent_move.id,
+            "product_id": serial.product_id.id,
+            "product_uom": self._get_component_uom().id,
+            "product_uom_qty": 1,
+            "state": "confirmed",
         }
 
-    def _get_component_move_vals(self, serial):
-        vals = self._get_common_component_move_vals(serial)
-        vals.update(
-            {
-                "name": self._get_component_move_name(serial),
-                "product_uom_qty": 1,
-                "product_uom": self._get_component_uom().id,
-            }
-        )
-        return vals
-
-    def _get_component_move_line_vals(self, move, serial):
-        vals = self._get_common_component_move_vals(serial)
-        vals.update(
-            {
-                "move_id": move.id,
-                "lot_id": serial.id,
-                "qty_done": 1,
-                "product_uom_qty": 0,
-                "product_uom_id": self._get_component_uom().id,
-                "package_id": serial.get_current_package().id,
-                "result_package_id": self.get_current_package().id,
-            }
-        )
-        return vals
+    def _get_component_move_line_vals(self, move, serial, parent_move_line):
+        return {
+            "location_dest_id": self.get_current_location().id,
+            "location_id": serial.get_current_location().id,
+            "lot_id": serial.id,
+            "move_id": move.id,
+            "package_id": serial.get_current_package().id,
+            "parent_id": parent_move_line.id,
+            "product_id": serial.product_id.id,
+            "product_uom_id": self._get_component_uom().id,
+            "product_uom_qty": 0,
+            "qty_done": 1,
+            "result_package_id": self.get_current_package().id,
+        }
 
     def _get_component_uom(self):
         return self.env.ref("uom.product_uom_unit")
 
-    def _get_component_move_name(self, serial):
-        return _("Move component {serial} as part of equipment {parent}").format(
-            serial=serial.display_name, parent=self.display_name
+    def _get_component_move_name(self, serial, parent_move):
+        return _("{parent_move}: Component {serial}").format(
+            parent_move=parent_move.reference, serial=serial.display_name
         )
 
     def _get_last_stock_move_line(self):

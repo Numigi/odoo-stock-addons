@@ -9,7 +9,7 @@
                 <sheet>
                     <group>
                         <field name="parent_component_id" invisible="1"/>
-                        <field name="component_ids" widget="many2many_tags" required="1"/>
+                        <field name="component_ids" widget="many2many_tags" required="1" options="{'no_create': True}"/>
                     </group>
                 </sheet>
                 <footer>
