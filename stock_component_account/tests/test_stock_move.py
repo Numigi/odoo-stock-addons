@@ -128,6 +128,15 @@ class TestShadowMoves(StockMoveCase):
         (3, 3, (100 + 100) / 2),
         (4, 3, 100),
         (5, 3, 0),
+        (-1, 1, 0),
+        (-1, 2, 600),
+        (-2, 2, 0),
+        (-2, 5, (600 + 600 + 300) / 3),
+        (3, -1, 300),
+        (3, -2, (600 + 300) / 2),
+        (0, -1, 0),
+        (2, -3, (600 + 600) / 2),
+        (-1, -1, 0),
     )
     @unpack
     def test_average_price__one_move_shipped(
@@ -141,18 +150,24 @@ class TestShadowMoves(StockMoveCase):
             qty_done, quantity, moves
         )
 
-    def test_number_of_accounts_on_parent_stock_move(self):
+    def test_number_of_account_moves_on_parent_stock_move(self):
+        """Test number of account moves linked to the parent stock.move.
+
+        3 moves for P1 (the equipment)
+        3 for P2 (the first level component)
+        2 for P3 (the second level component)
+        """
         account_moves = self.line_1.mapped("move_ids.account_move_ids")
-        # 3 moves for P1
-        # 3 for P2
-        # 2 for P3
         assert len(account_moves) == 8
 
     def test_total_number_of_account_moves(self):
+        """Test the total number of account moves.
+
+        3 + 3 + 2 moves for P1 (the equipment)
+        3 + 2 for P2 (the first level component)
+        2 for P3 (the second level component)
+        """
         all_account_moves = self._get_all_account_moves()
-        # 3 + 3 + 2 moves for P1
-        # 3 + 2 for P2
-        # 2 for P3
         assert len(all_account_moves) == 15
 
     def test_number_of_unreconciled_account_move_lines(self):

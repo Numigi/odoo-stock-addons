@@ -23,8 +23,12 @@ class Product(models.Model):
             key=lambda l: (l.date, l.id)
         )
 
-        start_index = int(qty_done)
-        end_index = int(qty_done + quantity)
+        start_index = max(0, int(qty_done))
+        end_index = max(0, int(qty_done + quantity))
+
+        if start_index > end_index:
+            start_index, end_index = end_index, start_index
+
         lines_to_include = done_lines[start_index:end_index]
 
         total = sum(abs(l.get_total_unit_price()) for l in lines_to_include)
