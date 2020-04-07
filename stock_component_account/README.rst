@@ -18,11 +18,11 @@ Summary
 -------
 The module does two things:
 
-* It adjusts the cost of equipments recorded on `Customer Invoices`_.
+* It adjusts the cost of equipments recorded on `Journal Entries of Customer Invoices`_.
 * It generates `Extra Journal Entries`_ for delivered equipments.
 
-Customer Invoices
------------------
+Journal Entries of Customer Invoices
+------------------------------------
 When a customer invoice is validated, a journal entry is generated.
 
 The journal entry may look like this:
