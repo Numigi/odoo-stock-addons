@@ -27,10 +27,15 @@ class StockMove(models.Model):
     def _find_component_items_to_reconcile(self):
         product_interim_account = self._get_product_output_account()
         journal_items = self.mapped("child_ids.account_move_ids.line_ids")
+
+        def is_interim_journal_item(item):
+            return item.account_id == product_interim_account
+
+        def is_journal_item_to_reconcile(item):
+            return item.account_id.reconcile and not item.reconciled
+
         return journal_items.filtered(
-            lambda i: i.account_id.reconcile
-            and i.account_id == product_interim_account
-            and not i.reconciled
+            lambda i: is_interim_journal_item(i) and is_journal_item_to_reconcile(i)
         )
 
     def _generate_component_interim_entry(self, journal_item):
