@@ -132,8 +132,8 @@ msgstr "Lot / Numéro de série"
 #. module: stock_component
 #: code:addons/stock_component/models/stock_production_lot.py:295
 #, python-format
-msgid "Move component {serial} as part of equipment {parent}"
-msgstr "Déplacer la composante {serial} vers l'équipement {parent}"
+msgid "{parent_move}: Component {serial}
+msgstr "{parent_move} : Composante {serial}
 
 #. module: stock_component
 #: model_terms:ir.ui.view,arch_db:stock_component.stock_component_line_add_form

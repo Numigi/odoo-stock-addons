@@ -17,6 +17,7 @@ USER odoo
 
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
 COPY stock_component /mnt/extra-addons/stock_component
+COPY stock_component_account /mnt/extra-addons/stock_component_account
 COPY stock_inventory_accounting_date_editable /mnt/extra-addons/stock_inventory_accounting_date_editable
 COPY stock_inventory_category_domain /mnt/extra-addons/stock_inventory_category_domain
 COPY stock_inventory_internal_location /mnt/extra-addons/stock_inventory_internal_location
