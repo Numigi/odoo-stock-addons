@@ -20,7 +20,7 @@ I click on the button, the wizard is opened. I can pick a new destination.
 
 Once I clicked apply, I can see the destination changed.
 
-.. image:: static/description/destination_changed.png.
+.. image:: static/description/destination_changed.png
 
 
 Constrains
