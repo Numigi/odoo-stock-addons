@@ -23,7 +23,7 @@ Once I clicked apply, I can see the destination changed.
 .. image:: static/description/destination_changed.png
 
 
-Constrains
+Constraints
 ----------
 
 The picking's destination update is under two constrains
