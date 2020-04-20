@@ -20,7 +20,7 @@ I notice a new button ``Add Transit``.
 
 .. image:: static/description/delivery_order.png
 
-A wizard is open.
+A wizard is opened.
 
 .. image:: static/description/wizard.png
 
