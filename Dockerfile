@@ -24,6 +24,7 @@ COPY stock_inventory_internal_location /mnt/extra-addons/stock_inventory_interna
 COPY stock_inventory_line_domain /mnt/extra-addons/stock_inventory_line_domain
 COPY stock_inventory_line_domain_barcode /mnt/extra-addons/stock_inventory_line_domain_barcode
 COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_alphanum
+COPY stock_picking_add_transit /mnt/extra-addons/stock_picking_add_transit
 COPY stock_picking_change_destination /mnt/extra-addons/stock_picking_change_destination
 COPY stock_serial_single_quant /mnt/extra-addons/stock_serial_single_quant
 COPY stock_theorical_quantity_access /mnt/extra-addons/stock_theorical_quantity_access
