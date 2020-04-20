@@ -25,6 +25,7 @@
         "stock_inventory_line_domain",
         "stock_inventory_line_domain_barcode",
         "stock_location_position_alphanum",
+        "stock_picking_add_transit",
         "stock_picking_change_destination",
         "stock_serial_single_quant",
         "stock_theorical_quantity_access",
