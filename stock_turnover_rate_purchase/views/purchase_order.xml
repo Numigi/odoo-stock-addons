@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="purchase_order_with_lines_colored" model="ir.ui.view">
+        <field name="name">Purchase Order Form: Colorize lines based on turnover rate</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="line_color" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="decoration-success">line_color == 'green'</attribute>
+                <attribute name="decoration-danger">line_color == 'red'</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_with_turnover_rate" model="ir.ui.view">
+        <field name="name">Purchase Order Form: Add turnover rate</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                <field name="turnover_rate" string="Turnover"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
