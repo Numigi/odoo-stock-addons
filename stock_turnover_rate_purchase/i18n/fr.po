@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_turnover_rate_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-22 13:12+0000\n"
+"PO-Revision-Date: 2019-10-22 09:13-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: stock_turnover_rate_purchase
+#: model:ir.model.fields,field_description:stock_turnover_rate_purchase.field_purchase_order_line__turnover_rate
+msgid "Effective Turnover Rate"
+msgstr ""
+
+#. module: stock_turnover_rate_purchase
+#: model:ir.model.fields,field_description:stock_turnover_rate_purchase.field_purchase_order_line__line_color
+msgid "Line Color"
+msgstr "Couleur de la ligne"
+
+#. module: stock_turnover_rate_purchase
+#: model:ir.model.fields,field_description:stock_turnover_rate_purchase.field_product_category__minimum_turnover_rate
+#: model:ir.model.fields,field_description:stock_turnover_rate_purchase.field_product_product__minimum_turnover_rate
+#: model:ir.model.fields,field_description:stock_turnover_rate_purchase.field_product_template__minimum_turnover_rate
+msgid "Minimum Turnover Rate"
+msgstr "Taux rotation min."
+
+#. module: stock_turnover_rate_purchase
+#: model:ir.model,name:stock_turnover_rate_purchase.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: stock_turnover_rate_purchase
+#: model:ir.model,name:stock_turnover_rate_purchase.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_turnover_rate_purchase
+#: model:ir.model,name:stock_turnover_rate_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: stock_turnover_rate_purchase
+#: code:addons/stock_turnover_rate_purchase/models/product_category.py:24
+#, python-format
+msgid ""
+"The minimum turnover rate for the product category {} must be lower or equal "
+"to the target turnover rate."
+msgstr ""
+"Le taux de rotation minimum de la catégorie d'article {} doit être inférieur "
+"ou égale au taux de rotation cible."
+
+#. module: stock_turnover_rate_purchase
+#: model_terms:ir.ui.view,arch_db:stock_turnover_rate_purchase.purchase_order_with_turnover_rate
+msgid "Turnover"
+msgstr "Rotation"

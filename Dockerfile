@@ -29,6 +29,7 @@ COPY stock_picking_change_destination /mnt/extra-addons/stock_picking_change_des
 COPY stock_serial_single_quant /mnt/extra-addons/stock_serial_single_quant
 COPY stock_theorical_quantity_access /mnt/extra-addons/stock_theorical_quantity_access
 COPY stock_turnover_rate /mnt/extra-addons/stock_turnover_rate
+COPY stock_turnover_rate_purchase /mnt/extra-addons/stock_turnover_rate_purchase
 COPY stock_warehouse_access /mnt/extra-addons/stock_warehouse_access
 COPY stock_warehouse_distance /mnt/extra-addons/stock_warehouse_distance
 
