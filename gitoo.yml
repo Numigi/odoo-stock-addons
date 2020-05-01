@@ -7,3 +7,7 @@
 - url: https://github.com/oca/queue
   branch: "12.0"
   includes: ["queue_job"]
+
+- url: https://github.com/oca/account-financial-tools
+  branch: "12.0"
+  includes: ["account_asset_management"]
