@@ -30,12 +30,11 @@ class StockPickingAddTransit(models.TransientModel):
 
         if self._should_add_transit_before():
             self._add_transit_before()
+            action = self.new_picking_id.get_formview_action()
+            action["target"] = "current"
+            return action
         else:
             self._add_transit_after()
-
-        action = self.new_picking_id.get_formview_action()
-        action["target"] = "current"
-        return action
 
     def _check_picking_state(self):
         if self.picking_id.state == "draft":
@@ -106,7 +105,7 @@ class StockPickingAddTransit(models.TransientModel):
             "priority": old_picking.priority,
             "scheduled_date": old_picking.scheduled_date,
             "partner_id": old_picking.partner_id.id,
-            "company_id": old_picking.company_id.id,
+            "company_id": self.warehouse_id.company_id.id,
             "picking_type_id": self.warehouse_id.int_type_id.id,
         }
 

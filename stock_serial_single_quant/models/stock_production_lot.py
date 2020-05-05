@@ -12,6 +12,19 @@ class StockProductionLot(models.Model):
         "Is Serial Number", compute="_compute_is_serial", compute_sudo=True, store=True
     )
 
+    location_id = fields.Many2one(
+        "stock.location",
+        compute="_compute_location_id",
+        compute_sudo=True,
+        store=True,
+        index=True,
+    )
+
+    @api.depends("quant_ids", "quant_ids.quantity")
+    def _compute_location_id(self):
+        for lot in self:
+            lot.location_id = lot.get_current_location()[:1]
+
     @api.depends("product_id", "product_id.tracking")
     def _compute_is_serial(self):
         for lot in self:

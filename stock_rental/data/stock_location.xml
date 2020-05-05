@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="rental_location" model="stock.location">
+        <field name="name">Rental</field>
+        <field name="usage">view</field>
+    </record>
+
+    <record id="customer_location" model="stock.location">
+        <field name="name">Customer</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="rental_location"/>
+        <field name="is_rental_customer_location" eval="True"/>
+    </record>
+
+    <record id="transit_location" model="stock.location">
+        <field name="name">Transit</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="rental_location"/>
+    </record>
+
+</odoo>
