@@ -11,10 +11,6 @@ When clicking on the button, the form view of the related asset is shown.
 
 .. image:: static/description/asset_form.png
 
-In the form view of the asset, a smart button is added to access the linked serial numbers.
-
-.. image:: static/description/asset_form_smart_button.png
-
 Known Issues
 ------------
 This module does not define how an asset is created from a serial number.

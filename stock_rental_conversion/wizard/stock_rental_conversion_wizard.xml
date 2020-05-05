@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_rental_conversion_wizard_form" model="ir.ui.view">
+        <field name="name">Stock Rental Conversion Wizard</field>
+        <field name="model">stock.rental.conversion.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Convert to Rental Product">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sales_product_id"/>
+                            <field name="is_serialized_product" invisible="1"/>
+                            <field name="sales_lot_id"
+                                string="Serial Number"
+                                domain="[('product_id', '=', sales_product_id), ('location_id.usage', '=', 'internal')]"
+                                options="{'no_create': True}"
+                                attrs="{
+                                    'invisible': [('is_serialized_product', '=', False)],
+                                    'required': [('is_serialized_product', '=', True)],
+                                }"/>
+                            <field name="rental_product_id"
+                                domain="[('type', '=', 'product')]"/>
+                            <field name="source_location_id"
+                                domain="[('usage', '=', 'internal'), ('company_id', '!=', False)]"/>
+                            <field name="destination_location_id"
+                                domain="[('usage', '=', 'internal'), ('company_id', '!=', False)]"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="validate" string="Validate" type="object" class="oe_highlight"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

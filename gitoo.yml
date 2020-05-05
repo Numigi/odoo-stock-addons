@@ -11,3 +11,13 @@
 - url: https://github.com/oca/account-financial-tools
   branch: "12.0"
   includes: ["account_asset_management"]
+
+- url: https://github.com/OCA/server-tools
+  branch: "12.0"
+  includes:
+    - onchange_helper
+
+- url: https://github.com/OCA/account-financial-tools
+  branch: "12.0"
+  includes:
+    - account_asset_management

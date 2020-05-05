@@ -9,6 +9,6 @@
     "license": "LGPL-3",
     "summary": "Link a serial number to an asset",
     "depends": ["account_asset_management", "stock"],
-    "data": ["views/stock_production_lot.xml"],
+    "data": ["views/stock_production_lot.xml", "views/account_asset.xml"],
     "installable": True,
 }

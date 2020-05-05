@@ -35,6 +35,9 @@
         "stock_turnover_rate_purchase",
         "stock_warehouse_access",
         "stock_warehouse_distance",
+        "stock_rental",
+        "stock_rental_conversion",
+        "stock_rental_conversion_asset",
     ],
     "installable": True,
 }
