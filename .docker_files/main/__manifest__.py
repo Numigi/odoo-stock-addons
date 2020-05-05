@@ -26,6 +26,7 @@
         "stock_inventory_line_domain_barcode",
         "stock_location_position_alphanum",
         "stock_picking_add_transit",
+        "stock_picking_add_transit_rental",
         "stock_picking_change_destination",
         "stock_serial_asset",
         "stock_serial_no_simple_form",
