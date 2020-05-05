@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_rental
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-05 20:42+0000\n"
+"PO-Revision-Date: 2020-05-05 20:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_rental
+#: model:ir.model.fields,help:stock_rental.field_stock_location__is_rental_customer_location
+msgid "Check this box if this location is used for products rented to a customer."
+msgstr "Cocher cette case si cet emplacement est utilisé pour les articles destinés à la location."
+
+#. module: stock_rental
+#: model:ir.model,name:stock_rental.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_rental
+#: model:ir.model.fields,field_description:stock_rental.field_stock_location__is_rental_customer_location
+msgid "Is Rental Customer Location"
+msgstr "Est un emplacement client de location"
+
+#. module: stock_rental
+#: model_terms:ir.ui.view,arch_db:stock_rental.stock_location_form
+msgid "Is a Rental Customer Location?"
+msgstr "Est un emplacement client de location ?"
+
+#. module: stock_rental
+#: code:addons/stock_rental/models/stock_warehouse.py:117
+#, python-format
+msgid "Rental"
+msgstr "Location"
+
+#. module: stock_rental
+#: model:ir.model.fields,field_description:stock_rental.field_stock_warehouse__rental_type_id
+msgid "Rental Picking Type"
+msgstr "Type d'opération pour la location"
+
+#. module: stock_rental
+#: code:addons/stock_rental/models/stock_warehouse.py:130
+#, python-format
+msgid "Rental Return"
+msgstr "Retour de location"
+
+#. module: stock_rental
+#: model:ir.model.fields,field_description:stock_rental.field_stock_warehouse__rental_return_type_id
+msgid "Rental Return Picking Type"
+msgstr "Type d'opération de retour de location"
+
+#. module: stock_rental
+#: model:ir.model.fields,field_description:stock_rental.field_stock_warehouse__rental_route_id
+msgid "Rental Route"
+msgstr "Route de location"
+
+#. module: stock_rental
+#: code:addons/stock_rental/models/stock_warehouse.py:43
+#, python-format
+msgid "Rental Stock"
+msgstr "Stock de location"
+
+#. module: stock_rental
+#: model:ir.model.fields,field_description:stock_rental.field_stock_warehouse__rental_location_id
+msgid "Rental Stock Location"
+msgstr "Emplacement de stock de location"
+
+#. module: stock_rental
+#: model:ir.model.fields,help:stock_rental.field_stock_warehouse__rental_location_id
+msgid "This location contains the stock available for rental."
+msgstr "Cet emplacement contient les articles disponibles à la location."
+
+#. module: stock_rental
+#: model:ir.model,name:stock_rental.model_stock_warehouse
+msgid "Warehouse"
+msgstr ""

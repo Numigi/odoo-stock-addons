@@ -1,0 +1,45 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_rental_conversion
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-05 20:20+0000\n"
+"PO-Revision-Date: 2020-05-05 16:21-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: stock_rental_conversion_asset
+#: model:ir.model.fields,field_description:stock_rental_conversion_asset.field_product_product__asset_profile_id
+#: model:ir.model.fields,field_description:stock_rental_conversion_asset.field_product_template__asset_profile_id
+#: model:ir.model.fields,field_description:stock_rental_conversion_asset.field_stock_rental_conversion_wizard__asset_profile_id
+msgid "Asset Profile"
+msgstr "Profil d'immobilisation"
+
+#. module: stock_rental_conversion_asset
+#: model_terms:ir.ui.view,arch_db:stock_rental_conversion_asset.product_template_form_with_asset_profile
+msgid "Assets"
+msgstr "Immobilisations"
+
+#. module: stock_rental_conversion_asset
+#: model:ir.model.fields,field_description:stock_rental_conversion_asset.field_stock_rental_conversion_wizard__create_asset
+msgid "Create Asset"
+msgstr "Créer une immobilisation"
+
+#. module: stock_rental_conversion_asset
+#: model:ir.model,name:stock_rental_conversion_asset.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_rental_conversion_asset
+#: model:ir.model,name:stock_rental_conversion_asset.model_stock_rental_conversion_wizard
+msgid "Stock Rental Conversion Wizard"
+msgstr "Assistant de conversion d'article de location"
