@@ -63,6 +63,7 @@ class TestWizardValidation(StockRentalConversionCaseWithAssets):
                 "rental_product_id": cls.rental_product.id,
                 "source_location_id": cls.source_location.id,
                 "destination_location_id": cls.destination_location.id,
+                "create_asset": True,
                 "asset_profile_id": cls.asset_profile.id,
             }
         )

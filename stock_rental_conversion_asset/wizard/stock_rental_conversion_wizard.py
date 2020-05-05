@@ -11,11 +11,12 @@ class StockRentalConversionWizard(models.TransientModel):
 
     asset_profile_id = fields.Many2one("account.asset.profile")
 
-    create_asset = fields.Boolean(default=True)
+    create_asset = fields.Boolean()
 
     @api.onchange("sales_product_id")
     def _propagate_asset_profile_from_sale_product(self):
         self.asset_profile_id = self.sales_product_id.asset_profile_id
+        self.create_asset = bool(self.asset_profile_id)
 
     def validate(self):
         super().validate()
