@@ -14,7 +14,6 @@
         "account_asset_management",
         "stock_rental_conversion",
         "stock_serial_asset",
-        "onchange_helper",
     ],
     "data": ["views/product_template.xml", "wizard/stock_rental_conversion_wizard.xml"],
     "installable": True,

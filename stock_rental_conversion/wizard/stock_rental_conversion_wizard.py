@@ -11,8 +11,10 @@ class StockRentalConversionWizard(models.TransientModel):
 
     sales_product_id = fields.Many2one("product.product")
     sales_lot_id = fields.Many2one("stock.production.lot")
+    sales_product_move_id = fields.Many2one("stock.move")
     rental_product_id = fields.Many2one("product.product")
     rental_lot_id = fields.Many2one("stock.production.lot")
+    rental_product_move_id = fields.Many2one("stock.move")
     source_location_id = fields.Many2one("stock.location")
     destination_location_id = fields.Many2one("stock.location")
     is_serialized_product = fields.Boolean(compute="_compute_is_serialized_product")
@@ -72,6 +74,7 @@ class StockRentalConversionWizard(models.TransientModel):
         move_line_vals = self._get_sales_move_line_vals(move)
         self.env["stock.move.line"].create(move_line_vals)
         move._action_done()
+        self.sales_product_move_id = move
 
     def _move_rental_product(self):
         move_vals = self._get_rental_move_vals()
@@ -79,6 +82,7 @@ class StockRentalConversionWizard(models.TransientModel):
         move_line_vals = self._get_rental_move_line_vals(move)
         self.env["stock.move.line"].create(move_line_vals)
         move._action_done()
+        self.rental_product_move_id = move
 
     def _create_rental_lot(self):
         self.rental_lot_id = self.env["stock.production.lot"].create(
