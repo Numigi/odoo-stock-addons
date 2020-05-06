@@ -12,6 +12,7 @@ class StockPickingAddTransitCase(SavepointCase):
         cls.picking_type = cls.warehouse.out_type_id
         cls.stock_location = cls.warehouse.lot_stock_id
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
+        cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
         cls.product_a = cls.make_product("Product A")
         cls.product_b = cls.make_product("Product B")
         cls.transit_1 = cls.env["stock.location"].create(
