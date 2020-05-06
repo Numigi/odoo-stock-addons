@@ -1,7 +1,9 @@
 # © 2020 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+import pytest
 from odoo.addons.stock_rental_conversion.tests.common import StockRentalConversionCase
+from odoo.exceptions import ValidationError
 
 
 class StockRentalConversionCaseWithAssets(StockRentalConversionCase):
@@ -56,6 +58,8 @@ class TestWizardValidation(StockRentalConversionCaseWithAssets):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.cost = 1000
+        cls.sales_product.standard_price = cls.cost
         cls.wizard = cls.env["stock.rental.conversion.wizard"].create(
             {
                 "sales_product_id": cls.sales_product.id,
@@ -67,10 +71,30 @@ class TestWizardValidation(StockRentalConversionCaseWithAssets):
                 "asset_profile_id": cls.asset_profile.id,
             }
         )
-        cls.wizard.validate()
-        cls.rental_serial = cls.wizard.rental_lot_id
-        cls.asset = cls.rental_serial.asset_ids
 
-    def test_asset_created(self):
-        assert len(self.asset) == 1
-        assert self.asset.profile_id == self.asset_profile
+    def test_perpetual_inventory(self):
+        self.sales_product.property_valuation = "real_time"
+        self.wizard.validate()
+        asset = self.wizard.rental_lot_id.asset_ids
+        assert len(asset) == 1
+        assert asset.profile_id == self.asset_profile
+        assert len(asset.account_move_line_ids) == 1
+        assert asset.purchase_value == self.cost
+
+    def test_periodic_inventory(self):
+        self.sales_product.property_valuation = "manual_periodic"
+        self.wizard.validate()
+        asset = self.wizard.rental_lot_id.asset_ids
+        assert asset.purchase_value == self.cost
+
+    def test_periodic_inventory_with_null_cost(self):
+        self.sales_product.property_valuation = "manual_periodic"
+        self.sales_product.standard_price = 0
+        with pytest.raises(ValidationError):
+            self.wizard.validate()
+
+    def test_periodic_inventory_with_negative_cost(self):
+        self.sales_product.property_valuation = "manual_periodic"
+        self.sales_product.standard_price = -1
+        with pytest.raises(ValidationError):
+            self.wizard.validate()
