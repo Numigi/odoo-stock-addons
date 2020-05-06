@@ -11,6 +11,7 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
+        "onchange_helper",  # Used for testing stock_rental_conversion
         "stock_dropshipping",  # Used for testing stock_warehouse_access
         # 'stock_immediate_transfer_disable',  # not ported to 12.0
         # 'stock_move_list_cost',  # not ported to 12.0
