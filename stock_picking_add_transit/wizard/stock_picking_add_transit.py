@@ -16,8 +16,6 @@ class StockPickingAddTransit(models.TransientModel):
 
     new_picking_id = fields.Many2one("stock.picking", "New Picking")
 
-    warehouse_id = fields.Many2one(related="picking_id.picking_type_id.warehouse_id")
-
     location_id = fields.Many2one(
         "stock.location",
         "Location",
@@ -50,7 +48,10 @@ class StockPickingAddTransit(models.TransientModel):
     def _should_add_transit_before(self):
         source_usage = self.picking_id.location_id.usage
         destination_usage = self.picking_id.location_dest_id.usage
-        is_outgoing = destination_usage in EXTERNAL_LOCATIONS
+        is_outgoing = (
+            source_usage not in EXTERNAL_LOCATIONS
+            and destination_usage in EXTERNAL_LOCATIONS
+        )
         is_internal = (
             source_usage not in EXTERNAL_LOCATIONS
             and destination_usage not in EXTERNAL_LOCATIONS
@@ -105,9 +106,23 @@ class StockPickingAddTransit(models.TransientModel):
             "priority": old_picking.priority,
             "scheduled_date": old_picking.scheduled_date,
             "partner_id": old_picking.partner_id.id,
-            "company_id": self.warehouse_id.company_id.id,
-            "picking_type_id": self.warehouse_id.int_type_id.id,
+            "company_id": old_picking.company_id.id,
+            "picking_type_id": self._get_new_picking_type().id,
         }
+
+    def _get_new_picking_type(self):
+        warehouse = self.picking_id.picking_type_id.warehouse_id
+        if warehouse:
+            return warehouse.int_type_id
+        else:
+            return self.env["stock.picking.type"].search(
+                [
+                    ("code", "=", "internal"),
+                    ("warehouse_id.company_id", "=", self.picking_id.company_id.id),
+                ],
+                order="sequence",
+                limit=1,
+            )
 
     def _create_move_before(self, old_move):
         vals = self._get_move_before_vals(old_move)

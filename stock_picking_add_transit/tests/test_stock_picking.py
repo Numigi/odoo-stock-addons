@@ -92,6 +92,31 @@ class TestIncomingPicking(StockPickingAddTransitCase):
         assert self.move_3.state == "waiting"
 
 
+class TestDropshipPicking(StockPickingAddTransitCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.picking = cls.make_picking(cls.supplier_location, cls.customer_location)
+        cls.picking.picking_type_id = cls.env.ref(
+            "stock_dropshipping.picking_type_dropship"
+        )
+        cls.move_1 = cls.make_stock_move(cls.picking, cls.product_a, 2)
+        cls.move_line = cls.make_stock_move_line(cls.move_1, 1)
+        cls.move_1.state = "partially_available"
+        cls.add_transit(cls.picking, cls.transit_2)
+        cls.add_transit(cls.picking, cls.transit_1)
+        cls.move_2 = cls.move_1.move_dest_ids
+        cls.move_3 = cls.move_2.move_dest_ids
+
+    def test_source_location(self):
+        assert self.move_1.location_id == self.supplier_location
+        assert self.move_1.location_dest_id == self.transit_1
+        assert self.move_2.location_id == self.transit_1
+        assert self.move_2.location_dest_id == self.transit_2
+        assert self.move_3.location_id == self.transit_2
+        assert self.move_3.location_dest_id == self.customer_location
+
+
 class TestConstraints(StockPickingAddTransitCase):
     @classmethod
     def setUpClass(cls):
