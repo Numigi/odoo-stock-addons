@@ -9,7 +9,7 @@
     "website": "https://bit.ly/numigi-com",
     "license": "LGPL-3",
     "category": "Product",
-    "summary": "Add a field Usual Location of products",
+    "summary": "Add a field Usual Location on products",
     "depends": ["stock"],
     "installable": True,
     "data": ["views/product_template.xml"],
