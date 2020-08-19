@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_picking_form" model="ir.ui.view">
+        <field name="name">Stock Picking Form: Add button to components</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='lot_id']" position="before">
+                <field name="has_components" invisible="1"/>
+                <button name="display_components" type="object" icon="fa-arrow-circle-down" class="oe_stat_button" attrs="{'invisible': [('has_components', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    See if need to have search/filter view and tree view-->
+
+
+</odoo>
