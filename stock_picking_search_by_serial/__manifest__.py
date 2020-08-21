@@ -9,6 +9,6 @@
     "maintainer": "Numigi",
     "license": "AGPL-3",
     "depends": ["stock"],
-    "data": ["views/stock_picking_views.xml"],
+    "data": ["views/stock_picking.xml"],
     "installable": True,
 }
