@@ -18,5 +18,5 @@ msgstr ""
 #. module: stock_picking_search_by_serial
 #: model_terms:ir.ui.view,arch_db:stock_picking_search_by_serial.view_picking_internal_search_with_barcode
 msgid "Lot / Serial Number"
-msgstr ""
+msgstr "Lot / Numéro de série"
 
