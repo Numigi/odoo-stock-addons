@@ -5,16 +5,15 @@
         <field name="name">Stock Picking Form: Add button to components</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="priority" eval="1"/>
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='lot_id']" position="before">
                 <field name="has_components" invisible="1"/>
-                <button name="display_components" type="object" icon="fa-arrow-circle-down" class="oe_stat_button" attrs="{'invisible': [('has_components', '=', False)]}"/>
+                <button name="display_components" type="object" icon="fa-arrow-circle-down" class="o_stock_picking_components" attrs="{'invisible': [('has_components', '=', False)]}" widget="stock_component"/>
             </xpath>
         </field>
     </record>
-
-<!--    See if need to have search/filter view and tree view-->
 
 
 </odoo>

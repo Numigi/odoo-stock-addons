@@ -11,6 +11,7 @@
     "depends": ["stock_serial_single_quant"],
     "data": [
         "security/ir.model.access.csv",
+        "views/assets.xml",
         "views/stock_picking.xml",
         "views/stock_production_lot.xml",
         "wizard/stock_component_line_add.xml",

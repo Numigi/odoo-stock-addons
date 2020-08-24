@@ -8,8 +8,7 @@ class StockPicking(models.Model):
     _inherit = "stock.move.line"
 
     has_components = fields.Boolean(
-        compute="_check_has_components",
-        default=False,
+        compute="_compute_has_components",
     )
 
     @api.multi
@@ -17,8 +16,7 @@ class StockPicking(models.Model):
         return self.lot_id.get_formview_action()
 
     @api.multi
-    def _check_has_components(self):
+    def _compute_has_components(self):
         for line in self:
-            if line.lot_id.component_ids:
-                line.has_components = True
+            line.has_components = bool(line.lot_id.component_ids)
 
