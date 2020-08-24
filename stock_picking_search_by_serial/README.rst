@@ -1,6 +1,6 @@
 Stock Picking Search By Serial
 ==============================
-- Add the ability to search Transfers by Lot / Serial Number (Barcode)
+- Add the ability to search Transfers by Lot / Serial Number
 
 .. image:: static/description/stock_picking_search_by_serial.png
 
