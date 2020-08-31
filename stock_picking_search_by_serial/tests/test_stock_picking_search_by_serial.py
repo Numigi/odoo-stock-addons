@@ -78,7 +78,7 @@ class TestStockPickingSearchBySerial(SavepointCase):
             ]
         )
 
-    def _check_search_stock_picking_by_serial(self, serial, exist_result):
+    def _check_search_stock_picking_by_serial(self, serial, result_length):
         res = self.env["stock.picking"].search(
             [
                 "|",
@@ -86,17 +86,10 @@ class TestStockPickingSearchBySerial(SavepointCase):
                 ("move_line_ids.lot_id", "ilike", serial),
             ]
         )
-        if exist_result:
-            self.assertEqual(len(res), 2)
-        else:
-            self.assertEqual(len(res), 0)
+        self.assertEqual(len(res), result_length)
 
     def test_search_stock_picking_by_serial_with_result(self):
-        self._check_search_stock_picking_by_serial(
-            serial="Right Lot", exist_result=True
-        )
+        self._check_search_stock_picking_by_serial(serial="Right Lot", result_length=2)
 
     def test_search_stock_picking_by_serial_without_result(self):
-        self._check_search_stock_picking_by_serial(
-            serial="Wrong Lot", exist_result=False
-        )
+        self._check_search_stock_picking_by_serial(serial="Wrong Lot", result_length=0)
