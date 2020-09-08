@@ -27,6 +27,7 @@ COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_
 COPY stock_picking_add_transit /mnt/extra-addons/stock_picking_add_transit
 COPY stock_picking_add_transit_rental /mnt/extra-addons/stock_picking_add_transit_rental
 COPY stock_picking_change_destination /mnt/extra-addons/stock_picking_change_destination
+COPY stock_picking_search_by_serial /mnt/extra-addons/stock_picking_search_by_serial
 COPY stock_rental /mnt/extra-addons/stock_rental
 COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_asset
