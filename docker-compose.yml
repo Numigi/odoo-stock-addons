@@ -9,7 +9,6 @@ services:
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./.log:/var/log/odoo
-      - ./stock_serial_asset:/mnt/extra-addons/stock_serial_asset
     ports:
       - "8069:8069"
       - "8071:8071"
