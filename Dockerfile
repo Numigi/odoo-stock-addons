@@ -1,4 +1,4 @@
-FROM quay.io/numigi/odoo-public:12.0
+FROM quay.io/numigi/odoo-public:12.latest
 MAINTAINER numigi <contact@numigi.com>
 
 USER root
@@ -18,16 +18,22 @@ USER odoo
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
 COPY stock_component /mnt/extra-addons/stock_component
 COPY stock_component_account /mnt/extra-addons/stock_component_account
+COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer_disable
 COPY stock_inventory_accounting_date_editable /mnt/extra-addons/stock_inventory_accounting_date_editable
 COPY stock_inventory_category_domain /mnt/extra-addons/stock_inventory_category_domain
 COPY stock_inventory_internal_location /mnt/extra-addons/stock_inventory_internal_location
 COPY stock_inventory_line_domain /mnt/extra-addons/stock_inventory_line_domain
 COPY stock_inventory_line_domain_barcode /mnt/extra-addons/stock_inventory_line_domain_barcode
 COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_alphanum
+COPY stock_move_list_cost /mnt/extra-addons/stock_move_list_cost
+COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
 COPY stock_picking_add_transit /mnt/extra-addons/stock_picking_add_transit
 COPY stock_picking_add_transit_rental /mnt/extra-addons/stock_picking_add_transit_rental
 COPY stock_picking_change_destination /mnt/extra-addons/stock_picking_change_destination
 COPY stock_picking_search_by_serial /mnt/extra-addons/stock_picking_search_by_serial
+COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
+COPY stock_previous_step_return /mnt/extra-addons/stock_previous_step_return
+COPY stock_product_location_info /mnt/extra-addons/stock_product_location_info
 COPY stock_rental /mnt/extra-addons/stock_rental
 COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_asset

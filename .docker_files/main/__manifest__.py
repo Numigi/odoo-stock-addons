@@ -13,23 +13,25 @@
     "depends": [
         "onchange_helper",  # Used for testing stock_rental_conversion
         "stock_dropshipping",  # Used for testing stock_warehouse_access
-        # 'stock_immediate_transfer_disable',  # not ported to 12.0
-        # 'stock_move_list_cost',  # not ported to 12.0
-        # 'stock_move_origin_link',  # not ported to 12.0
-        # 'stock_picking_show_address',  # not ported to 12.0
         "purchase_warehouse_access",
         "stock_component",
         "stock_component_account",
+        "stock_immediate_transfer_disable",
         "stock_inventory_accounting_date_editable",
         "stock_inventory_category_domain",
         "stock_inventory_internal_location",
         "stock_inventory_line_domain",
         "stock_inventory_line_domain_barcode",
         "stock_location_position_alphanum",
+        "stock_move_list_cost",
+        "stock_move_origin_link",
         "stock_picking_add_transit",
         "stock_picking_add_transit_rental",
         "stock_picking_change_destination",
         "stock_picking_search_by_serial",
+        "stock_picking_show_address",
+        "stock_previous_step_return",
+        "stock_product_location_info",
         "stock_rental",
         "stock_rental_conversion",
         "stock_rental_conversion_asset",
