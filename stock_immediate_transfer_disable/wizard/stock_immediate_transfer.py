@@ -7,13 +7,13 @@ from odoo import api, fields, models
 
 class StockImmediateTransfer(models.TransientModel):
 
-    _inherit = 'stock.immediate.transfer'
+    _inherit = "stock.immediate.transfer"
 
-    allow_imediate_transfer = fields.Boolean(compute='_compute_allow_imediate_transfer')
+    allow_imediate_transfer = fields.Boolean(compute="_compute_allow_imediate_transfer")
 
-    @api.depends('pick_ids')
+    @api.depends("pick_ids")
     def _compute_allow_imediate_transfer(self):
         for transfer in self:
             transfer.allow_imediate_transfer = all(
-                transfer.mapped('pick_ids.picking_type_id.allow_imediate_transfer')
+                transfer.mapped("pick_ids.picking_type_id.allow_imediate_transfer")
             )

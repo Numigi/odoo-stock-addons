@@ -7,6 +7,6 @@ from odoo import fields, models
 
 class StockPickingType(models.Model):
 
-    _inherit = 'stock.picking.type'
+    _inherit = "stock.picking.type"
 
-    allow_imediate_transfer = fields.Boolean('Allow Immediate Transfer')
+    allow_imediate_transfer = fields.Boolean("Allow Immediate Transfer")

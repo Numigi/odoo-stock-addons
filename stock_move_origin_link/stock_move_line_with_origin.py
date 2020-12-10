@@ -6,6 +6,6 @@ from odoo import fields, models
 
 class StockMoveLineWithOrigin(models.Model):
 
-    _inherit = 'stock.move.line'
+    _inherit = "stock.move.line"
 
-    origin = fields.Char(related='move_id.origin', readonly=True)
+    origin = fields.Char(related="move_id.origin", readonly=True)
