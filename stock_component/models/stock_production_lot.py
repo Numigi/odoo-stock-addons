@@ -29,6 +29,14 @@ class StockProductionLot(models.Model):
 
     is_component = fields.Boolean()
 
+    def name_get(self):
+        if self._context.get("show_stock_production_lot_product_name"):
+            return [
+                (r.id, "{} - {}".format(r.name, r.product_id.display_name))
+                for r in self
+            ]
+        return super().name_get()
+
     @api.constrains("component_ids")
     def _check_no_component_recursion(self):
         for parent in self:

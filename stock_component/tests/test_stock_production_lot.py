@@ -134,3 +134,7 @@ class TestStockProductionLot(StockMoveCase):
         self.serial_1.add_component(self.serial_2)
         with pytest.raises(ValidationError):
             self.serial_2.add_component(self.serial_1)
+
+    def test_show_stock_production_lot_product_name(self):
+        serial = self.serial_1.with_context(show_stock_production_lot_product_name=True)
+        assert self.product_1.name in serial.display_name
