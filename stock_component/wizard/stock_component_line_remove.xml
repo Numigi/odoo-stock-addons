@@ -9,7 +9,12 @@
                 <sheet>
                     <group>
                         <field name="parent_component_id" invisible="1"/>
-                        <field name="component_ids" widget="many2many_tags" required="1" options="{'no_create': True}"/>
+                        <field name="component_ids"
+                            widget="many2many_tags"
+                            required="1"
+                            options="{'no_create': True}"
+                            context="{'show_stock_production_lot_product_name': True}"
+                            />
                     </group>
                 </sheet>
                 <footer>
