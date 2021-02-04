@@ -42,3 +42,13 @@ class StockRentalConversionCase(SavepointCase):
                 "quantity": 1,
             }
         )
+
+        cls.wizard = cls.env["stock.rental.conversion.wizard"].create(
+            {
+                "sales_product_id": cls.sales_product.id,
+                "sales_lot_id": cls.sales_serial.id,
+                "rental_product_id": cls.rental_product.id,
+                "source_location_id": cls.source_location.id,
+                "destination_location_id": cls.destination_location.id,
+            }
+        )

@@ -36,6 +36,7 @@ COPY stock_previous_step_return /mnt/extra-addons/stock_previous_step_return
 COPY stock_product_location_info /mnt/extra-addons/stock_product_location_info
 COPY stock_rental /mnt/extra-addons/stock_rental
 COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
+COPY stock_rental_conversion_account /mnt/extra-addons/stock_rental_conversion_account
 COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_asset
 COPY stock_serial_asset /mnt/extra-addons/stock_serial_asset
 COPY stock_serial_no_simple_form /mnt/extra-addons/stock_serial_no_simple_form

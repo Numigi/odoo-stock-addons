@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_rental_conversion_wizard_form" model="ir.ui.view">
+        <field name="name">Stock Rental Conversion Wizard: add specific conversion account</field>
+        <field name="model">stock.rental.conversion.wizard</field>
+        <field name="inherit_id" ref="stock_rental_conversion.stock_rental_conversion_wizard_form"/>
+        <field name="arch" type="xml">
+            <field name="destination_location_id" position="after">
+                <field name="conversion_account_id" required="1"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

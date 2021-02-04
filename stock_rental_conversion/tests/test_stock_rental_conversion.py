@@ -28,15 +28,6 @@ class TestWizardValidation(StockRentalConversionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.wizard = cls.env["stock.rental.conversion.wizard"].create(
-            {
-                "sales_product_id": cls.sales_product.id,
-                "sales_lot_id": cls.sales_serial.id,
-                "rental_product_id": cls.rental_product.id,
-                "source_location_id": cls.source_location.id,
-                "destination_location_id": cls.destination_location.id,
-            }
-        )
         cls.wizard.validate()
         cls.rental_serial = cls.wizard.rental_lot_id
 
@@ -57,14 +48,7 @@ class TestWizardWithNonSerializedProduct(StockRentalConversionCase):
         cls.sales_product.tracking = "none"
         cls.rental_product.tracking = "none"
         cls.quant.lot_id = False
-        cls.wizard = cls.env["stock.rental.conversion.wizard"].create(
-            {
-                "sales_product_id": cls.sales_product.id,
-                "rental_product_id": cls.rental_product.id,
-                "source_location_id": cls.source_location.id,
-                "destination_location_id": cls.destination_location.id,
-            }
-        )
+        cls.wizard.rental_lot_id = False
         cls.wizard.validate()
 
     def test_sales_product_moved_to_production(self):
