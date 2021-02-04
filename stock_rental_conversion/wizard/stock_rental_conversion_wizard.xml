@@ -9,7 +9,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="sales_product_id"/>
+                            <field name="sales_product_id" readonly="1" force_save="1"/>
                             <field name="is_serialized_product" invisible="1"/>
                             <field name="sales_lot_id"
                                 string="Serial Number"
@@ -19,11 +19,11 @@
                                     'invisible': [('is_serialized_product', '=', False)],
                                     'required': [('is_serialized_product', '=', True)],
                                 }"/>
-                            <field name="rental_product_id"
+                            <field name="rental_product_id" required="1"
                                 domain="[('type', '=', 'product')]"/>
-                            <field name="source_location_id"
+                            <field name="source_location_id" required="1"
                                 domain="[('usage', '=', 'internal'), ('company_id', '!=', False)]"/>
-                            <field name="destination_location_id"
+                            <field name="destination_location_id" required="1"
                                 domain="[('usage', '=', 'internal'), ('company_id', '!=', False)]"/>
                         </group>
                     </group>
