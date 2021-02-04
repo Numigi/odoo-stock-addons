@@ -8,10 +8,6 @@
   branch: "12.0"
   includes: ["queue_job"]
 
-- url: https://github.com/oca/account-financial-tools
-  branch: "12.0"
-  includes: ["account_asset_management"]
-
 - url: https://github.com/OCA/server-tools
   branch: "12.0"
   includes:
@@ -21,3 +17,9 @@
   branch: "12.0"
   includes:
     - account_asset_management
+
+- url: https://github.com/OCA/reporting-engine
+  branch: "12.0"
+  includes:
+    - report_xlsx
+    - report_xlsx_helper  # dependency of account_asset_management
