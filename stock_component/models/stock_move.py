@@ -21,7 +21,9 @@ class StockMove(models.Model):
 
         res = super()._action_done()
 
-        moves_with_components = self_sudo.filtered(lambda m: m._has_components())
+        moves_with_components = self_sudo.filtered(
+            lambda m: m._has_components() and m.state == "done"
+        )
         for move in moves_with_components:
             move.generate_component_moves()
 
