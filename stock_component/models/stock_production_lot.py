@@ -277,6 +277,8 @@ class StockProductionLot(models.Model):
             "product_uom": self._get_component_uom().id,
             "product_uom_qty": 1,
             "state": "confirmed",
+            "picking_id": False,
+            "picking_type_id": False,
         }
 
     def _get_component_move_line_vals(self, move, serial, parent_move_line):
@@ -292,6 +294,7 @@ class StockProductionLot(models.Model):
             "product_uom_qty": 0,
             "qty_done": 1,
             "result_package_id": self.get_current_package().id,
+            "picking_id": False,
         }
 
     def _get_component_uom(self):
