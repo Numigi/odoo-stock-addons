@@ -14,6 +14,11 @@ class StockMove(models.Model):
 
     parent_id = fields.Many2one("stock.move", "Parent Move")
 
+    def _should_be_assigned(self):
+        if self.parent_id:
+            return False
+        return super()._should_be_assigned()
+
     def _action_done(self):
         self_sudo = self.sudo().with_context(lang=self.env.user.lang)
         if not self_sudo._is_pulling_components():
