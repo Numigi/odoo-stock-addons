@@ -68,7 +68,7 @@ Alternatively, instead of signing the picking, I can check the box ``Pending Sig
 
 .. image:: static/description/stock_picking_pending_signature.png
 
-This box allows to validate a picking although the document could not be signed.
+This box allows to validate a picking although the document could not be signed already.
 
 Contributors
 ------------

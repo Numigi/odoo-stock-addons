@@ -10,7 +10,7 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     partner_signature = fields.Binary(attachment=True, copy=False)
-    pending_signature = fields.Boolean(copy=False)
+    pending_signature = fields.Boolean(copy=False, track_visibility="onchange")
 
     @api.model
     def create(self, values):
