@@ -23,3 +23,8 @@
   includes:
     - report_xlsx
     - report_xlsx_helper  # dependency of account_asset_management
+
+- url: https://github.com/OCA/web
+  branch: "12.0"
+  includes:
+    - web_widget_digitized_signature
