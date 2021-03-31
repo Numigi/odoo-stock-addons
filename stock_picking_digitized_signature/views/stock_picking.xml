@@ -8,8 +8,9 @@
         <field name="arch" type="xml">
             <notebook position="after">
                 <div class="oe_clear"/>
-                <field name="partner_signature" widget="signature"/>
-                <group>
+                <field name="use_partner_signature" invisible="1"/>
+                <field name="partner_signature" widget="signature" attrs="{'invisible': [('use_partner_signature', '=', False)]}"/>
+                <group attrs="{'invisible': [('use_partner_signature', '=', False)]}">
                     <field name="pending_signature"/>
                 </group>
             </notebook>

@@ -11,6 +11,9 @@ class StockPicking(models.Model):
 
     partner_signature = fields.Binary(attachment=True, copy=False)
     pending_signature = fields.Boolean(copy=False, track_visibility="onchange")
+    use_partner_signature = fields.Boolean(
+        related="picking_type_id.use_partner_signature", string="Use Partner Signature"
+    )
 
     @api.model
     def create(self, values):
@@ -33,7 +36,7 @@ class StockPicking(models.Model):
     def _check_partner_signature(self):
         partner = self.partner_id.commercial_partner_id
         signature_required = (
-            self.picking_type_id.use_partner_signature
+            self.use_partner_signature
             and partner.mandatory_delivery_order_signature
             and not self.pending_signature
             and not self.partner_signature
