@@ -17,4 +17,16 @@
         </field>
     </record>
 
+    <record id="stock_picking_search" model="ir.ui.view">
+        <field name="name">Stock Picking Search: add pending signature</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <group position="before">
+                <separator/>
+                <filter name="pending_signature" string="Pending Signature" domain="[('pending_signature', '=', True)]"/>
+            </group>
+        </field>
+    </record>
+
 </odoo>
