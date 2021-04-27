@@ -21,10 +21,3 @@ class StockRentalConversionWizard(models.TransientModel):
             )
 
         return super(StockRentalConversionWizard, self).validate()
-
-    @api.onchange("sales_product_id")
-    def _compute_is_serialized_product(self):
-        for wizard in self:
-            wizard.conversion_account_id = (
-                wizard.sales_product_id.rental_conversion_account_id
-            )
