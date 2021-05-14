@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import api, models
+from odoo.osv.expression import AND
 
 
 class ProcurementGroup(models.Model):
@@ -35,6 +36,27 @@ class ProcurementGroup(models.Model):
             yield from _iter_rules_matching_location(
                 rules, routes, product, warehouse, location
             )
+
+    @api.model
+    def _search_rule(self, route_ids, product_id, warehouse_id, domain):
+        """Filter rules per special route.
+
+        Override this method to support cases where _search_rule is called directly
+        instead of _get_rule.
+
+        This happens when stocks are pushed.
+        """
+        domain = AND(
+            [
+                domain,
+                [
+                    "|",
+                    ("special_route_id", "=", False),
+                    ("special_route_id", "in", _get_product_routes(product_id).ids),
+                ],
+            ]
+        )
+        return super()._search_rule(route_ids, product_id, warehouse_id, domain)
 
 
 def _filter_rules_matching_location(rules, location):
@@ -72,9 +94,7 @@ def _iter_rules_matching_location(rules, routes, product, warehouse, location):
 
 
 def _iter_rules_matching_product(rules, product):
-    yield from _iter_rules_matching_routes(
-        rules, product.route_ids | product.categ_id.total_route_ids
-    )
+    yield from _iter_rules_matching_routes(rules, _get_product_routes(product))
 
 
 def _iter_rules_matching_warehouse(rules, warehouse):
@@ -94,3 +114,7 @@ def _iter_locations(location):
     while location:
         yield location
         location = location.location_id
+
+
+def _get_product_routes(product):
+    return product.route_ids | product.categ_id.total_route_ids

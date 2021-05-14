@@ -37,7 +37,8 @@ class StockRouteOptimizationCase(common.SavepointCase):
                 "type": "product",
             }
         )
-        cls.rule_one_step_delivery = cls.warehouse.delivery_route_id.rule_ids
+        cls.route_delivery = cls.warehouse.delivery_route_id
+        cls.rule_one_step_delivery = cls.route_delivery.rule_ids
         cls.procurement = cls.env["procurement.group"].create({
             "name": "S09999",
         })

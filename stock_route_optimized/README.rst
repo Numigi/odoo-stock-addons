@@ -41,29 +41,15 @@ The module overrides the method ``_get_rule``.
 Instead of using search domains to select stock rules, the module loads all rules related to the
 given company and filter the rules directly in python.
 
-Special Routes
---------------
-The module adds the concept of a special route.
+Known Issues
+------------
 
-.. image:: static/description/special_route.png
+Performance
+~~~~~~~~~~~
+The module improves the performance of stock rules in the context of procurements (pull).
 
-A special route is a route used to filter per product the rules to apply for another route.
-
-For example, you may define a purchase route with two steps.
-
-.. image:: static/description/receipt_route_two_steps.png
-
-The special route is set on the first two rules.
-These rules will be applied only for products linked to the special route.
-
-The third rule will be applied as default rule for other products.
-
-Therefore, some products will be received in two steps and others will be received in one step.
-
-Rule Order
-~~~~~~~~~~
-Because stock rules are evaluated in order of sequence, it is important that rules
-with a special route appear first in sequence.
+However, this improvement does not concern push operations for now.
+Future improvement could be done for push operations as well.
 
 Contributors
 ------------

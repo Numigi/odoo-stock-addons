@@ -36,16 +36,6 @@ class StockRule(models.Model):
         )
         return [r._get_data_dict() for r in rules]
 
-    def _matches_product(self, product):
-        if self.special_route_id:
-            return self._product_matches_special_route(product)
-        return True
-
-    def _product_matches_special_route(self, product):
-        return self.special_route_id in (
-            product.route_ids | product.categ_id.total_route_ids
-        )
-
     def _get_data_dict(self):
         return {
             "id": self.id,
