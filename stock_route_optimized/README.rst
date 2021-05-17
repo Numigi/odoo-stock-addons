@@ -41,6 +41,10 @@ The module overrides the method ``_get_rule``.
 Instead of using search domains to select stock rules, the module loads all rules related to the
 given company and filter the rules directly in python.
 
+The module can be extended using the method ``_matches_product`` defined on ``stock.rule``.
+
+For an example of usage, see the module ``stock_special_route``.
+
 Known Issues
 ------------
 

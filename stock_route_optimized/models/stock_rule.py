@@ -29,6 +29,9 @@ class StockRule(models.Model):
         modules.registry.Registry(self.env.cr.dbname).clear_caches()
         return True
 
+    def _matches_product(self, product):
+        return True
+
     @tools.ormcache()
     def _get_procurement_rules_data(self):
         rules = self.sudo().search(

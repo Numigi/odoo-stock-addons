@@ -39,9 +39,11 @@ COPY stock_rental /mnt/extra-addons/stock_rental
 COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 COPY stock_rental_conversion_account /mnt/extra-addons/stock_rental_conversion_account
 COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_asset
+COPY stock_route_optimized /mnt/extra-addons/stock_route_optimized
 COPY stock_serial_asset /mnt/extra-addons/stock_serial_asset
 COPY stock_serial_no_simple_form /mnt/extra-addons/stock_serial_no_simple_form
 COPY stock_serial_single_quant /mnt/extra-addons/stock_serial_single_quant
+COPY stock_special_route /mnt/extra-addons/stock_special_route
 COPY stock_theorical_quantity_access /mnt/extra-addons/stock_theorical_quantity_access
 COPY stock_turnover_rate /mnt/extra-addons/stock_turnover_rate
 COPY stock_turnover_rate_purchase /mnt/extra-addons/stock_turnover_rate_purchase

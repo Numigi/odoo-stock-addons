@@ -52,7 +52,7 @@ class ProcurementGroup(models.Model):
                 [
                     "|",
                     ("special_route_id", "=", False),
-                    ("special_route_id", "in", _get_product_routes(product_id).ids),
+                    ("special_route_id", "in", product_id._get_stock_routes().ids),
                 ],
             ]
         )
@@ -94,7 +94,7 @@ def _iter_rules_matching_location(rules, routes, product, warehouse, location):
 
 
 def _iter_rules_matching_product(rules, product):
-    yield from _iter_rules_matching_routes(rules, _get_product_routes(product))
+    yield from _iter_rules_matching_routes(rules, product._get_stock_routes())
 
 
 def _iter_rules_matching_warehouse(rules, warehouse):
@@ -114,7 +114,3 @@ def _iter_locations(location):
     while location:
         yield location
         location = location.location_id
-
-
-def _get_product_routes(product):
-    return product.route_ids | product.categ_id.total_route_ids

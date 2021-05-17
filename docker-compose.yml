@@ -10,6 +10,7 @@ services:
       - odoo-web-data:/var/lib/odoo
       - ./.log:/var/log/odoo
       - ./stock_route_optimized:/mnt/extra-addons/stock_route_optimized
+      - ./stock_special_route:/mnt/extra-addons/stock_special_route
     ports:
       - "8069:8069"
       - "8071:8071"

@@ -20,6 +20,4 @@ class StockRule(models.Model):
         )
 
     def _product_matches_special_route(self, product):
-        return self.special_route_id in (
-            product.route_ids | product.categ_id.total_route_ids
-        )
+        return self.special_route_id in product._get_stock_routes()

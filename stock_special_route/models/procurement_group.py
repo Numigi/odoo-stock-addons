@@ -27,7 +27,7 @@ class ProcurementGroup(models.Model):
                 [
                     "|",
                     ("special_route_id", "=", False),
-                    ("special_route_id", "in", _get_product_routes(product_id).ids),
+                    ("special_route_id", "in", product_id._get_stock_routes().ids),
                 ],
             ]
         )
