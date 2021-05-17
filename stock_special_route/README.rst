@@ -56,7 +56,7 @@ I go to the form view of the receipt route.
 
 On the two existing rules, I select the special route.
 
-Then, I add a third rule as fallaback from ``Input to Stock``.
+Then, I add a third rule as fallback from ``Input to Stock``.
 This rule is applied for products that don't require quality control.
 
 .. image:: static/description/three_steps_route_customized.png
