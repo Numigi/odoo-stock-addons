@@ -14,7 +14,7 @@
         "onchange_helper",  # Used for testing stock_rental_conversion
         "stock_dropshipping",  # Used for testing stock_warehouse_access
         "purchase_warehouse_access",
-        "stock_auto_assign_disable", #TA#35985
+        "stock_auto_assign_disabled", #TA#35985
         "stock_component",
         "stock_component_account",
         "stock_immediate_transfer_disable",

@@ -51,7 +51,3 @@ class TestShadowMoves(SavepointCase):
         self.stock_move._action_confirm()
         self.stock_move.group_id.run_scheduler()
         assert self.stock_move.reserved_availability == 0.0
-
-    def test_scheduler_no_reservation_unconfirmed(self):
-        self.stock_move.group_id.run_scheduler()
-        assert self.stock_move.reserved_availability == 0.0
