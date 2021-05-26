@@ -18,12 +18,19 @@ There are still no reservations.
 
 .. image:: static/description/no_reservation.png
 
-Usage
------
+In the settings menu, you also have the option to disable the automatic stock reservation by the scheduler on serialized articles only.
+
+.. image:: static/description/settings.png
 
 Configuration
 -------------
-This module requires no configuration beyond installation.
+To select which articles to exclude from automatic reservation, simply head to the inventory section of the settings menu.
+
+.. image:: static/description/settings_full.png
+
+You can then select between the 2 desired behaviors.
+
+If the **procurement_jit** module is installed, the `Stock Auto Assign Disabled Jit <../stock_auto_assign_disabled_jit/README.rst>`_ module will automatically be installed to also disable its automatic reservations.
 
 Contributors
 ------------
