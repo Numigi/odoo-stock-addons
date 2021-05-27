@@ -6,9 +6,10 @@ class ResConfigSettings(models.TransientModel):
 
     stock_reservation_disabled = fields.Selection(
         [
+            ("off", "All Product Reservations Enabled"),
             ("all", "All Product Reservations Disabled"),
             ("serial", "Serialized Product Reservations Disabled"),
         ],
-        default="all",
+        default="off",
         config_parameter="stock_auto_assign_disabled.config",
     )
