@@ -11,8 +11,6 @@ class TestShadowMoves(SavepointCase):
 
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
-        cls.customer_location = cls.env.ref("stock.stock_location_customers")
-
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Product A",
@@ -21,19 +19,29 @@ class TestShadowMoves(SavepointCase):
             }
         )
 
-        cls.stock_move = cls.env["stock.move"].create(
+        cls.partner = cls.env["res.partner"].create(
             {
-                "name": "stock move",
-                "location_id": cls.stock_location.id,
-                "location_dest_id": cls.customer_location.id,
+                "name": "partner",
+            }
+        )
+
+        cls.sale_order = cls.env["sale.order"].create(
+            {
+                "name": "sale order",
+                "partner_id": cls.partner.id,
+            }
+        )
+
+        cls.order_line = cls.env["sale.order.line"].create(
+            {
+                "name": "order_line",
+                "order_id": cls.sale_order.id,
                 "product_id": cls.product.id,
-                "product_uom": cls.env.ref("uom.product_uom_unit").id,
-                "product_uom_qty": 5.0,
             }
         )
 
         cls.serial = cls.env["stock.production.lot"].create(
-            {"name": cls.stock_move.name, "product_id": cls.product.id}
+            {"name": "serial", "product_id": cls.product.id}
         )
 
         cls.quant = cls.env["stock.quant"].create(
@@ -48,5 +56,5 @@ class TestShadowMoves(SavepointCase):
         )
 
     def test_no_reservation(self):
-        self.stock_move._action_confirm()
-        assert self.stock_move.reserved_availability == 0.0
+        self.sale_order.action_confirm()
+        assert self.order_line.move_ids.reserved_availability == 0
