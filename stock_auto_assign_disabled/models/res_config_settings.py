@@ -11,5 +11,6 @@ class ResConfigSettings(models.TransientModel):
             ("serial", "Serialized Product Reservations Disabled"),
         ],
         default="off",
+        required=True,
         config_parameter="stock_auto_assign_disabled.config",
     )
