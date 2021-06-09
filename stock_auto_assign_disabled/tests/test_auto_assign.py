@@ -49,9 +49,6 @@ class TestAutoAssign(SavepointCase):
 
     def test_scheduler_off(self):
         self.stock_move._action_confirm()
-        self.env["ir.config_parameter"].set_param(
-            "stock_auto_assign_disabled.config", "off"
-        )
         self.stock_move.group_id.run_scheduler()
         assert self.stock_move.reserved_availability == 5.0
 

@@ -54,7 +54,14 @@ class TestStockAutoAssignDisabledJit(SavepointCase):
                 "owner_id": None,
             }
         )
+    
+    def test_reservation(self):
+        self.sale_order.action_confirm()
+        assert self.order_line.move_ids.reserved_availability == 1
 
     def test_no_reservation(self):
+        self.env["ir.config_parameter"].set_param(
+            "stock_auto_assign_disabled.config", "all"
+        )
         self.sale_order.action_confirm()
         assert self.order_line.move_ids.reserved_availability == 0
