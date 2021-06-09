@@ -4,7 +4,7 @@
 from odoo.tests.common import SavepointCase
 
 
-class TestShadowMoves(SavepointCase):
+class TestAutoAssign(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
