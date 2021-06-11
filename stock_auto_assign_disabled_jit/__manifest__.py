@@ -2,13 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Stock Auto Assign Disabled",
-    "summary": "Disable the automatic stock reservation by the planner",
+    "name": "Stock Auto Assign Disabled Jit",
+    "summary": "Disable the automatic stock reservation by the procurement_jit module.",
     "version": "1.0.0",
-    "category": "Inventory",
+    "category": "Stock",
     "author": "Numigi",
     "license": "AGPL-3",
-    "depends": ["stock"],
-    "data": ["views/res_config_settings_views.xml"],
+    "depends": ["stock_auto_assign_disabled", "procurement_jit"],
     "installable": True,
 }
