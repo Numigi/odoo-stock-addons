@@ -9,7 +9,7 @@ class StockMove(models.Model):
 
     def _action_assign(self):
         mode = self.env["ir.config_parameter"].get_param(
-            "stock_auto_assign_disabled.config"
+            "stock_auto_assign_disabled.config", "off"
         )
         should_disable = self._context.get("stock_auto_assign_disable")
         if mode == "off" or not should_disable:
