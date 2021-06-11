@@ -9,8 +9,6 @@ services:
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./.log:/var/log/odoo
-      - ./stock_auto_assign_disabled_jit:/mnt/extra-addons/stock_auto_assign_disabled_jit
-      - ./stock_auto_assign_disabled:/mnt/extra-addons/stock_auto_assign_disabled
     ports:
       - "8069:8069"
       - "8071:8071"
