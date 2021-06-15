@@ -30,7 +30,7 @@ Using the **All Product Reservations Disabled** option, there are still no reser
 
 .. image:: static/description/no_reservation.png
 
-In the settings menu, you also have the option to disable the automatic stock reservation by the scheduler on serialized articles only, or alternatively turn off all of this module's functionalities.
+In the settings menu, you also have the option to disable the automatic stock reservation by the scheduler on serialized/lot articles only, or alternatively turn off all of this module's functionalities.
 
 .. image:: static/description/settings.png
 
