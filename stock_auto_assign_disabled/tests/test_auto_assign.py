@@ -63,7 +63,7 @@ class TestAutoAssign(SavepointCase):
     def test_scheduler_serial(self):
         self.stock_move.product_id.tracking = "serial"
         self.env["ir.config_parameter"].set_param(
-            "stock_auto_assign_disabled.config", "serial"
+            "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
         self.stock_move.group_id.run_scheduler()
@@ -72,7 +72,25 @@ class TestAutoAssign(SavepointCase):
     def test_scheduler_no_serial(self):
         self.stock_move.product_id.tracking = "none"
         self.env["ir.config_parameter"].set_param(
-            "stock_auto_assign_disabled.config", "serial"
+            "stock_auto_assign_disabled.config", "serial_lot"
+        )
+        self.stock_move._action_confirm()
+        self.stock_move.group_id.run_scheduler()
+        assert self.stock_move.reserved_availability == 5.0
+
+    def test_scheduler_lot(self):
+        self.stock_move.product_id.tracking = "lot"
+        self.env["ir.config_parameter"].set_param(
+            "stock_auto_assign_disabled.config", "serial_lot"
+        )
+        self.stock_move._action_confirm()
+        self.stock_move.group_id.run_scheduler()
+        assert self.stock_move.reserved_availability == 0.0
+
+    def test_scheduler_no_lot(self):
+        self.stock_move.product_id.tracking = "none"
+        self.env["ir.config_parameter"].set_param(
+            "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
         self.stock_move.group_id.run_scheduler()

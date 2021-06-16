@@ -8,7 +8,7 @@ class ResConfigSettings(models.TransientModel):
         [
             ("off", "All Product Reservations Enabled"),
             ("all", "All Product Reservations Disabled"),
-            ("serial", "Serialized Product Reservations Disabled"),
+            ("serial_lot", "Serialized/Lot Product Reservations Disabled"),
         ],
         default="off",
         required=True,

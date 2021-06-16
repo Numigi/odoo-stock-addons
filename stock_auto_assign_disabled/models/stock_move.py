@@ -14,11 +14,11 @@ class StockMove(models.Model):
         should_disable = self._context.get("stock_auto_assign_disable")
         if mode == "off" or not should_disable:
             super()._action_assign()
-        elif mode == "serial":
+        elif mode == "serial_lot":
             self_filtered = self.filtered(
                 lambda x: x._should_process_auto_reservation()
             )
             super(StockMove, self_filtered)._action_assign()
 
     def _should_process_auto_reservation(self):
-        return self.product_id.tracking != "serial"
+        return self.product_id.tracking not in ["serial", "lot"]
