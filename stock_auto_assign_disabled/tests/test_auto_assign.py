@@ -32,6 +32,12 @@ class TestAutoAssign(SavepointCase):
             }
         )
 
+        cls.group = cls.stock_move.group_id
+
+        cls.user = cls.env["res.users"].create(
+            {"name": "Testing", "email": "testing@testmail.com", "login": "Testing"}
+        )
+
         cls.serial = cls.env["stock.production.lot"].create(
             {"name": cls.stock_move.name, "product_id": cls.product.id}
         )
@@ -49,7 +55,7 @@ class TestAutoAssign(SavepointCase):
 
     def test_scheduler_off(self):
         self.stock_move._action_confirm()
-        self.stock_move.group_id.run_scheduler()
+        self._run_scheduler(self.group, self.user)
         assert self.stock_move.reserved_availability == 5.0
 
     def test_scheduler_all(self):
@@ -57,7 +63,7 @@ class TestAutoAssign(SavepointCase):
         self.env["ir.config_parameter"].set_param(
             "stock_auto_assign_disabled.config", "all"
         )
-        self.stock_move.group_id.run_scheduler()
+        self._run_scheduler(self.group, self.user)
         assert self.stock_move.reserved_availability == 0.0
 
     def test_scheduler_serial(self):
@@ -66,7 +72,7 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self.stock_move.group_id.run_scheduler()
+        self._run_scheduler(self.group, self.user)
         assert self.stock_move.reserved_availability == 0.0
 
     def test_scheduler_no_serial(self):
@@ -75,7 +81,7 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self.stock_move.group_id.run_scheduler()
+        self._run_scheduler(self.group, self.user)
         assert self.stock_move.reserved_availability == 5.0
 
     def test_scheduler_lot(self):
@@ -84,7 +90,7 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self.stock_move.group_id.run_scheduler()
+        self._run_scheduler(self.group, self.user)
         assert self.stock_move.reserved_availability == 0.0
 
     def test_scheduler_no_lot(self):
@@ -93,5 +99,8 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self.stock_move.group_id.run_scheduler()
+        self._run_scheduler(self.group, self.user)
         assert self.stock_move.reserved_availability == 5.0
+
+    def _run_scheduler(self, group, user):
+        group.sudo(user).run_scheduler()
