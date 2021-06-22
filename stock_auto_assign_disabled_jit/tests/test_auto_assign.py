@@ -9,6 +9,11 @@ class TestStockAutoAssignDisabledJit(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
 
+        cls.user = cls.env["res.users"].create(
+            {"name": "Testing", "email": "testing@testmail.com", "login": "Testing"}
+        )
+        cls.user.groups_id = cls.env.ref("sales_team.group_sale_salesman")
+
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
         cls.product = cls.env["product.product"].create(
@@ -29,6 +34,7 @@ class TestStockAutoAssignDisabledJit(SavepointCase):
             {
                 "name": "sale order",
                 "partner_id": cls.partner.id,
+                "user_id": cls.user.id,
             }
         )
 
@@ -56,12 +62,15 @@ class TestStockAutoAssignDisabledJit(SavepointCase):
         )
     
     def test_reservation(self):
-        self.sale_order.action_confirm()
+        self._confirm_sale_order()
         assert self.order_line.move_ids.reserved_availability == 1
 
     def test_no_reservation(self):
         self.env["ir.config_parameter"].set_param(
             "stock_auto_assign_disabled.config", "all"
         )
-        self.sale_order.action_confirm()
+        self._confirm_sale_order()
         assert self.order_line.move_ids.reserved_availability == 0
+
+    def _confirm_sale_order(self):
+        self.sale_order.sudo(self.user).action_confirm()

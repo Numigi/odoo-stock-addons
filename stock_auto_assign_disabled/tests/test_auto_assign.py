@@ -37,6 +37,7 @@ class TestAutoAssign(SavepointCase):
         cls.user = cls.env["res.users"].create(
             {"name": "Testing", "email": "testing@testmail.com", "login": "Testing"}
         )
+        cls.user.groups_id = cls.env.ref("stock.group_stock_user")
 
         cls.serial = cls.env["stock.production.lot"].create(
             {"name": cls.stock_move.name, "product_id": cls.product.id}
