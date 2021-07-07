@@ -9,6 +9,7 @@ services:
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./.log:/var/log/odoo
+      - ./stock_virtual_adjustment:/mnt/extra-addons/stock_virtual_adjustment
     ports:
       - "8069:8069"
       - "8071:8071"

@@ -48,6 +48,7 @@
         "stock_theorical_quantity_access",
         "stock_turnover_rate",
         "stock_turnover_rate_purchase",
+        "stock_virtual_adjustment",
         "stock_warehouse_access",
         "stock_warehouse_distance",
     ],
