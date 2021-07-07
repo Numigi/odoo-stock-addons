@@ -1,49 +1,420 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_inventory_line_domain
+# * stock_virtual_adjustment
+#
+# Translators:
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0+e\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-27 18:05+0000\n"
-"PO-Revision-Date: 2021-01-27 18:05+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2021-07-07 19:44+0000\n"
+"PO-Revision-Date: 2021-07-07 15:53-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
 
-#. module: stock_inventory_line_domain
-#: model:ir.model,name:stock_inventory_line_domain.model_stock_inventory
-msgid "Inventory"
-msgstr ""
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
 
-#. module: stock_inventory_line_domain
-#: model:ir.model,name:stock_inventory_line_domain.model_stock_inventory_line
-msgid "Inventory Line"
-msgstr ""
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__activity_ids
+msgid "Activities"
+msgstr "Activités"
 
-#. module: stock_inventory_line_domain
-#: model:ir.model,name:stock_inventory_line_domain.model_product_product
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__activity_state
+msgid "Activity State"
+msgstr "Status de l'Activité"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__adjustment_id
+msgid "Adjustment"
+msgstr "Ajustement"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__adjustment_date
+msgid "Adjustment Date"
+msgstr "Date d'ajustement"
+
+#. module: stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_form
+msgid "Anterior Stock Adjustment"
+msgstr "Ajustement antérieur"
+
+#. module: stock_virtual_adjustment
+#: model:ir.actions.act_window,name:stock_virtual_adjustment.action_stock_virtual_adjustment
+#: model:ir.ui.menu,name:stock_virtual_adjustment.menu_stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_list
+msgid "Anterior Stock Adjustments"
+msgstr "Ajustements antérieurs"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_virtual_adjustment
+#: selection:stock.virtual.adjustment,state:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_form
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__create_uid
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__create_date
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__location_dest_id
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_search
+msgid "Destination Location"
+msgstr "Emplacement de destination"
+
+#. module: stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_form
+msgid "Details"
+msgstr "Détails"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__display_name
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: stock_virtual_adjustment
+#: selection:stock.virtual.adjustment,state:0
+msgid "Done"
+msgstr "Fait"
+
+#. module: stock_virtual_adjustment
+#: selection:stock.virtual.adjustment,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Abonnés (Canaux)"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_search
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__id
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__message_unread
+msgid "If checked new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si actif, certains messages ont une erreur de livraison."
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment____last_update
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__write_uid
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__write_date
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__line_ids
+msgid "Line"
+msgstr "Ligne"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__location_id
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_search
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Pièce jointe principale"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'Activité à Venir"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé d'activité suivant"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'Activités à Venir"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__notes
+msgid "Notes"
+msgstr "Notes"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_has_error_counter
+msgid "Number of error"
+msgstr "Nombre d'erreurs"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Nombre de messages exigeant une action"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Nombre de messages non lus"
+
+#. module: stock_virtual_adjustment
+#: selection:stock.virtual.adjustment,activity_state:0
+msgid "Overdue"
+msgstr "Retard"
+
+#. module: stock_virtual_adjustment
+#: selection:stock.virtual.adjustment,activity_state:0
+msgid "Planned"
+msgstr "Planifié"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__product_id
 msgid "Product"
+msgstr "Article"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__quantity
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__activity_user_id
+msgid "Responsible User"
+msgstr "Responsable"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__reversal_date
+msgid "Reversal Date"
+msgstr "Date de renversement"
+
+#. module: stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_search
+msgid "Search Anterior Stock Adjustments"
+msgstr "Rechercher des ajustements antérieurs"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: stock_virtual_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_form
+msgid "Set To Draft"
+msgstr "Remettre à brouillon"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__state
+msgid "State"
+msgstr "Statut"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
 msgstr ""
+"Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
 
-#. module: stock_inventory_line_domain
-#: code:addons/stock_inventory_line_domain/models/stock_inventory.py:62
-#, python-format
-msgid "The lot / serial number selected on the inventory ({}) must be selected on each inventory line."
-msgstr "Le lot / numéro de série sélectionné pour l'inventaire ({}) doit être sélectionné sur chaque ligne."
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__stock_move_count
+msgid "Stock Move Count"
+msgstr "Nombre de mouvements"
 
-#. module: stock_inventory_line_domain
-#: code:addons/stock_inventory_line_domain/models/stock_inventory.py:48
-#, python-format
-msgid "The product {product} does not belong to the category selected on the inventory ({category})."
-msgstr "L'article {product} n'appartient pas à la catégorie sélectionnée sur l'inventaire ({category})."
+#. module: stock_virtual_adjustment
+#: model:ir.actions.act_window,name:stock_virtual_adjustment.action_view_stock_moves
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__move_ids
+#: model_terms:ir.ui.view,arch_db:stock_virtual_adjustment.stock_virtual_adjustment_form
+msgid "Stock Moves"
+msgstr "Mouvements de stocks"
 
-#. module: stock_inventory_line_domain
-#: code:addons/stock_inventory_line_domain/models/stock_inventory.py:33
+#. module: stock_virtual_adjustment
+#: code:addons/stock_virtual_adjustment/models/stock_virtual_adjustment_line.py:33
 #, python-format
-msgid "The product {product} is different from the product selected on the inventory ({inventory_product})."
-msgstr "L'article {product} est différent de l'article sélectionné pour l'inventaire ({inventory_product})."
+msgid ""
+"The adjustment could not be confirmed. The product {} is valued with the "
+"First In First Out method."
+msgstr ""
+"L'ajustement ne peut pas être confirmé. L'article {} est valorisé avec la "
+"méthode du premier entré premier sorti."
+
+#. module: stock_virtual_adjustment
+#: code:addons/stock_virtual_adjustment/models/stock_virtual_adjustment.py:151
+#, python-format
+msgid ""
+"The adjustment {adjustment} could not be confirmed. The reversal date "
+"({reversal_date}) must be after the adjustment date ({adjustment_date})."
+msgstr ""
+"L'ajustement {adjustment} ne peut pas être confirmé. La date de renversement "
+"({reversal_date}) doit être après la date d'ajustement ({adjustment})."
+
+#. module: stock_virtual_adjustment
+#: code:addons/stock_virtual_adjustment/models/stock_virtual_adjustment.py:140
+#, python-format
+msgid ""
+"The adjustment {adjustment} could not be confirmed. The reversal date "
+"({reversal_date}) must be in the past."
+msgstr ""
+"L'ajustement {adjustment} ne peut pas être confirmé. La date de renversement "
+"({reversal_date}) doit être dans le passé."
+
+#. module: stock_virtual_adjustment
+#: selection:stock.virtual.adjustment,activity_state:0
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_unread
+msgid "Unread Messages"
+msgstr "Messages non lus"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Compteur de messages non lus"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment_line__uom_id
+msgid "UoM"
+msgstr "UdM"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model,name:stock_virtual_adjustment.model_stock_virtual_adjustment
+msgid "Virtual Inventory Adjustment"
+msgstr "Ajustement d'inventaire virtuel"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model,name:stock_virtual_adjustment.model_stock_virtual_adjustment_line
+msgid "Virtual Inventory Adjustment Line"
+msgstr "Ligne d'ajustement d'inventaire virtuel"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,field_description:stock_virtual_adjustment.field_stock_virtual_adjustment__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: stock_virtual_adjustment
+#: model:ir.model.fields,help:stock_virtual_adjustment.field_stock_virtual_adjustment__website_message_ids
+msgid "Website communication history"
+msgstr "Historique de communication du site web"
+
+#. module: stock_virtual_adjustment
+#: code:addons/stock_virtual_adjustment/models/stock_virtual_adjustment.py:172
+#, python-format
+msgid "You can not cancel the adjustment {} because it is already done."
+msgstr "Vous ne pouvez pas annuler l'ajustement {} car il est déjà terminé."
+
+#. module: stock_virtual_adjustment
+#: code:addons/stock_virtual_adjustment/models/stock_virtual_adjustment.py:182
+#, python-format
+msgid "You can not set the adjustment {} to draft because it is already done."
+msgstr ""
+"Vous ne pouvez pas remettre l'ajustement {} à l'état brouillon car il est "
+"déjà terminé."

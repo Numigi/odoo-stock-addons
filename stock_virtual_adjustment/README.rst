@@ -106,7 +106,7 @@ I confirm the adjustment.
 
 .. image:: static/description/virtual_adjustment_confirm.png
 
-Once the adjustment confirmed, I notice a new smart button ``Operations``.
+Once the adjustment confirmed, I notice a new smart button ``Stock Moves``.
 
 .. image:: static/description/virtual_adjustment_confirm.png
 

@@ -15,7 +15,11 @@ class StockVirtualAdjustment(models.Model):
 
     name = fields.Char(readonly=True, copy=False)
     company_id = fields.Many2one(
-        "res.company", required=True, default=lambda self: self.env.user.company_id
+        "res.company",
+        required=True,
+        readonly=True,
+        default=lambda self: self.env.user.company_id,
+        states={"draft": [("readonly", False)]},
     )
 
     state = fields.Selection(
@@ -28,17 +32,39 @@ class StockVirtualAdjustment(models.Model):
         readonly=True,
         required=True,
         copy=False,
+        track_visibility="onchange",
     )
 
-    location_id = fields.Many2one("stock.location", required=True)
+    location_id = fields.Many2one(
+        "stock.location",
+        required=True,
+        track_visibility="onchange",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+    )
     location_dest_id = fields.Many2one(
-        "stock.location", required=True, string="Destination Location"
+        "stock.location",
+        required=True,
+        readonly=True,
+        string="Destination Location",
+        track_visibility="onchange",
+        states={"draft": [("readonly", False)]},
     )
 
-    adjustment_date = fields.Datetime(required=True)
-    reversal_date = fields.Datetime(required=True)
+    adjustment_date = fields.Datetime(
+        required=True,
+        readonly=True,
+        track_visibility="onchange",
+        states={"draft": [("readonly", False)]},
+    )
+    reversal_date = fields.Datetime(
+        required=True,
+        readonly=True,
+        track_visibility="onchange",
+        states={"draft": [("readonly", False)]},
+    )
 
-    note = fields.Char(copy=False)
+    notes = fields.Char(copy=False)
 
     move_ids = fields.Many2many(
         "stock.move",
@@ -46,13 +72,21 @@ class StockVirtualAdjustment(models.Model):
         "adjustment_id",
         "move_id",
         "Stock Moves",
-        copy=False
+        copy=False,
+        readonly=True,
     )
+    stock_move_count = fields.Integer(compute="_compute_stock_move_count")
 
     line_ids = fields.One2many(
         "stock.virtual.adjustment.line",
         "adjustment_id",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
     )
+
+    def _compute_stock_move_count(self):
+        for adjustment in self:
+            adjustment.stock_move_count = len(adjustment.move_ids)
 
     @api.model
     def create(self, vals):
@@ -92,16 +126,23 @@ class StockVirtualAdjustment(models.Model):
         self._check_can_set_to_draft()
         self.write({"state": "draft"})
 
+    def view_stock_moves(self):
+        action = self.env.ref(
+            "stock_virtual_adjustment.action_view_stock_moves"
+        ).read()[0]
+        action["domain"] = [("id", "in", self.move_ids.ids)]
+        return action
+
     def _check_dates(self):
         for adjustment in self:
             if adjustment.reversal_date >= datetime.now():
                 raise ValidationError(
                     _(
                         "The adjustment {adjustment} could not be confirmed. "
-                        "The reversal date ({date}) must be in the past."
+                        "The reversal date ({reversal_date}) must be in the past."
                     ).format(
                         adjustment=adjustment.display_name,
-                        date=adjustment.reversal_date,
+                        reversal_date=adjustment._get_context_reversal_date(),
                     )
                 )
 
@@ -113,10 +154,16 @@ class StockVirtualAdjustment(models.Model):
                         "the adjustment date ({adjustment_date})."
                     ).format(
                         adjustment=adjustment.display_name,
-                        adjustment_date=adjustment.adjustment_date,
-                        reversal_date=adjustment.reversal_date,
+                        adjustment_date=adjustment._get_context_adjustment_date(),
+                        reversal_date=adjustment._get_context_reversal_date(),
                     )
                 )
+
+    def _get_context_adjustment_date(self):
+        return fields.Datetime.context_timestamp(self, self.adjustment_date)
+
+    def _get_context_reversal_date(self):
+        return fields.Datetime.context_timestamp(self, self.reversal_date)
 
     def _check_can_cancel(self):
         for adjustment in self:

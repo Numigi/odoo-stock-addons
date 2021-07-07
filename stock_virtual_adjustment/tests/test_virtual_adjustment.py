@@ -131,3 +131,12 @@ class StockInventoryCase(SavepointCase):
         assert adjustment.state == "draft"
         assert len(adjustment.line_ids) == 1
         assert not adjustment.move_ids
+
+    def test_stock_move_count(self):
+        self.adjustment.confirm()
+        assert self.adjustment.stock_move_count == 2
+
+    def test_view_stock_moves(self):
+        self.adjustment.confirm()
+        action = self.adjustment.view_stock_moves()
+        assert action["domain"] == [("id", "in", self.adjustment.move_ids.ids)]

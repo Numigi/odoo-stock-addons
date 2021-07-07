@@ -16,6 +16,7 @@
     "data": [
         "security/ir.model.access.csv",
         "security/ir_rule.xml",
+        "views/stock_move.xml",
         "views/stock_virtual_adjustment.xml",
         "data/ir_sequence.xml",
     ],

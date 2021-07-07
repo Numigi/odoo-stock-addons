@@ -20,7 +20,7 @@ class StockVirtualAdjustmentLine(models.Model):
         required=True,
         digits=dp.get_precision("Product Unit of Measure"),
     )
-    uom_id = fields.Many2one("uom.uom", required=True)
+    uom_id = fields.Many2one("uom.uom", "UoM", required=True)
 
     def _confirm(self):
         self._check_can_be_confirmed()
