@@ -108,7 +108,7 @@ I confirm the adjustment.
 
 Once the adjustment confirmed, I notice a new smart button ``Stock Moves``.
 
-.. image:: static/description/virtual_adjustment_confirm.png
+.. image:: static/description/virtual_adjustment_move_smart_button.png
 
 When I click on the button, the list of stock moves (incoming and outgoing appears).
 

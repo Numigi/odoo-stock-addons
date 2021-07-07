@@ -70,6 +70,9 @@ class StockInventoryCase(SavepointCase):
         assert moves[0].product_uom_qty == self.quantity
         assert moves[1].product_uom_qty == self.quantity
 
+        assert moves[0].origin == self.adjustment.name
+        assert moves[1].origin == self.adjustment.name
+
     def test_confirm__no_picking_assigned(self):
         self.adjustment.confirm()
         moves = self.adjustment.move_ids
@@ -85,6 +88,9 @@ class StockInventoryCase(SavepointCase):
 
         assert moves[0].location_id == self.adjustment_location
         assert moves[0].location_dest_id == self.stock_location
+
+        assert moves[0].product_uom_qty == 1
+        assert moves[1].product_uom_qty == 1
 
     def test_confirm__adjustment_status(self):
         self.adjustment.confirm()
@@ -140,3 +146,9 @@ class StockInventoryCase(SavepointCase):
         self.adjustment.confirm()
         action = self.adjustment.view_stock_moves()
         assert action["domain"] == [("id", "in", self.adjustment.move_ids.ids)]
+
+    def test_onchange_product_set_uom(self):
+        line = self.env["stock.virtual.adjustment.line"].new({})
+        line.product_id = self.product
+        line._onchange_product_id()
+        assert line.uom_id == self.product.uom_id

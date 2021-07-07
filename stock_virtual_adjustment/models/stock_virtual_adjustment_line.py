@@ -1,7 +1,7 @@
 # © 2021 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 from odoo.addons import decimal_precision as dp
 from odoo.exceptions import ValidationError
 
@@ -21,6 +21,10 @@ class StockVirtualAdjustmentLine(models.Model):
         digits=dp.get_precision("Product Unit of Measure"),
     )
     uom_id = fields.Many2one("uom.uom", "UoM", required=True)
+
+    @api.onchange("product_id")
+    def _onchange_product_id(self):
+        self.uom_id = self.product_id.uom_id
 
     def _confirm(self):
         self._check_can_be_confirmed()
@@ -67,8 +71,9 @@ class StockVirtualAdjustmentLine(models.Model):
             "company_id": self.adjustment_id.company_id.id,
             "product_id": self.product_id.id,
             "product_uom": self.uom_id.id,
-            "product_uom_qty": self.quantity,
+            "product_uom_qty": abs(self.quantity),
             "state": "done",
+            "origin": self.adjustment_id.name,
         }
 
     def _reverse_locations_if_negative_quantity(self, vals):
