@@ -1,4 +1,4 @@
-Stock Move List Cost
+Stock Move List Location
 ====================
 This module adds the source and destination locations to the list of stock moves.
 
