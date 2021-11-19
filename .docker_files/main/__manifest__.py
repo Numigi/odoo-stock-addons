@@ -29,6 +29,7 @@
         "stock_move_list_location",
         "stock_move_location_domain_improved",
         "stock_move_origin_link",
+        "stock_move_valuation_adjustment",
         "stock_picking_add_transit",
         "stock_picking_add_transit_rental",
         "stock_picking_change_destination",
