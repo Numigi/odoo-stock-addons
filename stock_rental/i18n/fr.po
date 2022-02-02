@@ -36,6 +36,11 @@ msgid "Is a Rental Customer Location?"
 msgstr "Est un emplacement client de location ?"
 
 #. module: stock_rental
+#: model_terms:ir.ui.view,arch_db:stock_rental.stock_location_form
+msgid "Is a Rental Stock Location?"
+msgstr "Est un emplacement stock de location ?"
+
+#. module: stock_rental
 #: code:addons/stock_rental/models/stock_warehouse.py:117
 #, python-format
 msgid "Rental"
