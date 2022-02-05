@@ -31,6 +31,11 @@ msgid "Is Rental Customer Location"
 msgstr "Est un emplacement client de location"
 
 #. module: stock_rental
+#: model:ir.model.fields,field_description:stock_rental.field_stock_location__is_rental_stock_location
+msgid "Is Rental stock Location"
+msgstr "Est un emplacement stock de location"
+
+#. module: stock_rental
 #: model_terms:ir.ui.view,arch_db:stock_rental.stock_location_form
 msgid "Is a Rental Customer Location?"
 msgstr "Est un emplacement client de location ?"
