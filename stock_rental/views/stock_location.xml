@@ -7,6 +7,7 @@
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
             <field name="return_location" position="after">
+                <field name="is_rental_stock_location" string="Is a Rental Stock Location?"/>
                 <field name="is_rental_customer_location" string="Is a Rental Customer Location?"/>
             </field>
         </field>

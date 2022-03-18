@@ -12,3 +12,7 @@ class StockLocation(models.Model):
         help="Check this box if this location is used for products "
         "rented to a customer."
     )
+
+    is_rental_stock_location = fields.Boolean(
+        help="Check this box if this location is used for stocks of rental products."
+    )
