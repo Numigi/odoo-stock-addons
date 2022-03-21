@@ -44,6 +44,7 @@ class Warehouse(models.Model):
                 "usage": "internal",
                 "location_id": self.lot_stock_id.id,
                 "company_id": self.company_id.id,
+                "is_rental_stock_location": True,
             }
         )
 

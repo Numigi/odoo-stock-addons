@@ -17,7 +17,9 @@ class TestWarehouse(common.SavepointCase):
         cls.customer_location = cls.env.ref("stock_rental.customer_location")
 
     def test_rental_stock_location(self):
-        assert self.warehouse.rental_location_id
+        location = self.warehouse.rental_location_id
+        assert location
+        assert location.is_rental_stock_location
 
     def test_rental_route(self):
         assert self.warehouse.rental_route_id

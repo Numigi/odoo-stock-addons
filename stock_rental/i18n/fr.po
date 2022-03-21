@@ -1,24 +1,36 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_rental
+# 	* stock_rental
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 20:42+0000\n"
-"PO-Revision-Date: 2020-05-05 20:42+0000\n"
+"POT-Creation-Date: 2022-03-18 16:15+0000\n"
+"PO-Revision-Date: 2022-03-18 12:17-0400\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 2.3\n"
 
 #. module: stock_rental
 #: model:ir.model.fields,help:stock_rental.field_stock_location__is_rental_customer_location
-msgid "Check this box if this location is used for products rented to a customer."
-msgstr "Cocher cette case si cet emplacement est utilisé pour les articles destinés à la location."
+msgid ""
+"Check this box if this location is used for products rented to a customer."
+msgstr ""
+"Cocher cette case si cet emplacement est utilisé pour les articles loués à "
+"un client."
+
+#. module: stock_rental
+#: model:ir.model.fields,help:stock_rental.field_stock_location__is_rental_stock_location
+msgid "Check this box if this location is used for stocks of rental products."
+msgstr ""
+"Cocher cette case si cet emplacement est utilisé pour les articles destinés "
+"à la location."
 
 #. module: stock_rental
 #: model:ir.model,name:stock_rental.model_stock_location
@@ -31,12 +43,22 @@ msgid "Is Rental Customer Location"
 msgstr "Est un emplacement client de location"
 
 #. module: stock_rental
+#: model:ir.model.fields,field_description:stock_rental.field_stock_location__is_rental_stock_location
+msgid "Is Rental Stock Location"
+msgstr "Est un emplacement de stock de location"
+
+#. module: stock_rental
 #: model_terms:ir.ui.view,arch_db:stock_rental.stock_location_form
 msgid "Is a Rental Customer Location?"
 msgstr "Est un emplacement client de location ?"
 
 #. module: stock_rental
-#: code:addons/stock_rental/models/stock_warehouse.py:117
+#: model_terms:ir.ui.view,arch_db:stock_rental.stock_location_form
+msgid "Is a Rental Stock Location?"
+msgstr "Est un emplacement de stock de location?"
+
+#. module: stock_rental
+#: code:addons/stock_rental/models/stock_warehouse.py:118
 #, python-format
 msgid "Rental"
 msgstr "Location"
@@ -47,7 +69,7 @@ msgid "Rental Picking Type"
 msgstr "Type d'opération pour la location"
 
 #. module: stock_rental
-#: code:addons/stock_rental/models/stock_warehouse.py:130
+#: code:addons/stock_rental/models/stock_warehouse.py:131
 #, python-format
 msgid "Rental Return"
 msgstr "Retour de location"
