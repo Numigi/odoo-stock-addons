@@ -20,6 +20,7 @@ COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
 COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
 COPY stock_component /mnt/extra-addons/stock_component
 COPY stock_component_account /mnt/extra-addons/stock_component_account
+COPY stock_extra_views /mnt/extra-addons/stock_extra_views
 COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer_disable
 COPY stock_inventory_accounting_date_editable /mnt/extra-addons/stock_inventory_accounting_date_editable
 COPY stock_inventory_category_domain /mnt/extra-addons/stock_inventory_category_domain
