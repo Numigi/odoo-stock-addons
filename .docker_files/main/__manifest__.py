@@ -18,6 +18,7 @@
         "stock_auto_assign_disabled_jit",
         "stock_component",
         "stock_component_account",
+        "stock_extra_views",
         "stock_immediate_transfer_disable",
         "stock_inventory_accounting_date_editable",
         "stock_inventory_category_domain",
