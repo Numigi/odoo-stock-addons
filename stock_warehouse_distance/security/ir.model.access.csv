@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-stock_warehouse_distance_user_access,User: Access Warehouse Distances,model_stock_warehouse_distance,base.group_user,1,0,0,0
-stock_warehouse_distance_manager_access,Stock Manager: Access Warehouse Distances,model_stock_warehouse_distance,stock.group_stock_manager,1,1,1,1
