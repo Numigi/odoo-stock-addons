@@ -46,6 +46,7 @@ COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 COPY stock_rental_conversion_account /mnt/extra-addons/stock_rental_conversion_account
 COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_asset
 COPY stock_route_optimized /mnt/extra-addons/stock_route_optimized
+COPY stock_scheduler_include_rfq /mnt/extra-addons/stock_scheduler_include_rfq
 COPY stock_serial_asset /mnt/extra-addons/stock_serial_asset
 COPY stock_serial_no_simple_form /mnt/extra-addons/stock_serial_no_simple_form
 COPY stock_serial_single_quant /mnt/extra-addons/stock_serial_single_quant
