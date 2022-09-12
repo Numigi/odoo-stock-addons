@@ -44,6 +44,7 @@
         "stock_rental_conversion_account",
         "stock_rental_conversion_asset",
         "stock_route_optimized",
+        "stock_scheduler_include_rfq",
         "stock_serial_asset",
         "stock_serial_no_simple_form",
         "stock_serial_single_quant",
