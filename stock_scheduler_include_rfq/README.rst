@@ -1,4 +1,4 @@
-Project List Specific
+Stock Scheduler Include RFQ
 =====================
 The module changes the native behavior of calculating quantities
 that are not yet in virtual stock but must be deducted from orderpoints.
