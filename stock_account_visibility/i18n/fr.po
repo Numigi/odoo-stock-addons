@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_account_visibility
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-02 21:38+0000\n"
+"PO-Revision-Date: 2022-08-02 21:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_account_visibility
+#: model_terms:ir.ui.view,arch_db:stock_account_visibility.view_category_property_form
+msgid ""
+"When Inventory Valuation is manual, The Account used on Vendor Bills is the "
+"Stock Input Account. In this contexte, the Valuation Account is only for "
+"Information Purpose."
+msgstr ""
+"En valorisation manuelle, pour tout article stockable, le compte de charge "
+"affecté sur la facture fournisseur est le compte du champ 'Compte d'entrée "
+"en stock'. Le 'compte de valorisation' sert pour fin d'information uniquement, "
+"pour les traitements manuels comptables de fin de période pour la valorisation du stock."

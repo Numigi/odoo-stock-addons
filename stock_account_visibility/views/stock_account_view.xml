@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_category_property_form" model="ir.ui.view">
+        <field name="name">product.category.stock.property.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock_account.view_category_property_form"/>
+        <field name="arch" type="xml">
+            <group name="account_stock_property" position="attributes">
+                 <attribute name="attrs">{}</attribute>
+            </group>
+            <field name="property_stock_account_output_categ_id" position="attributes">
+                 <attribute name="attrs">{'invisible':[('property_valuation', '=', 'manual_periodic')]}</attribute>
+            </field>
+            <xpath expr="//div[@role='status']" position="after">
+                <div colspan="2" class="alert alert-info mt16" role="status" attrs="{'invisible':[('property_valuation', '!=', 'manual_periodic')]}">
+                    When Inventory Valuation is manual, The Account used on Vendor Bills is the Stock Input Account. In this contexte, the Valuation Account is only for Information Purpose.
+                </div>
+            </xpath>
+            <xpath expr="//div[@role='status']" position="attributes">
+                <attribute name="attrs">{'invisible':[('property_valuation', '=', 'manual_periodic')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
