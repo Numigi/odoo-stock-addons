@@ -9,6 +9,7 @@
     "author": "Numigi",
     "license": "LGPL-3",
     "depends": [
+        "stock_dropshipping",
         "stock_warehouse_access",
         "purchase_stock",
     ],
