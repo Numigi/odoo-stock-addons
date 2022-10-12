@@ -15,6 +15,7 @@ RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS
 
 USER odoo
 
+COPY stock_reserve_quant_package /mnt/extra-addons/stock_reserve_quant_package
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
 COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
 COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
@@ -45,7 +46,6 @@ COPY stock_rental /mnt/extra-addons/stock_rental
 COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 COPY stock_rental_conversion_account /mnt/extra-addons/stock_rental_conversion_account
 COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_asset
-COPY stock_reserve_quant_package /mnt/extra-addons/stock_reserve_quant_package
 COPY stock_route_optimized /mnt/extra-addons/stock_route_optimized
 COPY stock_scheduler_include_rfq /mnt/extra-addons/stock_scheduler_include_rfq
 COPY stock_serial_asset /mnt/extra-addons/stock_serial_asset
