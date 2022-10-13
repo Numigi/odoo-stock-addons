@@ -1,11 +1,14 @@
 Stock Reserve Quant Package
 ===========================
+
 The module allows to prevent the partial reservation of a package.
 
 .. contents:: Table of Contents
 
+
 Context
 -------
+
 In the native version of Odoo, you can reserve any product regardless of whether it belongs to a package or not.
 Depending on our needs, we cannot make a partial reservation of a package.
 So we check if we can reserve the whole package, if so we make the reservation otherwise we undo it.
@@ -46,10 +49,10 @@ I can see clearly that the package is associated to my transfer operation.
 
 .. image:: static/description/entire_package.png
 
+
 Contributors
 ------------
 * Numigi (tm) and all its contributors (https://bit.ly/numigiens)
-
 
 More information
 ----------------
