@@ -18,6 +18,7 @@ USER odoo
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
 COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
 COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
+COPY stock_client_order_ref /mnt/extra-addons/stock_client_order_ref
 COPY stock_component /mnt/extra-addons/stock_component
 COPY stock_component_account /mnt/extra-addons/stock_component_account
 COPY stock_extra_views /mnt/extra-addons/stock_extra_views
