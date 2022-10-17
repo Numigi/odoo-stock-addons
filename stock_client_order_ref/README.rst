@@ -4,13 +4,13 @@ Stock Client Order Reference
 Overview
 -------
 
-This module add a new field `Customer Reference` to `Inventory / Transfers.
+This module adds a new field ``Customer Reference`` to ``Inventory / Transfers``.
 
 Usage
 -----
 
-As a user in the `Inventory / User` group, I go to `Inventory / Transfers.
-I can see a new field `Customer Reference` added to the List and Form views.
+As a user in the ``Inventory / User`` group, I go to ``Inventory / Transfers``.
+I can see a new field ``Customer Reference`` added to the List and Form views.
 
 List View:
 ~~~~~~~~~~
@@ -22,11 +22,11 @@ Form View:
 
 .. image:: static/description/transfer_form_view.png
 
-The field retrieves the value of the field `Customer Reference` of the sale order mentioned on the `Origin` field.
+The field retrieves the value of the field ``Customer Reference`` of the sale order mentioned on the ``Origin`` field.
 
 .. image:: static/description/origin_customer_reference.png
 
-We can filter and group by the field `Customer Reference` in the `Transfers`.
+I can filter and group by the field ``Customer Reference`` in the ``Transfers`` menu.
 
 .. image:: static/description/filter_group_by_customer_ref.png
 
