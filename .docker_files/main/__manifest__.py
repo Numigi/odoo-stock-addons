@@ -16,6 +16,7 @@
         "purchase_warehouse_access",
         "stock_auto_assign_disabled",
         "stock_auto_assign_disabled_jit",
+        "stock_client_order_ref",
         "stock_component",
         "stock_component_account",
         "stock_extra_views",
