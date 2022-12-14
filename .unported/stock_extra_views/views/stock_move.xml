@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="stock.action_receipt_picking_move" model="ir.actions.act_window">
+        <field name="view_ids" eval="[(5, 0, 0)]"/>
+    </record>
+
+    <record id="action_receipt_picking_move_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="stock.view_move_tree"/>
+        <field name="act_window_id" ref="stock.action_receipt_picking_move"/>
+    </record>
+
+    <record id="action_receipt_picking_move_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock.view_move_form"/>
+        <field name="act_window_id" ref="stock.action_receipt_picking_move"/>
+    </record>
+
+    <record id="action_receipt_picking_move_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="stock.view_move_pivot"/>
+        <field name="act_window_id" ref="stock.action_receipt_picking_move"/>
+    </record>
+
+    <record id="action_receipt_picking_move_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="stock.view_move_graph"/>
+        <field name="act_window_id" ref="stock.action_receipt_picking_move"/>
+    </record>
+
+    <record id="action_receipt_picking_move_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="4"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="stock.view_move_kandan"/>
+        <field name="act_window_id" ref="stock.action_receipt_picking_move"/>
+    </record>
+
+</odoo>

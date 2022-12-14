@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_line_domain
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-27 18:05+0000\n"
+"PO-Revision-Date: 2020-01-27 18:05+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_line_domain
+#: model:ir.model,name:stock_inventory_line_domain.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_line_domain
+#: model:ir.model,name:stock_inventory_line_domain.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr ""
+
+#. module: stock_inventory_line_domain
+#: model:ir.model,name:stock_inventory_line_domain.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: stock_inventory_line_domain
+#: code:addons/stock_inventory_line_domain/models/stock_inventory.py:62
+#, python-format
+msgid "The lot / serial number selected on the inventory ({}) must be selected on each inventory line."
+msgstr "Le lot / numéro de série sélectionné pour l'inventaire ({}) doit être sélectionné sur chaque ligne."
+
+#. module: stock_inventory_line_domain
+#: code:addons/stock_inventory_line_domain/models/stock_inventory.py:48
+#, python-format
+msgid "The product {product} does not belong to the category selected on the inventory ({category})."
+msgstr "L'article {product} n'appartient pas à la catégorie sélectionnée sur l'inventaire ({category})."
+
+#. module: stock_inventory_line_domain
+#: code:addons/stock_inventory_line_domain/models/stock_inventory.py:33
+#, python-format
+msgid "The product {product} is different from the product selected on the inventory ({inventory_product})."
+msgstr "L'article {product} est différent de l'article sélectionné pour l'inventaire ({inventory_product})."

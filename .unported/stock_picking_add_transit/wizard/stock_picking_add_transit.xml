@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_picking_add_transit_form" model="ir.ui.view">
+        <field name="name">Stock Picking Add Transit</field>
+        <field name="model">stock.picking.add.transit</field>
+        <field name="arch" type="xml">
+            <form string="Add Transit Location">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="location_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm" string="Apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

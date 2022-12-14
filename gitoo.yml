@@ -3,3 +3,29 @@
 
 - url: https://{{GIT_TOKEN}}@github.com/numigi/odoo-base-addons
   branch: "14.0"
+
+- url: https://github.com/oca/queue
+  branch: "14.0"
+  includes: ["queue_job"]
+
+- url: https://github.com/OCA/server-tools
+  branch: "14.0"
+  includes:
+    - onchange_helper
+
+- url: https://github.com/OCA/account-financial-tools
+  branch: "14.0"
+  includes:
+    - account_asset_management
+
+- url: https://github.com/OCA/reporting-engine
+  branch: "14.0"
+  includes:
+    - report_xlsx
+    - report_xlsx_helper  # dependency of account_asset_management
+
+- url: https://github.com/OCA/web
+  branch: "14.0"
+  includes:
+    - web_widget_digitized_signature
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_location_form" model="ir.ui.view">
+        <field name="name">Stock Location Form: Add x,y,z positions as alphanumeric</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <field name="removal_strategy_id" position="after">
+                <field name="posx_alphanum"/>
+                <field name="posy_alphanum"/>
+                <field name="posz_alphanum"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

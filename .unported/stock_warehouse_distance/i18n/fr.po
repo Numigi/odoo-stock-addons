@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_warranty
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-11 20:21+0000\n"
+"PO-Revision-Date: 2019-12-11 15:25-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: stock_warehouse_distance
+#: code:addons/stock_warehouse_distance/models/stock_warehouse_distance.py:42
+#, python-format
+msgid ""
+"A distance between {warehouse_1} and {warehouse_2} already exists "
+"({distance}). You may not create 2 distances between the same warehouses."
+msgstr ""
+"Une distance entre {warehouse_1} et {warehouse_2} existe déjà "
+"({distance}). Vous ne pouvez pas créer 2 distances entre les mêmes "
+"entrepôts."
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__active
+msgid "Active"
+msgstr "Active"
+
+#. module: stock_warehouse_distance
+#: model_terms:ir.ui.view,arch_db:stock_warehouse_distance.warehouse_distance_search
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__distance
+msgid "Distance"
+msgstr "Distance"
+
+#. module: stock_warehouse_distance
+#: model:ir.actions.act_window,name:stock_warehouse_distance.action_distances_from_warehouse
+#: model_terms:ir.ui.view,arch_db:stock_warehouse_distance.warehouse_form_with_distances
+msgid "Distances"
+msgstr "Distances"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance____last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: stock_warehouse_distance
+#: model_terms:ir.ui.view,arch_db:stock_warehouse_distance.warehouse_distance_search
+msgid "Search Warehouse Distances"
+msgstr "Chercher des distances d'entrepôts"
+
+#. module: stock_warehouse_distance
+#: code:addons/stock_warehouse_distance/models/stock_warehouse_distance.py:55
+#, python-format
+msgid ""
+"The warehouse defined in the field Warehouse 1 must be different from the "
+"warehouse defined in Warehouse 2."
+msgstr ""
+"L’entrepôt défini dans le champ Entrepôt 1 ne doit pas être le même que "
+"celui saisi dans le champ Entrepôt 2."
+
+#. module: stock_warehouse_distance
+#: code:addons/stock_warehouse_distance/models/stock_warehouse.py:34
+#, python-format
+msgid ""
+"There is no defined distance between warehouses {warehouse_1} and "
+"{warehouse_2}."
+msgstr ""
+"Il n'y a aucune distance paramétrée entre les entrepôts {warehouse_1} et "
+"{warehouse_2}."
+
+#. module: stock_warehouse_distance
+#: model:ir.model,name:stock_warehouse_distance.model_stock_warehouse
+#: model_terms:ir.ui.view,arch_db:stock_warehouse_distance.warehouse_distance_search
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__warehouse_1_id
+msgid "Warehouse 1"
+msgstr "Entrepôt 1"
+
+#. module: stock_warehouse_distance
+#: model:ir.model.fields,field_description:stock_warehouse_distance.field_stock_warehouse_distance__warehouse_2_id
+msgid "Warehouse 2"
+msgstr "Entrepôt 2"
+
+#. module: stock_warehouse_distance
+#: model:ir.model,name:stock_warehouse_distance.model_stock_warehouse_distance
+msgid "Warehouse Distance"
+msgstr "Distance d'entrepôt"
+
+#. module: stock_warehouse_distance
+#: model:ir.actions.act_window,name:stock_warehouse_distance.action_warehouse_distance
+#: model:ir.ui.menu,name:stock_warehouse_distance.menu_warehouse_distance
+#: model_terms:ir.ui.view,arch_db:stock_warehouse_distance.warehouse_distance_list
+msgid "Warehouse Distances"
+msgstr "Distances des entrepôts"

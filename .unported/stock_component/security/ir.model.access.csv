@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+stock_component_line_base_user_access,stock_component_line_base_user_access,model_stock_component_line,base.group_user,1,0,0,0
+stock_component_line_stock_user_access,stock_component_line_stock_user_access,model_stock_component_line,stock.group_stock_user,1,1,1,1

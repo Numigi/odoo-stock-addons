@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_category_form_view_inherit_inventory_domain" model="ir.ui.view">
+        <field name="name">product.category.form.inventory.domain</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <group name="first" position="after">
+                <group string="Inventory settings">
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="available_in_inventory"/>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
