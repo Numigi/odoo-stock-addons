@@ -1,10 +1,9 @@
-# © 2019 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © 2022 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
 from datetime import datetime, date, timedelta
 from odoo import api, fields, models
-from odoo.addons.queue_job.job import job
 from typing import Iterable, Optional
 from .config import get_stock_turnover_days
 
@@ -116,22 +115,19 @@ class Product(models.Model):
         readonly=True,
     )
 
-    @job
     def compute_turnover_rate(self):
         current_quantity = get_current_stock_quantity(self)
-
         interval_in_days = get_stock_turnover_days(self.env)
         date_from = datetime.now().date() - timedelta(interval_in_days + 1)
         date_to = datetime.now().date()
-        delivered_quantity = get_delivered_quantity(self, date_from, date_to)
-
+        incoming_quantity_cmp = self.with_context(from_date=date_from, to_date=date_to).incoming_qty
         incomming_quantity = get_incomming_quantity(self, date_from, date_to)
         outgoing_quantity = get_outgoing_quantity(self, date_from, date_to)
-
-        start_quantity = current_quantity + outgoing_quantity - incomming_quantity
+        delivered_quantity = get_delivered_quantity(self, date_from, date_to)
+        start_quantity = current_quantity - outgoing_quantity + incomming_quantity
         average_quantity = (current_quantity + start_quantity) / 2
-
         if delivered_quantity == 0:
+
             turnover_rate = 0
         elif average_quantity == 0:
             turnover_rate = MAX_TURNOVER_RATE

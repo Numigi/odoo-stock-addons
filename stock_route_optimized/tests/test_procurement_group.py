@@ -24,10 +24,10 @@ class TestProcurementGroup(StockRouteOptimizationCase):
         assert rule == self.warehouse.mto_pull_id
 
     def test_make_to_order_different_warehouse(self):
-        self.values["warehouse_id"] = self.warehouse_2
+        self.values["warehouse_id"] = self.warehouse_3
         self.values["route_ids"] = self.env.ref("stock.route_warehouse0_mto")
         rule = self.procurement._get_rule(self.product, self.customer_location, self.values)
-        assert rule == self.warehouse_2.mto_pull_id
+        assert rule == self.warehouse_3.mto_pull_id
 
     def test_company_not_matching(self):
         self.values["company_id"] = self.company_2

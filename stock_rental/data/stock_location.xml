@@ -4,7 +4,7 @@
     <record id="rental_location" model="stock.location">
         <field name="name">Rental</field>
         <field name="usage">view</field>
-         <field name="company_id" ref="base.main_company"/>
+         <field name="company_id"></field>
     </record>
 
     <record id="customer_location" model="stock.location">
@@ -12,12 +12,14 @@
         <field name="usage">internal</field>
         <field name="location_id" ref="rental_location"/>
         <field name="is_rental_customer_location" eval="True"/>
+         <field name="company_id"></field>
     </record>
 
     <record id="transit_location" model="stock.location">
         <field name="name">Transit</field>
         <field name="usage">internal</field>
         <field name="location_id" ref="rental_location"/>
+         <field name="company_id"></field>
     </record>
 
 </odoo>

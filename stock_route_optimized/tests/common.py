@@ -16,10 +16,15 @@ class StockRouteOptimizationCase(common.SavepointCase):
         )
 
         cls.warehouse = cls.env.ref("stock.warehouse0")
-        cls.warehouse_2 = cls.env["stock.warehouse"].create(
+        cls.warehouse_2 = cls.env["stock.warehouse"].with_company(cls.company_2.id).create(
             {
                 "name": "Warehouse 2",
                 "code": "WH2",
+            })
+        cls.warehouse_3 = cls.env["stock.warehouse"].create(
+            {
+                "name": "Warehouse 3",
+                "code": "WH3",
             })
 
         cls.stock_location = cls.warehouse.lot_stock_id

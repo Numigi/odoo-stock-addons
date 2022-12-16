@@ -1,4 +1,4 @@
-# © 2019 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © 2022 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from datetime import datetime, timedelta
@@ -22,17 +22,11 @@ class TestTurnoverRate(common.SavepointCase):
             'type': 'product',
         })
 
-        cls.stock_location = cls.env['stock.location'].search(
-            [('usage', '=', 'internal')], limit=1
-        )
+        cls.stock_location = cls.env.ref('stock.stock_location_stock')
 
-        cls.customer_location = cls.env['stock.location'].search(
-            [('usage', '=', 'customer')], limit=1
-        )
+        cls.customer_location = cls.env.ref('stock.stock_location_customers')
 
-        cls.supplier_location = cls.env['stock.location'].search(
-            [('usage', '=', 'supplier')], limit=1
-        )
+        cls.supplier_location = cls.env.ref('stock.stock_location_suppliers')
 
     def _create_quant(self, quantity, location=None):
         self.env['stock.quant'].create({
@@ -49,28 +43,21 @@ class TestTurnoverRate(common.SavepointCase):
             'product_uom_qty': quantity,
             'location_id': origin.id,
             'location_dest_id': destination.id,
-            'state': 'confirmed',
-            'move_line_ids': [(0, 0, {
-                'product_id': self.product.id,
-                'product_uom_id': self.product.uom_id.id,
-                'product_uom_qty': 0,
-                'qty_done': quantity,
-                'location_id': origin.id,
-                'location_dest_id': destination.id,
-            })]
         })
 
-    def _process_stock_move(self, move):
+    def _process_stock_move(self, move, quantity):
+        move._action_confirm()
+        move.quantity_done = quantity
         move._action_done()
         assert move.state == 'done'
 
     def _receive(self, quantity):
         move = self._create_stock_move(quantity, self.supplier_location, self.stock_location)
-        self._process_stock_move(move)
+        self._process_stock_move(move, quantity)
 
     def _deliver(self, quantity):
         move = self._create_stock_move(quantity, self.stock_location, self.customer_location)
-        self._process_stock_move(move)
+        self._process_stock_move(move, quantity)
 
     def test_no_quant__no_move__then_turnover_is_zero(self):
         self.product.turnover_rate = 1

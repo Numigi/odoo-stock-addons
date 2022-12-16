@@ -29,7 +29,7 @@ class Warehouse(models.Model):
     @api.model
     def create(self, vals):
         warehouse = super().create(vals)
-        warehouse.setup_rental_route()
+        warehouse.with_company(warehouse.company_id.id).setup_rental_route()
         return warehouse
 
     def setup_rental_route(self):
