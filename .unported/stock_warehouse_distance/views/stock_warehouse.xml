@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="action_distances_from_warehouse" model="ir.actions.act_window">
+        <field name="name">Distances</field>
+        <field name="res_model">stock.warehouse.distance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[
+            '|',
+            ('warehouse_1_id', '=', context.get('active_id')),
+            ('warehouse_2_id', '=', context.get('active_id')),
+        ]</field>
+        <field name="context">{
+            'default_warehouse_1_id': context.get('active_id'),
+        }</field>
+    </record>
+
+    <record id="warehouse_form_with_distances" model="ir.ui.view">
+        <field name="name">Warehouse Form: Add distances</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <button name="toggle_active" position="before">
+                <button name="%(action_distances_from_warehouse)s"
+                        type="action"
+                        string="Distances"
+                        icon="fa-car"
+                        class="oe_stat_button"
+                        />
+            </button>
+        </field>
+    </record>
+
+</odoo>

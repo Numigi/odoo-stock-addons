@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inventory_form" model="ir.ui.view">
+        <field name="name">Inventory Adjustment Form: Make Accounting Date Editable on Open State</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_account.view_inventory_form_inherit"/>
+        <field name="arch" type="xml">
+            <field name="accounting_date" position="attributes">
+                <attribute name="attrs" operation="python_dict" key="readonly">
+                    [('state', 'not in', ('draft', 'confirm'))]
+                </attribute>
+                <attribute name="groups"></attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

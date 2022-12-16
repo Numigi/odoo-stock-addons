@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inventory_form_with_domain_filters" model="ir.ui.view">
+        <field name="name">Inventory Adjustment Form: Add domain filters on products</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="context" operation="python_dict" key="stock_inventory_product_filter">
+                    parent.product_id
+                </attribute>
+                <attribute name="context" operation="python_dict" key="stock_inventory_product_category_filter">
+                    parent.category_id
+                </attribute>
+                <attribute name="context" operation="python_dict" key="stock_inventory_product_lot_filter">
+                    parent.lot_id
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

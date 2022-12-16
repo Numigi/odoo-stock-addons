@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_production_lot_form" model="ir.ui.view">
+        <field name="name">Serial Number Form: add is_serial field</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <field name="is_serial" invisible="1"/>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_component_line_add_form" model="ir.ui.view">
+        <field name="name">Component Add Wizard</field>
+        <field name="model">stock.component.line.add</field>
+        <field name="arch" type="xml">
+            <form string="Add Component">
+                <sheet>
+                    <group>
+                        <field name="parent_component_id" invisible="1"/>
+                        <field name="product_id" required="1" options="{'no_create': True}"/>
+                        <field name="component_id" required="1" options="{'no_create': True}"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm" string="Ok" type="object" class="oe_highlight"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
