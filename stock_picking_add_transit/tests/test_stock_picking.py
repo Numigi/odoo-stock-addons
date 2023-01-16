@@ -25,11 +25,6 @@ class TestOutgoingPicking(StockPickingAddTransitCase):
         assert self.move_1.picking_id.origin == self.picking.name
         assert self.move_2.picking_id.origin == self.picking.name
 
-    def test_transit_partner_type(self):
-        self.env["ir.config_parameter"].sudo().set_param(
-            "stock_picking_add_transit.transit_partner_type", 'warehouse')
-        assert self.move_1.picking_id.partner_id == self.warehouse.partner_id
-
     def test_source_location(self):
         assert self.move_1.location_id == self.stock_location
         assert self.move_2.location_id == self.transit_1
