@@ -8,7 +8,11 @@
     "author": "Numigi",
     "license": "LGPL-3",
     "summary": "Allow to add a transit to a stock picking",
-    "depends": ["stock"],
-    "data": ["views/stock_picking.xml", "wizard/stock_picking_add_transit.xml"],
+    "depends": ["stock", "stock_dropshipping"],
+    "data": [
+        "views/res_config_settings_views.xml",
+        "views/stock_picking.xml",
+        "wizard/stock_picking_add_transit.xml"
+    ],
     "installable": True,
 }
