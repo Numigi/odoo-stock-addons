@@ -138,3 +138,34 @@ class TestConstraints(StockPickingAddTransitCase):
         self.picking.action_cancel()
         with pytest.raises(ValidationError):
             self.add_transit(self.picking, self.transit_1)
+
+
+class TestPickingPartner(StockPickingAddTransitCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.make_quant(cls.stock_location, cls.product_a, 1)
+        cls.picking = cls.make_picking(cls.stock_location,
+                                       cls.customer_location)
+        cls.move_3 = cls.make_stock_move(cls.picking, cls.product_a, 2)
+        cls.picking.action_assign()
+        cls.move_line = cls.move_3.move_line_ids
+        cls.move_line.qty_done = 1
+
+    def test_picking_partner_type_warehouse(self):
+        # add_transit when config of transit_partner_type == warehouse
+        self.env["ir.config_parameter"].sudo().set_param(
+            "stock_picking_add_transit.transit_partner_type", 'warehouse'
+        )
+        self.add_transit(self.picking, self.transit_2)
+        self.move_2 = self.move_3.move_orig_ids
+        assert self.move_2.picking_id.partner_id == self.warehouse.partner_id
+
+    def test_picking_partner_type_third_party(self):
+        # add_transit when config of transit_partner_type == third_party
+        self.env["ir.config_parameter"].sudo().set_param(
+            "stock_picking_add_transit.transit_partner_type", 'third_party'
+        )
+        self.add_transit(self.picking, self.transit_1)
+        self.move_1 = self.move_3.move_orig_ids
+        assert self.move_1.picking_id.partner_id == self.picking.partner_id
