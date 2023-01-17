@@ -38,6 +38,7 @@ COPY stock_picking_add_transit /mnt/extra-addons/stock_picking_add_transit
 COPY stock_picking_add_transit_rental /mnt/extra-addons/stock_picking_add_transit_rental
 COPY stock_picking_change_destination /mnt/extra-addons/stock_picking_change_destination
 COPY stock_picking_digitized_signature /mnt/extra-addons/stock_picking_digitized_signature
+COPY stock_picking_internal_partner /mnt/extra-addons/stock_picking_internal_partner
 COPY stock_picking_search_by_serial /mnt/extra-addons/stock_picking_search_by_serial
 COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 COPY stock_previous_step_return /mnt/extra-addons/stock_previous_step_return
