@@ -104,24 +104,3 @@ msgstr "Assistant d'ajout de transit"
 #, python-format
 msgid "You must mark the picking as To Do before adding a transit."
 msgstr "Vous devez marker l'opération comme À faire avant d'ajouter le transit."
-
-#. module: stock_picking_add_transit
-#: selection:res.config.settings,transit_partner_type:0
-msgid "Third Party"
-msgstr "Tiers"
-
-#. module: stock_picking_add_transit
-#: model:ir.model.fields,field_description:stock_picking_add_transit.field_res_config_settings__transit_partner_type
-msgid "Transit Picking Partner Type"
-msgstr "Type de partenaire de prélèvement en transit"
-
-#. module: stock_picking_add_transit
-#: selection:res.config.settings,transit_partner_type:0
-msgid "Warehouse"
-msgstr "Entrepôt"
-
-
-#. module: stock_picking_add_transit
-#: model_terms:ir.ui.view,arch_db:stock_picking_add_transit.res_config_settings_view_form_stock
-msgid "Which information to set in partner field when adding a transit."
-msgstr "Quelles informations à définir dans le champ partenaire lors de l'ajout d'un transit."
