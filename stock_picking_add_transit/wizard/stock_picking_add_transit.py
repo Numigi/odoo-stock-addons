@@ -89,12 +89,16 @@ class StockPickingAddTransit(models.TransientModel):
         vals = self._get_new_picking_vals()
         vals["location_id"] = self.picking_id.location_id.id
         vals["location_dest_id"] = self.location_id.id
+        vals["partner_id"] = self._get_new_picking_partner_id(
+            self.location_id).id,
         return vals
 
     def _get_new_picking_vals_after(self):
         vals = self._get_new_picking_vals()
         vals["location_id"] = self.location_id.id
         vals["location_dest_id"] = self.picking_id.location_dest_id.id
+        vals["partner_id"] = self._get_new_picking_partner_id(
+            self.picking_id.location_dest_id).id,
         return vals
 
     def _get_new_picking_vals(self):
@@ -105,17 +109,21 @@ class StockPickingAddTransit(models.TransientModel):
             "move_type": old_picking.move_type,
             "priority": old_picking.priority,
             "scheduled_date": old_picking.scheduled_date,
-            "partner_id": self._get_new_picking_partner_id().id,
             "company_id": old_picking.company_id.id,
             "picking_type_id": self._get_new_picking_type().id,
         }
 
-    def _get_new_picking_partner_id(self):
+    def _get_new_picking_partner_id(self, location_dest):
         partner_type = self.env["ir.config_parameter"].sudo().get_param(
             "stock_picking_add_transit.transit_partner_type"
         )
         if partner_type == 'warehouse':
-            partner = self._get_new_picking_type().warehouse_id.partner_id
+            warehouse = self.location_id.get_warehouse()
+            if not warehouse:
+                warehouse = self.env["stock.warehouse"].search([
+                    ('company_id', '=', self.picking_id.company_id.id)
+                ])
+            partner = warehouse.partner_id
         else:
             partner = self.picking_id.partner_id
         return partner
