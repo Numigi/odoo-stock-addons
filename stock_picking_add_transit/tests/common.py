@@ -25,7 +25,6 @@ class StockPickingAddTransitCase(SavepointCase):
             {
                 "name": "Transit 1",
                 "usage": "transit",
-                "location_id": cls.warehouse.view_location_id.id,
                 "company_id": cls.warehouse.company_id.id,
             }
         )
@@ -33,7 +32,6 @@ class StockPickingAddTransitCase(SavepointCase):
             {
                 "name": "Transit 2",
                 "usage": "transit",
-                "location_id": cls.warehouse.view_location_id.id,
                 "company_id": cls.warehouse.company_id.id,
             }
         )
