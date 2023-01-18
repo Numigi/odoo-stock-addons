@@ -9,12 +9,6 @@ class StockPickingAddTransitCase(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.warehouse = cls.env.ref("stock.warehouse0")
-        cls.user = cls.env['res.users'].create({
-            'name': 'test@example.com',
-            'email': 'test@example.com',
-            'login': 'test@example.com',
-        })
-        cls.partner = cls.user.partner_id
         cls.picking_type = cls.warehouse.out_type_id
         cls.stock_location = cls.warehouse.lot_stock_id
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
@@ -55,7 +49,6 @@ class StockPickingAddTransitCase(SavepointCase):
                 "location_dest_id": destination.id,
                 "location_id": source.id,
                 "picking_type_id": cls.picking_type.id,
-                "partner_id": cls.partner.id,
             }
         )
 
