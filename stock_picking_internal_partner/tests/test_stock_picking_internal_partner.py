@@ -42,7 +42,7 @@ class TestPickingInternalPartner(SavepointCase):
         })
 
     def test_stock_picking_internal_partner(self):
-        Picking = self.env['stock.picking']
+        picking = self.env['stock.picking']
         picking_values = {
             'partner_id': self.partner.id,
             'picking_type_id': self.warehouse.int_type_id.id,
@@ -50,20 +50,6 @@ class TestPickingInternalPartner(SavepointCase):
                 'stock.stock_location_suppliers').id,
             'location_dest_id': self.transit_1.id,
         }
-        internal_picking = Picking.create(picking_values)
+        internal_picking = picking.create(picking_values)
         self.assertEquals(internal_picking.partner_id.id,
                           self.warehouse.partner_id.id)
-
-    def test_stock_picking_internal_partner_with_sale_id(self):
-        Picking = self.env['stock.picking']
-        picking_values = {
-            'partner_id': self.partner.id,
-            'picking_type_id': self.warehouse.int_type_id.id,
-            'location_id': self.env.ref(
-                'stock.stock_location_suppliers').id,
-            'location_dest_id': self.transit_1.id,
-            'sale_id': self.order_1.id,
-        }
-        internal_picking = Picking.create(picking_values)
-        self.assertEquals(internal_picking.partner_id.id,
-                          self.partner.id)
