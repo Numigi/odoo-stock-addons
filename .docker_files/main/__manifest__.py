@@ -36,6 +36,7 @@
         "stock_picking_add_transit_rental",
         "stock_picking_change_destination",
         "stock_picking_digitized_signature",
+        "stock_picking_internal_partner",
         "stock_picking_search_by_serial",
         "stock_picking_show_address",
         "stock_previous_step_return",
