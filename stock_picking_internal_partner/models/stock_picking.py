@@ -36,5 +36,5 @@ class StockPicking(models.Model):
             company_id = vals.get('company_id') or self.company_id.id
             warehouse = self.env["stock.warehouse"].search([
                 ('company_id', '=', company_id)
-            ])
+            ], limit=1)
         return warehouse.partner_id
