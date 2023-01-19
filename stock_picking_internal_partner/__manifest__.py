@@ -8,7 +8,10 @@
     "author": "Numigi",
     "license": "LGPL-3",
     "summary": "Set Warehouse Address In Internal Transfer",
-    "depends": ["stock", "sale"],
-    "data": [],
+    "depends": ["stock"],
+    "data": [
+        "views/stock_picking_type_views.xml"
+    ],
     "installable": True,
+    "post_init_hook": 'set_warehouse_as_partner'
 }

@@ -9,22 +9,22 @@ class StockPicking(models.Model):
 
     @api.model
     def create(self, vals):
-        print(self._context)
         picking_type_id = self.env["stock.picking.type"].browse(
             vals.get('picking_type_id'))
         if picking_type_id.code == 'internal' and \
-                not self._context.get('from_sale_procurement'):
+                picking_type_id.warehouse_as_partner:
             vals['partner_id'] = self._get_partner_address(vals).id
         return super(StockPicking, self).create(vals)
 
     @api.multi
     def write(self, vals):
-        if vals.get('picking_type_id'):
-            picking_type_id = self.env["stock.picking.type"].browse(
-                vals.get('picking_type_id'))
-            if picking_type_id.code == 'internal' and \
-                    not self._context.get('from_sale_procurement'):
-                vals['partner_id'] = self._get_partner_address(vals).id
+        for record in self:
+            if vals.get('picking_type_id'):
+                picking_type_id = self.env["stock.picking.type"].browse(
+                    vals.get('picking_type_id'))
+                if picking_type_id.code == 'internal' and \
+                        picking_type_id.warehouse_as_partner:
+                    vals['partner_id'] = record._get_partner_address(vals).id
         return super(StockPicking, self).write(vals)
 
     def _get_partner_address(self, vals):
