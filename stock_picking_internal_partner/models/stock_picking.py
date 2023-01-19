@@ -11,7 +11,8 @@ class StockPicking(models.Model):
     def create(self, vals):
         picking_type_id = self.env["stock.picking.type"].browse(
             vals.get('picking_type_id'))
-        if picking_type_id.code == 'internal' and not vals.get('sale_id'):
+        if picking_type_id.code == 'internal' and \
+                not self._context.get('procurement'):
             vals['partner_id'] = self._get_partner_address(vals).id
         return super(StockPicking, self).create(vals)
 
@@ -20,7 +21,8 @@ class StockPicking(models.Model):
         if vals.get('picking_type_id'):
             picking_type_id = self.env["stock.picking.type"].browse(
                 vals.get('picking_type_id'))
-            if picking_type_id.code == 'internal' and not self.sale_id:
+            if picking_type_id.code == 'internal' and \
+                    not self._context.get('procurement'):
                 vals['partner_id'] = self._get_partner_address(vals).id
         return super(StockPicking, self).write(vals)
 
