@@ -9,10 +9,11 @@ class StockPicking(models.Model):
 
     @api.model
     def create(self, vals):
+        print(self._context)
         picking_type_id = self.env["stock.picking.type"].browse(
             vals.get('picking_type_id'))
         if picking_type_id.code == 'internal' and \
-                not self._context.get('procurement'):
+                not self._context.get('from_sale_procurement'):
             vals['partner_id'] = self._get_partner_address(vals).id
         return super(StockPicking, self).create(vals)
 
@@ -22,7 +23,7 @@ class StockPicking(models.Model):
             picking_type_id = self.env["stock.picking.type"].browse(
                 vals.get('picking_type_id'))
             if picking_type_id.code == 'internal' and \
-                    not self._context.get('procurement'):
+                    not self._context.get('from_sale_procurement'):
                 vals['partner_id'] = self._get_partner_address(vals).id
         return super(StockPicking, self).write(vals)
 
