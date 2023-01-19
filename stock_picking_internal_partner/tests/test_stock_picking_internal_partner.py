@@ -43,6 +43,7 @@ class TestPickingInternalPartner(SavepointCase):
 
     def test_stock_picking_internal_partner(self):
         picking = self.env['stock.picking']
+        self.warehouse.int_type_id.warehouse_as_partner = True
         picking_values = {
             'partner_id': self.partner.id,
             'picking_type_id': self.warehouse.int_type_id.id,
