@@ -16,7 +16,7 @@ Configuration
 -------------
 
 As a user with the Inventory Manager right, I go to the `Inventory / Configuration / Operations Types` menu.
-I see a new checkbox added to the form view of `Internal` type operations.
+I see a new checkbox `Set warehouse address as partner of transfe` is added to the form view of `Internal` type operations.
 
 This checkbox is checked by default on all internal types of operations when installing the module.
 
