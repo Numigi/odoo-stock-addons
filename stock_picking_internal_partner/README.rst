@@ -10,7 +10,7 @@ When adding a transit-type transfer, the partner on the transfer takes the wareh
 
 Also, this need spreads for internal transfers created manually or from a replenishment rule.
 
-Be able to configure the propagation of the warehouse address at the transfer type level
+Be able to configure the propagation of the warehouse address from the transfer operations types.
 
 Configuration
 -------------
