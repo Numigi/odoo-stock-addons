@@ -8,7 +8,7 @@ class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
     warehouse_as_partner = fields.Boolean(
-        string='Set warehouse as partner of transfer',
+        string='Set warehouse address as partner of transfer',
     )
 
     @api.onchange('code')

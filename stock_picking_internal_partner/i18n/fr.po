@@ -22,8 +22,8 @@ msgstr "Type de préparation"
 
 #. module: stock_picking_internal_partner
 #: model:ir.model.fields,field_description:stock_picking_internal_partner.field_stock_picking_type__warehouse_as_partner
-msgid "Set warehouse as partner of transfer"
-msgstr "Définir l'entrepôt comme partenaire de transfert"
+msgid "Set warehouse address as partner of transfer"
+msgstr "Définir l'adresse de l'entrepôt comme partenaire de transfert"
 
 #. module: stock_picking_internal_partner
 #: model:ir.model,name:stock_picking_internal_partner.model_stock_picking
