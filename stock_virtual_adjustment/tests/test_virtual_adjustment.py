@@ -1,4 +1,4 @@
-# © 2021 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © 2023 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import pytest
@@ -25,7 +25,7 @@ class StockInventoryCase(SavepointCase):
         cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.company = cls.warehouse.company_id
         cls.stock_location = cls.warehouse.lot_stock_id
-        cls.adjustment_location = cls.env.ref("stock.location_inventory")
+        cls.adjustment_location = cls.product.property_stock_inventory
 
         cls.adjustment = cls.env["stock.virtual.adjustment"].create(
             {
