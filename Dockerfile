@@ -61,7 +61,7 @@ COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 #COPY stock_theorical_quantity_access /mnt/extra-addons/stock_theorical_quantity_access
 COPY stock_turnover_rate /mnt/extra-addons/stock_turnover_rate
 COPY stock_turnover_rate_purchase /mnt/extra-addons/stock_turnover_rate_purchase
-#COPY stock_virtual_adjustment /mnt/extra-addons/stock_virtual_adjustment
+COPY stock_virtual_adjustment /mnt/extra-addons/stock_virtual_adjustment
 #COPY stock_warehouse_access /mnt/extra-addons/stock_warehouse_access
 #COPY stock_warehouse_distance /mnt/extra-addons/stock_warehouse_distance
 
