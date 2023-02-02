@@ -65,7 +65,7 @@ Overview
 --------
 This module adds ``Virtual Adjustments``.
 
-.. image:: static/description/virtual_adjustment_form.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_form.png
 
 When validating a virtual adjustment, two stock moves are created for each product.
 
@@ -82,37 +82,37 @@ Usage
 -----
 As member of the group ``Inventory / Manager``, I go to ``Inventory / Operations / Anterior Adjustments``.
 
-.. image:: static/description/virtual_adjustment_menu.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_menu.png
 
-.. image:: static/description/virtual_adjustment_list.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_list.png
 
 I create an adjustment.
 
-.. image:: static/description/virtual_adjustment_form.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_form.png
 
 I select an adjustment date and a reversal date.
 
-.. image:: static/description/virtual_adjustment_dates.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_dates.png
 
 I select a source and a destination location.
 
-.. image:: static/description/virtual_adjustment_locations.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_locations.png
 
 For each product, I add a line with the quantity to adjust.
 
-.. image:: static/description/virtual_adjustment_lines.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_lines.png
 
 I confirm the adjustment.
 
-.. image:: static/description/virtual_adjustment_confirm.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_confirm.png
 
 Once the adjustment confirmed, I notice a new smart button ``Stock Moves``.
 
-.. image:: static/description/virtual_adjustment_move_smart_button.png
+.. image:: stock_virtual_adjustment/static/description/virtual_adjustment_move_smart_button.png
 
 When I click on the button, the list of stock moves (incoming and outgoing appears).
 
-.. image:: static/description/stock_move_list.png
+.. image:: stock_virtual_adjustment/static/description/stock_move_list.png
 
 Constraints
 -----------

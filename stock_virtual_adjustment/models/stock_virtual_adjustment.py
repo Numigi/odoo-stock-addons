@@ -1,4 +1,4 @@
-# © 2021 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © 2023 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from datetime import datetime
@@ -32,13 +32,13 @@ class StockVirtualAdjustment(models.Model):
         readonly=True,
         required=True,
         copy=False,
-        track_visibility="onchange",
+        Tracking=True,
     )
 
     location_id = fields.Many2one(
         "stock.location",
         required=True,
-        track_visibility="onchange",
+        Tracking=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
@@ -47,20 +47,20 @@ class StockVirtualAdjustment(models.Model):
         required=True,
         readonly=True,
         string="Destination Location",
-        track_visibility="onchange",
+        Tracking=True,
         states={"draft": [("readonly", False)]},
     )
 
     adjustment_date = fields.Datetime(
         required=True,
         readonly=True,
-        track_visibility="onchange",
+        Tracking=True,
         states={"draft": [("readonly", False)]},
     )
     reversal_date = fields.Datetime(
         required=True,
         readonly=True,
-        track_visibility="onchange",
+        Tracking=True,
         states={"draft": [("readonly", False)]},
     )
 
@@ -94,7 +94,6 @@ class StockVirtualAdjustment(models.Model):
         adjustment._set_name_from_sequence()
         return adjustment
 
-    @api.multi
     def copy(self, default=None):
         adjustment = super().copy()
 

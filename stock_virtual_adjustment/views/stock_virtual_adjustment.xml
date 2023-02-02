@@ -104,7 +104,6 @@
         <field name="name">Anterior Stock Adjustments</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.virtual.adjustment</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="stock_virtual_adjustment_list"/>
         <field name="search_view_id" ref="stock_virtual_adjustment_search"/>
