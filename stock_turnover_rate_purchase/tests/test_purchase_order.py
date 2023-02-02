@@ -1,4 +1,4 @@
-# © 2019 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © 2023 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import pytest
@@ -23,7 +23,7 @@ class TestPurchaseOrder(common.SavepointCase):
         )
 
         cls.supplier = cls.env["res.partner"].create(
-            {"name": "Supplier", "supplier": True}
+            {"name": "Supplier", "supplier_rank": 1}
         )
 
         cls.po = cls.env["purchase.order"].create(

@@ -14,7 +14,7 @@
         # "onchange_helper",  # Used for testing stock_rental_conversion
         # "stock_dropshipping",  # Used for testing stock_warehouse_access
         # "purchase_warehouse_access",
-          "stock_account_visibility",
+        "stock_account_visibility",
         # "stock_auto_assign_disabled",
         # "stock_auto_assign_disabled_jit",
         # "stock_client_order_ref",
@@ -53,8 +53,8 @@
         # "stock_serial_single_quant",
         # "stock_special_route",
         # "stock_theorical_quantity_access",
-        # "stock_turnover_rate",
-        # "stock_turnover_rate_purchase",
+        "stock_turnover_rate",
+        "stock_turnover_rate_purchase",
         # "stock_virtual_adjustment",
         # "stock_warehouse_access",
         # "stock_warehouse_distance",
