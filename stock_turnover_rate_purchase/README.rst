@@ -14,17 +14,17 @@ Configuration
 -------------
 In the form view of a product category, I find a new field ``Minimum Turnover Rate``.
 
-.. image:: static/description/product_category_form.png
+.. image:: stock_turnover_rate_purchase/static/description/product_category_form.png
 
 The value defined on the category is displayed on products directly under this category.
 
-.. image:: static/description/product_form.png
+.. image:: stock_turnover_rate_purchase/static/description/product_form.png
 
 Usage
 -----
 In the form view of a purchase order, the turnover rate of the product is displayed on each line.
 
-.. image:: static/description/purchase_order_form.png
+.. image:: stock_turnover_rate_purchase/static/description/purchase_order_form.png
 
 The PO lines are colored based on the turnover rate:
 

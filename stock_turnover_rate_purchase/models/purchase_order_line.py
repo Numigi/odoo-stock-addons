@@ -1,4 +1,4 @@
-# © 2019 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © 2023 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import fields, models
@@ -14,6 +14,7 @@ class PurchaseOrderLine(models.Model):
 
     def _compute_line_color(self):
         for line in self:
+            line_color = False
             minimum_rate = line.product_id.minimum_turnover_rate or 0
             target_rate = line.product_id.target_turnover_rate or 0
             effective_rate = line.product_id.turnover_rate or 0
@@ -22,7 +23,8 @@ class PurchaseOrderLine(models.Model):
             lte_minimum_rate = float_compare(effective_rate, minimum_rate, 2) in (-1, 0)
 
             if gte_target_rate:
-                line.line_color = "green"
+                line_color = "green"
 
             elif lte_minimum_rate:
-                line.line_color = "red"
+                line_color = "red"
+            line.line_color = line_color
