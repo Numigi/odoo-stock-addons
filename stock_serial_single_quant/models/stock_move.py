@@ -5,14 +5,13 @@ from odoo import models
 
 
 class StockMove(models.Model):
-
     _inherit = "stock.move"
 
-    def _action_done(self):
+    def _action_done(self, cancel_backorder=False):
         moves_with_serial_numbers = self.filtered(lambda m: m._has_serialized_product())
         for move in moves_with_serial_numbers:
             move._check_serial_number_constraints()
-        return super()._action_done()
+        return super()._action_done(cancel_backorder=cancel_backorder)
 
     def _has_serialized_product(self):
         return self.product_id.tracking == "serial"
