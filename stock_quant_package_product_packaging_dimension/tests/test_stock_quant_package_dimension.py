@@ -26,7 +26,8 @@ class TestStockQuantPackageDimension(common.SavepointCase):
         self.stock_quant_package.refresh()
 
         self.assertEqual(self.stock_quant_package.height, self.height)
-        self.assertEqual(self.stock_quant_package.packaging_length, self.packaging_length)
+        self.assertEqual(
+            self.stock_quant_package.packaging_length, self.packaging_length)
         self.assertEqual(self.stock_quant_package.width, self.width)
 
     def test_stock_quant_package_dimension_uom(self):
