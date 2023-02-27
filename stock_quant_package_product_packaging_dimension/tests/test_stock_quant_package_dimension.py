@@ -31,7 +31,7 @@ class TestStockQuantPackageDimension(common.SavepointCase):
 
     def test_stock_quant_package_dimension_uom(self):
         self.stock_quant_package_ft = self.env['stock.quant.package'].create({
-            'name': 'Test stock quand package - foot',
+            'name': 'Test stock quant package - foot',
             'height': self.height,
             'height_uom_id': self.foot.id,
             'packaging_length': self.packaging_length,
@@ -41,7 +41,7 @@ class TestStockQuantPackageDimension(common.SavepointCase):
         })
 
         self.stock_quant_package_m = self.env['stock.quant.package'].create({
-            'name': 'Test stock quand package - meter',
+            'name': 'Test stock quant package - meter',
             'height': self.height,
             'height_uom_id': self.meter.id,
             'packaging_length': self.packaging_length,
