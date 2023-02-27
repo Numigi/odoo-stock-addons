@@ -30,7 +30,7 @@ class TestStockQuantPackageDimension(common.SavepointCase):
         self.assertEqual(self.stock_quant_package.width, self.width)
 
     def test_stock_quant_package_dimension_uom(self):
-        self.stock_quant_package_ft = self.env['product.packaging'].create({
+        self.stock_quant_package_ft = self.env['stock.quant.package'].create({
             'name': 'Test stock quand package - foot',
             'height': self.height,
             'height_uom_id': self.foot.id,
@@ -40,7 +40,7 @@ class TestStockQuantPackageDimension(common.SavepointCase):
             'width_uom_id': self.foot.id,
         })
 
-        self.stock_quant_package_m = self.env['product.packaging'].create({
+        self.stock_quant_package_m = self.env['stock.quant.package'].create({
             'name': 'Test stock quand package - meter',
             'height': self.height,
             'height_uom_id': self.meter.id,
