@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Allow user to record dimension and its UOM -->
+    <record id="stock_quant_package_dimension" model="ir.ui.view">
+        <field name="name">Stock Quant Package: adding dimension/uom fields</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='stock.package_location_group']" position="after">
+                <group id='stock.package_location_group' groups="stock.group_stock_user">
+                    <label for="height"/>
+                    <div class="o_row" name="Height">
+                        <field name='height'/>
+                        <span><field name="height_uom_id" nolabel="1" style="width:90px"/></span>
+                    </div>
+                    <label for="width"/>
+                    <div class="o_row" name="Width">
+                        <field name='width'/>
+                        <span><field name="width_uom_id" nolabel="1" style="width:90px"/></span>
+                    </div>  
+                    <label for="packaging_length"/>
+                    <div class="o_row" name="Length">
+                        <field name='packaging_length'/>
+                        <span><field name="length_uom_id" nolabel="1" style="width:90px"/></span>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
