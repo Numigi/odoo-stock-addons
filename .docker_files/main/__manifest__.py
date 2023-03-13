@@ -11,6 +11,7 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
+        "product_packaging_dimension_decimal",
         # "onchange_helper",  # Used for testing stock_rental_conversion
         # "stock_dropshipping",  # Used for testing stock_warehouse_access
         # "purchase_warehouse_access",
@@ -41,6 +42,8 @@
         # "stock_picking_show_address",
         # "stock_previous_step_return",
         # "stock_product_location_info",
+        "stock_product_packaging_dimension",
+        "stock_product_packaging_uom",
         # "stock_rental",
         # "stock_rental_conversion",
         # "stock_rental_conversion_account",

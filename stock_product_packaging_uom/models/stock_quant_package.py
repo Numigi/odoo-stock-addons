@@ -12,9 +12,12 @@ class StockQuantPackage(models.Model):
 
     @api.onchange('packaging_id')
     def _onchange_packaging_id(self):
-        self.height = self.packaging_id.height
-        self.width = self.packaging_id.width
-        self.packaging_length = self.packaging_id.packaging_length
-        self.height_uom_id = self.packaging_id.height_uom_id
-        self.width_uom_id = self.packaging_id.width_uom_id
-        self.length_uom_id = self.packaging_id.length_uom_id
+        if self.packaging_id:
+            self.write({
+                'height': self.packaging_id.height,
+                'width': self.packaging_id.width,
+                'packaging_length': self.packaging_id.packaging_length,
+                'height_uom_id': self.packaging_id.height_uom_id,
+                'width_uom_id': self.packaging_id.width_uom_id,
+                'length_uom_id': self.packaging_id.length_uom_id,
+            })

@@ -21,13 +21,13 @@
 
             <!-- ... then add the many2one uom field -->
             <xpath expr="//div[@name='height']/span/field[@name='length_uom_name']" position="before">
-                <field name="height_uom_id" nolabel="1" style="width:90px"/>
+                <field name="height_uom_id" nolabel="1" class="oe_inline"/>
             </xpath>
             <xpath expr="//div[@name='width']/span/field[@name='length_uom_name']" position="before">
-                <field name="width_uom_id" nolabel="1" style="width:90px"/>
+                <field name="width_uom_id" nolabel="1" class="oe_inline"/>
             </xpath>
             <xpath expr="//div[@name='packaging_length']/span/field[@name='length_uom_name']" position="before">
-                <field name="length_uom_id" nolabel="1" style="width:90px"/>
+                <field name="length_uom_id" nolabel="1" class="oe_inline"/>
             </xpath>
 
         </field>
