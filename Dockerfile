@@ -19,6 +19,7 @@ RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS
 USER odoo
 
 
+COPY product_packaging_dimension_decimal /mnt/extra-addons/product_packaging_dimension_decimal
 #COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
 COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 #COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
@@ -47,6 +48,8 @@ COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 #COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 #COPY stock_previous_step_return /mnt/extra-addons/stock_previous_step_return
 #COPY stock_product_location_info /mnt/extra-addons/stock_product_location_info
+COPY stock_product_packaging_dimension /mnt/extra-addons/stock_product_packaging_dimension
+COPY stock_product_packaging_uom /mnt/extra-addons/stock_product_packaging_uom
 #COPY stock_rental /mnt/extra-addons/stock_rental
 #COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 #COPY stock_rental_conversion_account /mnt/extra-addons/stock_rental_conversion_account
