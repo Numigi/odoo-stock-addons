@@ -22,8 +22,8 @@
             </button>
             <button special="cancel" position="after">
                 <button special="cancel" string="Return"
-                    attrs="{'invisible': [('allow_imediate_transfer', '=', True)]}"
-                    />
+                        attrs="{'invisible': [('allow_imediate_transfer', '=', True)]}"
+                />
             </button>
         </field>
     </record>
