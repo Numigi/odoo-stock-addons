@@ -24,8 +24,12 @@
     - report_xlsx
     - report_xlsx_helper  # dependency of account_asset_management
 
+- url: https://github.com/OCA/stock-logistics-warehouse
+  branch: "14.0"
+  includes:
+    - stock_change_qty_reason
+
 - url: https://github.com/OCA/web
   branch: "14.0"
   includes:
     - web_widget_digitized_signature
-
