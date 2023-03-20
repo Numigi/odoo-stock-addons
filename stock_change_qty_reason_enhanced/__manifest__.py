@@ -9,7 +9,7 @@
     'website': 'https://bit.ly/numigi-com',
     "license": "LGPL-3",
     'category': 'Stock',
-    'summary': 'Fix the install error on the OCA Module stock_change_qty_reason, setting a default value on ``group quantity reason preset`` field.',
+    'summary': 'This fixes the install error on the OCA Module stock_change_qty_reason, setting a default value on ``group quantity reason preset`` field.',
     'depends': [
         'stock_change_qty_reason',
     ],
