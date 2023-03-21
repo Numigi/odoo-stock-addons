@@ -28,7 +28,7 @@ COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 #COPY stock_component /mnt/extra-addons/stock_component
 #COPY stock_component_account /mnt/extra-addons/stock_component_account
 #COPY stock_extra_views /mnt/extra-addons/stock_extra_views
-#COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer_disable
+COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer_disable
 #COPY stock_inventory_accounting_date_editable /mnt/extra-addons/stock_inventory_accounting_date_editable
 #COPY stock_inventory_category_domain /mnt/extra-addons/stock_inventory_category_domain
 #COPY stock_inventory_internal_location /mnt/extra-addons/stock_inventory_internal_location
@@ -38,14 +38,14 @@ COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 #COPY stock_move_list_cost /mnt/extra-addons/stock_move_list_cost
 #COPY stock_move_list_location /mnt/extra-addons/stock_move_list_location
 #COPY stock_move_location_domain_improved /mnt/extra-addons/stock_move_location_domain_improved
-#COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
+COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
 #COPY stock_move_valuation_adjustment /mnt/extra-addons/stock_move_valuation_adjustment
 #COPY stock_picking_add_transit /mnt/extra-addons/stock_picking_add_transit
 #COPY stock_picking_add_transit_rental /mnt/extra-addons/stock_picking_add_transit_rental
 #COPY stock_picking_change_destination /mnt/extra-addons/stock_picking_change_destination
 #COPY stock_picking_digitized_signature /mnt/extra-addons/stock_picking_digitized_signature
 #COPY stock_picking_search_by_serial /mnt/extra-addons/stock_picking_search_by_serial
-#COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
+COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 #COPY stock_previous_step_return /mnt/extra-addons/stock_previous_step_return
 #COPY stock_product_location_info /mnt/extra-addons/stock_product_location_info
 COPY stock_product_packaging_dimension /mnt/extra-addons/stock_product_packaging_dimension
