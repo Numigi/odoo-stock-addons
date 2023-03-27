@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <template id="report_delivery_document" name="Description on delivery document" 
+                    inherit_id="stock.report_delivery_document">
+            <xpath expr="//table[hasclass('mt48')]/thead/tr/th[1]" position="after">
+                <th><strong>Description</strong></th>
+            </xpath>
+            <xpath expr="//table[hasclass('mt48')]/tbody/tr/td[1]" position="after">
+                <td>
+                    <span t-field="move.name"/>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

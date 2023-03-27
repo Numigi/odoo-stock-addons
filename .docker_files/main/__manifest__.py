@@ -13,6 +13,7 @@
     "depends": [
         "onchange_helper",  # Used for testing stock_rental_conversion
         "stock_dropshipping",  # Used for testing stock_warehouse_access
+        "purchase_stock_move_description",
         "purchase_warehouse_access",
         "stock_auto_assign_disabled",
         "stock_auto_assign_disabled_jit",

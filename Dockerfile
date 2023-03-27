@@ -15,6 +15,7 @@ RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS
 
 USER odoo
 
+COPY purchase_stock_move_description /mnt/extra-addons/purchase_stock_move_description
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
 COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
 COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
