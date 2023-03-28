@@ -8,7 +8,7 @@
             </xpath>
             <xpath expr="//table[hasclass('mt48')]/tbody/tr/td[1]" position="after">
                 <td>
-                    <span t-field="move.name"/>
+                    <span t-field="move.product_description"/>
                 </td>
             </xpath>
         </template>

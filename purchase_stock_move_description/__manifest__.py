@@ -9,7 +9,7 @@
     "license": "LGPL-3",
     "category": "Stock",
     "summary": "Show description of each operation line on stock picking from purchase order.",
-    "depends": ["stock"],
+    "depends": ["purchase_stock"],
     "data": [
         "report/report_deliveryslip.xml",
 
