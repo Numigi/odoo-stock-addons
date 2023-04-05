@@ -31,7 +31,7 @@
         # "stock_location_position_alphanum",
         # "stock_move_list_cost",
         # "stock_move_list_location",
-        # "stock_move_location_domain_improved",
+        "stock_move_location_domain_improved",
         "stock_move_origin_link",
         # "stock_move_valuation_adjustment",
         # "stock_picking_add_transit",

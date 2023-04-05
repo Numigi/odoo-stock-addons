@@ -37,7 +37,7 @@ COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer
 #COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_alphanum
 #COPY stock_move_list_cost /mnt/extra-addons/stock_move_list_cost
 #COPY stock_move_list_location /mnt/extra-addons/stock_move_list_location
-#COPY stock_move_location_domain_improved /mnt/extra-addons/stock_move_location_domain_improved
+COPY stock_move_location_domain_improved /mnt/extra-addons/stock_move_location_domain_improved
 COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
 #COPY stock_move_valuation_adjustment /mnt/extra-addons/stock_move_valuation_adjustment
 #COPY stock_picking_add_transit /mnt/extra-addons/stock_picking_add_transit
