@@ -41,6 +41,7 @@
         "stock_picking_show_address",
         "stock_previous_step_return",
         "stock_product_location_info",
+        "stock_quant_package_image",
         "stock_rental",
         "stock_rental_conversion",
         "stock_rental_conversion_account",

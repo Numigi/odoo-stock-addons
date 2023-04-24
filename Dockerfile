@@ -43,6 +43,7 @@ COPY stock_picking_search_by_serial /mnt/extra-addons/stock_picking_search_by_se
 COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 COPY stock_previous_step_return /mnt/extra-addons/stock_previous_step_return
 COPY stock_product_location_info /mnt/extra-addons/stock_product_location_info
+COPY stock_quant_package_image /mnt/extra-addons//stock_quant_package_image
 COPY stock_rental /mnt/extra-addons/stock_rental
 COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 COPY stock_rental_conversion_account /mnt/extra-addons/stock_rental_conversion_account
