@@ -1,0 +1,32 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_quant_package_image
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-25 03:23+0000\n"
+"PO-Revision-Date: 2023-04-25 03:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_quant_package_image
+#: model:ir.model.fields,field_description:stock_quant_package_image.field_stock_quant_package__image
+#: model_terms:ir.ui.view,arch_db:stock_quant_package_image.view_quant_package_image_form
+msgid "Image"
+msgstr ""
+
+#. module: stock_quant_package_image
+#: model:ir.model,name:stock_quant_package_image.model_stock_quant_package
+msgid "Packages"
+msgstr "Colis"
+
+#. module: stock_quant_package_image
+#: model:ir.model.fields,help:stock_quant_package_image.field_stock_quant_package__image
+msgid "This field holds the image used for the package, about 250 x 330"
+msgstr "Ce champ contient l'image utilisée pour le package, environ 250 x 330"
