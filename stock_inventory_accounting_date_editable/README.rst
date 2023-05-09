@@ -1,4 +1,4 @@
-Stock Inventory Line Product Domain
+Stock Inventory Accounting Date Editable
 ===================================
 This module makes the accounting date editable on confirmed inventory adjustments.
 
