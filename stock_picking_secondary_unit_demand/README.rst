@@ -11,12 +11,12 @@ Usage
 * Secondary measurement unit: Defined (dependent or not)
 * Secondary Unit of Measure for Sales: Defined
 
-.. image:: ./static/description/_______.png
+.. image:: ./static/description/product_configuration.png
 
 As a Sales user, I create and confirm a sale for 5 units* of ``My Great Item``.
 ``The unit represents the secondary unit of measurement on my item``.
 
-.. image:: ./static/description/_______.png
+.. image:: ./static/description/sale_order_with_second_qty.png
 
 > Information dissemination ``Request secondary unit``
 
@@ -24,7 +24,7 @@ As an Inventory user, I go to the delivery slip generated from my sale.
 
 I see that the quantity (in the secondary unit of measure) as well as the name of the secondary unit of measure are displayed in the new field.
 
-.. image:: ./static/description/_______.png
+.. image:: ./static/description/stock_picking_with_second_qty_and_uom.png
 
 I find this information on operations, detailed operations as well as stock movements.
 
