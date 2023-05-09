@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_move_tree_second_qty_inherit" model="ir.ui.view">
+        <field name="name">stock.move.tree.second.qty.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree"/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='state']" position="before">
+                <field name="merged_qty_uom_info"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
