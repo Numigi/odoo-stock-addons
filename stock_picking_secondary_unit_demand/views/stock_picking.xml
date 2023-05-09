@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_picking_form_second_qty_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.form.second.qty.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']" position="before">
+                <field name="merged_qty_uom_info"/>                
+            </xpath>
+            <xpath expr="//field[@name='move_ids_without_package']/form/group/field[@name='product_uom_qty']" position="before">
+                <field name="merged_qty_uom_info"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
