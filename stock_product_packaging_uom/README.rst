@@ -9,7 +9,7 @@ As an User of Inventory, I go to ``Inventory > Products > Packages``.
 In the form view, the following fields value will be changed when selecting a package type: 
 ``Height``, ``Width`` and ``Length``.
 Values are set from the value of the package type. 
-Then,  I also can change the unit of measure of each property to ``m`` or ``ft``.
+Then,  I also can change the unit of measure of each property to ``m``, ``ft``, ``inch`` or ``cm``.
 
 .. image:: ./static/description/stock_quant_package_dimension_changes.png
 
