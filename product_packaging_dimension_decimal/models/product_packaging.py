@@ -16,6 +16,8 @@ class ProductPackaging(models.Model):
             (
                 self.env.ref("uom.product_uom_foot").id,
                 self.env.ref("uom.product_uom_meter").id,
+                self.env.ref("uom.product_uom_inch").id,
+                self.env.ref("uom.product_uom_cm").id,
             )
         )
         return [("id", "in", uom_ids)]
@@ -44,4 +46,3 @@ class ProductPackaging(models.Model):
         domain=_get_uom_domain,
         default=_get_default_uom
     )
-
