@@ -101,7 +101,7 @@ class StockPickingAddTransit(models.TransientModel):
         old_picking = self.picking_id
         return {
             "group_id": old_picking.group_id.id,
-            "origin": old_picking.name,
+            "origin": old_picking.origin,
             "move_type": old_picking.move_type,
             "priority": old_picking.priority,
             "scheduled_date": old_picking.scheduled_date,
