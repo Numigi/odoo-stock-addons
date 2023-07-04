@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["stock_secondary_unit"],
-    "summary": "Add some progress time on task",
+    "summary": "Add 2nd unit and 2nd Unit On Hand Qty on some stock quant views.",
     "data": [
         "views/stock_quant.xml",
     ],
