@@ -13,14 +13,14 @@ Usage
 
 .. image:: ./static/description/product_configuration.png
 
-As a Sales user, I create and confirm a sale for 5 units* of ``My Great Item``.
+- As a Sales user, I create and confirm a sale for 5 units* of ``My Great Item``.
 ``The unit represents the secondary unit of measurement on my item``.
 
 .. image:: ./static/description/sale_order_with_second_qty.png
 
 > Information dissemination ``Request secondary unit``
 
-As an Inventory user, I go to the delivery slip generated from my sale.
+- As an Inventory user, I go to the delivery slip generated from my sale.
 
 I see that the quantity (in the secondary unit of measure) as well as the name of the secondary unit of measure are displayed in the new field.
 
@@ -29,6 +29,18 @@ I see that the quantity (in the secondary unit of measure) as well as the name o
 I find this information on operations, detailed operations as well as stock movements.
 
 When the 2nd Qty and 2nd uom fields on the sales line are not filled in, then the Secondary unit request field on the delivery line will be empty.
+
+- As an Inventory user, I go to the form view of a transfer for which the type of operation is configured not to display detailed operations.
+
+.. image:: ./static/description/operation_type_configuration.png
+
+When I click on the detailed operations icon to open the form view.
+
+.. image:: ./static/description/detailed_operation_button.png
+
+I see that the `Request Secondary Unit` field is available.
+
+.. image:: ./static/description/request_secondary_unit_field.png
 
 Contributors
 ------------
