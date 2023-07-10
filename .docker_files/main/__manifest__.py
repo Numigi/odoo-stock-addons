@@ -45,6 +45,7 @@
         # "stock_product_location_info",
         "stock_product_packaging_dimension",
         "stock_product_packaging_uom",
+        "stock_production_lot_rma",
         "stock_quant_secondary_unit",
         # "stock_rental",
         # "stock_rental_conversion",
