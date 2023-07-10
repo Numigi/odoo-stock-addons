@@ -44,3 +44,8 @@
   branch: "14.0"
   includes:
     - web_widget_digitized_signature
+
+- url: https://github.com/OCA/rma
+  branch: "14.0"
+  includes:
+    - rma
