@@ -49,3 +49,5 @@
   branch: "14.0"
   includes:
     - rma
+    - rma_sale
+    - rma_delivery
