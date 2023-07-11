@@ -9,7 +9,7 @@
     "website": "https://bit.ly/numigi-com",
     "license": "AGPL-3",
     "category": "Stock",
-    "depends": ["rma"],
+    "depends": ["rma_sale"],
     "summary": "Add the possibility to access the list of linked RMAs from the lot / serial number.",
     "data": [
         "views/stock_production_lot_views.xml",
