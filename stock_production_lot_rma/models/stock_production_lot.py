@@ -15,7 +15,7 @@ class StockProductionLot(models.Model):
     def _compute_rma_count(self):
         for rec in self:
             rec.rma_count = len(
-                rec.sale_order_ids.mapped("rma_ids")) + len(rec.get_rma_from_picking())
+                rec.sale_order_ids.mapped("rma_ids") | rec.get_rma_from_picking())
 
     def get_rma_from_picking(self):
         rma = self.env["rma"]
