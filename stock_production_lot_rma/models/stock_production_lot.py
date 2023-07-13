@@ -19,14 +19,14 @@ class StockProductionLot(models.Model):
     def get_rma(self):
         rma = self.env['rma']
         # RMAs that were created from the delivery move
-        rma_ids = self.env["stock.move"].search(
-            [('lot_ids', 'in', self.id)]).mapped("rma_ids")
+        rma_ids = self.env["stock.move.line"].search(
+            [('lot_id', '=', self.id)]).mapped("move_id.rma_ids")
         # RMAs linked to the incoming movement from client
-        rma_receiver_ids = self.env["stock.move"].search(
-            [('lot_ids', 'in', self.id)]).mapped("rma_receiver_ids")
+        rma_receiver_ids = self.env["stock.move.line"].search(
+            [('lot_id', '=', self.id)]).mapped("move_id.rma_receiver_ids")
         # RMA that create the delivery movement to the customer
-        rma_id = self.env["stock.move"].search(
-            [('lot_ids', 'in', self.id)]).mapped("rma_id")
+        rma_id = self.env["stock.move.line"].search(
+            [('lot_id', '=', self.id)]).mapped("move_id.rma_id")
         rma |= rma_ids + rma_receiver_ids + rma_id
         return rma
 
