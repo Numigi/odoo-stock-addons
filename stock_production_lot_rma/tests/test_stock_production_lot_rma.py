@@ -82,3 +82,11 @@ class TestStockProductionLotRma(TestRma):
         wizard.process()
         self._create_return(so_2.picking_ids)
         self.assertEqual(lot_1.rma_count, 2)
+
+        # Create RMA manually and count RMA
+        rma = self._create_rma(self.partner, self.product, 10, self.rma_loc)
+        rma.action_confirm()
+        rma.reception_move_id.quantity_done = 10
+        rma.reception_move_id.picking_id.move_line_ids_without_package[0].lot_id = lot_1.id
+        rma.reception_move_id.picking_id.button_validate()
+        self.assertEqual(lot_1.rma_count, 3)

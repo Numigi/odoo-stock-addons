@@ -15,12 +15,23 @@ class StockProductionLot(models.Model):
     def _compute_rma_count(self):
         for rec in self:
             rec.rma_count = len(
-                rec.sale_order_ids.mapped("rma_ids"))
+                rec.sale_order_ids.mapped("rma_ids")) + len(rec.get_rma_from_picking())
+
+    def get_rma_from_picking(self):
+        rma = self.env["rma"]
+        picking_ids = self.env["stock.move.line"].search(
+            [('lot_id', '=', self.id),]).mapped("picking_id")
+        for rma_line in self.env["rma"].search(
+                [('state', '!=', 'draft'),]):
+            if rma_line.reception_move_id.picking_id.id in picking_ids.ids:
+                rma |= rma_line
+        return rma
 
     def action_view_rma(self):
         self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id("rma.rma_action")
-        rma = self.sale_order_ids.mapped("rma_ids")
+        rma = self.sale_order_ids.mapped(
+            "rma_ids") | self.get_rma_from_picking()
         if len(rma) == 1:
             action.update(
                 res_id=rma.id,
