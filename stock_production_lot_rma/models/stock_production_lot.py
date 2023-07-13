@@ -14,24 +14,26 @@ class StockProductionLot(models.Model):
 
     def _compute_rma_count(self):
         for rec in self:
-            rec.rma_count = len(
-                rec.sale_order_ids.mapped("rma_ids") | rec.get_rma_from_picking())
+            rec.rma_count = len(rec.get_rma())
 
-    def get_rma_from_picking(self):
-        rma = self.env["rma"]
-        picking_ids = self.env["stock.move.line"].search(
-            [('lot_id', '=', self.id),]).mapped("picking_id")
-        for rma_line in self.env["rma"].search(
-                [('state', '!=', 'draft'),]):
-            if rma_line.reception_move_id.picking_id.id in picking_ids.ids:
-                rma |= rma_line
+    def get_rma(self):
+        rma = self.env['rma']
+        # RMAs that were created from the delivery move
+        rma_ids = self.env["stock.move"].search(
+            [('lot_ids', 'in', self.id)]).mapped("rma_ids")
+        # RMAs linked to the incoming movement from client
+        rma_receiver_ids = self.env["stock.move"].search(
+            [('lot_ids', 'in', self.id)]).mapped("rma_receiver_ids")
+        # RMA that create the delivery movement to the customer
+        rma_id = self.env["stock.move"].search(
+            [('lot_ids', 'in', self.id)]).mapped("rma_id")
+        rma |= rma_ids + rma_receiver_ids + rma_id
         return rma
 
     def action_view_rma(self):
         self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id("rma.rma_action")
-        rma = self.sale_order_ids.mapped(
-            "rma_ids") | self.get_rma_from_picking()
+        rma = self.get_rma()
         if len(rma) == 1:
             action.update(
                 res_id=rma.id,
