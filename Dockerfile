@@ -52,6 +52,7 @@ COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 COPY stock_product_packaging_dimension /mnt/extra-addons/stock_product_packaging_dimension
 COPY stock_product_packaging_uom /mnt/extra-addons/stock_product_packaging_uom
 COPY stock_production_lot_rma /mnt/extra-addons/stock_production_lot_rma
+COPY stock_quant_by_category /mnt/extra-addons/stock_quant_by_category
 COPY stock_quant_secondary_unit /mnt/extra-addons/stock_quant_secondary_unit
 #COPY stock_rental /mnt/extra-addons/stock_rental
 #COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
