@@ -1,5 +1,5 @@
 Stock Quant by Category
-==========================
+=======================
 This module adds product category field on `Inventory Report` (Inventory / Reporting).
 
 Usage
