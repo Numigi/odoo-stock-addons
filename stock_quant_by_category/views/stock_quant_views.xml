@@ -5,7 +5,6 @@
             <field name="name">stock.quant.tree.editable</field>
             <field name="model">stock.quant</field>
             <field name="inherit_id" ref="stock.view_stock_quant_tree_editable" />
-            <field name="groups_id" eval="[(6,0, (ref('stock.group_stock_manager'),))]"/>
             <field name="arch" type="xml">
                 <field name="company_id" position="after">
                     <field name="product_category_id" 
@@ -22,10 +21,10 @@
             <field name="arch" type="xml">
                 <xpath expr="//filter[@name='productgroup']" position="after">
                     <filter string="Product Category" name="productcategorygroup"
-                        domain="[]" context="{'group_by': 'product_category_id'}" groups="stock.group_stock_manager"/>
+                        domain="[]" context="{'group_by': 'product_category_id'}"/>
                 </xpath>
                 <xpath expr="//search/field[@name='lot_id']" position="after">
-                    <field name="product_category_id" groups="stock.group_stock_manager"/>
+                    <field name="product_category_id"/>
                 </xpath>
             </field>
         </record>
