@@ -16,7 +16,7 @@
         </record>
 
         <record id="quant_search_view_inherit_product_category" model="ir.ui.view">
-            <field name="name">stock.quant.search.inherit..product.category</field>
+            <field name="name">stock.quant.search.inherit.product.category</field>
             <field name="model">stock.quant</field>
             <field name="inherit_id" ref="stock.quant_search_view"/>
             <field name="arch" type="xml">
