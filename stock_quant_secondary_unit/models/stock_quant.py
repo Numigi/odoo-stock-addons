@@ -21,6 +21,7 @@ class StockQuant(models.Model):
         comodel_name="product.secondary.unit",
         string="2nd Unit",
         related="product_tmpl_id.stock_secondary_uom_id",
+        store=True,
     )
 
     @api.depends(
