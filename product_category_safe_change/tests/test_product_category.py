@@ -1,24 +1,33 @@
 # © 2023 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.stock.tests.test_move import StockMove
 from odoo.exceptions import UserError
+from odoo.tests.common import TransactionCase
 
 
-class TestProductCategoryRestrictions(StockMove):
+class TestProductCategoryRestrictions(TransactionCase):
     def setUp(self):
         super(TestProductCategoryRestrictions, self).setUp()
+        self.stock_location = self.env.ref('stock.stock_location_stock')
+        self.customer_location = self.env.ref('stock.stock_location_customers')
+        self.uom_unit = self.env.ref('uom.product_uom_unit')
+        self.product = self.env['product.product'].create({
+            'name': 'Product A',
+            'type': 'product',
+            'tracking': 'serial',
+            'categ_id': self.env.ref('product.product_category_all').id,
+        })
 
     def test_change_product_category_on_product_with_stock_move(self):
         self.process_stock_move()
         # for product.product
         with self.assertRaises(UserError):
-            self.product2.write(
+            self.product.write(
                 {'categ_id': self.env.ref('product.product_category_1').id})
 
         # for product.template
         with self.assertRaises(UserError):
-            self.product2.product_tmpl_id.write(
+            self.product.product_tmpl_id.write(
                 {'categ_id': self.env.ref('product.product_category_1').id})
 
     def test_update_product_category_with_stock_move(self):
@@ -57,7 +66,7 @@ class TestProductCategoryRestrictions(StockMove):
             'name': 'new_move',
             'location_id': self.stock_location.id,
             'location_dest_id': self.customer_location.id,
-            'product_id': self.product2.id,
+            'product_id': self.product.id,
             'product_uom': self.uom_unit.id,
             'product_uom_qty': 2.0,
         })
@@ -67,7 +76,7 @@ class TestProductCategoryRestrictions(StockMove):
         move._action_done()
         lot = self.env['stock.production.lot'].create({
             'name': 'lot for test',
-            'product_id': self.product2.id,
+            'product_id': self.product.id,
         })
 
         self.env['stock.move.line'].create({
