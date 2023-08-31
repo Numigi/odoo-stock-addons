@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="assets_common_with_origin_link" name="assets_common_with_origin_link" inherit_id="web.assets_common">
+    <template id="assets_backend_with_origin_link" name="assets_backend_with_origin_link" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/stock_move_origin_link/static/src/js/stockMoveOriginLink.js"></script>
         </xpath>

@@ -107,8 +107,9 @@ async function getRecordFormViewAction(record){
  * breaks the behavior of the editable list.
  */
 require("web.EditableListRenderer");
+var ListRenderer = require("web.ListRenderer")
 
-require("web.ListRenderer").include({
+ListRenderer.include({
     _renderView(){
         if(stockMoveModels.indexOf(this.state.model) !== -1){
             var super_ = this._super;
@@ -201,7 +202,9 @@ require("web.ListRenderer").include({
     },
 });
 
-require("web.FormRenderer").include({
+var FormRenderer = require("web.FormRenderer");
+
+FormRenderer.include({
     _renderView() {
         var result = this._super.apply(this, arguments);
         if(
