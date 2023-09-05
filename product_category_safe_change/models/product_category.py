@@ -34,15 +34,15 @@ class ProductCategory(models.Model):
                 for move in existing_move_lines
             ]
             products = "\n- ".join(product_lists)
-            raise UserError(
-                _(
-                    """
-                    You cannot modify Stock Properties Parameters when 
+            primary_text = _(
+                """
+                    You cannot modify Stock Properties Parameters when
                     related Products have existing Stock Moves.\n
                     Stock moves exist for the following products:
-                    - %s"""
-                    % products
-                )
+                    - """
+            )
+            raise UserError(
+                primary_text + products
             )
 
     def write(self, vals):
