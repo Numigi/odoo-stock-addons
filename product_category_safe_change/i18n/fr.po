@@ -16,20 +16,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_category_safe_change
-#: code:addons/product_category_safe_change/models/product_category.py:38
+#: code:addons/product_category_safe_change/models/product_category.py:37
 #, python-format
 msgid "\n"
-"                    You cannot modify Stock Properties Parameters when \n"
+"                    You cannot modify Stock Properties Parameters when\n"
 "                    related Products have existing Stock Moves.\n"
 "\n"
 "                    Stock moves exist for the following products:\n"
-"                    - %s"
+"                    - "
 msgstr "\n"
 "                    Vous ne pouvez pas modifier le paramétrage des propriétés de stock \n"
 "                    si un des articles de la catégorie a des mouvements de stock associés.\n"
 "\n"
 "                    Des mouvements de stock sont existants pour les articles suivants:\n"
-"                    - %s"
+"                    - "
 
 #. module: product_category_safe_change
 #: model:ir.model,name:product_category_safe_change.model_product_product
