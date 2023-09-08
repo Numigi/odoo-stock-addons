@@ -26,12 +26,6 @@ class TestProductCategoryRestrictions(TransactionCase):
             'tracking': 'serial',
             'categ_id': self.env.ref('product.product_category_all').id,
         })
-        # self.multicompany_user_id = self.env['res.users'].create({
-        #     'name': 'multicompnumigi',
-        #     'login': 'multicompnumigi',
-        #     'company_id': self.company_a.id,
-        #     'company_ids': [(6, 0, [self.company_a.id, self.company_b.id])]
-        # })
         self.env.user.write({
             'company_id': self.company_a.id,
             'company_ids': [(6, 0, [self.company_a.id, self.company_b.id])]
@@ -68,10 +62,9 @@ class TestProductCategoryRestrictions(TransactionCase):
 
         self.assertGreater(len(existing_move_lines), 0)
         self.assertTrue(not_allowed)
-
-        # for property_stock_account_input_categ_id
         self.assertEqual(move.company_id, self.env.user.company_id)
 
+        # for property_stock_account_input_categ_id
         with self.assertRaises(UserError):
             categ_all.write(
                 {'property_stock_account_input_categ_id': False})
@@ -112,20 +105,6 @@ class TestProductCategoryRestrictions(TransactionCase):
         with self.assertRaises(UserError):
             self.product.product_tmpl_id.write(
                 {'categ_id': self.env.ref('product.product_category_1').id})
-
-    # def _multi_company_constraints(self, domain):
-    #     current_company = self.env.user.company_id
-    #     existing_moves = self.env["stock.move.line"].read_group(
-    #         domain, fields=["move_id"], groupby=["move_id"]
-    #     )
-    #     if len(existing_moves):
-    #         for move in existing_moves:
-    #             move_company = self.env["stock.move"].search(
-    #                 [("id", "=", move["move_id"][0])]).company_id
-    #             if current_company != move_company:
-    #                 self.assertEqual(current_company.name, move_company.name)
-    #                 return False
-    #     return True
 
     def process_stock_move(self, company_id):
         move = self.env['stock.move'].create({
