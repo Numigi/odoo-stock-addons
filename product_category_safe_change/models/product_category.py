@@ -20,12 +20,10 @@ class ProductCategory(models.Model):
         return self.env["product.product"].browse(product_id).name
 
     def _get_company_id_from_move(self, move_id):
-        return self.env["stock.move"].search([("id", "=", move_id)]).company_id.id
+        return self.env["stock.move"].browse(move_id).company_id.id
 
-    def _multi_company_constraints(self, domain, set_company=False):
-        current_company = (
-            self.env.user.company_id.id if not set_company else set_company.id
-        )
+    def _multi_company_constraints(self, domain):
+        current_company = self.env.user.company_id.id
         existing_moves = self.env["stock.move.line"].read_group(
             domain, fields=["move_id"], groupby=["move_id"]
         )
