@@ -58,7 +58,7 @@ class TestProductCategoryRestrictions(TransactionCase):
             domain, fields=["product_id"], groupby=["product_id"]
         )
         not_allowed = categ_all._multi_company_constraints(
-            domain, self.company_a)
+            domain)
 
         self.assertGreater(len(existing_move_lines), 0)
         self.assertTrue(not_allowed)
