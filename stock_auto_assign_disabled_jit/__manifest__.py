@@ -4,7 +4,7 @@
 {
     "name": "Stock Auto Assign Disabled Jit",
     "summary": "Disable the automatic stock reservation by the procurement_jit module.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "category": "Stock",
     "author": "Numigi",
     "license": "AGPL-3",
