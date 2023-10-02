@@ -3,7 +3,7 @@
 
 {
     "name": "Product Category Safe Change",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",

@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_category_safe_change
-#: code:addons/product_category_safe_change/models/product_category.py:37
+#: code:addons/product_category_safe_change/models/product_category.py:45
 #, python-format
 msgid "\n"
 "                    You cannot modify Stock Properties Parameters when\n"
