@@ -54,11 +54,9 @@ class TestProductCategoryRestrictions(TransactionCase):
         categ_all = self.env.ref('product.product_category_all')
 
         domain = [("product_id.categ_id", "in", categ_all.ids)]
-        existing_move_lines = self.env["stock.move.line"].read_group(
-            domain, fields=["product_id"], groupby=["product_id"]
-        )
+        existing_move_lines = self.env["stock.move.line"].search(domain)
         not_allowed = categ_all._multi_company_constraints(
-            domain)
+            existing_move_lines)
 
         self.assertGreater(len(existing_move_lines), 0)
         self.assertTrue(not_allowed)
