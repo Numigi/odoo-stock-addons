@@ -33,6 +33,7 @@ class TestProductCategoryRestrictions(TransactionCase):
 
     def test_change_product_category_on_product_with_stock_move(self):
         # company A
+        self.assertEqual(self.stock_location.company_id, self.company_a)
         self.process_stock_move(self.company_a)
         self.assert_on_product()
 
@@ -105,7 +106,6 @@ class TestProductCategoryRestrictions(TransactionCase):
                 {'categ_id': self.env.ref('product.product_category_1').id})
 
     def process_stock_move(self, company_id):
-        self.stock_location.company_id = company_id.id
         move = self.env['stock.move'].create({
             'name': 'new_move',
             'location_id': self.stock_location.id,
