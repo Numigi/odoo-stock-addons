@@ -9,8 +9,6 @@ class TestProductCategoryRestrictions(TransactionCase):
     def setUp(self):
         super(TestProductCategoryRestrictions, self).setUp()
         ResCompany = self.env['res.company']
-        self.stock_location = self.env.ref('stock.stock_location_stock')
-
         self.customer_location = self.env.ref('stock.stock_location_customers')
         self.uom_unit = self.env.ref('uom.product_uom_unit')
         self.company_a = ResCompany.create({
@@ -22,15 +20,11 @@ class TestProductCategoryRestrictions(TransactionCase):
             'currency_id': self.env.ref('base.USD').id,
         })
 
-        # Stock location for each company
+        # Stock location for company A
         customer_loc = self.env.ref(
             'stock.stock_location_customers', raise_if_not_found=False)
         self.stock_location_a = self.env['stock.location'].with_company(self.company_a).create({
             'name': "Stock Location A",
-            'location_id': customer_loc.id,
-        })
-        self.stock_location_b = self.env['stock.location'].with_company(self.company_b).create({
-            'name': "Stock Location B",
             'location_id': customer_loc.id,
         })
 
