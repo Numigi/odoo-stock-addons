@@ -10,6 +10,7 @@ class TestProductCategoryRestrictions(TransactionCase):
         super(TestProductCategoryRestrictions, self).setUp()
         ResCompany = self.env['res.company']
         self.stock_location = self.env.ref('stock.stock_location_stock')
+
         self.customer_location = self.env.ref('stock.stock_location_customers')
         self.uom_unit = self.env.ref('uom.product_uom_unit')
         self.company_a = ResCompany.create({
@@ -20,6 +21,19 @@ class TestProductCategoryRestrictions(TransactionCase):
             'name': 'Company Test B',
             'currency_id': self.env.ref('base.USD').id,
         })
+
+        # Stock location for each company
+        customer_loc = self.env.ref(
+            'stock.stock_location_customers', raise_if_not_found=False)
+        self.stock_location_a = self.env['stock.location'].with_company(self.company_a).create({
+            'name': "Stock Location A",
+            'location_id': customer_loc.id,
+        })
+        self.stock_location_b = self.env['stock.location'].with_company(self.company_b).create({
+            'name': "Stock Location B",
+            'location_id': customer_loc.id,
+        })
+
         self.product = self.env['product.product'].create({
             'name': 'Product A',
             'type': 'product',
@@ -33,8 +47,7 @@ class TestProductCategoryRestrictions(TransactionCase):
 
     def test_change_product_category_on_product_with_stock_move(self):
         # company A
-        self.assertEqual(self.stock_location.company_id, self.company_a)
-        self.process_stock_move(self.company_a)
+        self.process_stock_move(self.company_a, self.stock_location_a)
         self.assert_on_product()
 
         # company B
@@ -51,7 +64,7 @@ class TestProductCategoryRestrictions(TransactionCase):
         """
         # company A
         self.env.user.company_id = self.company_a.id
-        move = self.process_stock_move(self.company_a)
+        move = self.process_stock_move(self.company_a, self.stock_location_a)
         categ_all = self.env.ref('product.product_category_all')
 
         domain = [("product_id.categ_id", "in", categ_all.ids)]
@@ -105,10 +118,10 @@ class TestProductCategoryRestrictions(TransactionCase):
             self.product.product_tmpl_id.write(
                 {'categ_id': self.env.ref('product.product_category_1').id})
 
-    def process_stock_move(self, company_id):
+    def process_stock_move(self, company_id, stock_location_id):
         move = self.env['stock.move'].create({
             'name': 'new_move',
-            'location_id': self.stock_location.id,
+            'location_id': stock_location_id.id,
             'location_dest_id': self.customer_location.id,
             'product_id': self.product.id,
             'product_uom': self.uom_unit.id,
