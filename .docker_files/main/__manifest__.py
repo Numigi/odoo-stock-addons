@@ -11,6 +11,7 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
+        "product_category_safe_change",
         "product_packaging_dimension_decimal",
         # "onchange_helper",  # Used for testing stock_rental_conversion
         # "stock_dropshipping",  # Used for testing stock_warehouse_access

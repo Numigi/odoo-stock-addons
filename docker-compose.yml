@@ -14,7 +14,7 @@ services:
       - "8071:8071"
     depends_on:
       - db
-    command: odoo
+    command: odoo -u module -d dtabase
     environment:
       - LOG_ODOO=/var/log/odoo
   db:
