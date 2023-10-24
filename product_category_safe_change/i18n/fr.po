@@ -1,0 +1,54 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_category_safe_change
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-24 15:06+0000\n"
+"PO-Revision-Date: 2023-08-24 15:06+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_category_safe_change
+#: code:addons/product_category_safe_change/models/product_category.py:45
+#, python-format
+msgid "\n"
+"                    You cannot modify Stock Properties Parameters when\n"
+"                    related Products have existing Stock Moves.\n"
+"\n"
+"                    Stock moves exist for the following products:\n"
+"                    - "
+msgstr "\n"
+"                    Vous ne pouvez pas modifier le paramétrage des propriétés de stock \n"
+"                    si un des articles de la catégorie a des mouvements de stock associés.\n"
+"\n"
+"                    Des mouvements de stock sont existants pour les articles suivants:\n"
+"                    - "
+
+#. module: product_category_safe_change
+#: model:ir.model,name:product_category_safe_change.model_product_product
+msgid "Product"
+msgstr "Article"
+
+#. module: product_category_safe_change
+#: model:ir.model,name:product_category_safe_change.model_product_category
+msgid "Product Category"
+msgstr "Catégorie d'article"
+
+#. module: product_category_safe_change
+#: model:ir.model,name:product_category_safe_change.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: product_category_safe_change
+#: code:addons/product_category_safe_change/models/product.py:17
+#: code:addons/product_category_safe_change/models/product.py:34
+#, python-format
+msgid "You cannot modify the category of a Product with Stock Moves."
+msgstr "Vous ne pouvez pas modifier la catégorie d’un article ayant des mouvements de stocks associés."
