@@ -44,3 +44,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_quant_secondary_unit.field_stock_quant__stock_secondary_uom_id
 msgid "2nd Unit"
 msgstr "2e unité"
+
+#. module: stock_quant_secondary_unit
+#: model:ir.model.fields,field_description:stock_quant_secondary_unit.field_stock_quant__available_second_unit
+msgid "Available 2nd Unit"
+msgstr "Disponible 2e unité"
