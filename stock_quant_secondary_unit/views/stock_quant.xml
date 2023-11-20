@@ -8,8 +8,10 @@
             <field name="groups_id" eval="[(6,0, (ref('stock.group_stock_manager'),))]"/>
             <field name="arch" type="xml">
                 <field name="company_id" position="before">
-                    <field name="secondary_unit_qty_available"/>
-                    <field name="stock_secondary_uom_id" options="{'no_open': True, 'no_create': True}"     />
+                    <field name="secondary_unit_qty_available" optional="show"/>
+                    <field name="available_second_unit" optional="show"/>
+                    <field name="stock_secondary_uom_id" optional="show" options="{'no_open': True, 'no_create': True}"     />
+                    <field name="value" optional="show"/>
                 </field>
             </field>
         </record>
@@ -22,10 +24,24 @@
             <field name="groups_id" eval="[(6,0, (ref('stock.group_stock_manager'),))]"/>
             <field name="arch" type="xml">
                 <field name="company_id" position="before">
-                    <field name="secondary_unit_qty_available"/>
-                    <field name="stock_secondary_uom_id" options="{'no_open': True, 'no_create': True}"     />
+                    <field name="secondary_unit_qty_available" optional="show"/>
+                    <field name="available_second_unit" optional="show"/>
+                    <field name="stock_secondary_uom_id" optional="show" options="{'no_open': True, 'no_create': True}"     />
+                    <field name="value" optional="show"/>
                 </field>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="view_stock_quant_tree_editable_inherit">
+            <field name="name">stock.quant.tree.editable</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock_account.view_stock_quant_tree_editable_inherit" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='value']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
 
 </odoo>
