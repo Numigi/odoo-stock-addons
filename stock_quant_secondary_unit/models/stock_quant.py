@@ -87,5 +87,4 @@ class StockQuant(models.Model):
                     for node in doc.xpath("//field[@name='%s']" % field):
                         node.set("optional", "show")
                 res["arch"] = etree.tostring(doc, encoding="unicode")
-
                 return res
