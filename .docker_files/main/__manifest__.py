@@ -49,6 +49,7 @@
         "stock_production_lot_rma",
         "stock_quant_secondary_unit",
         # "stock_rental",
+        "stock_replenish_report_secondary_unit",
         # "stock_rental_conversion",
         # "stock_rental_conversion_account",
         # "stock_rental_conversion_asset",

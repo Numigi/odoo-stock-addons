@@ -56,6 +56,7 @@ COPY stock_production_lot_rma /mnt/extra-addons/stock_production_lot_rma
 COPY stock_quant_by_category /mnt/extra-addons/stock_quant_by_category
 COPY stock_quant_secondary_unit /mnt/extra-addons/stock_quant_secondary_unit
 #COPY stock_rental /mnt/extra-addons/stock_rental
+COPY stock_replenish_report_secondary_unit /mnt/extra-addons/stock_replenish_report_secondary_unit
 #COPY stock_rental_conversion /mnt/extra-addons/stock_rental_conversion
 #COPY stock_rental_conversion_account /mnt/extra-addons/stock_rental_conversion_account
 #COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_asset
