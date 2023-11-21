@@ -3,7 +3,7 @@
 
 {
     "name": "Stock Replenish Report Secondary Unit",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",
