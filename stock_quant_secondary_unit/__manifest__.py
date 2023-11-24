@@ -3,13 +3,13 @@
 
 {
     "name": "Stock Quant Secondary Unit",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",
     "license": "AGPL-3",
     "category": "Stock",
-    "depends": ["stock_account", "stock_secondary_unit"],
+    "depends": ["stock_secondary_unit"],
     "summary": "Add 2nd unit and 2nd Unit On Hand Qty on some stock quant views.",
     "data": [
         "views/stock_quant.xml",
