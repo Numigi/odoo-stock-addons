@@ -8,7 +8,7 @@
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",
     "license": "AGPL-3",
-    "category": "Delivery",
+    "category": "Stock",
     "depends": ["delivery"],
     "summary": "Allow to enter the `Tracking reference` when the transfer status `out` = `Done`.",
     "data": [
