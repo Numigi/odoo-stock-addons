@@ -41,6 +41,7 @@
         "stock_picking_search_by_serial",
         "stock_picking_show_address",
         "stock_picking_show_sale_order",
+        "stock_picking_tracking_reference",
         "stock_previous_step_return",
         "stock_product_location_info",
         "stock_quant_package_image",
