@@ -48,6 +48,7 @@ COPY stock_picking_secondary_unit_demand /mnt/extra-addons/stock_picking_seconda
 #COPY stock_picking_digitized_signature /mnt/extra-addons/stock_picking_digitized_signature
 #COPY stock_picking_search_by_serial /mnt/extra-addons/stock_picking_search_by_serial
 COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
+COPY stock_picking_tracking_reference /mnt/extra-addons/stock_picking_tracking_reference
 #COPY stock_previous_step_return /mnt/extra-addons/stock_previous_step_return
 #COPY stock_product_location_info /mnt/extra-addons/stock_product_location_info
 COPY stock_product_packaging_dimension /mnt/extra-addons/stock_product_packaging_dimension
