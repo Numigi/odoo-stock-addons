@@ -10,10 +10,10 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["stock_secondary_unit"],
-    "summary": "Add 2nd unit and 2nd Unit On Hand Qty on some stock quant views.",
+    "summary": "Add 2nd unit quantities to stock quants",
     "data": [
         "views/stock_quant.xml",
     ],
-    "post_init_hook": "_update_secondary_unit_qty_available",
+    "post_init_hook": "_update_secondary_unit_qty",
     "installable": True,
 }

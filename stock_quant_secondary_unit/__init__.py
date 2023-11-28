@@ -5,8 +5,7 @@ from . import models
 from odoo import api, SUPERUSER_ID
 
 
-def _update_secondary_unit_qty_available(cr, registry):
+def _update_secondary_unit_qty(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
     quant_lines = env["stock.quant"].search([])
-    quant_lines.with_context(inventory_mode=True).compute_secondary_unit_qty_available()
-    quant_lines.with_context(inventory_mode=True).compute_available_second_unit()
+    quant_lines.with_context(inventory_mode=True).compute_secondary_unit_qty()
