@@ -4,10 +4,11 @@
         <record model="ir.ui.view" id="view_stock_quant_tree_editable_inherited">
             <field name="name">stock.quant.tree.editable</field>
             <field name="model">stock.quant</field>
+            <field name="priority">10</field>
             <field name="inherit_id" ref="stock.view_stock_quant_tree_editable" />
             <field name="groups_id" eval="[(6,0, (ref('stock.group_stock_manager'),))]"/>
             <field name="arch" type="xml">
-                <field name="company_id" position="before">
+                <field name="product_uom_id" position="after">
                     <field name="inventory_secondary_unit_qty" optional="show"/>
                     <field name="available_secondary_unit_qty" optional="show"/>
                     <field name="stock_secondary_uom_id" optional="show" options="{'no_open': True, 'no_create': True}"/>
@@ -19,10 +20,11 @@
         <record model="ir.ui.view" id="view_stock_quant_tree_inherited">
             <field name="name">stock.quant.tree.editable</field>
             <field name="model">stock.quant</field>
+            <field name="priority">10</field>
             <field name="inherit_id" ref="stock.view_stock_quant_tree" />
             <field name="groups_id" eval="[(6,0, (ref('stock.group_stock_manager'),))]"/>
             <field name="arch" type="xml">
-                <field name="company_id" position="before">
+                <field name="product_uom_id" position="after">
                     <field name="inventory_secondary_unit_qty" optional="show"/>
                     <field name="available_secondary_unit_qty" optional="show"/>
                     <field name="stock_secondary_uom_id" optional="show" options="{'no_open': True, 'no_create': True}"/>
