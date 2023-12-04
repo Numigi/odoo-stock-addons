@@ -9,7 +9,7 @@
               <data>
                 <xpath expr="//field[@name='carrier_tracking_ref']" position="attributes">
                     <attribute name="attrs">
-                        {'readonly': ['|','&amp;',('state', 'in', ('cancel')),('picking_type_code', '=', 'outgoing'),'&amp;',('state', 'in', ('done', 'cancel')), ('picking_type_code', '!=', 'outgoing')]}
+                        {'readonly': ['|','&amp;',('state', 'in', ('cancel')),('picking_type_code', 'in', ('outgoing', 'internal')),'&amp;',('state', 'in', ('done', 'cancel')), ('picking_type_code', 'not in', ('outgoing', 'internal'))]}
                     </attribute>
                 </xpath>
               </data>
