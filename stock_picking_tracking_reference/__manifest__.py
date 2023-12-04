@@ -3,14 +3,14 @@
 
 {
     "name": "Stock Picking Tracking Reference",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["delivery"],
-    "summary": "Allow to enter the `Tracking reference` when the transfer status `out` = `Done`.",
+    "summary": "Allow to enter the `Tracking reference` when the transfer status `out` or `int`  = `Done`.",
     "data": [
         "views/delivery_view.xml",
     ],

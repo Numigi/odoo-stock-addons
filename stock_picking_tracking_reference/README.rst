@@ -4,7 +4,7 @@ This module allow to have the ability to enter the `Tracking reference` when the
 
 Usage
 -----
-As a user with access to transfers, I access an "out" type delivery whose status is "Done".
+As a user with access to transfers, I access an "out" (outgoing transfer) or "int" (internal transfer) type delivery whose status is "Done".
 When I click on "Edit", I see that the `Tracking reference` field is editable.
 
 .. image:: static/description/outgoing_transfer.png
