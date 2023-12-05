@@ -52,6 +52,7 @@
         "stock_reserve_quant_package",
         "stock_route_optimized",
         "stock_routes_product_multico",
+        "stock_same_location_disable_reservation",
         "stock_scheduler_include_rfq",
         "stock_serial_asset",
         "stock_serial_no_simple_form",

@@ -54,6 +54,7 @@ COPY stock_rental_conversion_asset /mnt/extra-addons/stock_rental_conversion_ass
 COPY stock_reserve_quant_package /mnt/extra-addons/stock_reserve_quant_package
 COPY stock_route_optimized /mnt/extra-addons/stock_route_optimized
 COPY stock_routes_product_multico /mnt/extra-addons/stock_routes_product_multico
+COPY stock_same_location_disable_reservation /mnt/extra-addons/stock_same_location_disable_reservation
 COPY stock_scheduler_include_rfq /mnt/extra-addons/stock_scheduler_include_rfq
 COPY stock_serial_asset /mnt/extra-addons/stock_serial_asset
 COPY stock_serial_no_simple_form /mnt/extra-addons/stock_serial_no_simple_form
