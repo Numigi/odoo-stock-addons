@@ -6,7 +6,7 @@ from odoo.addons.stock.tests.test_move import StockMove as StockMove
 
 class TestSplitStockMoveLine(StockMove):
     def setUp(self):
-        super(StockMove, self).setUp()
+        super(TestSplitStockMoveLine, self).setUp()
 
     def test_split_move_line_outgoing_picking(self):
         """Check that reserving a move and spliting its move lines to
