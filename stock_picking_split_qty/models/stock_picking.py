@@ -48,7 +48,7 @@ class Picking(models.Model):
                 for line in move_line_ids:
                     line.qty_done = line.product_uom_qty
 
-            self._create_new_move_lines(move_line_ids)
+            pick._create_new_move_lines(move_line_ids)
 
     def _prepare_move_lines(self, picking_move_lines):
         move_line_ids = picking_move_lines.filtered(
