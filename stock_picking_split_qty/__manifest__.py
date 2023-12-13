@@ -11,7 +11,7 @@
     "category": "Stock",
     "depends": ["stock"],
     "summary": """
-        Split the quantities reserved on the outgoing transfer in 
+        Split the quantities reserved on the outgoing/internal transfer in 
         order to facilitate the packing operation.
     """,
     "data": ["views/stock_picking_views.xml"],

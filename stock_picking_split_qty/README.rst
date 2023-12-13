@@ -1,10 +1,10 @@
 Stock Picking Split Quantity
 ============================
-This module allows to split the quantities reserved on the outgoing transfer in order to facilitate the packing operation.
+This module allows to split the quantities reserved on the outgoing/internal transfer in order to facilitate the packing operation.
 
 Usage
 -----
-As a user with inventory access, I access the outgoing transfer form view to prepare the merchandise.
+As a user with inventory access, I access the outgoing (or an internal) transfer form view to prepare the merchandise.
 I notice a new `Split` button.
 If I click on the button and no quantity made is mentioned then nothing happens.
 I enter the quantities to divide in the `Done` column and click on `Split`.
