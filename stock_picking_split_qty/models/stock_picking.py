@@ -71,11 +71,20 @@ class Picking(models.Model):
                 )
                 == 0
             )
+            # Do nothing if we did not compete done quantity on stock move line
+            # for initial stock move
+            return False
         return move_line_ids
 
     def action_divide_stock_move_line(self):
+        """
+        Dividing stock move line for internal and outgoing transfer only.
+        """
         self.ensure_one()
-        if self.state in ("assigned") and self.picking_type_code == "outgoing":
+        if self.state in ("assigned") and self.picking_type_code in (
+            "outgoing",
+            "internal",
+        ):
             picking_move_lines = self.move_line_ids
             if (
                 not self.picking_type_id.show_reserved
@@ -89,8 +98,4 @@ class Picking(models.Model):
             if move_line_ids:
                 return self._divide_stock_move_line(move_line_ids)
             else:
-                raise UserError(
-                    _(
-                        "Please add 'Done' quantities to the picking to split stock move."
-                    )
-                )
+                return False
