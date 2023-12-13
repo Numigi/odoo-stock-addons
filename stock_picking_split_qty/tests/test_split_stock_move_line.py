@@ -9,8 +9,9 @@ class TestSplitStockMoveLine(StockMove):
         super(TestSplitStockMoveLine, self).setUp()
 
     def test_split_move_line_outgoing_picking(self):
-        """Check that reserving a move and spliting its move lines to
-        different lines work as expected.
+        """
+        Check that reserving a move and spliting its move lines to
+        different lines work as expected for an outgoing picking.
         """
         self.env["stock.quant"]._update_available_quantity(
             self.product, self.stock_location, 50
@@ -35,6 +36,38 @@ class TestSplitStockMoveLine(StockMove):
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,
             }
         )
+        self.process_picking_steps(picking)
+
+    def test_split_move_line_internal_picking(self):
+        """
+        Check that spliting move lines work as expected
+        for an internal picking.
+        """
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.stock_location, 50
+        )
+        picking = self.env["stock.picking"].create(
+            {
+                "location_id": self.stock_location.id,
+                "location_dest_id": self.pack_location.id,
+                "picking_type_id": self.env.ref("stock.picking_type_internal").id,
+            }
+        )
+
+        self.env["stock.move"].create(
+            {
+                "name": "test_transit_2",
+                "location_id": self.stock_location.id,
+                "location_dest_id": self.pack_location.id,
+                "product_id": self.product.id,
+                "product_uom": self.uom_unit.id,
+                "product_uom_qty": 10.0,
+                "picking_id": picking.id,
+            }
+        )
+        self.process_picking_steps(picking)
+
+    def process_picking_steps(self, picking):
         picking.action_confirm()
         picking.action_assign()
         self.assertEqual(picking.state, "assigned")

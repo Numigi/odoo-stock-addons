@@ -36,12 +36,6 @@ msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: stock_picking_split_qty
-#: code:addons/stock_picking_split_qty/models/stock_picking.py:0
-#, python-format
-msgid "Please add 'Done' quantities to the picking to split stock move."
-msgstr "Veuillez ajouter les quantités 'Fait' au transfert pour diviser le mouvement de stock."
-
-#. module: stock_picking_split_qty
 #: model:ir.model,name:stock_picking_split_qty.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
