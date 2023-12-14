@@ -1,6 +1,6 @@
 Stock Picking Tracking Reference
 ================================
-This module allow to have the ability to enter the `Tracking reference` when the transfer status “out” = “Done”.
+This module allow to have the ability to enter the `Tracking reference` when the transfer status “out” or "int" = “Done”.
 
 Usage
 -----
