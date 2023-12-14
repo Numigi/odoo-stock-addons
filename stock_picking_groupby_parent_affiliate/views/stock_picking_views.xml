@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="view_stock_picking_partner_highest_parent_tree" model="ir.ui.view">
+        <field name="name">stock.picking.partner.highest.parent.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="partner_highest_parent_id"/>
+                </xpath>
+        </field>
+    </record>
+
+</odoo>
