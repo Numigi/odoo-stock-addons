@@ -28,7 +28,7 @@ RUN [ "/bin/bash", "-c", "\
     find /mnt/extra-addons/ -maxdepth 1 -type f -delete && \
     find /mnt/extra-addons/ -maxdepth 1 -type d -iname '.*' -print0 | xargs -I {} -0 rm -rvf '{}'\
     " ]
-
+    
 USER odoo
 
 COPY .docker_files/main /mnt/extra-addons/main

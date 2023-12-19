@@ -4,6 +4,11 @@
 - url: https://{{GIT_TOKEN}}@github.com/numigi/odoo-base-addons
   branch: "14.0"
 
+- url: https://github.com/Numigi/odoo-partner-addons
+  branch: "14.0"
+  includes:
+    - partner_affiliate_extended
+
 - url: https://github.com/OCA/account-financial-tools
   branch: "14.0"
   includes:
@@ -12,6 +17,11 @@
 - url: https://github.com/oca/queue
   branch: "14.0"
   includes: ["queue_job"]
+
+- url: https://github.com/oca/partner-contact
+  branch: "14.0"
+  includes:
+    - partner_affiliate
 
 - url: https://github.com/OCA/product-attribute
   branch: "14.0"
