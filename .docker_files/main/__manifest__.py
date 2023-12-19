@@ -34,6 +34,7 @@
         # "stock_move_list_location",
         "stock_move_location_domain_improved",
         "stock_move_origin_link",
+        "stock_picking_responsible_editable",
         "stock_picking_secondary_unit_demand",
         # "stock_move_valuation_adjustment",
         # "stock_picking_add_transit",
