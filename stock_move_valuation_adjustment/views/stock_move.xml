@@ -27,7 +27,6 @@
                             <field name="weight"/>
                             <field name="volume"/>
                             <field name="quantity"/>
-                            <field name="former_cost_per_unit" widget="monetary"/>
                             <field name="former_cost"/>
                             <field name="additional_landed_cost"/>
                         </tree>
