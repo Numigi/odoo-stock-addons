@@ -12,9 +12,6 @@ class StockMove(models.Model):
             self.location_dest_id.get_putaway_strategy(self.product_id).id
             or self.location_dest_id.id
         )
-        if (
-            self.env.context.get("disable_same_location_reservation")
-            and self.location_id.id == location_dest_id
-        ):
+        if self.location_id.id == location_dest_id:
             return
         return super()._action_assign()
