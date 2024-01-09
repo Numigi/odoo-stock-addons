@@ -12,6 +12,13 @@ class TestStockMoveReservation(SavepointCase):
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.location_dest = cls.env.ref("stock.stock_location_stock")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
+        cls.shelf1_location = cls.env["stock.location"].create(
+            {
+                "name": "shelf1",
+                "usage": "internal",
+                "location_id": cls.stock_location.id,
+            }
+        )
 
         cls.product1 = cls.env["product.product"].create(
             {
@@ -23,7 +30,7 @@ class TestStockMoveReservation(SavepointCase):
         )
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
 
-    def test_reservation_same_location(self):
+    def test_reservation_same_location_or_child_parent_relation(self):
         self.env["stock.quant"]._update_available_quantity(
             self.product1, self.env.ref("stock.stock_location_stock"), 20
         )
@@ -47,6 +54,17 @@ class TestStockMoveReservation(SavepointCase):
                 "picking_id": picking1.id,
             }
         )
+        picking1.action_confirm()
+        picking1.action_assign()
+
+        # Picking and Move did not pass to the next step
+        self.assertNotEqual(picking1.state, "assigned")
+        self.assertNotEqual(move1.state, "partially_available")
+        self.assertNotEqual(move1.state, "assigned")
+
+        # changing location destination to a child of source location
+        picking1.write({"location_dest_id": self.shelf1_location.id})
+        picking1.refresh()
         picking1.action_confirm()
         picking1.action_assign()
 
