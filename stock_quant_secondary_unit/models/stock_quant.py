@@ -28,8 +28,10 @@ class StockQuant(models.Model):
     )
 
     @api.depends(
-        "stock_secondary_uom_id", "inventory_quantity",
-        "product_uom_id.rounding"
+        "stock_secondary_uom_id",
+        "inventory_quantity",
+        "available_quantity",
+        "product_uom_id.rounding",
     )
     def compute_secondary_unit_qty(self):
         if self.user_has_groups("stock.group_stock_manager"):
@@ -45,14 +47,14 @@ class StockQuant(models.Model):
                     line.stock_secondary_uom_id.factor or 1.0
                 )
                 inventory_qty = float_round(
-                    inventory_qty,
-                    precision_rounding=line.product_uom_id.rounding
+                    inventory_qty, precision_rounding=line.product_uom_id.rounding
                 )
                 available_qty = float_round(
-                    available_qty,
-                    precision_rounding=line.product_uom_id.rounding
+                    available_qty, precision_rounding=line.product_uom_id.rounding
                 )
-            line.write({
-                "inventory_secondary_unit_qty": inventory_qty,
-                "available_secondary_unit_qty": available_qty,
-                })
+            line.write(
+                {
+                    "inventory_secondary_unit_qty": inventory_qty,
+                    "available_secondary_unit_qty": available_qty,
+                }
+            )
