@@ -3,7 +3,7 @@
 
 {
     "name": "Stock Move Valuation Adjustment",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "Numigi",
     "maintainer": "numigi",
     "website": "https://bit.ly/numigi-com",
