@@ -16,5 +16,5 @@ class StockMove(models.Model):
     def _compute_total_value(self):
         for stock_move in self:
             stock_move.value = sum(
-                [(-svl.value) for svl in stock_move.stock_valuation_layer_ids]
+                [(svl.value) for svl in stock_move.stock_valuation_layer_ids]
             )
