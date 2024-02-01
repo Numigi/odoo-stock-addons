@@ -122,6 +122,8 @@ class TestStockMoveReservation(SavepointCase):
         picking1.action_confirm()
         picking1.action_assign()
 
+        self.assertEqual(move1._context.get("strict_on_location"), "-")
+
         # Picking and Move did not pass to the next step
         self.assertEqual(
             picking1.move_line_ids_without_package.mapped("location_id.name"), {}
