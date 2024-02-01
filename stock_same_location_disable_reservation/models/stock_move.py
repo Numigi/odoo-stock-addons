@@ -13,23 +13,34 @@ class StockMove(models.Model):
                 rec.location_dest_id.get_putaway_strategy(rec.product_id).id
                 or rec.location_dest_id.id
             )
-
-            has_child_parent_relation = rec._has_location_parent_relation(
-                rec.location_id.id, location_dest_id
-            )
-            if rec.location_id.id == location_dest_id or has_child_parent_relation:
+            # This will prevent to process reservation on picking
+            if rec.location_id.id == location_dest_id:
                 return
-        return super()._action_assign()
 
-    def _has_location_parent_relation(
-        self, source_location_id, destination_location_id
+            super(
+                StockMove, self.with_context(strict_on_location=location_dest_id)
+            )._action_assign()
+
+
+class StockQuant(models.Model):
+    _inherit = "stock.quant"
+
+    def _gather(
+        self,
+        product_id,
+        location_id,
+        lot_id=None,
+        package_id=None,
+        owner_id=None,
+        strict=False,
     ):
-        has_relation = False
-        locations = (
-            self.env["stock.location"]
-            .search([("id", "parent_of", [destination_location_id])])
-            .ids
+        res = super(StockQuant, self)._gather(
+            product_id, location_id, lot_id, package_id, owner_id, strict
         )
-        if source_location_id in locations:
-            has_relation = True
-        return has_relation
+        if self._context.get("strict_on_location"):
+            # We do only reservation on quant that having location
+            # different to location destination on picking
+            res = res.filtered(
+                lambda m: m.location_id.id != self._context.get("strict_on_location")
+            )
+        return res
