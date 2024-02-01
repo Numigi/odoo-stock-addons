@@ -123,6 +123,9 @@ class TestStockMoveReservation(SavepointCase):
         picking1.action_assign()
 
         # Picking and Move did not pass to the next step
+        self.assertEqual(
+            picking1.move_line_ids_without_package.mapped("location_id.name"), {}
+        )
         self.assertNotEqual(picking1.state, "assigned")
         self.assertNotEqual(move1.state, "partially_available")
         self.assertNotEqual(move1.state, "assigned")
