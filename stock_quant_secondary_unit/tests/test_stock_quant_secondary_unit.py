@@ -39,3 +39,15 @@ class TestCustomerReference(TestProductSecondaryUnit):
         self.assertEqual(self.quant_white.stock_secondary_uom_id.factor, 0.9)
         self.assertEqual(self.quant_white.inventory_secondary_unit_qty, 11.11)
         self.assertEqual(self.quant_white.available_secondary_unit_qty, 11.11)
+
+        # Updating available quantity
+        self.assertEqual(self.quant_white.location_id, self.warehouse.lot_stock_id)
+
+        # Available_quantity become 10 + 1 = 11
+        self.quant_white._update_available_quantity(
+            self.quant_white.product_id, self.warehouse.lot_stock_id, 1.0
+        )
+        self.env["stock.quant"].compute_secondary_unit_qty()
+
+        self.assertEqual(self.quant_white.available_quantity, 11.0)
+        self.assertEqual(self.quant_white.available_secondary_unit_qty, 12.22)
