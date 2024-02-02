@@ -4,11 +4,11 @@
 {
     "name": "Stock Reserve Quant Package",
     "summary": "Force Quant reservation by package",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "category": "Inventory",
     "author": "Numigi",
     "license": "LGPL-3",
-    "depends": ['sale', 'stock'],
+    "depends": ["sale", "stock"],
     "data": [],
     "installable": True,
 }
