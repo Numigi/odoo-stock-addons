@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="name">Stock Adjustment Line tree Display</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_inventory_line_tree']"
+                   position="attributes">
+                <attribute name="groups">
+                   stock.group_stock_user
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
