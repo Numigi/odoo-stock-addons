@@ -15,6 +15,7 @@
         "stock_dropshipping",  # Used for testing stock_warehouse_access
         "product_category_safe_change",
         "purchase_warehouse_access",
+        "stock_adjustment_lines_display",  # TA#56790
         "stock_auto_assign_disabled",
         "stock_auto_assign_disabled_jit",
         "stock_client_order_ref",
