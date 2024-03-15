@@ -23,7 +23,7 @@ COPY product_category_safe_change /mnt/extra-addons/product_category_safe_change
 COPY product_packaging_dimension_decimal /mnt/extra-addons/product_packaging_dimension_decimal
 COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
-COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
+# COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
 COPY stock_change_qty_reason_enhanced /mnt/extra-addons/stock_change_qty_reason_enhanced
 COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer_disable
 COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_alphanum
