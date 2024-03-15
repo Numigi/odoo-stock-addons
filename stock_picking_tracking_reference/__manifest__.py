@@ -10,7 +10,8 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["delivery"],
-    "summary": "Allow to enter the `Tracking reference` when the transfer status `out` or `int`  = `Done`.",
+    "summary": """Allow to enter the `Tracking reference` when the transfer
+    status `out` or `int`  = `Done`.""",
     "data": [
         "views/delivery_view.xml",
     ],

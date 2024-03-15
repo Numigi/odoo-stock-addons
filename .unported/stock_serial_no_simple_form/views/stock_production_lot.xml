@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-
-    <record id="stock.view_production_lot_form_simple" model="ir.ui.view">
-        <field name="priority" eval="99"/>
-    </record>
-
-</odoo>

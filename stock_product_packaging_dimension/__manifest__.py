@@ -9,7 +9,8 @@
     'website': 'https://bit.ly/numigi-com',
     'license': 'AGPL-3',
     'category': 'Stock',
-    'summary': 'Add height, width and length to a stock quant package with its UOM for each field.',
+    'summary': """Add height, width and length to a stock quant package
+    with its UOM for each field.""",
     'depends': [
         'delivery',
     ],

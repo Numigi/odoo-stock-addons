@@ -1,7 +1,9 @@
 # © 2023 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo.addons.sale_order_secondary_unit.tests.test_sale_order_secondary_unit import TestSaleOrderSecondaryUnit
+from odoo.addons.sale_order_secondary_unit.tests.test_sale_order_secondary_unit import (
+    TestSaleOrderSecondaryUnit,
+)
 
 
 class TestSecondaryQtyUomInfo(TestSaleOrderSecondaryUnit):
