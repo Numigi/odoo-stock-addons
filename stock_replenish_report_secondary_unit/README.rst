@@ -18,7 +18,8 @@ As a Sales user, I go to the form view of a sale and from the order lines, I cli
 
 I see that the report displays all the quantities in both units of measurement.
 
-.. image:: static/description/forecasted_report_from_order_line.png
+.. image:: static/description/forecasted_report_by_order_line.png
+
 
 Contributors
 ------------
