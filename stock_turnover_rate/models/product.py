@@ -120,6 +120,9 @@ class Product(models.Model):
         interval_in_days = get_stock_turnover_days(self.env)
         date_from = datetime.now().date() - timedelta(interval_in_days + 1)
         date_to = datetime.now().date()
+        self.with_context(
+            from_date=date_from, to_date=date_to
+        ).incoming_qty
         incomming_quantity = get_incomming_quantity(self, date_from, date_to)
         outgoing_quantity = get_outgoing_quantity(self, date_from, date_to)
         delivered_quantity = get_delivered_quantity(self, date_from, date_to)
