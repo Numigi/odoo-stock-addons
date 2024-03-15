@@ -10,7 +10,8 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["stock_secondary_unit"],
-    "summary": "Adds, in the inventory forecast report, the forecast quantities in the 2nd unit of measurement.",
+    "summary": """Adds, in the inventory forecast report, the forecast quantities
+    in the 2nd unit of measurement.""",
     "data": [
         "report/report_stock_forecasted.xml",
     ],

@@ -60,7 +60,7 @@ class TestStockAutoAssignDisabledJit(SavepointCase):
                 "owner_id": None,
             }
         )
-    
+
     def test_reservation(self):
         self._confirm_sale_order()
         assert self.order_line.move_ids.reserved_availability == 1

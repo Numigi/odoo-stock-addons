@@ -14,7 +14,10 @@ class StockMoveLine(models.Model):
         compute="_compute_merged_qty_uom_info"
     )
 
-    @api.depends("move_id.sale_line_id.secondary_uom_qty", "move_id.sale_line_id.secondary_uom_id.name")
+    @api.depends(
+        "move_id.sale_line_id.secondary_uom_qty",
+        "move_id.sale_line_id.secondary_uom_id.name"
+    )
     def _compute_merged_qty_uom_info(self):
         for line in self:
             line.merged_qty_uom_info = "%s %s" % (

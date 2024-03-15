@@ -72,4 +72,3 @@ class TestStockQuantPackageDimensionUomSpread(common.SavepointCase):
             self.stock_quant_package.width_uom_id,
             self.product_packaging_type.width_uom_id,
         )
-

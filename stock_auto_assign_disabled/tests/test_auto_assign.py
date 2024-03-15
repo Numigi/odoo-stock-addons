@@ -40,7 +40,11 @@ class TestAutoAssign(SavepointCase):
         cls.user.groups_id = cls.env.ref("stock.group_stock_user")
 
         cls.serial = cls.env["stock.production.lot"].create(
-            {"name": cls.stock_move.name, "product_id": cls.product.id, 'company_id': cls.env.company.id}
+            {
+                "name": cls.stock_move.name,
+                "product_id": cls.product.id,
+                "company_id": cls.env.company.id,
+            }
         )
 
         cls.quant = cls.env["stock.quant"].create(
