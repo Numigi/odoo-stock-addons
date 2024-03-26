@@ -70,9 +70,9 @@ class ProductPackaging(models.Model):
     pl_cache = fields.Float("Length Cache")
 
     def update_cache_field_values(self, values):
-        for key, new_key in MAPPING_FIELD_CACHE.items():
-            if key in values:
-                values[new_key] = values[key]
+        for field, field_cache in MAPPING_FIELD_CACHE.items():
+            if field in values:
+                values[field_cache] = values[field]
         return values
 
     @api.model
