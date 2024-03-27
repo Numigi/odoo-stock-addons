@@ -4,7 +4,7 @@
 {
     "name": "Stock Auto Assign Disabled",
     "summary": "Disable the automatic stock reservation by the planner",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "category": "Inventory",
     "author": "Numigi",
     "license": "AGPL-3",
