@@ -1,15 +1,17 @@
 # © 2022 - today Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import api, models
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _action_assign(self):
-        mode = self.env["ir.config_parameter"].sudo().get_param(
-            "stock_auto_assign_disabled.config", "off"
+        mode = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock_auto_assign_disabled.config", "off")
         )
         should_disable = self._context.get("stock_auto_assign_disable")
         if mode == "off" or not should_disable:
@@ -22,3 +24,44 @@ class StockMove(models.Model):
 
     def _should_process_auto_reservation(self):
         return self.product_id.tracking not in ["serial", "lot"]
+
+    def _should_bypass_reservation(self):
+        self.ensure_one()
+        mode = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock_auto_assign_disabled.config", "off")
+        )
+        if mode == "all":
+            return True
+        else:
+            return super()._should_bypass_reservation()
+
+    @api.depends("move_line_ids.product_qty")
+    def _compute_reserved_availability(self):
+        super()._compute_reserved_availability()
+        if any(self._ids):
+            for move in self:
+                mode = (
+                    self.env["ir.config_parameter"]
+                    .sudo()
+                    .get_param("stock_auto_assign_disabled.config", "off")
+                )
+                if mode == "all":
+                    move.reserved_availability = 0.0
+
+
+class StockMoveLine(models.Model):
+    _inherit = "stock.move.line"
+
+    def _should_bypass_reservation(self, location):
+        self.ensure_one()
+        mode = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock_auto_assign_disabled.config", "off")
+        )
+        if mode == "all":
+            return True
+        else:
+            return super()._should_bypass_reservation(location)
