@@ -108,4 +108,4 @@ class TestAutoAssign(SavepointCase):
         assert self.stock_move.reserved_availability == 5.0
 
     def _run_scheduler(self, group, user):
-        group.sudo(user).run_scheduler()
+        group.with_user(user).run_scheduler()

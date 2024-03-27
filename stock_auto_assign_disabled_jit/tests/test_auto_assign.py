@@ -73,4 +73,4 @@ class TestStockAutoAssignDisabledJit(SavepointCase):
         assert self.order_line.move_ids.reserved_availability == 0
 
     def _confirm_sale_order(self):
-        self.sale_order.sudo(self.user).action_confirm()
+        self.sale_order.with_user(self.user).action_confirm()
