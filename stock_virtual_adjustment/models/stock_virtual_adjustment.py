@@ -32,13 +32,13 @@ class StockVirtualAdjustment(models.Model):
         readonly=True,
         required=True,
         copy=False,
-        Tracking=True,
+        tracking=True,
     )
 
     location_id = fields.Many2one(
         "stock.location",
         required=True,
-        Tracking=True,
+        tracking=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
@@ -47,20 +47,20 @@ class StockVirtualAdjustment(models.Model):
         required=True,
         readonly=True,
         string="Destination Location",
-        Tracking=True,
+        tracking=True,
         states={"draft": [("readonly", False)]},
     )
 
     adjustment_date = fields.Datetime(
         required=True,
         readonly=True,
-        Tracking=True,
+        tracking=True,
         states={"draft": [("readonly", False)]},
     )
     reversal_date = fields.Datetime(
         required=True,
         readonly=True,
-        Tracking=True,
+        tracking=True,
         states={"draft": [("readonly", False)]},
     )
 
