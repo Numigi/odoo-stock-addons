@@ -1,6 +1,6 @@
 Stock Orderpoint Secondary Unit
 ===============================
-This module allows to use secondary unit on order and group replenishment lines by primary unit of measure.
+This module extends the functionality of stock orderpoint to allow order products in secondary unit.
 
 Usage
 -----
@@ -9,29 +9,27 @@ As an Inventory user, I access the replenishment view from `Inventory > Operatio
 .. image:: static/description/replenishment_menu.png
 
 I see that the following new fields are available on the view:
--On Hand Qty 2nd Unit
+-On Hand 2nd Unit
 -Forecast 2nd Unit
--To Order 2nd Unit : available in custom filters and grouping.
--2nd Unit: available in custom filters and grouping.
+-To Order 2nd Unit.
+-2nd Unit.
 
 .. image:: static/description/new_secondary_uom_fields.png
 
 *Order in secondary unit*
 
-When a quantity to order is indicated by the system in the `To order` field, 
-I notice that the `To order 2nd unit`` field also contains the order proposal in the secondary unit for the inventory.
+When the 'To order' quantity is filled, The 'To order 2nd unit' wiil be automatically updated.
 
 .. image:: static/description/to_order_convertion.png
 
-When I change the quantity `To order 2nd unit`, I notice that the system automatically converts and fills the `To order` field and vice versa.
+When I adjust the quantity in the `To order 2nd unit`, the system automatically converts and populates the `To order` field.
 
-In other words, I can enter the quantity to order in one of the 2 units, and automatically the quantity is calculated in the other unit.
+The ``On Hand 2nd Unit`` and ``Forecast 2nd Unit`` fields are automatically  computed using the ``Secondary Uom``, the ``On Hand Qty`` and ``the Forecast Qty`` values.
 
 *Group by Unit of Measure*
 
-I notice that a new grouping pre-defined by `Unit of measure` is present.
+This module adds a new group by entry: `Unit of measure`.
 
-.. image:: static/description/unity_of_measure_grouping.png
 
 Contributors
 ------------

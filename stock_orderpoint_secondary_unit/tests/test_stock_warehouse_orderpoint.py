@@ -13,14 +13,6 @@ class TestStockWarehouseOrderpoint(common.SavepointCase):
         cls.product_uom_unit = cls.env.ref("uom.product_uom_unit")
         cls.warehouse = cls.env.ref("stock.warehouse0")
 
-        # Create product attribute and attribute value
-        ProductAttribute = cls.env["product.attribute"]
-        ProductAttributeValue = cls.env["product.attribute.value"]
-        cls.attribute_color = ProductAttribute.create({"name": "test_color"})
-        cls.attribute_value_white = ProductAttributeValue.create(
-            {"name": "test_white", "attribute_id": cls.attribute_color.id}
-        )
-
         # Create product and configure
         cls.product_template = cls.env["product.template"].create(
             {
@@ -39,18 +31,6 @@ class TestStockWarehouseOrderpoint(common.SavepointCase):
                             "factor": 0.5,
                         },
                     ),
-                ],
-                "attribute_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "attribute_id": cls.attribute_color.id,
-                            "value_ids": [
-                                (4, cls.attribute_value_white.id),
-                            ],
-                        },
-                    )
                 ],
             }
         )
@@ -82,12 +62,14 @@ class TestStockWarehouseOrderpoint(common.SavepointCase):
                 "product_max_qty": 20.0,
             }
         )
-
-        # Check secondary_uom_id.factor and product_uom.rounding are set correctly
+        # Check secondary_uom_id
+        replenishment_order._onchange_product_id()
         self.assertEqual(
             replenishment_order.secondary_uom_id,
             replenishment_order.product_tmpl_id.stock_secondary_uom_id,
         )
+
+        # Check secondary_uom_id.factor and product_uom.rounding are set correctly
         self.assertEqual(
             replenishment_order.secondary_uom_id.factor,
             replenishment_order.product_tmpl_id.stock_secondary_uom_id.factor,
@@ -107,11 +89,9 @@ class TestStockWarehouseOrderpoint(common.SavepointCase):
             replenishment_order.product_tmpl_id.stock_secondary_uom_id,
         )
         # we have 10 initially on hand and 10 forecasted
-        replenishment_order._compute_to_secondary_uom()
-        replenishment_order.refresh()
         self.assertEqual(replenishment_order.qty_on_hand, 10.0)
-        self.assertEqual(replenishment_order.secondary_uom_qty_on_hand, 20.0)
-        self.assertEqual(replenishment_order.secondary_uom_qty_forecast, 20.0)
+        self.assertEqual(replenishment_order.secondary_uom_on_hand, 20.0)
+        self.assertEqual(replenishment_order.secondary_uom_forecast, 20.0)
 
         # Check when secondary_uom_qty is changed, qty_to_order is also changed
         replenishment_order.secondary_uom_qty = 30.0

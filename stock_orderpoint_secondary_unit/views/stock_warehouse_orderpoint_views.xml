@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-        <record id="view_warehouse_orderpoint_tree_secondary_unit" model="ir.ui.view">
-            <field name="name">stock.warehouse.orderpoint.tree.secondary.unit</field>
-            <field name="model">stock.warehouse.orderpoint</field>
-            <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree_editable"/>
-            <field name="arch" type="xml">
-                <field name="company_id" position="before">
-                    <field name="secondary_uom_qty_on_hand" />
-                    <field name="secondary_uom_qty_forecast" />
-                    <field name="secondary_uom_qty" />
-                    <field name="secondary_uom_id" />
-                </field>
+    <record id="view_warehouse_orderpoint_tree_secondary_unit" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.tree.secondary.unit</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree_editable"/>
+        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]" />
+        <field name="arch" type="xml">
+            <field name="product_uom_name" position="after">
+                <field name="secondary_uom_on_hand" />
+                <field name="secondary_uom_forecast" />
+                <field name="secondary_uom_qty" />
+                <field name="secondary_uom_id" domain="[('product_tmpl_id.product_variant_ids', 'in', [product_id])]" options="{'no_create': True}" />
             </field>
-        </record>
+        </field>
+    </record>
 
-        <record id="stock_reorder_report_search_inherit" model="ir.ui.view">
-            <field name="name">stock.warehouse.orderpoint.reorder.search.secondary.unit</field>
-            <field name="model">stock.warehouse.orderpoint</field>
-            <field name="inherit_id" ref="stock.stock_reorder_report_search"/>
-            <field name="arch" type="xml">
-                <filter name="groupby_category" position="after">
-                    <filter string="Unity of measure" name="groupby_secondary_uom_id" domain="[]" context="{'group_by': 'secondary_uom_id'}"/>
-                </filter>
-            </field>
-        </record>
+    <record id="stock_reorder_report_search_inherit" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.reorder.search.secondary.unit</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.stock_reorder_report_search"/>
+        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]" />
+        <field name="arch" type="xml">
+            <filter name="groupby_category" position="after">
+                <filter string="Unit of Measure" name="groupby_product_uom" domain="[]" context="{'group_by': 'product_uom'}"/>
+            </filter>
+        </field>
+    </record>
 
 </odoo>

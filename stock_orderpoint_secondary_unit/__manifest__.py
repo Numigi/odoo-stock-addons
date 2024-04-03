@@ -12,9 +12,7 @@
     "depends": [
         "stock_secondary_unit",
     ],
-    "summary": """
-        Use secondary unit on order and group
-        replenishment lines by primary unit of measure.
+    "summary": """Stock Orderpoint in a secondary unit.
     """,
     "data": [
         "views/stock_warehouse_orderpoint_views.xml",
