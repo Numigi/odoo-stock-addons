@@ -14,36 +14,12 @@ class StockWarehouseOrderpoint(models.Model):
         "uom_field": "product_uom",
     }
 
-    # This field is using the mixin field to calculate the secondary unit quantity
-    # for the qty_to_order field.
-    secondary_uom_qty = fields.Float(
-        string="To Order 2nd Unit",
-        digits="Product Unit of Measure",
-        inverse="_inverse_secondary_uom_qty",
-    )
+    # Store product_uom to be able to groupBy Unit Of Measure
+    product_uom = fields.Many2one(store=True)
 
-    secondary_uom_id = fields.Many2one(
-        comodel_name="product.secondary.unit",
-        string="2nd Unit",
-        ondelete="restrict",
-        related="product_tmpl_id.stock_secondary_uom_id",
-        store=True,
-    )
-
-    secondary_uom_qty_on_hand = fields.Float(
-        string="On Hand Qty 2nd Unit",
-        digits="Product Unit of Measure",
-        compute="_compute_to_secondary_uom",
-        store=True,
-    )
-
-    secondary_uom_qty_forecast = fields.Float(
-        string="Forecast 2nd Unit",
-        digits="Product Unit of Measure",
-        compute="_compute_to_secondary_uom",
-        store=True,
-    )
-
+    # Redefine fields to change String
+    secondary_uom_qty = fields.Float(string="To Order 2nd Unit")
+    secondary_uom_id = fields.Many2one(string="2nd Unit")
     qty_to_order = fields.Float(
         store=True, readonly=False, compute="_compute_qty_to_order", copy=True
     )
@@ -56,45 +32,48 @@ class StockWarehouseOrderpoint(models.Model):
     def onchange_product_uom_for_secondary(self):
         self._onchange_helper_product_uom_for_secondary()
 
-    def _calculate_secondary_uom_qty(
-        self, qty_on_hand, qty_forecast, uom_factor, uom_rounding
-    ):
-        """
-        Calculate the quantity in the secondary unit.
-        """
-        secondary_uom_qty_on_hand = qty_on_hand / (uom_factor or 1.0)
-        secondary_uom_qty_forecast = qty_forecast / (uom_factor or 1.0)
-        return (
-            float_round(secondary_uom_qty_on_hand, precision_rounding=uom_rounding),
-            float_round(secondary_uom_qty_forecast, precision_rounding=uom_rounding),
-        )
+    @api.onchange("product_id")
+    def _onchange_product_id(self):
+        res = super(StockWarehouseOrderpoint, self)._onchange_product_id()
+        if self.product_id:
+            self.secondary_uom_id = self.product_id.stock_secondary_uom_id
+        return res
 
-    def _compute_to_secondary_uom(self):
+    # Add On Hand and forecast in secondary unit
+    secondary_uom_on_hand = fields.Float(
+        string="On Hand 2nd Unit",
+        digits="Product Unit of Measure",
+        compute="_compute_on_hand_forecast_secondary_uom",
+        store=True,
+    )
+
+    secondary_uom_forecast = fields.Float(
+        string="Forecast 2nd Unit",
+        digits="Product Unit of Measure",
+        compute="_compute_on_hand_forecast_secondary_uom",
+        store=True,
+    )
+
+    @api.depends("secondary_uom_id", "qty_on_hand", "qty_forecast")
+    def _compute_on_hand_forecast_secondary_uom(self):
         """
-        Compute the on hand and forecast quantities in the secondary unit.
+        Compute the on hand and forecast quantities in secondary unit.
         """
         for line in self:
-            secondary_uom_qty_on_hand = 0.0
-            secondary_uom_qty_forecast = 0.0
-            if line.secondary_uom_id:
-                secondary_uom_qty_on_hand, secondary_uom_qty_forecast = (
-                    self._calculate_secondary_uom_qty(
-                        line.qty_on_hand,
-                        line.qty_forecast,
-                        line.secondary_uom_id.factor,
-                        line.product_uom.rounding,
-                    )
-                )
-            line.write(
-                {
-                    "secondary_uom_qty_on_hand": secondary_uom_qty_on_hand,
-                    "secondary_uom_qty_forecast": secondary_uom_qty_forecast,
-                }
+            if not line.secondary_uom_id:
+                line.secondary_uom_on_hand = 0.0
+                line.secondary_uom_forecast = 0.0
+                continue
+            elif line.secondary_uom_id.dependency_type == "independent":
+                continue
+            factor = line._get_factor_line()
+            qty_on_hand = float_round(
+                line.qty_on_hand / (factor or 1.0),
+                precision_rounding=line.secondary_uom_id.uom_id.rounding,
             )
-
-    def _inverse_secondary_uom_qty(self):
-        for line in self:
-            if line.secondary_uom_id:
-                line.qty_to_order = line.secondary_uom_qty * (
-                    line.secondary_uom_id.factor or 1.0
-                )
+            qty_forecast = float_round(
+                line.qty_forecast / (factor or 1.0),
+                precision_rounding=line.secondary_uom_id.uom_id.rounding,
+            )
+            line.secondary_uom_on_hand = qty_on_hand
+            line.secondary_uom_forecast = qty_forecast
