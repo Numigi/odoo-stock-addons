@@ -12,8 +12,8 @@
     "depends": [
         "stock_secondary_unit",
     ],
-    "summary": """ 
-        Use secondary unit on order and group 
+    "summary": """
+        Use secondary unit on order and group
         replenishment lines by primary unit of measure.
     """,
     "data": [
