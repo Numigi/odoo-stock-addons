@@ -8,10 +8,10 @@
         <field name="groups_id" eval="[(4, ref('uom.group_uom'))]" />
         <field name="arch" type="xml">
             <field name="product_uom_name" position="after">
-                <field name="secondary_uom_on_hand" />
-                <field name="secondary_uom_forecast" />
-                <field name="secondary_uom_qty" />
-                <field name="secondary_uom_id" domain="[('product_tmpl_id.product_variant_ids', 'in', [product_id])]" options="{'no_create': True}" />
+                <field name="secondary_uom_on_hand" optional="show" />
+                <field name="secondary_uom_forecast" optional="show" />
+                <field name="secondary_uom_qty"  optional="show"/>
+                <field name="secondary_uom_id" optional="show" domain="[('product_tmpl_id.product_variant_ids', 'in', [product_id])]" options="{'no_create': True}" />
             </field>
         </field>
     </record>
