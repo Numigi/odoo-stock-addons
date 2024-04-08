@@ -20,9 +20,9 @@ class StockWarehouseOrderpoint(models.Model):
     # Redefine fields to change String
     secondary_uom_qty = fields.Float(string="To Order 2nd Unit", digits=(16, 2))
     secondary_uom_id = fields.Many2one(
-        string="2nd Unit", 
-        related="product_id.stock_secondary_uom_id", 
-        store=True, 
+        string="2nd Unit",
+        related="product_id.stock_secondary_uom_id",
+        store=True,
         readonly=True
     )
     qty_to_order = fields.Float(
