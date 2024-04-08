@@ -19,7 +19,12 @@ class StockWarehouseOrderpoint(models.Model):
 
     # Redefine fields to change String
     secondary_uom_qty = fields.Float(string="To Order 2nd Unit", digits=(16, 2))
-    secondary_uom_id = fields.Many2one(string="2nd Unit")
+    secondary_uom_id = fields.Many2one(
+        string="2nd Unit", 
+        related="product_id.stock_secondary_uom_id", 
+        store=True, 
+        readonly=True
+    )
     qty_to_order = fields.Float(
         store=True, readonly=False, compute="_compute_qty_to_order", copy=True
     )
@@ -31,13 +36,6 @@ class StockWarehouseOrderpoint(models.Model):
     @api.onchange("product_uom")
     def onchange_product_uom_for_secondary(self):
         self._onchange_helper_product_uom_for_secondary()
-
-    @api.onchange("product_id")
-    def _onchange_product_id(self):
-        res = super(StockWarehouseOrderpoint, self)._onchange_product_id()
-        if self.product_id:
-            self.secondary_uom_id = self.product_id.stock_secondary_uom_id
-        return res
 
     # Add On Hand and forecast in secondary unit
     secondary_uom_on_hand = fields.Float(
