@@ -30,6 +30,7 @@ COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_
 COPY stock_move_location_domain_improved /mnt/extra-addons/stock_move_location_domain_improved
 COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
 COPY stock_move_valuation_adjustment /mnt/extra-addons/stock_move_valuation_adjustment
+COPY stock_orderpoint_scheduled_date /mnt/extra-addons/stock_orderpoint_scheduled_date
 COPY stock_orderpoint_secondary_unit /mnt/extra-addons/stock_orderpoint_secondary_unit
 COPY stock_picking_groupby_parent_affiliate /mnt/extra-addons/stock_picking_groupby_parent_affiliate
 COPY stock_picking_responsible_editable /mnt/extra-addons/stock_picking_responsible_editable

@@ -11,6 +11,7 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
+        "purchase",  # For testing stock_orderpoint_scheduled_date
         "product_category_safe_change",
         "product_packaging_dimension_decimal",
         "stock_account_visibility",
@@ -22,6 +23,7 @@
         "stock_move_location_domain_improved",
         "stock_move_origin_link",
         "stock_move_valuation_adjustment",
+        "stock_orderpoint_scheduled_date",
         "stock_orderpoint_secondary_unit",
         "stock_picking_groupby_parent_affiliate",
         "stock_picking_responsible_editable",
