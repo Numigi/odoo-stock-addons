@@ -19,6 +19,7 @@
         # "stock_auto_assign_disabled_jit",
         "stock_change_qty_reason_enhanced",
         "stock_immediate_transfer_disable",
+        "stock_location_dest_width",
         "stock_location_position_alphanum",
         "stock_move_location_domain_improved",
         "stock_move_origin_link",
