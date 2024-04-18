@@ -26,6 +26,7 @@ COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
 # COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
 COPY stock_change_qty_reason_enhanced /mnt/extra-addons/stock_change_qty_reason_enhanced
 COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer_disable
+COPY stock_location_dest_width /mnt/extra-addons/stock_location_dest_width
 COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_alphanum
 COPY stock_move_location_domain_improved /mnt/extra-addons/stock_move_location_domain_improved
 COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
