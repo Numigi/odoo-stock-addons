@@ -26,6 +26,7 @@
         "stock_move_valuation_adjustment",
         "stock_orderpoint_scheduled_date",
         "stock_orderpoint_secondary_unit",
+        "stock_picking_barcode",
         "stock_picking_groupby_parent_affiliate",
         "stock_picking_responsible_editable",
         "stock_picking_secondary_unit_demand",
