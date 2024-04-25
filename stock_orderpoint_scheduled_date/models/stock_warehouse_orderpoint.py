@@ -25,3 +25,8 @@ class stockWarehouseOrderpoint(models.Model):
         action['target'] = 'new'
         action['name'] = _('Set Schedule Date')
         return action
+
+    def action_replenish(self):
+        result = super(stockWarehouseOrderpoint, self).action_replenish()
+        self.write({"scheduled_date": False})
+        return result
