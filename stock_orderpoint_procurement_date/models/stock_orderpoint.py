@@ -43,6 +43,16 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpoint):
                 while orderpoints_batch:
                     procurements = []
                     for orderpoint in orderpoints_batch:
+                        origins = orderpoint.env.context.get("origins", {}).get(
+                            orderpoint.id, False
+                        )
+                        if origins:
+                            origin = "%s - %s" % (
+                                orderpoint.display_name,
+                                ",".join(origins),
+                            )
+                        else:
+                            origin = orderpoint.name
                         if (
                             float_compare(
                                 orderpoint.qty_to_order,
@@ -62,7 +72,7 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpoint):
                                     orderpoint.product_uom,
                                     orderpoint.location_id,
                                     orderpoint.name,
-                                    orderpoint.name,
+                                    origin,
                                     orderpoint.company_id,
                                     values,
                                 )
