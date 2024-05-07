@@ -22,8 +22,8 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpoint):
         self, use_new_cursor=False, company_id=None, raise_user_error=True
     ):
         """Create procurements based on orderpoints.
-        :param bool use_new_cursor: if set, use a dedicated cursor and auto-commit after processing
-            1000 orderpoints.
+        :param bool use_new_cursor: if set, use a dedicated cursor and auto-commit
+            after processing 1000 orderpoints.
             This is appropriate for batch jobs only.
         """
         self = self.with_company(company_id)
