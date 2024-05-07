@@ -6,7 +6,7 @@ from datetime import datetime, time
 from psycopg2 import OperationalError
 from pytz import timezone, UTC
 
-from odoo import SUPERUSER_ID, registry, models
+from odoo import SUPERUSER_ID, registry
 from odoo.addons.stock.models.stock_rule import ProcurementException
 from odoo.tools import float_compare, split_every
 
@@ -18,6 +18,16 @@ _logger = logging.getLogger(__name__)
 
 
 class StockWarehouseOrderpoint(StockWarehouseOrderpoint):
+
+    def _get_orderpoint_procurement_date(self, lead_days_date):
+        """Return the right procurement date for the orderpoint."""
+        return (
+            timezone(self.company_id.partner_id.tz or "UTC")
+            .localize(datetime.combine(lead_days_date, time(12)))
+            .astimezone(UTC)
+            .replace(tzinfo=None)
+        )
+
     def _procure_orderpoint_confirm(
         self, use_new_cursor=False, company_id=None, raise_user_error=True
     ):
@@ -58,8 +68,7 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpoint):
                                 orderpoint.qty_to_order,
                                 0.0,
                                 precision_rounding=orderpoint.product_uom.rounding,
-                            )
-                            == 1
+                            ) == 1
                         ):
                             date = self._get_orderpoint_procurement_date(
                                 orderpoint.lead_days_date
@@ -77,7 +86,6 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpoint):
                                     values,
                                 )
                             )
-
                     try:
                         with self.env.cr.savepoint():
                             self.env["procurement.group"].with_context(
@@ -136,16 +144,3 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpoint):
         return {}
 
     StockWarehouseOrderpoint._procure_orderpoint_confirm = _procure_orderpoint_confirm
-
-
-class StockWarehouseOrderpoint(models.Model):
-    _inherit = "stock.warehouse.orderpoint"
-
-    def _get_orderpoint_procurement_date(self, lead_days_date):
-        """Return the right procurement date for the orderpoint."""
-        return (
-            timezone(self.company_id.partner_id.tz or "UTC")
-            .localize(datetime.combine(lead_days_date, time(12)))
-            .astimezone(UTC)
-            .replace(tzinfo=None)
-        )
