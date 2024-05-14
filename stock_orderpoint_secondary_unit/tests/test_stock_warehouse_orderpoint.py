@@ -93,6 +93,7 @@ class TestStockWarehouseOrderpoint(common.SavepointCase):
         self.assertEqual(replenishment_order.secondary_uom_on_hand, 20.0)
         self.assertEqual(replenishment_order.secondary_uom_forecast, 20.0)
 
-        # Check when secondary_uom_qty is changed, qty_to_order is also changed
+        # Check when secondary_uom_qty is changed manually, qty_to_order is also changed
         replenishment_order.secondary_uom_qty = 30.0
+        replenishment_order.onchange_product_qty_to_order()
         self.assertEqual(replenishment_order.qty_to_order, 15.0)
