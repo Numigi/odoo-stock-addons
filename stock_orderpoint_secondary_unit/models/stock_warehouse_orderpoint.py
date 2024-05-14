@@ -25,12 +25,10 @@ class StockWarehouseOrderpoint(models.Model):
         store=True,
         readonly=True
     )
-    qty_to_order = fields.Float(
-        store=True, readonly=False, compute="_compute_qty_to_order", copy=True
-    )
 
-    @api.depends("secondary_uom_qty", "secondary_uom_id", "qty_to_order")
-    def _compute_qty_to_order(self):
+    @api.onchange("secondary_uom_qty")
+    def onchange_product_qty_to_order(self):
+        """Compute the qty_to_order when changing the secondary_uom_qty"""
         self._compute_helper_target_field_qty()
 
     @api.onchange("product_uom")
