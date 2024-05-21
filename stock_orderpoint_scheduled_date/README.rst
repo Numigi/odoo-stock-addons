@@ -6,15 +6,15 @@ Stock Orderpoint Scheduled Date
 Context
 -------
 
-This module allows user to set a scheduled date manuelly to replanish stock.
+This module allows a user to set a ``Scheduled Date`` manually to replenish stock.
 
 Description
 -----------
-As a user with access right to `Inventory > Operations > Replanishment`, I can see a new field in the list view:
+As a user with access right to ``Inventory > Operations > Replenishment``, I can see the new field ``Scheduled Date`` in the list view:
 
 .. image:: static/description/replanishment_tree_view.png
 
-You can assign in mass the Scheduled Date to a selection of records using the server action `Set Scheduled Date`:
+I also can assign in mass the ``Scheduled Date`` to a selection of records using the server action ``Set Scheduled Date``:
 
 .. image:: static/description/set_scheduled_date_action.png
 
