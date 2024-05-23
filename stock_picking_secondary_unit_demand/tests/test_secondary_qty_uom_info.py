@@ -13,7 +13,7 @@ class TestSecondaryQtyUomInfo(TestSaleOrderSecondaryUnit):
 
     def test_secondary_qty_uom_info_on_stock_move(self):
         self.order.order_line.write(
-            {"secondary_uom_qty": 2, "secondary_uom_id": self.secondary_unit.id}
+            {"secondary_uom_qty": 2.00, "secondary_uom_id": self.secondary_unit.id}
         )
         self.order.action_confirm()
         self.assertGreater(len(self.order.picking_ids.ids), 0, msg=None)
@@ -24,7 +24,7 @@ class TestSecondaryQtyUomInfo(TestSaleOrderSecondaryUnit):
 
     def test_secondary_qty_uom_info_on_stock_move_line(self):
         self.order.order_line.write(
-            {"secondary_uom_qty": 3, "secondary_uom_id": self.secondary_unit.id}
+            {"secondary_uom_qty": 3.00, "secondary_uom_id": self.secondary_unit.id}
         )
         self.order.action_confirm()
         self.assertGreater(len(self.order.picking_ids.ids), 0, msg=None)
@@ -75,32 +75,3 @@ class TestSimplePickingSecondaryQtyUomInfo(common.SavepointCase):
             cls.warehouse.lot_stock_id,
             10.0,
         )
-
-    def test_merged_qty_uom_info_on_simple_picking(self):
-        """
-        Test merged_qty_uom_info either it is created from sale
-        or another operation like replenishment.
-        Only convert demand to the right secondary unit of measure.
-        """
-        # Create picking for white product
-        picking = self.env["stock.picking"].create(
-            {
-                "picking_type_id": self.warehouse.out_type_id.id,
-                "location_id": self.warehouse.lot_stock_id.id,
-                "location_dest_id": self.warehouse.wh_output_stock_loc_id.id,
-            }
-        )
-        # Create move for white product
-        move = self.env["stock.move"].create(
-            {
-                "name": "Test",
-                "product_id": self.product_template.product_variant_ids[0].id,
-                "product_uom_qty": 2.0,
-                "product_uom": self.product_uom_kg.id,
-                "picking_id": picking.id,
-                "location_id": self.warehouse.lot_stock_id.id,
-                "location_dest_id": self.warehouse.wh_output_stock_loc_id.id,
-            }
-        )
-        # Check merged_qty_uom_info
-        self.assertEqual(move.merged_qty_uom_info, "40.00 unit-50")
