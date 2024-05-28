@@ -27,7 +27,6 @@
         "stock_inventory_category_domain",
         "stock_inventory_internal_location",
         "stock_inventory_line_domain",
-        "stock_inventory_line_domain_barcode",
         "stock_location_position_alphanum",
         "stock_move_list_cost",
         "stock_move_list_location",
