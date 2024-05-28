@@ -3,12 +3,12 @@
 
 {
     "name": "Stock Picking Barcode",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.0",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",
     "license": "LGPL-3",
-    "category": "Product",
+    "category": "Stock",
     "summary": "Scan a barcode by picking",
     "depends": ["stock", "barcodes"],
     "data": [
