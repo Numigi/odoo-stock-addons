@@ -50,7 +50,7 @@ class StockMove(models.Model):
         stock_secondary_uom_id = self.product_id.stock_secondary_uom_id
         if not stock_secondary_uom_id:
             demand_qty = 0.0
-        factor = (self._get_factor_line() 
+        factor = (self._get_factor_line()
                   or self.product_id.stock_secondary_uom_id.factor or 1.0)
         precision_rounding = (
             self.product_id.stock_secondary_uom_id.uom_id.rounding
