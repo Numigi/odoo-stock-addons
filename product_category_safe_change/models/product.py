@@ -17,8 +17,9 @@ class Product(models.Model):
                 _("You cannot modify the category of a Product with Stock Moves."))
 
     def write(self, vals):
-        if self.type != "service" and "categ_id" in vals:
-            self._check_category_stock_move()
+        for rec in self:
+            if rec.type != "service" and "categ_id" in vals:
+                rec._check_category_stock_move()
         return super(Product, self).write(vals)
 
 
@@ -34,6 +35,7 @@ class ProductTemplate(models.Model):
                 _("You cannot modify the category of a Product with Stock Moves."))
 
     def write(self, vals):
-        if self.type != "service" and "categ_id" in vals:
-            self._check_category_stock_move()
+        for rec in self:
+            if rec.type != "service" and "categ_id" in vals:
+                rec._check_category_stock_move()
         return super(ProductTemplate, self).write(vals)
