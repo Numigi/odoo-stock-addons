@@ -1,5 +1,6 @@
 # © 2024 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
 from odoo import models, fields
 
 
@@ -20,6 +21,7 @@ class StockPickingType(models.Model):
     nomenclature_id = fields.Many2one(
         "barcode.nomenclature",
         string="Nomenclature",
+        ondelete="restrict",
         default=_get_default_nomenclature,
         help="""This field allows you to choose the Barcodes Nomenclature
         to apply when scanning.""",

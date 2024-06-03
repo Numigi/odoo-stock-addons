@@ -10,6 +10,6 @@
             <field name="sequence">10</field>
             <field name="type">weight</field>
             <field name="encoding">any</field>
-            <field name="pattern">.....{NNNDD}</field>
+            <field name="pattern">.....{NNNDDD}</field>
         </record>
 </odoo>

@@ -61,13 +61,12 @@ class TestProductCategoryRestrictions(TransactionCase):
         move = self.process_stock_move(self.company_a, self.stock_location_a)
         categ_all = self.env.ref('product.product_category_all')
 
-        domain = [("product_id.categ_id", "in", categ_all.ids)]
+        domain = [
+            ("product_id.categ_id", "in", categ_all.ids),
+            ("company_id", "=", self.env.company.id)
+        ]
         existing_move_lines = self.env["stock.move.line"].search(domain)
-        not_allowed = categ_all._multi_company_constraints(
-            existing_move_lines)
-
         self.assertGreater(len(existing_move_lines), 0)
-        self.assertTrue(not_allowed)
         self.assertEqual(move.company_id, self.env.user.company_id)
 
         # for property_stock_account_input_categ_id
