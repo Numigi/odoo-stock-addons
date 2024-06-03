@@ -16,23 +16,13 @@ IMPORTANT_FIELDS = [
 class ProductCategory(models.Model):
     _inherit = "product.category"
 
-    def _get_product_name(self, product_id):
-        return self.env["product.product"].browse(product_id).name
-
-    def _multi_company_constraints(self, existing_move_lines):
-        current_company = self.env.user.company_id.id
-        if existing_move_lines:
-            if current_company not in existing_move_lines.sudo().mapped(
-                "move_id.company_id.id"
-            ):
-                return False
-        return True
-
     def _check_category_stock_move(self):
-        domain = [("product_id.categ_id", "in", self.ids)]
-        existing_move_lines = self.env["stock.move.line"].search(domain)
-        not_allowed = self._multi_company_constraints(existing_move_lines)
-        if len(existing_move_lines) and not_allowed:
+        domain = [
+            ("product_id.categ_id", "in", self.ids),
+            ("company_id", "=", self.env.company.id)
+        ]
+        existing_move_lines = self.env["stock.move.line"].sudo().search(domain)
+        if len(existing_move_lines):
             product_lists = existing_move_lines.mapped("product_id.name")
             product_lists = (
                 # select three first products found on move lines
