@@ -38,9 +38,7 @@ class StockPicking(models.Model):
         return {
             "warning": {
                 "title": _("Wrong barcode"),
-                "message": _(
-                    'The barcode "%(barcode)s" doesn\'t correspond to a proper product.'
-                )
+                "message": _('The barcode "%(barcode)s" does not match any product.')
                 % {"barcode": barcode},
             }
         }

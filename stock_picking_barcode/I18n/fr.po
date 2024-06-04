@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0+e\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-22 04:07+0000\n"
-"PO-Revision-Date: 2024-04-22 04:07+0000\n"
+"POT-Creation-Date: 2024-06-04 19:54+0000\n"
+"PO-Revision-Date: 2024-06-04 19:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,8 +62,8 @@ msgstr "Numériser depuis ce type d'opération"
 #. module: stock_picking_barcode
 #: code:addons/stock_picking_barcode/models/stock_picking.py:0
 #, python-format
-msgid "The barcode \"%(barcode)s\" doesn't correspond to a proper product."
-msgstr ""
+msgid "The barcode \"%(barcode)s\" does not match any product."
+msgstr "Le code barre \"%(barcode)s\" ne correspond à aucun article."
 
 #. module: stock_picking_barcode
 #: model:ir.model.fields,help:stock_picking_barcode.field_stock_picking_type__nomenclature_id
@@ -89,7 +89,8 @@ msgstr "Valeur du dernier code-barres scanné."
 msgid ""
 "When this box is checked, a new “Scan” field is displayed on\n"
 "        transfers of this type of operation to allow scanning of a barcode."
-msgstr "Lorsque cette case est cochée, un nouveau champ “Numériser” est affiché sur les transferts de ce type d’opération afin de permettre de numériser un code-barres."
+msgstr "Lorsque cette case est cochée, un nouveau champ “Code-barres numérisé” est affiché sur\n
+"        les transferts de ce type d’opération afin de permettre de numériser un code-barres."
 
 #. module: stock_picking_barcode
 #: code:addons/stock_picking_barcode/models/stock_picking.py:0
