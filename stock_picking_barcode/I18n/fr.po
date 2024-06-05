@@ -84,13 +84,13 @@ msgid "Value of the last barcode scanned."
 msgstr "Valeur du dernier code-barres scanné."
 
 #. module: stock_picking_barcode
-#: model:ir.model.fields,help:stock_picking_barcode.field_stock_picking__scan_barcode
 #: model:ir.model.fields,help:stock_picking_barcode.field_stock_picking_type__scan_barcode
 msgid ""
 "When this box is checked, a new “Scan” field is displayed on\n"
 "        transfers of this type of operation to allow scanning of a barcode."
-msgstr "Lorsque cette case est cochée, un nouveau champ “Code-barres numérisé” est affiché sur\n
-"        les transferts de ce type d’opération afin de permettre de numériser un code-barres."
+msgstr ""
+"Lorsque cette case est cochée, un nouveau champ “Code-barres numérisé” est affiché sur"
+" les transferts de ce type d’opération afin de permettre de numériser un code-barres."
 
 #. module: stock_picking_barcode
 #: code:addons/stock_picking_barcode/models/stock_picking.py:0
