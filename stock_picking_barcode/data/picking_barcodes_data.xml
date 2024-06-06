@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
     	<record id="picking_barcode_nomenclature" model="barcode.nomenclature">
-            <field name="name">Operations/ Detailed Operations</field>
+            <field name="name">Operations / Detailed Operations</field>
         </record>
 
         <record id="barcode_rule_picking_product_weight" model="barcode.rule">

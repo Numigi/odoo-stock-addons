@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-04 19:54+0000\n"
-"PO-Revision-Date: 2024-06-04 19:54+0000\n"
+"POT-Creation-Date: 2024-06-06 16:33+0000\n"
+"PO-Revision-Date: 2024-06-06 16:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,6 +62,12 @@ msgstr "Numériser depuis ce type d'opération"
 #. module: stock_picking_barcode
 #: code:addons/stock_picking_barcode/models/stock_picking.py:0
 #, python-format
+msgid "The barcode \"%(barcode)s\" does not match any product on this picking."
+msgstr "Le code barre \"%(barcode)s\" ne correspond à aucun article sur ce transfert."
+
+#. module: stock_picking_barcode
+#: code:addons/stock_picking_barcode/models/stock_picking.py:0
+#, python-format
 msgid "The barcode \"%(barcode)s\" does not match any product."
 msgstr "Le code barre \"%(barcode)s\" ne correspond à aucun article."
 
@@ -71,7 +77,8 @@ msgid ""
 "This field allows you to choose the Barcodes Nomenclature\n"
 "        to apply when scanning."
 msgstr ""
-"Ce champ vous permet de choisir la nomenclature des code-barres à appliquer lors de la numérisation."
+"Ce champ vous permet de choisir la nomenclature des code-barres à appliquer "
+"lors de la numérisation."
 
 #. module: stock_picking_barcode
 #: model:ir.model,name:stock_picking_barcode.model_stock_picking
@@ -89,10 +96,12 @@ msgid ""
 "When this box is checked, a new “Scan” field is displayed on\n"
 "        transfers of this type of operation to allow scanning of a barcode."
 msgstr ""
-"Lorsque cette case est cochée, un nouveau champ “Code-barres numérisé” est affiché sur"
-" les transferts de ce type d’opération afin de permettre de numériser un code-barres."
+"Lorsque cette case est cochée, un nouveau champ “Code-barres numérisé” est "
+"affiché sur les transferts de ce type d’opération afin de permettre"
+" de numériser un code-barres."
 
 #. module: stock_picking_barcode
+#: code:addons/stock_picking_barcode/models/stock_picking.py:0
 #: code:addons/stock_picking_barcode/models/stock_picking.py:0
 #, python-format
 msgid "Wrong barcode"

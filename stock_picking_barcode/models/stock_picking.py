@@ -33,8 +33,7 @@ class StockPicking(models.Model):
                     limit=1,
                 )
                 if product:
-                    if self._check_product(product, qty):
-                        return
+                    self._check_product(product, qty)
         return {
             "warning": {
                 "title": _("Wrong barcode"),
@@ -63,4 +62,14 @@ class StockPicking(models.Model):
         )[:1]
         if corresponding_ml:
             corresponding_ml.qty_done += qty
+        else:
+            return {
+                "warning": {
+                    "title": _("Wrong barcode"),
+                    "message": _(
+                        'The barcode "%(barcode)s" does not match any product on this picking.'
+                    )
+                    % {"barcode": barcode},
+                }
+            }
         return True
