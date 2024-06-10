@@ -44,6 +44,8 @@ class StockPicking(models.Model):
                                 % {"barcode": barcode},
                             }
                         }
+                    else:
+                        return
         return {
             "warning": {
                 "title": _("Wrong barcode"),
@@ -71,4 +73,5 @@ class StockPicking(models.Model):
         if corresponding_ml:
             corresponding_ml.qty_done += qty
             return True
-        return False
+        else:
+            return False
