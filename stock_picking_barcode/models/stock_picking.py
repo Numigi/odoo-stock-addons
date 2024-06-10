@@ -33,7 +33,17 @@ class StockPicking(models.Model):
                     limit=1,
                 )
                 if product:
-                    self._check_product(product, qty)
+                    if not self._check_product(product, qty):
+                        return {
+                            "warning": {
+                                "title": _("Wrong barcode"),
+                                "message": _(
+                                    'The barcode "%(barcode)s" does not match any '
+                                    'product on this picking.'
+                                )
+                                % {"barcode": barcode},
+                            }
+                        }
         return {
             "warning": {
                 "title": _("Wrong barcode"),
@@ -50,8 +60,6 @@ class StockPicking(models.Model):
         """
         # Get back the move line to increase. If multiple are found, chose
         # arbitrary the first one that doesn't have qty_done set.
-        # Filter out the ones processed by `_check_location` and the ones already
-        # having a # destination package.
         picking_move_lines = self.move_line_ids_without_package
         if not self.show_reserved:
             picking_move_lines = self.move_line_nosuggest_ids
@@ -62,14 +70,5 @@ class StockPicking(models.Model):
         )[:1]
         if corresponding_ml:
             corresponding_ml.qty_done += qty
-        else:
-            return {
-                "warning": {
-                    "title": _("Wrong barcode"),
-                    "message": _(
-                        'The barcode "%(barcode)s" does not match any product on this picking.'
-                    )
-                    % {"barcode": barcode},
-                }
-            }
-        return True
+            return True
+        return False
