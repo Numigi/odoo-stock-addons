@@ -41,7 +41,7 @@ class StockPicking(models.Model):
                                     'The barcode "%(barcode)s" does not match any '
                                     'product on this picking.'
                                 )
-                                % {"barcode": barcode},
+                                % {"barcode": product.barcode},
                             }
                         }
                     else:
