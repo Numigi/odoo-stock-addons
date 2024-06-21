@@ -13,4 +13,5 @@
     "summary": "Add some restriction to the product category of articles",
     "data": [],
     "installable": True,
+    "auto_install": True,
 }
