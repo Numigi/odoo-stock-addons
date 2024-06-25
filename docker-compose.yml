@@ -7,7 +7,7 @@ services:
       args:
         - GIT_TOKEN=${GIT_TOKEN}
     volumes:
-      - odoo-web-data:/var/lib/odoo
+      - odoo16-web-data:/var/lib/odoo
       - ./.log:/var/log/odoo
     ports:
       - "8069:8069"
@@ -24,10 +24,10 @@ services:
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - odoo16-db-data:/var/lib/postgresql/data/pgdata
     expose:
       - 5432
 
 volumes:
-  odoo-web-data:
-  odoo-db-data:
+  odoo16-web-data:
+  odoo16-db-data:

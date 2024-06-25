@@ -1,4 +1,4 @@
-# © 2022 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © 2024 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
@@ -11,42 +11,7 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
-        "purchase",  # For testing stock_orderpoint_scheduled_date
-        "product_category_safe_change",
-        "product_packaging_dimension_decimal",
-        "stock_account_visibility",
-        "stock_auto_assign_disabled",
-        "stock_auto_assign_disabled_jit",
-        "stock_change_qty_reason_enhanced",
-        "stock_immediate_transfer_disable",
-        "stock_location_dest_width",
-        "stock_location_position_alphanum",
-        "stock_move_location_domain_improved",
-        "stock_move_origin_link",
-        "stock_move_valuation_adjustment",
-        "stock_orderpoint_scheduled_date",
-        "stock_orderpoint_secondary_unit",
-        "stock_orderpoint_procurement_date",
-        "stock_picking_barcode",
-        "stock_picking_groupby_parent_affiliate",
-        "stock_picking_responsible_editable",
-        "stock_picking_secondary_unit_demand",
-        "stock_picking_show_address",
-        "stock_picking_split_qty",
-        "stock_picking_tracking_reference",
-        "stock_product_packaging_dimension",
-        "stock_product_packaging_uom",
-        "stock_production_lot_rma",
-        "stock_quant_by_category",
-        "stock_quant_secondary_unit",
-        "stock_rental",
-        "stock_replenish_report_secondary_unit",
-        "stock_route_optimized",
-        "stock_serial_single_quant",
-        "stock_special_route",
-        "stock_turnover_rate",
-        "stock_turnover_rate_purchase",
-        "stock_virtual_adjustment",
+        "stock",
     ],
     "installable": True,
 }
