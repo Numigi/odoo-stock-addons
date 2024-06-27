@@ -11,7 +11,7 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
-        "stock",
+        "stock_account_visibility",
     ],
     "installable": True,
 }
