@@ -11,7 +11,7 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
-        "stock",
+        "stock_move_origin_link",
     ],
     "installable": True,
 }

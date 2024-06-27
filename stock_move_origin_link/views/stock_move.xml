@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="stock_move_list_with_origin" model="ir.ui.view">
+        <field name="name">Stock Move List: Add origin</field>
+        <field name="model">stock.move</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="stock.view_move_tree"/>
+        <field name="arch" type="xml">
+            <field name="reference" position="after">
+                <field name="origin"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
