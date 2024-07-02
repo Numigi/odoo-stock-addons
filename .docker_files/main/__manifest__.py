@@ -12,6 +12,7 @@
     "summary": "Install all addons required for testing.",
     "depends": [
         "stock",
+        "stock_quant_by_category",
     ],
     "installable": True,
 }
