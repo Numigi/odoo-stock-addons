@@ -12,6 +12,8 @@
     "summary": "Install all addons required for testing.",
     "depends": [
         "stock",
+        "stock_account_visibility",
+        "stock_picking_show_address",
         "stock_quant_by_category",
     ],
     "installable": True,
