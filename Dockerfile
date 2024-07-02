@@ -13,6 +13,7 @@ RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS
 
 USER odoo
 
+COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 COPY stock_quant_by_category /mnt/extra-addons/stock_quant_by_category
 
 COPY .docker_files/main /mnt/extra-addons/main
