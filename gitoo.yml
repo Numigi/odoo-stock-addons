@@ -43,9 +43,6 @@
 
 - url: https://github.com/OCA/stock-logistics-warehouse
   branch: "14.0"
-  includes:
-    - stock_secondary_unit
-    - stock_change_qty_reason
 
 - url: https://github.com/OCA/web
   branch: "14.0"
