@@ -1,4 +1,4 @@
-# © 2024 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# Copyright 2024-today Numigi and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
@@ -11,7 +11,11 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
+        "stock",
+        "stock_account_visibility",
         "stock_move_origin_link",
+        "stock_picking_show_address",
+        "stock_quant_by_category",
     ],
     "installable": True,
 }

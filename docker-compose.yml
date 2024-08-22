@@ -1,11 +1,8 @@
-version: '3'
 services:
   odoo:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        - GIT_TOKEN=${GIT_TOKEN}
     volumes:
       - odoo16-web-data:/var/lib/odoo
       - ./.log:/var/log/odoo

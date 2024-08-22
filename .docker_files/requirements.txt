@@ -1,2 +1,4 @@
 unidecode==1.0.23
 html2text
+freezegun==0.3.4
+ddt==1.4.2
