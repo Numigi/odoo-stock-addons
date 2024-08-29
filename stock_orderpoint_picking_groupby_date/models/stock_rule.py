@@ -14,15 +14,16 @@ class StockRule(models.Model):
             raise UserError(_("No sequence defined for procurement group."))
         return {
             "name": name,
+            "from_orderpoint": True,
             "scheduled_date": date,
         }
 
-    def _get_procurement_group(self, date):
+    def _get_procurement_group(self, date, orderpoint_id):
         ProcObject = self.env["procurement.group"]
-        if date:
+        if date and orderpoint_id:
             group_id = ProcObject.search(
                 [
-                    ("partner_id", "=", self.partner_address_id.id),
+                    ("from_orderpoint", "=", True),
                     ("scheduled_date", "=", date),
                 ],
                 order="scheduled_date desc",
@@ -32,9 +33,3 @@ class StockRule(models.Model):
                 return group_id
         group_data = self._prepare_procurement_group_data(date)
         return self.env["procurement.group"].create(group_data)
-
-    def _push_prepare_move_copy_values(self, move_to_copy, new_date):
-        new_move_vals = super()._push_prepare_move_copy_values(move_to_copy, new_date)
-        group = self._get_procurement_group(move_to_copy.date)
-        new_move_vals["group_id"] = group.id
-        return new_move_vals
