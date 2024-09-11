@@ -8,7 +8,7 @@
         <field name="inherit_id" ref="stock.view_move_tree"/>
         <field name="arch" type="xml">
             <field name="reference" position="after">
-                <field name="origin"/>
+                <field name="origin" widget="origin"/>
             </field>
         </field>
     </record>

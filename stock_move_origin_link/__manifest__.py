@@ -10,10 +10,11 @@
     "website": "https://bit.ly/numigi-com",
     "license": "LGPL-3",
     "depends": ["stock"],
-    "data": ["views/stock_move.xml", "views/stock_move_line.xml"],
+    "data": [
+        "views/stock_move_views.xml",
+        "views/stock_move_line_views.xml",
+    ],
     "assets": {
-        "web.assets_backend": [
-            "stock_move_origin_link/static/src/js/stockMoveOriginLink.js",
-        ],
+        "web.assets_backend": ["stock_move_origin_link/static/src/views/*"],
     },
 }
