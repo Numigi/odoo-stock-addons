@@ -1,41 +1,41 @@
 Stock Same Location Disable Reservation
 =======================================
-This module allows to prevent the system from reserving inventory in an origin location, on picking or on quant, similar to the destination location.
+This module prevents the system from reserving stock at the destination 
+location of a stock transfer.
 
-Usage
------
-*Case A*
-On a product, I do :
+Context:
+--------
 
-.. image:: static/description/product_location_availability.png
+In the standard version of Odoo, if there is stock in the location `Shelf 1`, 
+which is a child of the `Stock` location, and I create an internal transfer 
+from the source location `Stock` to the destination `Shelf 1`, the system will, 
+if it doesn’t find the requested quantity in the `Stock` location, search in 
+the child locations. It will then reserve stock from `Shelf 1`, which is the 
+same as the destination location.
 
-And on a picking, I do :
+With this module, we aim to prevent the system from reserving stock from 
+the destination location.
 
-.. image:: static/description/stock_picking.png
+Before Installing the module
+----------------------------
+In my picking, when I click on `Check Availability`,the system can reserve 
+stock from the destination location of the move:
 
-Even if there are only quantities in the WH/Stock location, the system does not reserve these quantities because the location is the same as the destination location.
-So the picking will still stay on the same state.
+.. image:: static/description/before_install_module.png
 
-*Case B*
+After Installing the module
+---------------------------
+In my picking, when I click on `Check Availability`, the system no longer 
+reserves stock from the destination location, it will only search in the source 
+location and its childs location, excluding the destination location.
 
-Now, on a product, I do :
+.. image:: static/description/after_install_module.png
 
-.. image:: static/description/product_on_hand.png
+If I go to my product and add quantities in `Shelf 2`, witch is a child location 
+of `Stock`, the system can reserve stock from `Shelf 2` as it is different from 
+the destination location.
 
-And on a picking, I do :
-
-.. image:: static/description/picking_check.png
-
-This still will be blocked by system. No reserved product was made, because the system did not found any avalaible quantity
-on different location.
-
-In other case, I will have a reserved quantity on quant and picking:
-
-.. image:: static/description/quant_with_reserved_quantity.png
-
-.. image:: static/description/stock_move_line_reservation.png
-
-.. image:: static/description/stock_move_line_reservation.png
+.. image:: static/description/stock_reservation_ok.png
 
 Contributors
 ------------
