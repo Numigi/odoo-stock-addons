@@ -49,7 +49,6 @@
         "stock_rental_conversion",
         "stock_rental_conversion_account",
         "stock_rental_conversion_asset",
-        "stock_reserve_quant_package",
         "stock_route_optimized",
         "stock_routes_product_multico",
         "stock_same_location_disable_reservation",
