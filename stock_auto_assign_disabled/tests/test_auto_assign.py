@@ -13,7 +13,14 @@ class TestAutoAssign(SavepointCase):
 
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
 
-        cls.product = cls.env["product.product"].create(
+        cls.user = cls.env["res.users"].create(
+            {"name": "Testing", "email": "testing@testmail.com", "login": "Testing"}
+        )
+        cls.user.groups_id |= cls.env.ref("stock.group_stock_user")
+        cls.user.groups_id |= cls.env.ref("stock.group_production_lot")
+        cls.user.groups_id |= cls.env.ref('stock.group_stock_multi_locations')
+
+        cls.product_A = cls.env["product.product"].create(
             {
                 "name": "Product A",
                 "type": "product",
@@ -26,26 +33,19 @@ class TestAutoAssign(SavepointCase):
                 "name": "stock move",
                 "location_id": cls.stock_location.id,
                 "location_dest_id": cls.customer_location.id,
-                "product_id": cls.product.id,
+                "product_id": cls.product_A.id,
                 "product_uom": cls.env.ref("uom.product_uom_unit").id,
                 "product_uom_qty": 5.0,
             }
         )
 
-        cls.group = cls.stock_move.group_id
-
-        cls.user = cls.env["res.users"].create(
-            {"name": "Testing", "email": "testing@testmail.com", "login": "Testing"}
-        )
-        cls.user.groups_id = cls.env.ref("stock.group_stock_user")
-
         cls.serial = cls.env["stock.production.lot"].create(
-            {"name": cls.stock_move.name, "product_id": cls.product.id}
+            {"name": cls.stock_move.name, "product_id": cls.product_A.id}
         )
 
         cls.quant = cls.env["stock.quant"].create(
             {
-                "product_id": cls.product.id,
+                "product_id": cls.product_A.id,
                 "lot_id": cls.serial.id,
                 "location_id": cls.stock_location.id,
                 "quantity": 5,
@@ -56,7 +56,7 @@ class TestAutoAssign(SavepointCase):
 
     def test_scheduler_off(self):
         self.stock_move._action_confirm()
-        self._run_scheduler(self.group, self.user)
+        self._run_scheduler(self.user)
         assert self.stock_move.reserved_availability == 5.0
 
     def test_scheduler_all(self):
@@ -64,7 +64,7 @@ class TestAutoAssign(SavepointCase):
         self.env["ir.config_parameter"].set_param(
             "stock_auto_assign_disabled.config", "all"
         )
-        self._run_scheduler(self.group, self.user)
+        self._run_scheduler(self.user)
         assert self.stock_move.reserved_availability == 0.0
 
     def test_scheduler_serial(self):
@@ -73,7 +73,7 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self._run_scheduler(self.group, self.user)
+        self._run_scheduler(self.user)
         assert self.stock_move.reserved_availability == 0.0
 
     def test_scheduler_no_serial(self):
@@ -82,7 +82,7 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self._run_scheduler(self.group, self.user)
+        self._run_scheduler(self.user)
         assert self.stock_move.reserved_availability == 5.0
 
     def test_scheduler_lot(self):
@@ -91,7 +91,7 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self._run_scheduler(self.group, self.user)
+        self._run_scheduler(self.user)
         assert self.stock_move.reserved_availability == 0.0
 
     def test_scheduler_no_lot(self):
@@ -100,8 +100,10 @@ class TestAutoAssign(SavepointCase):
             "stock_auto_assign_disabled.config", "serial_lot"
         )
         self.stock_move._action_confirm()
-        self._run_scheduler(self.group, self.user)
+        self._run_scheduler(self.user)
         assert self.stock_move.reserved_availability == 5.0
 
-    def _run_scheduler(self, group, user):
-        group.sudo(user).run_scheduler()
+    def _run_scheduler(self, user):
+        self.env['procurement.group'].sudo(user).run_scheduler(
+            use_new_cursor=False, company_id=False
+        )
