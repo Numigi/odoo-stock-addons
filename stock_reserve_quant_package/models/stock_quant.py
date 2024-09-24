@@ -16,11 +16,18 @@ class StockQuant(models.Model):
         owner_id=None,
         strict=False,
     ):
-        quants = super(StockQuant, self)._gather(
-                product_id, location_id, lot_id, package_id, owner_id, strict
+        quants = super()._gather(
+            product_id, location_id, lot_id, package_id, owner_id, strict
         )
-        if package_id and not strict:
-            quants = quants.filtered(
-                lambda m: m.package_id == package_id or False
-            )
+
+        # Filter quants based on the context for package reservation
+        if self._context.get("reserve_full_package"):
+            quants = self._filter_quants_by_package(quants, package_id)
+
         return quants
+
+    def _filter_quants_by_package(self, quants, package_id):
+        """Filter quants based on the package ID."""
+        if package_id:
+            return quants.filtered(lambda m: m.package_id == package_id)
+        return quants.filtered(lambda m: not m.package_id)

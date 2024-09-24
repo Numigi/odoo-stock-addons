@@ -1,89 +1,122 @@
 # © 2022 - Numigi (tm) and all its contributors (https://bit.ly/numigiens)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from itertools import groupby
-from operator import itemgetter
-
 from odoo import models
+from collections import defaultdict
 from odoo.tools.float_utils import float_compare, float_is_zero
-from odoo.addons.stock.models.stock_move import StockMove
 
 
 class MyStockMove(models.Model):
     _inherit = "stock.move"
 
-    def _check_move_map_quant_package(self, moves, package):
-        """ This method checks that all product of the package (quant) are well
-         present in the moves of the picking. """
-        all_in = True
-        precision_digits = self.env['decimal.precision'].precision_get(
-            'Product Unit of Measure')
-        grouped_quants = {}
-        for k, g in groupby(
-                sorted(package.quant_ids, key=lambda q: q.product_id),
-                key=lambda q: q.product_id):
-            grouped_quants[k] = \
-                sum(self.env['stock.quant'].browse(
-                    list(g)[0].id).mapped('quantity'))
+    def _check_move_map_quant_package(self, package, moves):
+        """
+        Check if the package can fully fulfill the products in the given moves.
+        The package will only be considered if:
+        1. It contains all the required products with exact or higher quantities.
+        2. All products in the package have corresponding moves.
+        3. The moves must fulfill the **entire** quantity in the package
+        for every product.
+        """
+        # Group quants by product and sum their quantities in the package
+        grouped_quants = defaultdict(float)
+        for quant in package.quant_ids:
+            grouped_quants[quant.product_id] += quant.quantity
 
-        grouped_ops = {}
-        for k, g in groupby(
-                sorted(moves, key=lambda m: m.product_id),
-                key=lambda m: m.product_id):
-            grouped_ops[k] = \
-                sum(self.env['stock.move'].browse(
-                    list(g)[0].id).mapped('product_uom_qty'))
-        if any(not float_is_zero(
-                grouped_quants.get(key, 0) - grouped_ops.get(key, 0),
-                precision_digits=precision_digits) for key in grouped_quants):
-            all_in = False
-        return all_in
+        # Group moves by product and sum their required quantities
+        grouped_ops = defaultdict(float)
+        for move in moves:
+            grouped_ops[move.product_id] += move.product_uom_qty
 
-    def _get_quant_package_to_reserve(self, quant_package, move, moves):
-        """ This method verify if all moves products exist in quants without
-        package or if they belong to the same quant package.
-        Then return the common package if exist"""
-        packages = self.env['stock.quant'].search(
-            [('product_id', '=', move.product_id.id),
-             ('location_id', '=', move.location_id.id),
+        # Ensure that all products in the package have moves and
+        # their quantities exactly match
+        all_fulfilled = all(
+            grouped_ops.get(product, 0) == grouped_quants.get(product, 0)
+            for product in grouped_quants
+        )
+
+        # Return the matching moves for the package only if
+        # all quantities are fully fulfilled
+        package_moves = self.env['stock.move']
+        if all_fulfilled:
+            package_moves = moves.filtered(lambda m: m.product_id in grouped_quants)
+
+        return package_moves
+
+    def _get_quant_package_to_reserve(self, moves):
+        """
+        Find the packages that can fully fulfill the moves. 
+        If no package can fulfill the moves, it returns un-packaged products.
+        """
+        # Search for quants that are not reserved and
+        # match the products and locations in the moves
+        quants = self.env['stock.quant'].search(
+            [('product_id', 'in', moves.mapped('product_id').ids),
+             ('location_id', 'in', moves.mapped('location_id').ids),
              ('reserved_quantity', '=', 0),
-             ], order="package_id desc").mapped('package_id')
-        if packages:
-            # checks that all product of the package (quant)
-            # are well present in the moves of the picking
-            for package in packages:
-                all_in = \
-                    self._check_move_map_quant_package(
-                        moves, package)
-                if all_in:
-                    quant_package = package
-                    break
-        return quant_package
+             ('quantity', '>', 0),
+             ('package_id', '!=', False)],
+            order="package_id desc"
+        )
+
+        # Prefetch necessary fields to improve performance
+        packages = quants.mapped('package_id').with_context(prefetch_fields=False)
+
+        # Sort packages by the number of quants they contain,
+        # prioritizing larger packages
+        packages = sorted(packages, key=lambda p: len(p.quant_ids), reverse=True)
+
+        next_moves = moves
+        package_moves_map = defaultdict(list)
+
+        # Try to find packages that can fully cover the moves
+        for package in packages:
+            # If package has reserved Quants pass to next package
+            if package.quant_ids.filtered(lambda q: q.reserved_quantity):
+                continue
+            if next_moves:
+                # Check if the package can completely fulfill some moves
+                package_moves = self._check_move_map_quant_package(
+                    package, next_moves
+                )
+                if package_moves:
+                    package_moves_map[package] = package_moves
+                    # Subtract the moves covered by the package from
+                    # the remaining moves
+                    next_moves = next_moves - package_moves_map[package]
+        # If there are still unfulfilled moves, or no package was found,
+        # assign the un-packaged moves
+        if next_moves or not package_moves_map:
+            package_moves_map[None] = next_moves
+        return package_moves_map
 
     def _action_assign(self):
         assigned_moves = self.env['stock.move']
         partially_available_moves = self.env['stock.move']
-        reserved_availability = {move: move.reserved_availability for move in self}
+        reserved_availability = {
+            move: move.reserved_availability for move in self}
         roundings = {move: move.product_id.uom_id.rounding for move in self}
         moves = self.filtered(
             lambda m: m.state in ['confirmed', 'waiting', 'partially_available']
         )
-        for move in moves:
-            quant_package = self.env['stock.quant.package']
-            rounding = roundings[move]
-            missing_reserved_uom_quantity = (
-                move.product_uom_qty - reserved_availability[move]
-            )
-            missing_reserved_quantity = move.product_uom._compute_quantity(
-                missing_reserved_uom_quantity,
-                move.product_id.uom_id,
-                rounding_method='HALF-UP'
-            )
-            if move.location_id.should_bypass_reservation()\
-                    or move.product_id.type == 'consu':
-                return super()._action_assign()
-            else:
-                if not move.move_orig_ids:
+        moves_by_package = self._get_quant_package_to_reserve(moves)
+        package_list = list(moves_by_package.keys())
+        for package in package_list:
+            for move in moves_by_package[package]:
+                rounding = roundings[move]
+                missing_reserved_uom_quantity = (
+                    move.product_uom_qty - reserved_availability[move]
+                )
+                missing_reserved_quantity = move.product_uom._compute_quantity(
+                    missing_reserved_uom_quantity,
+                    move.product_id.uom_id,
+                    rounding_method='HALF-UP'
+                )
+                if move.location_id.should_bypass_reservation()\
+                        or move.product_id.type == 'consu':
+                    return super(MyStockMove, move)._action_assign()
+                if (not move.move_orig_ids
+                        and move.procure_method != 'make_to_order'):
                     if move.procure_method == 'make_to_order':
                         continue
                     # If we don't need any quantity, consider the move assigned.
@@ -91,40 +124,30 @@ class MyStockMove(models.Model):
                     if float_is_zero(need, precision_rounding=rounding):
                         assigned_moves |= move
                         continue
-                    # check if we can reserve the whole package
-                    quant_package = \
-                        self._get_quant_package_to_reserve(
-                            quant_package, move, moves)
-                    if quant_package:
-                        forced_package_id = \
-                            move.package_level_id.package_id or \
-                            quant_package or None
-                    else:
-                        forced_package_id = \
-                            move.package_level_id.package_id or None
-                    # Reserve new quants and create move lines accordingly.
-                    forced_package_id = move.package_level_id.package_id or None
+                    forced_package_id = (move.package_level_id.package_id
+                                         or package or None)
                     available_quantity = \
-                        self.env['stock.quant']._get_available_quantity(
+                        self.env['stock.quant'].with_context(
+                            reserve_full_package=True
+                            )._get_available_quantity(
                             move.product_id, move.location_id,
                             package_id=forced_package_id
                         )
                     if available_quantity <= 0:
                         continue
                     taken_quantity = \
-                        move._update_reserved_quantity(
+                        move.with_context(
+                            reserve_full_package=True
+                            )._update_reserved_quantity(
                             need, available_quantity,
                             move.location_id, package_id=forced_package_id,
                             strict=False
                         )
-                    if float_is_zero(taken_quantity,
-                                     precision_rounding=rounding):
+                    if float_is_zero(taken_quantity, precision_rounding=rounding):
                         continue
                     if float_compare(need, taken_quantity,
                                      precision_rounding=rounding) == 0:
                         assigned_moves |= move
                     else:
                         partially_available_moves |= move
-                else:
-                    return super()._action_assign()
-        return super()._action_assign()
+                return super(MyStockMove, move)._action_assign()
