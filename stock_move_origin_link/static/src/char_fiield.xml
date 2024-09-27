@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-inherit="web.CharField" owl="1" t-inherit-mode="extension" >
-        <xpath expr="//t[@t-if='props.readonly']"  position="replace">
+        <xpath expr="//t[@t-if='props.readonly']" position="replace">
             <t t-if="props.readonly">
-                <t t-if="props.isOrigin">
-                    <t t-if="props.OriginUrl">
-                        <a href="demo.com"><span t-esc="formattedValue" /></a>
+                <t t-if="props.hasOrigin">
+                    <t t-if="props.originUrl">
+                        <a t-attf-href="{{props.originUrl}}" t-on-click.prevent="onLinkClick"><span t-esc="formattedValue" /></a>
                     </t>
                     <t t-else="">
                         <span t-esc="formattedValue" />
                     </t>
-                  </t>
+                </t>
                 <t t-else="">
                     <span t-esc="formattedValue" />
                 </t>
             </t>
         </xpath>
-   </t>
+    </t>
 </templates>

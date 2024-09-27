@@ -15,6 +15,6 @@
         "views/stock_move_line_views.xml",
     ],
     "assets": {
-        "web.assets_backend": ["stock_move_origin_link/static/src/views/*"],
+        "web.assets_backend": ["stock_move_origin_link/static/src/*"],
     },
 }

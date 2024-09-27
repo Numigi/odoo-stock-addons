@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id="stock_move_line_list_with_origin" model="ir.ui.view">
+    <record id="view_move_line_tree" model="ir.ui.view">
         <field name="name">Stock Move Line List: Add origin</field>
         <field name="model">stock.move.line</field>
         <field name="type">tree</field>
