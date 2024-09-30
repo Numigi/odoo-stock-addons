@@ -29,6 +29,7 @@
         "stock_orderpoint_secondary_unit",
         "stock_orderpoint_procurement_date",
         "stock_picking_barcode",
+        "stock_picking_delivery_carrier_required",
         "stock_picking_groupby_parent_affiliate",
         "stock_picking_responsible_editable",
         "stock_picking_secondary_unit_demand",
