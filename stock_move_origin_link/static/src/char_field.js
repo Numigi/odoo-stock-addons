@@ -8,14 +8,15 @@ import rpc from "web.rpc";
 
 const VALID_MODELS = ["stock.picking", "stock.move", "stock.move.line"];
 
+// AccessVerifier Class for caching access checks
 class AccessVerifier extends Component {
     constructor() {
         super(...arguments);
         this._accessCache = new Map();
     }
 
+    // Check if the model is readable, with caching
     async isModelReadable(model) {
-
         if (!this._accessCache.has(model)) {
             const result = await rpc.query({
                 model: model,
@@ -28,61 +29,66 @@ class AccessVerifier extends Component {
     }
 }
 
+// Global instance of AccessVerifier
 const accessVerifier = new AccessVerifier();
 const originCache = new Map();
 
+// Patch CharField prototype
 patch(CharField.prototype, 'stock_move_origin_link_charfield', {
     setup() {
         this.props.hasOrigin = this.hasOriginField();
         this.actionService = useService("action");
         this._super(...arguments);
 
-        onWillStart(async () => {
-            if (!this.props.originUrl && this.props.hasOrigin) {
-                await this.updateOriginUrl(this.props.record);
-            }
-        });
+        // Setup hooks
+        onWillStart(this.updateOriginIfNeeded.bind(this));
+        onWillUpdateProps(this.handleUpdateProps.bind(this));
+        onMounted(this.updateOriginIfNeeded.bind(this));
+    },
 
-        onWillUpdateProps(async (nextProps) => {
-            if (nextProps.record !== this.props.record && !nextProps.originUrl && this.props.hasOrigin) {
-                await this.updateOriginUrl(nextProps.record);
-            }
-        });
+    // Consolidate origin update logic
+    async updateOriginIfNeeded() {
+        if (!this.props.originUrl && this.props.hasOrigin) {
+            await this.updateOriginUrl(this.props.record);
+        }
+    },
 
-        onMounted(async () => {
-            if (!this.props.originUrl && this.props.hasOrigin) {
-                await this.updateOriginUrl(this.props.record);
-            }
-        });
+    async handleUpdateProps(nextProps) {
+        if (nextProps.record !== this.props.record && !nextProps.originUrl && this.props.hasOrigin) {
+            await this.updateOriginUrl(nextProps.record);
+        }
     },
 
     async updateOriginUrl(record) {
         try {
-            if (!this.props.originUrl && originCache.has(record.id)) {
+            if (originCache.has(record.id)) {
                 const cachedOrigin = originCache.get(record.id);
                 this.props.originRecord = cachedOrigin.record;
                 this.props.originUrl = cachedOrigin.url;
-            } else if (!this.props.originUrl) {
-                this.props.hasOrigin = this.hasOriginField();
+                return;
+            }
+
+            if (this.hasOriginField()) {
                 const originRecord = await this.computeOriginUrl(record);
                 const originUrl = originRecord ? `#id=${originRecord.id}&model=${originRecord.model}` : null;
                 this.props.originRecord = originRecord;
                 this.props.originUrl = originUrl;
+
                 if (originRecord) {
                     originCache.set(record.id, { record: originRecord, url: originUrl });
                 }
             }
         } catch (error) {
-            console.error('Failed to update origin URL:', error);
-            this.props.originUrl = null;
-            this.props.originRecord = null;
+            this.handleError('Failed to update origin URL:', error);
         }
     },
 
+    // Check if the field has an origin
     hasOriginField() {
-        return this.props.name === 'origin' && VALID_MODELS.includes(this.props.record.resModel);
+        return this.props.name === 'origin' && VALID_MODELS.includes(this.props.record.resModel) && this.props.record.data.origin;
     },
 
+    // Fetch the form view action
     async getRecordFormViewAction(record) {
         try {
             return await rpc.query({
@@ -91,27 +97,23 @@ patch(CharField.prototype, 'stock_move_origin_link_charfield', {
                 args: [[record.id]],
             });
         } catch (error) {
-            console.error('Error fetching form view action:', error);
+            this.handleError('Error fetching form view action:', error);
             return null;
         }
     },
 
+    // Handle link click event
     async onLinkClick(event) {
         event.preventDefault();
         event.stopPropagation();
 
-        try {
-            const originRecord = this.props.originRecord;
-            if (originRecord) {
-                const action = await this.getRecordFormViewAction(originRecord);
-                this.actionService.doAction(action);
-
-            }
-        } catch (error) {
-            console.error('Error handling link click:', error);
+        if (this.props.originRecord) {
+            const action = await this.getRecordFormViewAction(this.props.originRecord);
+            this.actionService.doAction(action);
         }
     },
 
+    // Check if a module is installed, with caching
     async isModuleInstalled(moduleName) {
         try {
             const result = await rpc.query({
@@ -119,21 +121,21 @@ patch(CharField.prototype, 'stock_move_origin_link_charfield', {
                 method: "search_read",
                 args: [[["name", "=", moduleName], ["state", "=", "installed"]]],
             });
-            return result.length > 0 ? result : null;
+            return result.length > 0;
         } catch (error) {
-            console.error(`Error checking if module ${moduleName} is installed:`, error);
-            return null;
+            this.handleError(`Error checking if module ${moduleName} is installed:`, error);
+            return false;
         }
     },
 
+    // Fetch documents based on origin field
     async fetchDocumentsByOrigin(modelName, moduleName, record) {
         try {
-            const installedModules = await this.isModuleInstalled(moduleName);
-            if (!installedModules) {
+            if (!(await this.isModuleInstalled(moduleName))) {
                 return false;
             }
-            const isReadable = await accessVerifier.isModelReadable(modelName);
-            if (!isReadable) {
+
+            if (!(await accessVerifier.isModelReadable(modelName))) {
                 return false;
             }
 
@@ -142,35 +144,42 @@ patch(CharField.prototype, 'stock_move_origin_link_charfield', {
                 method: "search_read",
                 args: [[["name", "=", record.data.origin]], ["name"]],
             });
+
             return data.length ? { ...data[0], model: modelName } : false;
 
         } catch (error) {
-            console.error(`Error fetching documents for model ${modelName}:`, error);
+            this.handleError(`Error fetching documents for model ${modelName}:`, error);
             return false;
         }
     },
 
+    // Compute origin URL by checking various models
     async computeOriginUrl(record) {
         try {
-            const purchaseOrder = await this.fetchDocumentsByOrigin("purchase.order", "purchase", record);
-            if (purchaseOrder) return purchaseOrder;
-
-            const saleOrder = await this.fetchDocumentsByOrigin("sale.order", "sale", record);
-            if (saleOrder) return saleOrder;
-
-            const mrpProduction = await this.fetchDocumentsByOrigin("mrp.production", "mrp", record);
-            return mrpProduction || null;
-
+            return (
+                await this.fetchDocumentsByOrigin("purchase.order", "purchase", record) ||
+                await this.fetchDocumentsByOrigin("sale.order", "sale", record) ||
+                await this.fetchDocumentsByOrigin("mrp.production", "mrp", record) ||
+                null
+            );
         } catch (error) {
-            console.error('Error computing origin URL:', error);
+            this.handleError('Error computing origin URL:', error);
             return null;
         }
+    },
+
+    // Error handling helper
+    handleError(message, error) {
+        console.error(message, error);
+        this.props.originUrl = null;
+        this.props.originRecord = null;
     }
 });
 
+// Extend CharField props
 CharField.props = {
     ...CharField.props,
     hasOrigin: { type: Boolean, optional: true },
     originUrl: { type: String, optional: true },
-    originRecord: { type: Object, optional: true }
+    originRecord: { type: Object, optional: true },
 };
