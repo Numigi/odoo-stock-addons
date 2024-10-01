@@ -7,7 +7,7 @@
     "category": "Stock",
     "description": "Add a link to the origin document from stock moves.",
     "summary": "Add a link to the origin document from stock moves.",
-    "maintainer": "numigi",
+    "author": "Numigi",
     "website": "https://bit.ly/numigi-com",
     "license": "LGPL-3",
     "depends": ["stock"],
