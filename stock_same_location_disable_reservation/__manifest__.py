@@ -3,14 +3,15 @@
 
 {
     "name": "Stock Same Location Disable Reservation",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["stock"],
-    "summary": "Prevent the system from reserving inventory in an origin location similar to the destination location",
+    "summary": """Prevent the system from reserving inventory in an origin
+location similar to the destination location""",
     "data": [],
     "installable": True,
 }
