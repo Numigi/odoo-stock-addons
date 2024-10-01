@@ -14,7 +14,9 @@ class TestReservePackage(SavepointCase):
              "email": "testing@testmail.com",
              "login": "Testing"}
         )
-        cls.user.groups_id = cls.env.ref("stock.group_stock_user")
+        cls.user.groups_id |= cls.env.ref("stock.group_stock_user")
+        cls.user.groups_id |= cls.env.ref("stock.group_production_lot")
+        cls.user.groups_id |= cls.env.ref('stock.group_stock_multi_locations')
 
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
@@ -30,6 +32,13 @@ class TestReservePackage(SavepointCase):
         cls.product_B = cls.env["product.product"].create(
             {
                 "name": "Product B",
+                "type": "product",
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
+            }
+        )
+        cls.product_C = cls.env["product.product"].create(
+            {
+                "name": "Product C",
                 "type": "product",
                 "uom_id": cls.env.ref("uom.product_uom_unit").id,
             }
@@ -55,8 +64,16 @@ class TestReservePackage(SavepointCase):
                 "product_uom_qty": 2.0,
             }
         )
-
-        cls.group = cls.stock_move_A.group_id
+        cls.stock_move_C = cls.env["stock.move"].create(
+            {
+                "name": "stock move",
+                "location_id": cls.stock_location.id,
+                "location_dest_id": cls.customer_location.id,
+                "product_id": cls.product_C.id,
+                "product_uom": cls.env.ref("uom.product_uom_unit").id,
+                "product_uom_qty": 3.0,
+            }
+        )
 
         cls.package_A = cls.env["stock.quant.package"].create(
             {"name": 'PACK0000001', "location_id": cls.stock_location.id}
@@ -83,13 +100,26 @@ class TestReservePackage(SavepointCase):
                 "owner_id": None,
             }
         )
+        cls.quant_C = cls.env["stock.quant"].create(
+            {
+                "product_id": cls.product_C.id,
+                "location_id": cls.stock_location.id,
+                "quantity": 4,
+                "owner_id": None,
+            }
+        )
 
     def test_move_all_package(self):
         self.stock_move_A._action_confirm()
         self.stock_move_B._action_confirm()
-        self._run_scheduler(self.group, self.user)
+        self.stock_move_C._action_confirm()
+        self._run_scheduler(self.user)
+        # Move with qty of product not equal to same qty of product in package
         assert self.stock_move_A.reserved_availability == 0.0
+        # Move with qty of product equal to the qty of product in package
         assert self.stock_move_B.reserved_availability == 2.0
+        # Move with product not present in any package
+        assert self.stock_move_C.reserved_availability == 3.0
 
-    def _run_scheduler(self, group, user):
-        group.sudo(user).run_scheduler()
+    def _run_scheduler(self, user):
+        self.env['procurement.group'].sudo(user).run_scheduler()
