@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.ListRenderer.RecordRow" owl="1" t-inherit-mode="extension" >
+        <xpath expr="//t[@t-if='!isInvisible']" position="replace">
+            <t t-if="!isInvisible">
+                <t t-if="column.name === 'origin' and ['stock.picking', 'stock.move', 'stock.move.line'].includes(record.resModel)">
+                <Field name="column.name" record="record" type="column.widget" class="getFieldClass(column)" fieldInfo="props.archInfo.fieldNodes[column.name]" setDirty="(isDirty) => this.setDirty(isDirty)" readonly="props.activeActions?.edit === false and !record.isNew"/>
+                </t>
+                <t t-elif="canUseFormatter(column, record)" t-out="getFormattedValue(column, record)"/>
+                <Field t-else="" name="column.name" record="record" type="column.widget" class="getFieldClass(column)" fieldInfo="props.archInfo.fieldNodes[column.name]" setDirty="(isDirty) => this.setDirty(isDirty)" readonly="props.activeActions?.edit === false and !record.isNew"/>
+            </t>
+        </xpath>
+   </t>
+</templates>

@@ -14,6 +14,7 @@ RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS
 USER odoo
 
 COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
+COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
 COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 COPY stock_quant_by_category /mnt/extra-addons/stock_quant_by_category
 

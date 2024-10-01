@@ -13,6 +13,7 @@
     "depends": [
         "stock",
         "stock_account_visibility",
+        "stock_move_origin_link",
         "stock_picking_show_address",
         "stock_quant_by_category",
     ],

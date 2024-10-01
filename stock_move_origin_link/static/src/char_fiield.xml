@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.CharField" owl="1" t-inherit-mode="extension" >
+        <xpath expr="//span[@t-esc='formattedValue']" position="replace">
+                <t t-if="props.hasOrigin and props.originUrl">
+                    <a t-attf-href="{{props.originUrl}}" t-on-click.prevent="onLinkClick">
+                        <span t-esc="formattedValue" />
+                    </a>
+                </t>
+                <t t-else="">
+                    <span t-esc="formattedValue" />
+                </t>
+        </xpath>
+    </t>
+</templates>
