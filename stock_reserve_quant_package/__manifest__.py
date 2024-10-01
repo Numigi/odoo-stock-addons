@@ -4,7 +4,7 @@
 {
     "name": "Stock Reserve Quant Package",
     "summary": "Force Quant reservation by package",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "category": "Inventory",
     "author": "Numigi",
     "license": "LGPL-3",
