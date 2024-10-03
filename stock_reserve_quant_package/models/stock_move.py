@@ -93,11 +93,6 @@ class MyStockMove(models.Model):
         return package_moves_map
 
     def _action_assign(self):
-        assigned_moves = self.env['stock.move']
-        partially_available_moves = self.env['stock.move']
-        reserved_availability = {
-            move: move.reserved_availability for move in self}
-        roundings = {move: move.product_id.uom_id.rounding for move in self}
         moves = self.filtered(
             lambda m: m.state in ['confirmed', 'waiting', 'partially_available']
         )
@@ -107,22 +102,23 @@ class MyStockMove(models.Model):
         package_list = list(moves_by_package.keys())
         for package in package_list:
             for move in moves_by_package[package]:
-                rounding = roundings[move]
-                missing_reserved_uom_quantity = (
-                    move.product_uom_qty - reserved_availability[move]
-                )
-                missing_reserved_quantity = move.product_uom._compute_quantity(
-                    missing_reserved_uom_quantity,
-                    move.product_id.uom_id,
-                    rounding_method='HALF-UP'
-                )
                 if move.location_id.should_bypass_reservation()\
                         or move.product_id.type == 'consu':
-                    return super(MyStockMove, move)._action_assign()
+                    continue
                 else:
                     if not move.move_orig_ids:
                         if move.procure_method == 'make_to_order':
                             continue
+                        assigned_moves = self.env['stock.move']
+                        rounding = move.product_id.uom_id.rounding
+                        missing_reserved_uom_quantity = (
+                            move.product_uom_qty - move.reserved_availability
+                        )
+                        missing_reserved_quantity = move.product_uom._compute_quantity(
+                            missing_reserved_uom_quantity,
+                            move.product_id.uom_id,
+                            rounding_method='HALF-UP'
+                        )
                         # If we don't need any quantity, consider the move assigned.
                         need = missing_reserved_quantity
                         if float_is_zero(need, precision_rounding=rounding):
@@ -138,6 +134,7 @@ class MyStockMove(models.Model):
                                 package_id=forced_package_id
                             )
                         if available_quantity <= 0:
+                            self = self - move
                             continue
                         taken_quantity = \
                             move.with_context(
@@ -149,11 +146,13 @@ class MyStockMove(models.Model):
                             )
                         if float_is_zero(taken_quantity,
                                          precision_rounding=rounding):
+                            self = self - move
                             continue
                         if float_compare(need, taken_quantity,
                                          precision_rounding=rounding) == 0:
                             assigned_moves |= move
                         else:
-                            partially_available_moves |= move
+                            self = self - move
                     else:
-                        return super(MyStockMove, move)._action_assign()
+                        continue
+        return super(MyStockMove, self)._action_assign()
