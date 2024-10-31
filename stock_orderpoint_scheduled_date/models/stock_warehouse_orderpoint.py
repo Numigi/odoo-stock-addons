@@ -8,15 +8,20 @@ class stockWarehouseOrderpoint(models.Model):
     _inherit = "stock.warehouse.orderpoint"
 
     scheduled_date = fields.Date("Scheduled Date")
+    previous_scheduled_date = fields.Date(
+        "Previous Scheduled Date", default=fields.Date.today()
+    )
 
     @api.depends('rule_ids', 'product_id.seller_ids',
                  'product_id.seller_ids.delay', 'scheduled_date')
     def _compute_lead_days(self):
         for orderpoint in self.with_context(bypass_delay_description=True):
-            if not orderpoint.scheduled_date:
-                return super(stockWarehouseOrderpoint, orderpoint)._compute_lead_days()
-            else:
+            if orderpoint.scheduled_date:
                 orderpoint.lead_days_date = orderpoint.scheduled_date
+            elif orderpoint.previous_scheduled_date:
+                orderpoint.lead_days_date = orderpoint.previous_scheduled_date
+            else:
+                super(stockWarehouseOrderpoint, orderpoint)._compute_lead_days()
 
     def open_set_schedule_date_wizard(self):
         wizard = self.env['stock.warehouse.orderpoint.schedule.date'].create({})
@@ -28,5 +33,7 @@ class stockWarehouseOrderpoint(models.Model):
 
     def action_replenish(self):
         result = super(stockWarehouseOrderpoint, self).action_replenish()
-        self.write({"scheduled_date": False})
+        self.write(
+            {"previous_scheduled_date": self.scheduled_date, "scheduled_date": False}
+        )
         return result
