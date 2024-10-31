@@ -22,18 +22,19 @@ Configuration
 -------------
 In the form view of a product, the supplier reference can be found under the Purchase tab.
 
-.. image:: stock_picking_product_supplier/static/description/product_template_form.png
+.. image:: static/description/product_template_form.png
 
 The value defined on the product is displayed on stock move lines during the receipt.
 
-.. image:: stock_picking_product_supplier/static/description/picking_form.png
+.. image:: static/description/picking_form.png
 
 Usage
 -----
 In the form view of a stock move line, the supplier reference of the product is displayed on each line during receipt.
 
-.. image:: stock_picking_product_supplier/static/description/purchase_order_form.png
+.. image:: static/description/purchase_order_form.png
 
 Contributors
 ------------
 * Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+*
