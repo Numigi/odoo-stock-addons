@@ -16,8 +16,6 @@ RUN mkdir -p "${THIRD_PARTY_ADDONS}" && chown -R odoo "${THIRD_PARTY_ADDONS}"
 COPY ./gitoo.yml /gitoo.yml
 RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS}"
 
-USER odoo
-
 
 COPY product_category_safe_change /mnt/extra-addons/product_category_safe_change
 COPY product_packaging_dimension_decimal /mnt/extra-addons/product_packaging_dimension_decimal
