@@ -33,6 +33,7 @@
         # in conflict with OCA/OCA/stock-logistics-warehouse module: stock_secondary_unit
         # loaded from Numigi/odoo-stock-addons module: stock_quant_secondary_unit
         "stock_picking_groupby_parent_affiliate",
+        "stock_picking_product_supplier",
         "stock_picking_responsible_editable",
         "stock_picking_secondary_unit_demand",
         "stock_picking_show_address",
