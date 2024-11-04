@@ -18,14 +18,12 @@ class StockMoveLine(models.Model):
         "picking_id.partner_id", "product_id", "product_id.seller_ids.name"
     )
     def _compute_product_supplier_name(self):
-        self.write({"product_supplier_name" : False})
-        for line in self.filtered(
-            lambda l: l.picking_id
-            and l.picking_id.partner_id
-            and l.product_id.product_tmpl_id.seller_ids
-        ):
-            suppliers = line.product_id.product_tmpl_id.seller_ids.filtered(
-                lambda l: l.name == line.picking_id.partner_id
-            )
-            if suppliers:
-                line.product_supplier_name = suppliers[0].name.name
+        for line in self:
+            line.product_supplier_name = False
+            partner = line.picking_id.partner_id
+            if partner and line.product_id.product_tmpl_id.seller_ids:
+                suppliers = line.product_id.product_tmpl_id.seller_ids.filtered(
+                    lambda s: s.name == partner
+                )
+                if suppliers:
+                    line.product_supplier_name = suppliers[0].name.name
