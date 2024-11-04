@@ -1,7 +1,7 @@
 Stock Picking Product Supplier
 ==============================
 
-This module extends the module `stock`.
+This module enhances the functionality of the stock module, adding the supplier reference information on stock move lines during incoming receipts.
 
 Table of Contents
 -----------------
@@ -12,29 +12,24 @@ Table of Contents
 
 Overview
 --------
-This module displays the supplier reference of the product on stock move lines during receipts. The supplier reference is retrieved based on the supplier associated with the incoming transfer.
+The ``Stock Picking Product Supplier`` module displays the supplier reference for products on stock move lines specifically during receipt operations. This supplier reference is automatically retrieved based on the supplier associated with the incoming transfer.
 
-As a user with access to goods receipts, you will notice a new field on stock move lines.
-
-This field is displayed exclusively on transfers of the receipt type and is propagated from the product form under the Purchase tab.
+When handling incoming receipts, users will see a new field on each stock move line displaying the relevant supplier reference. This field is visible only on transfers of type "Receipt" and pulls information from the supplier reference set in the Purchase tab of the product form.
 
 Configuration
 -------------
-In the form view of a product, the supplier reference can be found under the Purchase tab.
+To configure this feature, navigate to the Purchase tab on the product form view. Here, you can specify the supplier reference, which will then display on stock move lines during receipt operations.
 
 .. image:: static/description/product_template_form.png
-
-The value defined on the product is displayed on stock move lines during the receipt.
 
 .. image:: static/description/picking_form.png
 
 Usage
 -----
-In the form view of a stock move line, the supplier reference of the product is displayed on each line during receipt.
+During the processing of an incoming receipt, the supplier reference for each product will be shown on its respective stock move line. This helps users quickly reference supplier information directly within the receipt view.
 
 .. image:: static/description/purchase_order_form.png
 
 Contributors
 ------------
 * Numigi (tm) and all its contributors (https://bit.ly/numigiens)
-*
