@@ -31,8 +31,7 @@
                             t-on-click.prevent="onLinkClick">
                     </button>
                 </t>
-            </div>
-            
+            </div>            
         </xpath>
     </t>
 </templates>
