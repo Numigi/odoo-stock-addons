@@ -73,7 +73,6 @@ patch(CharField.prototype, 'stock_move_origin_link_charfield', {
                 const originUrl = originRecord ? `#id=${originRecord.id}&model=${originRecord.model}` : null;
                 this.props.originRecord = originRecord;
                 this.props.originUrl = originUrl;
-
                 if (originRecord) {
                     originCache.set(record.id, { record: originRecord, url: originUrl });
                 }

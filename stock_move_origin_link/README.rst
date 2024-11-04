@@ -15,10 +15,11 @@ form view of the production order.
 
 Stock Pickings
 --------------
-The feature is available for all stock picking list views.
+The feature is available for all stock picking list and form  views .
 Here is an example with the list view of delivery orders.
 
 .. image:: static/description/delivery_order_list.png
+    
 
 When clicking on `SO020`, the user is redirected to the sale order.
 
