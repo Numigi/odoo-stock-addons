@@ -16,6 +16,12 @@ As a user with access to transfers (stock picking), when I receive the error mes
 
 I need to click on "Desynchronize the reservation."
 
+.. image:: static/description/stock_picking_select_items.png
+
+.. image:: static/description/stock_picking_remove_reservation.png
+
+
+
 
 
 Contributors
