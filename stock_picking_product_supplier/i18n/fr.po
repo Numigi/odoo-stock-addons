@@ -36,6 +36,6 @@ msgid "Product Moves (Stock Move Line)"
 msgstr "Mouvements d'article (Ligne de mouvement de stock)"
 
 #. module: stock_picking_product_supplier
-#: model:ir.model.fields,field_description:stock_picking_product_supplier.field_stock_move_line__product_supplier_name
-msgid "Product Supplier Name"
+#: model:ir.model.fields,field_description:stock_picking_product_supplier.field_stock_move_line__product_supplier_code
+msgid "Product Supplier Code"
 msgstr "Référence fournisseur"
