@@ -10,11 +10,11 @@ form and unreserve move lines for the active picking.
 
 Usage
 -----
-As a user with access to transfers (stock picking), when I receive the error message:
+As a user with access stock manager , when I receive the error message:
 
 .. image:: static/description/stock_picking_error_message.png
 
-I need to click on "Desynchronize the reservation."
+I need to click on "Remove reservation"
 
 .. image:: static/description/stock_picking_select_items.png
 
