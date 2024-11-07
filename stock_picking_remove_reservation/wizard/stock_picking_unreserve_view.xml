@@ -25,7 +25,7 @@
             <field name="view_id" ref="stock_picking_unreserve_view"/>
             <field name="target">new</field>
             <field name="binding_model_id" ref="stock.model_stock_picking" />
-            <field name="binding_view_types">list</field>
+            <field name="binding_view_types">list,form</field>
         </record>
 
     </data>
