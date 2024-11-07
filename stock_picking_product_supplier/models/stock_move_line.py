@@ -15,7 +15,7 @@ class StockMoveLine(models.Model):
     )
 
     @api.depends(
-        "picking_id.partner_id", "product_id", "product_id.seller_ids.name"
+        "picking_id.partner_id", "product_id", "product_id.seller_ids.product_code"
     )
     def _compute_product_supplier_code(self):
         for line in self:
