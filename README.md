@@ -1,3 +1,5 @@
+[![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.numigi.tech/builds?repo=numigi/odoo-stock-addons&target_branch=14.0)
+
 # Stock Addons
 
 This repository contains Odoo addons related to inventory.
