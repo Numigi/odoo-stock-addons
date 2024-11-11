@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="stock_picking_correct_reservation_view" model="ir.ui.view">
+            <field name="name">Correct Reservation</field>
+            <field name="model">stock.picking.reservation</field>
+            <field name="arch" type="xml">
+            <form>
+                <separator string="Correct Reservation"/>
+                <form class="o_form_label">You should run this action only if you encounter a picking validation issue related to reservations.</form>
+                <footer>
+                    <button string="Correct Reservation" name="action_correct_reservation" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_stock_picking_correct_reservation" model="ir.actions.act_window">
+            <field name="name">Correct Reservation</field>
+            <field name="groups_id" eval="[(4,ref('stock.group_stock_manager'))]"/>
+            <field name="res_model">stock.picking.reservation</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_picking_correct_reservation_view"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+    </data>
+</odoo>
