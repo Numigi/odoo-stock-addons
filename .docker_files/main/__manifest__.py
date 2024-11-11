@@ -35,7 +35,7 @@
         "stock_picking_groupby_parent_affiliate",
         "stock_picking_product_supplier",
         "stock_picking_responsible_editable",
-        "stock_picking_remove_reservation",
+        "stock_picking_correct_reservation",
         "stock_picking_secondary_unit_demand",
         "stock_picking_show_address",
         "stock_picking_split_qty",

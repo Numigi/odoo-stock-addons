@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Stock Picking Remove Reservation",
+    "name": "Stock Picking Correct Reservation",
     "version": "14.0.1.0.0",
     "author": "Numigi",
     "maintainer": "Numigi",
@@ -10,10 +10,10 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["stock"],
-    "summary": "Allow to force stock picking unreservation.",
+    "summary": "Correct inconsistencies for reservation.",
     "data": [
         "security/ir.model.access.csv",
-        "wizard/stock_picking_unreserve_view.xml",
+        "wizard/stock_picking_reservation_view.xml",
     ],
     "installable": True,
 }
