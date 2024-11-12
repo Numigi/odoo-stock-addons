@@ -9,12 +9,11 @@ This action could unreserve stock.
 This action is executed only by users with group ``Administration``.
 
 We want to give access to users with group ``Inventory / Administrator``, to be able to execute this action. 
-And limit the correction to only selected stock picking.
 
 Description:
 ~~~~~~~~~~~~
 
-This module allows to execute the same code of 'Correct inconsistencies for reservation' action from a selected transfers.
+This module allows to execute the same code of 'Correct inconsistencies for reservation' action from picking.
 
 Usage
 -----
