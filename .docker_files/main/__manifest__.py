@@ -11,19 +11,31 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
+        "purchase",  # For testing stock_orderpoint_scheduled_date
         "product_category_safe_change",
         "product_packaging_dimension_decimal",
         "stock_account_visibility",
         "stock_auto_assign_disabled",
-        # "stock_auto_assign_disabled_jit",
+        "stock_auto_assign_disabled_jit",
         "stock_change_qty_reason_enhanced",
         "stock_immediate_transfer_disable",
+        "stock_location_dest_width",
         "stock_location_position_alphanum",
         "stock_move_location_domain_improved",
         "stock_move_origin_link",
         "stock_move_valuation_adjustment",
+        "stock_orderpoint_picking_groupby_date",
+        "stock_orderpoint_scheduled_date",
+        "stock_orderpoint_secondary_unit",
+        "stock_orderpoint_procurement_date",
+        "stock_picking_barcode",
+        # "stock_picking_delivery_carrier_required", TA#68633
+        # in conflict with OCA/OCA/stock-logistics-warehouse module: stock_secondary_unit
+        # loaded from Numigi/odoo-stock-addons module: stock_quant_secondary_unit
         "stock_picking_groupby_parent_affiliate",
+        "stock_picking_product_supplier",
         "stock_picking_responsible_editable",
+        "stock_picking_correct_reservation",
         "stock_picking_secondary_unit_demand",
         "stock_picking_show_address",
         "stock_picking_split_qty",

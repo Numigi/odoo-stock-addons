@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_barcode
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-06 16:33+0000\n"
+"PO-Revision-Date: 2024-06-06 16:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_barcode
+#: model_terms:ir.ui.view,arch_db:stock_picking_barcode.stock_picking_type_view_form_inherit
+msgid "Barcode"
+msgstr "Code-barres"
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking___barcode_scanned
+msgid "Barcode Scanned"
+msgstr "Code-barres numérisé"
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking_type__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking_type__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking_type____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking_type__nomenclature_id
+msgid "Nomenclature"
+msgstr "Nomenclature"
+
+#. module: stock_picking_barcode
+#: model:ir.model,name:stock_picking_barcode.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Type de préparation"
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking__scan_barcode
+#: model:ir.model.fields,field_description:stock_picking_barcode.field_stock_picking_type__scan_barcode
+msgid "Scan from this Operation Type"
+msgstr "Numériser depuis ce type d'opération"
+
+#. module: stock_picking_barcode
+#: code:addons/stock_picking_barcode/models/stock_picking.py:0
+#, python-format
+msgid "The barcode \"%(barcode)s\" does not match any product on this picking."
+msgstr "Le code barre \"%(barcode)s\" ne correspond à aucun article sur ce transfert."
+
+#. module: stock_picking_barcode
+#: code:addons/stock_picking_barcode/models/stock_picking.py:0
+#, python-format
+msgid "The barcode \"%(barcode)s\" does not match any product."
+msgstr "Le code barre \"%(barcode)s\" ne correspond à aucun article."
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,help:stock_picking_barcode.field_stock_picking_type__nomenclature_id
+msgid ""
+"This field allows you to choose the Barcodes Nomenclature\n"
+"        to apply when scanning."
+msgstr ""
+"Ce champ vous permet de choisir la nomenclature des code-barres à appliquer "
+"lors de la numérisation."
+
+#. module: stock_picking_barcode
+#: model:ir.model,name:stock_picking_barcode.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,help:stock_picking_barcode.field_stock_picking___barcode_scanned
+msgid "Value of the last barcode scanned."
+msgstr "Valeur du dernier code-barres scanné."
+
+#. module: stock_picking_barcode
+#: model:ir.model.fields,help:stock_picking_barcode.field_stock_picking_type__scan_barcode
+msgid ""
+"When this box is checked, a new “Scan” field is displayed on\n"
+"        transfers of this type of operation to allow scanning of a barcode."
+msgstr ""
+"Lorsque cette case est cochée, un nouveau champ “Code-barres numérisé” est "
+"affiché sur les transferts de ce type d’opération afin de permettre"
+" de numériser un code-barres."
+
+#. module: stock_picking_barcode
+#: code:addons/stock_picking_barcode/models/stock_picking.py:0
+#: code:addons/stock_picking_barcode/models/stock_picking.py:0
+#, python-format
+msgid "Wrong barcode"
+msgstr "Mauvais code-barres."

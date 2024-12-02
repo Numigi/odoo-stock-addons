@@ -3,7 +3,7 @@
 
 {
     "name": "Product Category Safe Change",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://bit.ly/numigi-com",
@@ -13,4 +13,5 @@
     "summary": "Add some restriction to the product category of articles",
     "data": [],
     "installable": True,
+    "auto_install": True,
 }

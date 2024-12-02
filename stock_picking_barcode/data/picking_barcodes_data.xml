@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    	<record id="picking_barcode_nomenclature" model="barcode.nomenclature">
+            <field name="name">Operations / Detailed Operations</field>
+        </record>
+
+        <record id="barcode_rule_picking_product_weight" model="barcode.rule">
+            <field name="name">Product Weight</field>
+            <field name="barcode_nomenclature_id" ref="picking_barcode_nomenclature"/>
+            <field name="sequence">10</field>
+            <field name="type">weight</field>
+            <field name="encoding">any</field>
+            <field name="pattern">.....{NNNDDD}</field>
+        </record>
+</odoo>

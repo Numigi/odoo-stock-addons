@@ -16,27 +16,34 @@ RUN mkdir -p "${THIRD_PARTY_ADDONS}" && chown -R odoo "${THIRD_PARTY_ADDONS}"
 COPY ./gitoo.yml /gitoo.yml
 RUN gitoo install-all --conf_file /gitoo.yml --destination "${THIRD_PARTY_ADDONS}"
 
-USER odoo
-
 
 COPY product_category_safe_change /mnt/extra-addons/product_category_safe_change
 COPY product_packaging_dimension_decimal /mnt/extra-addons/product_packaging_dimension_decimal
 COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
-# COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
+COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
 COPY stock_change_qty_reason_enhanced /mnt/extra-addons/stock_change_qty_reason_enhanced
 COPY stock_immediate_transfer_disable /mnt/extra-addons/stock_immediate_transfer_disable
+COPY stock_location_dest_width /mnt/extra-addons/stock_location_dest_width
 COPY stock_location_position_alphanum /mnt/extra-addons/stock_location_position_alphanum
 COPY stock_move_location_domain_improved /mnt/extra-addons/stock_move_location_domain_improved
 COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
 COPY stock_move_valuation_adjustment /mnt/extra-addons/stock_move_valuation_adjustment
+COPY stock_orderpoint_picking_groupby_date /mnt/extra-addons/stock_orderpoint_picking_groupby_date
+COPY stock_orderpoint_scheduled_date /mnt/extra-addons/stock_orderpoint_scheduled_date
+COPY stock_orderpoint_secondary_unit /mnt/extra-addons/stock_orderpoint_secondary_unit
+COPY stock_orderpoint_procurement_date /mnt/extra-addons/stock_orderpoint_procurement_date
+COPY stock_picking_barcode /mnt/extra-addons/stock_picking_barcode
+COPY stock_picking_delivery_carrier_required /mnt/extra-addons/stock_picking_delivery_carrier_required
 COPY stock_picking_groupby_parent_affiliate /mnt/extra-addons/stock_picking_groupby_parent_affiliate
 COPY stock_picking_responsible_editable /mnt/extra-addons/stock_picking_responsible_editable
+COPY stock_picking_correct_reservation /mnt/extra-addons/stock_picking_correct_reservation
 COPY stock_picking_secondary_unit_demand /mnt/extra-addons/stock_picking_secondary_unit_demand
 COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 COPY stock_picking_split_qty /mnt/extra-addons/stock_picking_split_qty
 COPY stock_picking_tracking_reference /mnt/extra-addons/stock_picking_tracking_reference
 COPY stock_product_packaging_dimension /mnt/extra-addons/stock_product_packaging_dimension
+COPY stock_picking_product_supplier /mnt/extra-addons/stock_picking_product_supplier
 COPY stock_product_packaging_uom /mnt/extra-addons/stock_product_packaging_uom
 COPY stock_production_lot_rma /mnt/extra-addons/stock_production_lot_rma
 COPY stock_quant_by_category /mnt/extra-addons/stock_quant_by_category
