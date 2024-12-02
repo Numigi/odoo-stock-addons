@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 class stockWarehouseOrderpoint(models.Model):
     _inherit = "stock.warehouse.orderpoint"
 
-    scheduled_date = fields.Datetime(
+    scheduled_date = fields.Date(
         "Scheduled Date", help="The date when this replenishment should be scheduled."
     )
 
@@ -46,11 +46,11 @@ class stockWarehouseOrderpoint(models.Model):
     @api.model
     def action_open_set_schedule_date_wizard(self):
         """Open a wizard to set the scheduled date."""
-        wizard = self.env['stock.warehouse.orderpoint.schedule.date'].create({})
+        wizard = self.env["stock.warehouse.orderpoint.schedule.date"].create({})
         wizard.orderpoint_ids = self
         action = wizard.get_formview_action()
-        action['target'] = 'new'
-        action['name'] = _('Set Schedule Date')
+        action["target"] = "new"
+        action["name"] = _("Set Schedule Date")
         return action
 
     @api.model
