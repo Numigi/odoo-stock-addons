@@ -18,7 +18,7 @@ class StockRule(models.Model):
         )
         if scheduled_date:
             # Convert the scheduled date from string to UTC datetime
-            manual_delay = (scheduled_date - fields.Datetime.now()).days
+            manual_delay = (scheduled_date - fields.Date.today()).days
             delay += manual_delay
             if not bypass_delay_description:
                 delay_description += (
