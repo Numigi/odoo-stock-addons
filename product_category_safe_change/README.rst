@@ -12,7 +12,11 @@ I edit the product and change the category of the product.
 I click on the `Save` button.
 I get the following blocking error message:
 
-.. image:: static/description/product_category_changed.png
+.. image:: static/description/product_variant_category.png
+
+.. image:: static/description/product_variant_new_category.png
+
+.. image:: static/description/product_variant_category_validate_error.png
 
 
 * Restricting Inventory Properties Setup Changes

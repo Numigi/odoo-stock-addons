@@ -24,7 +24,7 @@ class ProductCategory(models.Model):
         if len(existing_move_lines):
             product_lists = existing_move_lines.mapped("product_id.name")
             product_lists = (
-                # select three first products found on move lines
+                # Select only three first products found on move lines
                 # if there is more than 3
                 product_lists[:3]
                 if len(product_lists) > 3
@@ -33,10 +33,10 @@ class ProductCategory(models.Model):
             products = "\n- ".join(product_lists)
             primary_text = _(
                 """
-You cannot modify Stock Properties Parameters when
-related Products have existing Stock Moves.\n
-Stock moves exist for the following products:
-- """
+                    You cannot modify Stock Properties Parameters when
+                    related Products have existing Stock Moves.\n
+                    Stock moves exist for the following products:
+                    - """
             )
             raise UserError(primary_text + products)
 
