@@ -1,4 +1,4 @@
-- url: https://{{GIT_TOKEN}}@github.com/numigi/odoo-base-addons
+- url: https://github.com/Numigi/odoo-base-addons
   branch: "14.0"
 
 - url: https://github.com/Numigi/odoo-partner-addons
