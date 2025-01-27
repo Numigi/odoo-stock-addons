@@ -1,4 +1,9 @@
 
+- url: https://github.com/Numigi/odoo-product-addons
+  branch: "16.0"
+  includes:
+    - product_extra_views
+
 - url: https://github.com/OCA/account-financial-tools
   branch: "16.0"
   includes:
