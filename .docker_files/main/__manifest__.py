@@ -11,10 +11,10 @@
     "category": "Other",
     "summary": "Install all addons required for testing.",
     "depends": [
-        "stock",
         "stock_account_visibility",
         "stock_move_origin_link",
         "stock_picking_show_address",
+        "stock_product_extra_views",
         "stock_quant_by_category",
     ],
     "installable": True,

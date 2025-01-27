@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock.product_template_action_product" model="ir.actions.act_window">
+        <field name="view_mode">kanban,tree,form,pivot,graph</field>
+    </record>
+
+    <record id="stock.stock_product_normal_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+    </record>
+
+</odoo>
