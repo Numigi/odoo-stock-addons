@@ -18,7 +18,7 @@ class TestProductSupplierName(TransactionCase):
             }
         )
 
-    def test_product_supplier_name_with_supplier(self):
+    def test_product_supplier_code_with_supplier(self):
         picking = self.env["stock.picking"].create({
             "partner_id": self.partner.id,
             "picking_type_id": self.env.ref("stock.picking_type_in").id,
@@ -35,9 +35,9 @@ class TestProductSupplierName(TransactionCase):
                 "location_dest_id": self.env.ref("stock.stock_location_stock").id,
             }
         )
-        self.assertEqual(move_line.product_supplier_name, self.supplier.name)
+        self.assertEqual(move_line.product_supplier_code, "SLL_CODE")
 
-    def test_product_supplier_name_without_supplier(self):
+    def test_product_supplier_code_without_supplier(self):
         self.product.write({"seller_ids": [(5, 0, 0)]})
         picking = self.env["stock.picking"].create({
             "partner_id": self.partner.id,
@@ -55,4 +55,4 @@ class TestProductSupplierName(TransactionCase):
                 "location_dest_id": self.env.ref("stock.stock_location_stock").id,
             }
         )
-        self.assertFalse(move_line.product_supplier_name)
+        self.assertFalse(move_line.product_supplier_code)

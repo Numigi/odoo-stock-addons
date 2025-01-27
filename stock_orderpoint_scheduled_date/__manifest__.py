@@ -3,7 +3,7 @@
 {
     "name": "Stock Orderpoint Scheduled Date",
     "summary": "Force Scheduled Date in Stock Orderpoint",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.1",
     "category": "stock",
     "website": "https://bit.ly/numigi-com",
     "author": "Numigi",
@@ -14,6 +14,6 @@
     "data": [
         "security/ir.model.access.csv",
         "views/stock_orderpoint_views.xml",
-        "wizard/stock_warehouse_orderpoint_schedule_date.xml"
+        "wizard/stock_warehouse_orderpoint_schedule_date.xml",
     ],
 }

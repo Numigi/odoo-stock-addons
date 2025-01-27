@@ -37,7 +37,7 @@ COPY stock_picking_barcode /mnt/extra-addons/stock_picking_barcode
 COPY stock_picking_delivery_carrier_required /mnt/extra-addons/stock_picking_delivery_carrier_required
 COPY stock_picking_groupby_parent_affiliate /mnt/extra-addons/stock_picking_groupby_parent_affiliate
 COPY stock_picking_responsible_editable /mnt/extra-addons/stock_picking_responsible_editable
-COPY stock_picking_remove_reservation /mnt/extra-addons/stock_picking_remove_reservation
+COPY stock_picking_correct_reservation /mnt/extra-addons/stock_picking_correct_reservation
 COPY stock_picking_secondary_unit_demand /mnt/extra-addons/stock_picking_secondary_unit_demand
 COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
 COPY stock_picking_split_qty /mnt/extra-addons/stock_picking_split_qty
