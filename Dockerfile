@@ -17,6 +17,7 @@ COPY product_category_safe_change /mnt/extra-addons/product_category_safe_change
 COPY stock_account_visibility /mnt/extra-addons/stock_account_visibility
 COPY stock_move_origin_link /mnt/extra-addons/stock_move_origin_link
 COPY stock_picking_show_address /mnt/extra-addons/stock_picking_show_address
+COPY stock_product_extra_views /mnt/extra-addons/stock_product_extra_views
 COPY stock_quant_by_category /mnt/extra-addons/stock_quant_by_category
 
 COPY .docker_files/main /mnt/extra-addons/main
