@@ -12,11 +12,11 @@ I edit the product and change the category of the product.
 I click on the `Save` button.
 I get the following blocking error message:
 
-.. image:: static/description/product_variant_category.png
+.. image:: https://raw.githubusercontent.com/Numigi/odoo-stock-addons/16.0/product_category_safe_change/static/description/product_variant_category.png
 
-.. image:: static/description/product_variant_new_category.png
+.. image:: https://raw.githubusercontent.com/Numigi/odoo-stock-addons/16.0/product_category_safe_change/static/description/product_variant_new_category.png
 
-.. image:: static/description/product_variant_category_validate_error.png
+.. image:: https://raw.githubusercontent.com/Numigi/odoo-stock-addons/16.0/product_category_safe_change/static/description/product_variant_category_validate_error.png
 
 
 * Restricting Inventory Properties Setup Changes
@@ -32,7 +32,7 @@ And then click on the `Save` button.
 
 If I have products with this category that have stock move, I get the following blocking error message:
 
-.. image:: static/description/product_category_account_updated.png
+.. image:: https://raw.githubusercontent.com/Numigi/odoo-stock-addons/16.0/product_category_safe_change/static/description/product_category_account_updated.png
 
 Multi company contrainsts
 -------------------------
