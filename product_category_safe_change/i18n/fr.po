@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_category_safe_change
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-31 12:20+0000\n"
+"PO-Revision-Date: 2025-01-31 12:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_category_safe_change
+#. odoo-python
+#: code:addons/product_category_safe_change/models/product_category.py:0
+#, python-format
+msgid ""
+"\n"
+"                    You cannot modify Stock Properties Parameters when\n"
+"                    related Products have existing Stock Moves.\n"
+"\n"
+"                    Stock moves exist for the following products:\n"
+"                    - "
+msgstr ""
+"\n"
+"                    Vous ne pouvez pas modifier le paramétrage des propriétés de stock \n"
+"                    si un des articles de la catégorie a des mouvements de stock associés.\n"
+"\n"
+"                    Des mouvements de stock sont existants pour les articles suivants:\n"
+"                    - "
+
+#. module: product_category_safe_change
+#: model:ir.model,name:product_category_safe_change.model_product_template
+msgid "Product"
+msgstr "Produit"
+
+#. module: product_category_safe_change
+#: model:ir.model,name:product_category_safe_change.model_product_category
+msgid "Product Category"
+msgstr "Catégorie de produit"
+
+#. module: product_category_safe_change
+#: model:ir.model,name:product_category_safe_change.model_product_product
+msgid "Product Variant"
+msgstr "Variante de produit"
+
+#. module: product_category_safe_change
+#. odoo-python
+#: code:addons/product_category_safe_change/models/product.py:0
+#: code:addons/product_category_safe_change/models/product_template.py:0
+#, python-format
+msgid "You cannot modify the category of a Product with Stock Moves."
+msgstr ""
+"Vous ne pouvez pas modifier la catégorie d’un article ayant des mouvements "
+"de stocks associés."
