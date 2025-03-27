@@ -26,9 +26,3 @@
   branch: "12.0"
   includes:
     - web_widget_digitized_signature
-
-- url: https://github.com/OCA/stock-logistics-barcode
-  branch: "12.0"
-  includes:
-    - barcodes_generator_product
-    - barcodes_generator_abstract
