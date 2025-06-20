@@ -15,6 +15,7 @@ services:
     depends_on:
       - db
     command: odoo
+
     environment:
       - LOG_ODOO=/var/log/odoo
   db:
