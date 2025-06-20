@@ -14,7 +14,9 @@ services:
       - "8071:8071"
     depends_on:
       - db
-    command: odoo
+    # command: odoo
+    command: pytest -s /mnt/extra-addons/stock_account_fifo_fix_valuation -v --disable-warnings
+
     environment:
       - LOG_ODOO=/var/log/odoo
   db:

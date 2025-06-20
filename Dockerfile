@@ -17,6 +17,7 @@ USER odoo
 
 COPY product_category_safe_change /mnt/extra-addons/product_category_safe_change
 COPY purchase_warehouse_access /mnt/extra-addons/purchase_warehouse_access
+COPY stock_account_fifo_fix_valuation /mnt/extra-addons/stock_account_fifo_fix_valuation
 COPY stock_adjustment_lines_display /mnt/extra-addons/stock_adjustment_lines_display
 COPY stock_auto_assign_disabled /mnt/extra-addons/stock_auto_assign_disabled
 COPY stock_auto_assign_disabled_jit /mnt/extra-addons/stock_auto_assign_disabled_jit
