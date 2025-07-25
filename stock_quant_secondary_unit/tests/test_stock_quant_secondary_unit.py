@@ -1,4 +1,4 @@
-# © 2023 Numigi (tm) and all its contributors (https://bit.ly/numigiens)
+# © Numigi (tm) and all its contributors (https://numigi.com/r/home)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.addons.stock_secondary_unit.tests.test_stock_secondary_unit import (
