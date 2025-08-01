@@ -1,5 +1,5 @@
 ==================================
-STOCK ACCOUNT FIFO Stock Valuation
+Stock Account FIFO Stock Valuation
 ==================================
 This module fixes picking return stock valuation, especially stock valuation for FIFO
 and valuation is in automated mode.
