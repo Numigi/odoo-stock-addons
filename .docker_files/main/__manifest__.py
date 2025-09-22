@@ -53,6 +53,7 @@
         "stock_turnover_rate",
         "stock_turnover_rate_purchase",
         "stock_virtual_adjustment",
+        "stock_visibility_days",
     ],
     "installable": True,
 }
