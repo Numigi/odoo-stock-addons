@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_warehouse_orderpoint_tree_editable_visibility" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.tree.editable.visibility</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree_editable"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_forecast']" position="after">
+                <field name="visibility_days" string="Visibility Days"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_warehouse_orderpoint_form_visibility" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.form.visibility</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group[2]" position="inside">
+                 <field name="visibility_days"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

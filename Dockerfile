@@ -56,6 +56,7 @@ COPY stock_special_route /mnt/extra-addons/stock_special_route
 COPY stock_turnover_rate /mnt/extra-addons/stock_turnover_rate
 COPY stock_turnover_rate_purchase /mnt/extra-addons/stock_turnover_rate_purchase
 COPY stock_virtual_adjustment /mnt/extra-addons/stock_virtual_adjustment
+COPY stock_visibility_days /mnt/extra-addons/stock_visibility_days
 
 COPY .docker_files/main /mnt/extra-addons/main
 COPY .docker_files/odoo.conf /etc/odoo
