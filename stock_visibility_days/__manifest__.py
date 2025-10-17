@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Stock Visibility Days (V14 Backport)",
+    'name': "Stock Visibility Days",
     'summary': """
-        Backport of the 'visibility_days' feature for reordering rules
-        from Odoo 16 to V14.
+        Add the 'visibility_days' feature for reordering rules.
     """,
     'description': """
         This module introduces the 'visibility_days' field on reordering rules

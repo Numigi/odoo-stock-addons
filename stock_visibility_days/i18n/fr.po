@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-17 11:36+0000\n"
+"PO-Revision-Date: 2025-10-17 11:36+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+#. module: stock_visibility_days
+#: model:ir.model,name:stock_visibility_days.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+#. module: stock_visibility_days
+#: model:ir.model.fields,help:stock_visibility_days.field_stock_warehouse_orderpoint__visibility_days
+msgid ""
+"Consider the forecasted stock for this many days in the future when "
+"replenishing. Set to 0 for just-in-time."
+msgstr "Tenez compte du stock prévu pour un certain nombre de jours à l'avenir lors du réapprovisionnement. Définissez la valeur sur 0 pour un réapprovisionnement juste à temps."
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint__days_to_order
+msgid "Days To Order"
+msgstr "Jours de délai de commande"
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_res_config_settings__stock_visibility_days
+msgid "Global Visibility Days"
+msgstr "Jours de visibilité globale"
+#. module: stock_visibility_days
+#: model:ir.model.fields,help:stock_visibility_days.field_res_config_settings__stock_visibility_days
+msgid "Global visibility days to apply to all reordering rules."
+msgstr "Nombre de jours de visibilité à appliquer à toutes les règles de réapprovisionnement."
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_res_config_settings__id
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint__id
+msgid "ID"
+msgstr "ID"
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint__lead_days_date
+msgid "Lead Days Date"
+msgstr "Date des jours de délai"
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint__manufacturing_visibility_days
+msgid "Manufacturing Visibility Days"
+msgstr "Jours de visibilité de fabrication"
+#. module: stock_visibility_days
+#: model:ir.model,name:stock_visibility_days.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Règle de stock minimum"
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint__purchase_visibility_days
+msgid "Purchase Visibility Days"
+msgstr "Jours de visibilité d'achat"
+#. module: stock_visibility_days
+#: model_terms:ir.ui.view,arch_db:stock_visibility_days.res_config_settings_view_form_visibility
+msgid "Replenishment"
+msgstr "Réapprovisionnement"
+#. module: stock_visibility_days
+#: model:ir.model.fields,help:stock_visibility_days.field_stock_warehouse_orderpoint__days_to_order
+msgid "Safety days to create replenishment demands in advance."
+msgstr "Nombre de jours de sécurité pour créer des demandes de réapprovisionnement à l'avance."
+#. module: stock_visibility_days
+#: model_terms:ir.ui.view,arch_db:stock_visibility_days.res_config_settings_view_form_visibility
+msgid "Set a global number of visibility days for replenishment forecasts."
+msgstr "Définir un nombre global de jours de visibilité pour les prévisions de réapprovisionnement."
+#. module: stock_visibility_days
+#: model:ir.model.fields,field_description:stock_visibility_days.field_stock_warehouse_orderpoint__visibility_days
+#: model_terms:ir.ui.view,arch_db:stock_visibility_days.view_warehouse_orderpoint_tree_editable_visibility
+msgid "Visibility Days"
+msgstr "Jours de visibilité"
+#. module: stock_visibility_days
+#: model:ir.model.fields,help:stock_visibility_days.field_stock_warehouse_orderpoint__manufacturing_visibility_days
+msgid "Visibility Days applied on the manufacturing routes."
+msgstr "Jours de visibilité appliqués aux itinéraires de fabrication."
+#. module: stock_visibility_days
+#: model:ir.model.fields,help:stock_visibility_days.field_stock_warehouse_orderpoint__purchase_visibility_days
+msgid "Visibility Days applied on the purchase routes."
+msgstr "Jours de visibilité appliqués aux itinéraires d'achat."
