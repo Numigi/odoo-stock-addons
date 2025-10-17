@@ -15,9 +15,9 @@
         A global 'Visibility Days' parameter is also added in the inventory settings.
     """,
     'author': "Your Name",
-    'website': "https://www.your-company.com",
+    'website': "https://www.numigi.com",
     'category': 'Inventory/Inventory',
-    'version': '14.0.1.0.0',
+    'version': '14.0.1.1.0',
     'depends': [
         'stock',
         'purchase_stock',
