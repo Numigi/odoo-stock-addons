@@ -56,4 +56,3 @@ msgstr "Étagères (Y)"
 #: model:ir.model.fields,field_description:stock_location_position_alphanum.field_stock_location__posy
 msgid "Shelves (Y) (Integer)"
 msgstr "Étagères (Y) (Entier)"
-

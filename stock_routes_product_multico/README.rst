@@ -51,4 +51,3 @@ Contributors
 More information
 ----------------
 * Meet us at https://bit.ly/numigi-com
-

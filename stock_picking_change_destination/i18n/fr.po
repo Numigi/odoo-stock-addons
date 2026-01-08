@@ -119,4 +119,3 @@ msgstr ""
 #: model:ir.model,name:stock_picking_change_destination.model_stock_picking_change_destination
 msgid "stock.picking.change.destination"
 msgstr ""
-

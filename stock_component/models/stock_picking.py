@@ -19,4 +19,3 @@ class StockPicking(models.Model):
     def _compute_has_components(self):
         for line in self:
             line.has_components = bool(line.lot_id.component_ids)
-

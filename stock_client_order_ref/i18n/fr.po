@@ -25,4 +25,3 @@ msgstr "Référence Client"
 #: model:ir.model,name:stock_client_order_ref.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
-

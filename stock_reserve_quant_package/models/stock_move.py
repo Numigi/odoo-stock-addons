@@ -45,7 +45,7 @@ class MyStockMove(models.Model):
 
     def _get_quant_package_to_reserve(self, moves):
         """
-        Find the packages that can fully fulfill the moves. 
+        Find the packages that can fully fulfill the moves.
         If no package can fulfill the moves, it returns un-packaged products.
         """
         # Search for quants that are not reserved and
