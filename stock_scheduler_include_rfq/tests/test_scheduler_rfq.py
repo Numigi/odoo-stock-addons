@@ -30,7 +30,7 @@ class TestSchedulerRFQ(SavepointCase):
                 'min_qty': 1,
             })]
         })
-    
+
         # create reordering rule
         self.orderpoint = self.env['stock.warehouse.orderpoint'].create({
             'warehouse_id': self.warehouse_1.id,
@@ -39,7 +39,7 @@ class TestSchedulerRFQ(SavepointCase):
             'product_min_qty': 100.000,
             'product_max_qty': 200.000,
         })
-    
+
         # Create Delivery Order of 10 product
         self.purchase = self.env['purchase.order'].create({
             'partner_id': self.partner.id,

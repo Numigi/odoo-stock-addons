@@ -67,7 +67,7 @@ Expected result: I cannot change the category settings under any of the companie
 Expected result: I can modify the category settings under Company A. I cannot modify the item category since it is common to all companies.
 
 
-NOTICE : 
+NOTICE :
 This behavior is applied in the same way when I have several articles in the database:
 
 1. If the user tries to modify the parameters of a category under a company for which there is no stock.move associated via the products, the constraint is not applied.

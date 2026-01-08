@@ -45,7 +45,7 @@ class MyStockMove(models.Model):
 
     def _get_quant_package_to_reserve(self, moves):
         """
-        Find the packages that can fully fulfill the moves. 
+        Find the packages that can fully fulfill the moves.
         If no package can fulfill the moves, it returns un-packaged products.
         """
         # Search for quants that are not reserved and
@@ -93,6 +93,8 @@ class MyStockMove(models.Model):
         return package_moves_map
 
     def _action_assign(self):
+        if hasattr(self, '_filter_moves_for_auto_assign'):
+            self = self._filter_moves_for_auto_assign()
         moves = self.filtered(
             lambda m: m.state in ['confirmed', 'waiting', 'partially_available']
         )

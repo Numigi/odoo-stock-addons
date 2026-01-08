@@ -24,4 +24,3 @@ msgstr "De"
 #: model_terms:ir.ui.view,arch_db:stock_move_list_location.stock_move_list
 msgid "To"
 msgstr "Vers"
-
