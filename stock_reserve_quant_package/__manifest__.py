@@ -8,7 +8,10 @@
     "category": "Inventory",
     "author": "Numigi",
     "license": "LGPL-3",
-    "depends": ["sale", "stock"],
+    "depends": [
+        "sale",
+        "stock_auto_assign_disabled",
+                ],
     "data": [],
     "installable": True,
 }
