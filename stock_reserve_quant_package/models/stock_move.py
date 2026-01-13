@@ -98,7 +98,6 @@ class StockMove(models.Model):
 
     def _action_assign(self):
         # Apply the filter from the dependency module 'stock_auto_assign_disabled'
-        # if available. This sets the context to disable reservation if configured.
         if hasattr(self, '_filter_moves_for_auto_assign'):
             self = self._filter_moves_for_auto_assign()
 
@@ -111,6 +110,10 @@ class StockMove(models.Model):
             return super(StockMove, self)._action_assign()
 
         package_list = list(moves_by_package.keys())
+
+        # --- NEW: Track partial moves for manual state update ---
+        partially_available_moves = self.env['stock.move']
+
         for package in package_list:
             for move in moves_by_package[package]:
                 if move.location_id.should_bypass_reservation() \
@@ -130,13 +133,12 @@ class StockMove(models.Model):
                             move.product_id.uom_id,
                             rounding_method='HALF-UP'
                         )
-                        # If we don't need any quantity, consider the move assigned.
+
                         need = missing_reserved_quantity
                         if float_is_zero(need, precision_rounding=rounding):
                             assigned_moves |= move
                             continue
 
-                        # Use package or None (for bulk)
                         forced_package_id = (move.package_level_id.package_id
                                              or package or None)
 
@@ -148,10 +150,8 @@ class StockMove(models.Model):
                                 package_id=forced_package_id
                             )
 
-                        # --- STRICT LOGIC ENFORCEMENT ---
                         if available_quantity <= 0:
-                            # If we failed to find stock with our strict criteria (Package Match OR Loose Stock),
-                            # we MUST prevent super() from trying standard logic (which might break a package).
+                            # Strict logic: if not found in package/bulk, don't fallback to standard
                             self = self - move
                             continue
 
@@ -165,7 +165,6 @@ class StockMove(models.Model):
                             )
                         if float_is_zero(taken_quantity,
                                          precision_rounding=rounding):
-                            # Technical failure to reserve -> Block super to be safe/consistent.
                             self = self - move
                             continue
                         if float_compare(need, taken_quantity,
@@ -173,11 +172,14 @@ class StockMove(models.Model):
                             assigned_moves |= move
                         else:
                             # Partial reservation: we remove from self so super doesn't try to fill the rest
-                            # by breaking packages.
                             self = self - move
+                            # --- NEW: Track this move ---
+                            partially_available_moves |= move
                     else:
                         continue
 
-        # Final call to parent handles only moves we decided to skip completely (e.g. consu)
-        # or that were not processed in the loop logic at all.
+        # --- NEW: Update state for moves we processed exclusively ---
+        if partially_available_moves:
+            partially_available_moves.write({'state': 'partially_available'})
+
         return super(StockMove, self)._action_assign()
