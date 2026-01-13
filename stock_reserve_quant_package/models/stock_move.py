@@ -147,7 +147,12 @@ class StockMove(models.Model):
                                 move.product_id, move.location_id,
                                 package_id=forced_package_id
                             )
+
+                        # --- STRICT LOGIC ENFORCEMENT ---
                         if available_quantity <= 0:
+                            # If we failed to find stock with our strict criteria (Package Match OR Loose Stock),
+                            # we MUST prevent super() from trying standard logic (which might break a package).
+                            self = self - move
                             continue
 
                         taken_quantity = \
@@ -160,14 +165,19 @@ class StockMove(models.Model):
                             )
                         if float_is_zero(taken_quantity,
                                          precision_rounding=rounding):
+                            # Technical failure to reserve -> Block super to be safe/consistent.
+                            self = self - move
                             continue
                         if float_compare(need, taken_quantity,
                                          precision_rounding=rounding) == 0:
                             assigned_moves |= move
                         else:
+                            # Partial reservation: we remove from self so super doesn't try to fill the rest
+                            # by breaking packages.
                             self = self - move
                     else:
                         continue
 
-        # Final call to parent handles remaining moves (fallback logic)
+        # Final call to parent handles only moves we decided to skip completely (e.g. consu)
+        # or that were not processed in the loop logic at all.
         return super(StockMove, self)._action_assign()
