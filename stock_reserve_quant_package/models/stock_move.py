@@ -86,10 +86,6 @@ class MyStockMove(models.Model):
                     # Subtract the moves covered by the package from
                     # the remaining moves
                     next_moves = next_moves - package_moves_map[package]
-        # If there are still unfulfilled moves, or no package was found,
-        # assign the un-packaged moves
-        if next_moves or not package_moves_map:
-            package_moves_map[None] = next_moves
         return package_moves_map
 
     def _action_assign(self):
