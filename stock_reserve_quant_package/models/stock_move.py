@@ -6,7 +6,7 @@ from collections import defaultdict
 from odoo.tools.float_utils import float_compare, float_is_zero
 
 
-class MyStockMove(models.Model):
+class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _check_move_map_quant_package(self, package, moves):
@@ -69,6 +69,8 @@ class MyStockMove(models.Model):
         next_moves = moves
         package_moves_map = defaultdict(list)
         if not packages:
+            # If no packages are found, return everything as "bulk" (key None)
+            package_moves_map[None] = next_moves
             return package_moves_map
 
         # Try to find packages that can fully cover the moves
@@ -86,25 +88,35 @@ class MyStockMove(models.Model):
                     # Subtract the moves covered by the package from
                     # the remaining moves
                     next_moves = next_moves - package_moves_map[package]
+
         # If there are still unfulfilled moves, or no package was found,
-        # assign the un-packaged moves
+        # assign the un-packaged moves (bulk).
         if next_moves or not package_moves_map:
             package_moves_map[None] = next_moves
+
         return package_moves_map
 
     def _action_assign(self):
+        # Apply the filter from the dependency module 'stock_auto_assign_disabled'
         if hasattr(self, '_filter_moves_for_auto_assign'):
             self = self._filter_moves_for_auto_assign()
+
         moves = self.filtered(
             lambda m: m.state in ['confirmed', 'waiting', 'partially_available']
         )
         moves_by_package = self._get_quant_package_to_reserve(moves)
+
         if not moves_by_package:
-            return super(MyStockMove, self)._action_assign()
+            return super(StockMove, self)._action_assign()
+
         package_list = list(moves_by_package.keys())
+
+        # --- NEW: Track partial moves for manual state update ---
+        partially_available_moves = self.env['stock.move']
+
         for package in package_list:
             for move in moves_by_package[package]:
-                if move.location_id.should_bypass_reservation()\
+                if move.location_id.should_bypass_reservation() \
                         or move.product_id.type == 'consu':
                     continue
                 else:
@@ -114,34 +126,39 @@ class MyStockMove(models.Model):
                         assigned_moves = self.env['stock.move']
                         rounding = move.product_id.uom_id.rounding
                         missing_reserved_uom_quantity = (
-                            move.product_uom_qty - move.reserved_availability
+                                move.product_uom_qty - move.reserved_availability
                         )
                         missing_reserved_quantity = move.product_uom._compute_quantity(
                             missing_reserved_uom_quantity,
                             move.product_id.uom_id,
                             rounding_method='HALF-UP'
                         )
-                        # If we don't need any quantity, consider the move assigned.
+
                         need = missing_reserved_quantity
                         if float_is_zero(need, precision_rounding=rounding):
                             assigned_moves |= move
                             continue
+
                         forced_package_id = (move.package_level_id.package_id
                                              or package or None)
+
                         available_quantity = \
                             self.env['stock.quant'].with_context(
                                 reserve_full_package=True
-                                )._get_available_quantity(
+                            )._get_available_quantity(
                                 move.product_id, move.location_id,
                                 package_id=forced_package_id
                             )
+
                         if available_quantity <= 0:
+                            # Strict logic: if not found in package/bulk, don't fallback to standard
                             self = self - move
                             continue
+
                         taken_quantity = \
                             move.with_context(
                                 reserve_full_package=True
-                                )._update_reserved_quantity(
+                            )._update_reserved_quantity(
                                 need, available_quantity,
                                 move.location_id, package_id=forced_package_id,
                                 strict=False
@@ -154,7 +171,15 @@ class MyStockMove(models.Model):
                                          precision_rounding=rounding) == 0:
                             assigned_moves |= move
                         else:
+                            # Partial reservation: we remove from self so super doesn't try to fill the rest
                             self = self - move
+                            # --- NEW: Track this move ---
+                            partially_available_moves |= move
                     else:
                         continue
-        return super(MyStockMove, self)._action_assign()
+
+        # --- NEW: Update state for moves we processed exclusively ---
+        if partially_available_moves:
+            partially_available_moves.write({'state': 'partially_available'})
+
+        return super(StockMove, self)._action_assign()
