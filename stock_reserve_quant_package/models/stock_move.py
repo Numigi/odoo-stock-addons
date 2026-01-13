@@ -69,6 +69,8 @@ class MyStockMove(models.Model):
         next_moves = moves
         package_moves_map = defaultdict(list)
         if not packages:
+            # If no packages are found, return everything as "bulk" (key None)
+            package_moves_map[None] = next_moves
             return package_moves_map
 
         # Try to find packages that can fully cover the moves
@@ -86,21 +88,35 @@ class MyStockMove(models.Model):
                     # Subtract the moves covered by the package from
                     # the remaining moves
                     next_moves = next_moves - package_moves_map[package]
+
+        # If there are still unfulfilled moves, or no package was found,
+        # assign the un-packaged moves (bulk).
+        # This prevents these moves from going to super() logic which might break packages.
+        if next_moves or not package_moves_map:
+            package_moves_map[None] = next_moves
+
         return package_moves_map
 
     def _action_assign(self):
+        # Apply the filter from the dependency module 'stock_auto_assign_disabled'
+        # if available. This sets the context to disable reservation if configured.
         if hasattr(self, '_filter_moves_for_auto_assign'):
             self = self._filter_moves_for_auto_assign()
+
         moves = self.filtered(
             lambda m: m.state in ['confirmed', 'waiting', 'partially_available']
         )
         moves_by_package = self._get_quant_package_to_reserve(moves)
+
+        # If there is nothing to process (neither package nor bulk returned by the method),
+        # let the standard logic handle it immediately.
         if not moves_by_package:
             return super(MyStockMove, self)._action_assign()
+
         package_list = list(moves_by_package.keys())
         for package in package_list:
             for move in moves_by_package[package]:
-                if move.location_id.should_bypass_reservation()\
+                if move.location_id.should_bypass_reservation() \
                         or move.product_id.type == 'consu':
                     continue
                 else:
@@ -110,7 +126,7 @@ class MyStockMove(models.Model):
                         assigned_moves = self.env['stock.move']
                         rounding = move.product_id.uom_id.rounding
                         missing_reserved_uom_quantity = (
-                            move.product_uom_qty - move.reserved_availability
+                                move.product_uom_qty - move.reserved_availability
                         )
                         missing_reserved_quantity = move.product_uom._compute_quantity(
                             missing_reserved_uom_quantity,
@@ -122,22 +138,33 @@ class MyStockMove(models.Model):
                         if float_is_zero(need, precision_rounding=rounding):
                             assigned_moves |= move
                             continue
+
+                        # Use package or None (for bulk)
                         forced_package_id = (move.package_level_id.package_id
                                              or package or None)
+
                         available_quantity = \
                             self.env['stock.quant'].with_context(
                                 reserve_full_package=True
-                                )._get_available_quantity(
+                            )._get_available_quantity(
                                 move.product_id, move.location_id,
                                 package_id=forced_package_id
                             )
+
+                        # Logic explanation:
+                        # 1. If disable_reservation=True (via stock_auto_assign_disabled), available_quantity will be 0.
+                        # 2. If we are on bulk (forced_package_id=None), available_quantity will return 0 for package-only locations.
                         if available_quantity <= 0:
+                            # We remove the move from self only if we failed to reserve it via package logic.
+                            # Since we are in a custom loop, we don't want to fallback to standard reservation here
+                            # if the package logic failed (to enforce strict package reservation or disable logic).
                             self = self - move
                             continue
+
                         taken_quantity = \
                             move.with_context(
                                 reserve_full_package=True
-                                )._update_reserved_quantity(
+                            )._update_reserved_quantity(
                                 need, available_quantity,
                                 move.location_id, package_id=forced_package_id,
                                 strict=False
@@ -153,4 +180,6 @@ class MyStockMove(models.Model):
                             self = self - move
                     else:
                         continue
+
+        # Final call to parent to handle any remaining logic or moves not covered above
         return super(MyStockMove, self)._action_assign()
