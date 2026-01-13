@@ -6,7 +6,7 @@ from collections import defaultdict
 from odoo.tools.float_utils import float_compare, float_is_zero
 
 
-class MyStockMove(models.Model):
+class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _check_move_map_quant_package(self, package, moves):
@@ -91,7 +91,6 @@ class MyStockMove(models.Model):
 
         # If there are still unfulfilled moves, or no package was found,
         # assign the un-packaged moves (bulk).
-        # This prevents these moves from going to super() logic which might break packages.
         if next_moves or not package_moves_map:
             package_moves_map[None] = next_moves
 
@@ -108,10 +107,8 @@ class MyStockMove(models.Model):
         )
         moves_by_package = self._get_quant_package_to_reserve(moves)
 
-        # If there is nothing to process (neither package nor bulk returned by the method),
-        # let the standard logic handle it immediately.
         if not moves_by_package:
-            return super(MyStockMove, self)._action_assign()
+            return super(StockMove, self)._action_assign()
 
         package_list = list(moves_by_package.keys())
         for package in package_list:
@@ -150,15 +147,7 @@ class MyStockMove(models.Model):
                                 move.product_id, move.location_id,
                                 package_id=forced_package_id
                             )
-
-                        # Logic explanation:
-                        # 1. If disable_reservation=True (via stock_auto_assign_disabled), available_quantity will be 0.
-                        # 2. If we are on bulk (forced_package_id=None), available_quantity will return 0 for package-only locations.
                         if available_quantity <= 0:
-                            # We remove the move from self only if we failed to reserve it via package logic.
-                            # Since we are in a custom loop, we don't want to fallback to standard reservation here
-                            # if the package logic failed (to enforce strict package reservation or disable logic).
-                            self = self - move
                             continue
 
                         taken_quantity = \
@@ -171,7 +160,6 @@ class MyStockMove(models.Model):
                             )
                         if float_is_zero(taken_quantity,
                                          precision_rounding=rounding):
-                            self = self - move
                             continue
                         if float_compare(need, taken_quantity,
                                          precision_rounding=rounding) == 0:
@@ -181,5 +169,5 @@ class MyStockMove(models.Model):
                     else:
                         continue
 
-        # Final call to parent to handle any remaining logic or moves not covered above
-        return super(MyStockMove, self)._action_assign()
+        # Final call to parent handles remaining moves (fallback logic)
+        return super(StockMove, self)._action_assign()
