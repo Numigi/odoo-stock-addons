@@ -19,8 +19,9 @@ class StockMove(models.Model):
             "stock_auto_assign_disabled.config", "off"
         )
         stock_auto_assign_disable = self._context.get("stock_auto_assign_disable")
+        is_superuser = self.env.user == self.env.ref('base.user_root')
 
-        if stock_auto_assign_disable:
+        if stock_auto_assign_disable or is_superuser :
             if mode == "all":
                 # Return self with the flag in context.
                 # The caller will use this recordset which already carries the context.
