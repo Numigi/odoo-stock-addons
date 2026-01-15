@@ -18,10 +18,10 @@ class StockMove(models.Model):
         mode = self.env["ir.config_parameter"].sudo().get_param(
             "stock_auto_assign_disabled.config", "off"
         )
-        stock_auto_assign_disable = self._context.get("stock_auto_assign_disable")
-        is_superuser = self.env.user == self.env.ref('base.user_root')
-
-        if stock_auto_assign_disable or is_superuser :
+        is_scheduler = self._context.get("stock_auto_assign_disable")
+        # is_project_move check if the move is linked to a project task
+        is_project_move = any(getattr(move, 'task_id', False) for move in self)
+        if is_scheduler or is_project_move:
             if mode == "all":
                 # Return self with the flag in context.
                 # The caller will use this recordset which already carries the context.
