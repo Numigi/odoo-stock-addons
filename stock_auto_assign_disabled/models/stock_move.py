@@ -22,6 +22,7 @@ class StockMove(models.Model):
 
         # is_project_move check if the move is linked to a project task
         is_project_move = any(getattr(move, 'task_id', False) for move in self)
+        _logger.info("Stock Auto Assign: is_project_move state: %s", is_project_move)
 
         if is_scheduler or is_project_move:
             if mode == "all":
@@ -34,5 +35,6 @@ class StockMove(models.Model):
         return self
 
     def _action_assign(self):
+        _logger.info("_action_assign from stock_auto_assign_disabled")
         moves_to_assign = self._filter_moves_for_auto_assign()
         return super(StockMove, moves_to_assign)._action_assign()

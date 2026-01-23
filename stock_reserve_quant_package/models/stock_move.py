@@ -98,6 +98,7 @@ class StockMove(models.Model):
 
     def _action_assign(self):
         # Apply the filter from the dependency module 'stock_auto_assign_disabled'
+        _logger.info("_action_assign from stock_reserve_quant_package")
         if hasattr(self, '_filter_moves_for_auto_assign'):
             self = self._filter_moves_for_auto_assign()
 
