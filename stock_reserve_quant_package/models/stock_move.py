@@ -186,3 +186,4 @@ class StockMove(models.Model):
             partially_available_moves.write({'state': 'partially_available'})
 
         return super(StockMove, self)._action_assign()
+
