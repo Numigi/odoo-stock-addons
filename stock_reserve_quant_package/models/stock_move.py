@@ -101,6 +101,9 @@ class StockMove(models.Model):
         if hasattr(self, '_filter_moves_for_auto_assign'):
             self = self._filter_moves_for_auto_assign()
 
+        if self._context.get('disable_reservation'):
+            return super(StockMove, self)._action_assign()
+
         moves = self.filtered(
             lambda m: m.state in ['confirmed', 'waiting', 'partially_available']
         )
