@@ -1,0 +1,26 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * stock_zero_cost_protection
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-07 10:00+0000\n"
+"PO-Revision-Date: 2023-11-07 10:00+0000\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: stock_zero_cost_protection
+#: code:addons/stock_zero_cost_protection/models/stock_move.py:0
+#, python-format
+msgid "You are not allowed to validate this stock move with a zero cost. Please contact your stock manager."
+msgstr "Vous n'êtes pas autorisé à valider ce mouvement de stock avec un coût nul, merci de contacter votre gestionnaire de stock."
+
+#. module: stock_zero_cost_protection
+#: model:res.groups,name:stock_zero_cost_protection.group_allow_zero_cost_move
+msgid "Allow zero cost stock moves"
+msgstr "Autoriser les mouvements de stock à coût nul"
