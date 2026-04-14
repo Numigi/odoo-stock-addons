@@ -24,7 +24,7 @@
         "stock_move_location_domain_improved",
         "stock_move_origin_link",
         "stock_move_valuation_adjustment",
-        #"stock_no_zero_cost",
+        # "stock_no_zero_cost", # in conflict with other stock move with zero cost
         "stock_orderpoint_picking_groupby_date",
         "stock_orderpoint_scheduled_date",
         "stock_orderpoint_secondary_unit",
