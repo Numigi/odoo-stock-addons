@@ -1,0 +1,254 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * stock_no_zero_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-14 12:30+0000\n"
+"PO-Revision-Date: 2026-04-14 12:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/wizard/stock_zero_cost_wizard.py:0
+#, python-format
+msgid "Action Forced: Zero cost valuation explicitly approved by %s on %s."
+msgstr "Action forcée : Valorisation à coût nul explicitement approuvée par %s le %s."
+
+#. module: stock_no_zero_cost
+#: model:res.groups,name:stock_no_zero_cost.group_allow_zero_cost_move
+msgid "Allow zero cost stock moves"
+msgstr "Autoriser les mouvements de stock à coût nul"
+
+#. module: stock_no_zero_cost
+#: model:res.groups,comment:stock_no_zero_cost.group_allow_zero_cost_move
+msgid ""
+"Allows users to validate stock moves (receipts, transfers, adjustments) even"
+" if the product valuation is zero."
+msgstr ""
+"Permet aux utilisateurs de valider les mouvements de stock (réceptions, "
+"transferts, ajustements) même si la valorisation de l'article est nulle."
+
+#. module: stock_no_zero_cost
+#: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.view_stock_zero_cost_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_mrp_production__id
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_no_zero_cost
+#: model:ir.model,name:stock_no_zero_cost.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__inventory_id
+msgid "Inventory Adjustment"
+msgstr "Ajustement d'inventaire"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_inventory____last_update
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__production_id
+msgid "Manufacturing Order"
+msgstr "Ordre de fabrication"
+
+#. module: stock_no_zero_cost
+#: model:ir.model,name:stock_no_zero_cost.model_mrp_production
+msgid "Production Order"
+msgstr "Ordre de fabrication"
+
+#. module: stock_no_zero_cost
+#: model:ir.model,name:stock_no_zero_cost.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"The following products have a 0.00 cost and will result in a zero valuation for the newly discovered stock: \n"
+"- %s\n"
+"\n"
+"Do you want to explicitly force this validation?"
+msgstr ""
+"Les articles suivants ont un coût de 0,00 et entraîneront une valorisation nulle pour le stock nouvellement découvert : \n"
+"- %s\n"
+"\n"
+"Voulez-vous forcer explicitement cette validation ?"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_picking.py:0
+#, python-format
+msgid ""
+"The following products have a 0.00 cost and will result in a zero valuation for this transfer: \n"
+"- %s\n"
+"\n"
+"Do you want to explicitly force this validation?"
+msgstr ""
+"Les articles suivants ont un coût de 0,00 et entraîneront une valorisation nulle pour ce transfert : \n"
+"- %s\n"
+"\n"
+"Voulez-vous forcer explicitement cette validation ?"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,help:stock_no_zero_cost.field_stock_move__zero_cost_approval_note
+msgid "Traces the user and date when a zero cost was explicitly approved."
+msgstr "Trace l'utilisateur et la date à laquelle un coût nul a été explicitement approuvé."
+
+#. module: stock_no_zero_cost
+#: model:ir.model,name:stock_no_zero_cost.model_stock_picking
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__picking_id
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: stock_no_zero_cost
+#: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.view_stock_zero_cost_wizard_form
+msgid "Validate (Force 0 Cost)"
+msgstr "Valider (Forcer le coût nul)"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_move.py:0
+#, python-format
+msgid ""
+"Validation Blocked: Product '%s' has a zero cost. Please validate the "
+"transfer via the standard interface to access the approval options, or "
+"contact your inventory manager."
+msgstr ""
+"Validation bloquée : l'article '%s' a un coût nul. Veuillez valider le "
+"transfert via l'interface standard pour accéder aux options d'approbation, "
+"ou contactez votre gestionnaire d'inventaire."
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__message
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/mrp_production.py:0
+#, python-format
+msgid ""
+"You are about to produce stockable products with a cost of 0.00: \n"
+"- %s\n"
+"\n"
+"Do you want to explicitly force this validation?"
+msgstr ""
+"Vous êtes sur le point de fabriquer des articles stockables avec un coût de 0,00 : \n"
+"- %s\n"
+"\n"
+"Voulez-vous forcer explicitement cette validation ?"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/mrp_production.py:0
+#, python-format
+msgid ""
+"You are not allowed to validate a Manufacturing Order yielding zero-cost "
+"products (%s). Please contact your inventory manager."
+msgstr ""
+"Vous n'êtes pas autorisé à valider un ordre de fabrication générant des "
+"articles à coût nul (%s). Veuillez contacter votre gestionnaire d'inventaire."
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_picking.py:0
+#, python-format
+msgid ""
+"You are not allowed to validate an Incoming or Internal stock move with a "
+"zero cost. Please contact your stock manager to authorize this transfer."
+msgstr ""
+"Vous n'êtes pas autorisé à valider un mouvement de stock entrant ou interne "
+"avec un coût nul. Veuillez contacter votre gestionnaire de stock pour "
+"autoriser ce transfert."
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"You cannot validate an inventory adjustment creating positive stock for "
+"zero-cost products (%s). Please update the product cost first."
+msgstr ""
+"Vous ne pouvez pas valider un ajustement d'inventaire créant du stock "
+"positif pour des articles à coût nul (%s). Veuillez d'abord mettre à jour "
+"le coût de l'article."
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_move__zero_cost_approval_note
+msgid "Zero Cost Approval Note"
+msgstr "Note d'approbation de coût nul"
+
+#. module: stock_no_zero_cost
+#: model:ir.model,name:stock_no_zero_cost.model_stock_zero_cost_wizard
+msgid "Zero Cost Confirmation Wizard"
+msgstr "Assistant de confirmation de coût nul"
+
+#. module: stock_no_zero_cost
+#: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.view_stock_zero_cost_wizard_form
+msgid "Zero Cost Valuation Warning"
+msgstr "Avertissement de valorisation à coût nul"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_inventory.py:0
+#, python-format
+msgid "Zero Cost Valuation Warning (Inventory)"
+msgstr "Avertissement de valorisation à coût nul (Inventaire)"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/mrp_production.py:0
+#, python-format
+msgid "Zero Cost Valuation Warning (Manufacturing)"
+msgstr "Avertissement de valorisation à coût nul (Fabrication)"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_picking.py:0
+#, python-format
+msgid "Zero Cost Valuation Warning (Transfer)"
+msgstr "Avertissement de valorisation à coût nul (Transfert)"
