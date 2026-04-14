@@ -10,14 +10,13 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     def _pre_action_done_hook(self):
-        print("""
-        Intercept the validation flow to check for zero cost moves.
-        Shows a wizard for authorized users, blocks unauthorized users.
-        """)
         # If the context tells us to skip (because the wizard was confirmed), we bypass
         if not self.env.context.get('skip_zero_cost_check'):
             pickings_to_warn = self.env['stock.picking']
             moves_to_warn = self.env['stock.move']
+
+            # 1. Initialisation de la liste pour stocker les noms des articles
+            products_with_zero_cost = []
 
             for picking in self:
                 for move in picking.move_lines:
@@ -30,6 +29,8 @@ class StockPicking(models.Model):
                             if float_is_zero(cost, precision_rounding=currency.rounding):
                                 pickings_to_warn |= picking
                                 moves_to_warn |= move
+                                # 2. Ajout du nom de l'article à la liste
+                                products_with_zero_cost.append(move.product_id.display_name)
 
             if pickings_to_warn:
                 # Security Check
@@ -41,14 +42,20 @@ class StockPicking(models.Model):
 
                 # Show the Wizard to the authorized manager
                 return {
-                    'name': _('Zero Cost Valuation Warning'),
+                    'name': _('Zero Cost Valuation Warning (Transfer)'),
                     'type': 'ir.actions.act_window',
                     'res_model': 'stock.zero.cost.wizard',
                     'view_mode': 'form',
+                    'views': [(False, 'form')],
                     'target': 'new',
                     'context': {
                         'default_picking_id': pickings_to_warn[0].id,
-                        'default_move_ids': [(6, 0, moves_to_warn.ids)]
+                        'default_move_ids': [(6, 0, moves_to_warn.ids)],  # 3. Attention à la virgule ici !
+                        'default_message': _(
+                            "The following products have a 0.00 cost and will result in a zero valuation "
+                            "for this transfer: \n- %s\n\n"
+                            "Do you want to explicitly force this validation?"
+                        ) % "\n- ".join(set(products_with_zero_cost))  # set() permet d'enlever les doublons
                     }
                 }
 

@@ -7,9 +7,9 @@
             <form string="Zero Cost Valuation Warning">
                 <field name="message" nolabel="1" readonly="1" widget="text" class="text-warning text-center font-weight-bold"/>
                 <group>
-                    <field name="picking_id" readonly="1"/>
-                     <field name="production_id" readonly="1"/>
-                     <field name="inventory_id" readonly="1"/>
+                    <field name="picking_id" readonly="1"  attrs="{'invisible': [('picking_id', '=', False)]}"/>
+                     <field name="production_id" readonly="1" attrs="{'invisible': [('production_id', '=', False)]}"/>
+                     <field name="inventory_id" readonly="1"  attrs="{'invisible': [('inventory_id', '=', False)]}"/>
                 </group>
                 <footer>
                     <button string="Validate (Force 0 Cost)" name="action_confirm" type="object" class="btn-primary"/>

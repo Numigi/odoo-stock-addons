@@ -42,6 +42,7 @@ class StockInventory(models.Model):
                     'type': 'ir.actions.act_window',
                     'res_model': 'stock.zero.cost.wizard',
                     'view_mode': 'form',
+                    'views': [(False, 'form')],
                     'target': 'new',
                     'context': {
                         'default_inventory_id': inventories_to_warn[0].id,

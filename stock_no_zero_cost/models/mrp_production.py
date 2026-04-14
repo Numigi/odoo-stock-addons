@@ -40,6 +40,7 @@ class MrpProduction(models.Model):
                     'type': 'ir.actions.act_window',
                     'res_model': 'stock.zero.cost.wizard',
                     'view_mode': 'form',
+                    'views': [(False, 'form')],
                     'target': 'new',
                     'context': {
                         'default_production_id': productions_to_warn[0].id,
@@ -51,3 +52,4 @@ class MrpProduction(models.Model):
                 }
 
         return super(MrpProduction, self).button_mark_done()
+
