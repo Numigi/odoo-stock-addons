@@ -214,11 +214,12 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot validate an inventory adjustment creating positive stock for "
-"zero-cost products (%s). Please update the product cost first."
+"zero-cost products (%s). Please either update the product cost on the product "
+"form first, or ask your stock manager to validate this adjustment."
 msgstr ""
 "Vous ne pouvez pas valider un ajustement d'inventaire créant du stock "
-"positif pour des articles à coût nul (%s). Veuillez d'abord mettre à jour "
-"le coût de l'article."
+"positif pour des articles à coût nul (%s). Veuillez d'abord revoir le coût sur "
+"la fiche article, ou demander à votre manager de valider."
 
 #. module: stock_no_zero_cost
 #: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_move__zero_cost_approval_note
