@@ -34,7 +34,7 @@ class StockInventory(models.Model):
                 if not self.env.user.has_group('stock_no_zero_cost.group_allow_zero_cost_move'):
                     raise UserError(_(
                         "You cannot validate an inventory adjustment creating positive stock for zero-cost products (%s). "
-                        "Please update the product cost first."
+                        "Please either update the product cost on the product form first, or ask your stock manager to validate this adjustment."
                     ) % ", ".join(set(products_with_zero_cost)))
 
                 return {
