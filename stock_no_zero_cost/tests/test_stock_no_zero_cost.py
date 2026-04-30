@@ -1,4 +1,6 @@
-# # -*- coding: utf-8 -*-
+# © Numigi (tm) and all its contributors (https://numigi.com/r/home)
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError
 
@@ -7,6 +9,7 @@ class TestStockNoZeroCost(TransactionCase):
 
     def setUp(self):
         super(TestStockNoZeroCost, self).setUp()
+        self.env = self.env(context=dict(self.env.context, force_zero_cost_check=True))
 
         # 1. Configuration des utilisateurs
         self.standard_user = self.env['res.users'].create({

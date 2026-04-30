@@ -1,4 +1,7 @@
-from odoo import models, _
+# © Numigi (tm) and all its contributors (https://numigi.com/r/home)
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+from odoo import models, _, tools
 from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
 
@@ -10,6 +13,9 @@ class MrpProduction(models.Model):
         """
         Intercept the MO validation to check if produced items have 0 cost.
         """
+        # --- BYPASS POUR LES TESTS STANDARDS ODOO ---
+        if tools.config['test_enable'] and not self.env.context.get('force_zero_cost_check'):
+            return super(MrpProduction, self).button_mark_done()
         if not self.env.context.get('skip_zero_cost_check'):
             productions_to_warn = self.env['mrp.production']
             products_with_zero_cost = []
