@@ -108,6 +108,7 @@ class TestStockNoZeroCost(TransactionCase):
 
         # 2. Simulate the Wizard creation and confirmation
         wizard_context = action.get('context', {})
+        wizard_context['force_zero_cost_check'] = True
         wizard = self.env['stock.zero.cost.wizard'].with_user(
             self.manager_user
         ).with_context(**wizard_context).create({})
@@ -155,6 +156,8 @@ class TestStockNoZeroCost(TransactionCase):
         })
         mo.action_confirm()
         mo.qty_producing = 1.0
+        for move in mo.move_raw_ids:
+            move.quantity_done = move.product_uom_qty
 
         # Manager clicks Mark as Done
         action = mo.with_user(self.manager_user).button_mark_done()
