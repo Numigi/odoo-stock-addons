@@ -11,7 +11,6 @@ class TestStockNoZeroCost(TransactionCase):
         super(TestStockNoZeroCost, self).setUp()
         self.env = self.env(context=dict(self.env.context, force_zero_cost_check=True))
 
-        # 1. Configuration des utilisateurs
         self.standard_user = self.env['res.users'].create({
             'name': 'Standard Warehouse User',
             'login': 'standard_user_test',
@@ -25,15 +24,16 @@ class TestStockNoZeroCost(TransactionCase):
         self.manager_user = self.env['res.users'].create({
             'name': 'Warehouse Manager (Bypass)',
             'login': 'manager_user_test',
+            'email': 'manager@test.com',
             'groups_id': [(6, 0, [
                 self.env.ref('base.group_user').id,
                 self.env.ref('stock.group_stock_manager').id,
                 self.env.ref('mrp.group_mrp_manager').id,
-                self.env.ref('stock_no_zero_cost.group_allow_zero_cost_move').id  # Le droit de Bypass
+                # Le droit de Bypass
+                self.env.ref('stock_no_zero_cost.group_allow_zero_cost_move').id
             ])]
         })
 
-        # 2. Configuration des Articles
         self.product_zero = self.env['product.product'].create({
             'name': 'Test Product Zero Cost',
             'type': 'product',
@@ -46,7 +46,6 @@ class TestStockNoZeroCost(TransactionCase):
             'standard_price': 15.0,
         })
 
-        # 3. Configuration des Emplacements
         self.supplier_loc = self.env.ref('stock.stock_location_suppliers')
         self.stock_loc = self.env.ref('stock.stock_location_stock')
         self.customer_loc = self.env.ref('stock.stock_location_customers')
@@ -83,40 +82,57 @@ class TestStockNoZeroCost(TransactionCase):
 
     def test_01_standard_user_blocked_on_zero_cost_in(self):
         """TEST 1: Standard user gets a hard block (UserError) on Receipt with 0 cost."""
-        picking = self._create_picking(self.supplier_loc, self.stock_loc, self.product_zero, price_unit=0.0)
+        picking = self._create_picking(
+            self.supplier_loc, self.stock_loc, self.product_zero, price_unit=0.0
+        )
 
         with self.assertRaises(UserError):
             picking.with_user(self.standard_user).button_validate()
 
     def test_02_manager_user_wizard_bypass_on_zero_cost_in(self):
-        """TEST 2: Manager user gets the wizard, confirms it, and the transfer is validated with a trace."""
-        picking = self._create_picking(self.supplier_loc, self.stock_loc, self.product_zero, price_unit=0.0)
+        """TEST 2: Manager user gets wizard, confirms it, and transfer is validated."""
+        picking = self._create_picking(
+            self.supplier_loc, self.stock_loc, self.product_zero, price_unit=0.0
+        )
 
-        # 1. The manager clicks validate -> should return an action dictionary (the wizard)
+        # 1. The manager clicks validate -> returns an action dictionary (the wizard)
         action = picking.with_user(self.manager_user).button_validate()
 
-        self.assertEqual(type(action), dict, "Expected an action dictionary to open the wizard.")
-        self.assertEqual(action.get('res_model'), 'stock.zero.cost.wizard', "Expected the Zero Cost Wizard.")
+        self.assertEqual(
+            type(action), dict, "Expected an action dictionary to open the wizard."
+        )
+        self.assertEqual(
+            action.get('res_model'), 'stock.zero.cost.wizard',
+            "Expected the Zero Cost Wizard."
+        )
 
         # 2. Simulate the Wizard creation and confirmation
         wizard_context = action.get('context', {})
-        wizard = self.env['stock.zero.cost.wizard'].with_user(self.manager_user).with_context(**wizard_context).create(
-            {})
+        wizard = self.env['stock.zero.cost.wizard'].with_user(
+            self.manager_user
+        ).with_context(**wizard_context).create({})
         wizard.action_confirm()
 
         # 3. Check results
-        self.assertEqual(picking.state, 'done', "Picking should be validated after wizard confirmation.")
+        self.assertEqual(
+            picking.state, 'done',
+            "Picking should be validated after wizard confirmation."
+        )
 
         # 4. Check Traceability
         done_move = picking.move_lines[0]
-        self.assertTrue(done_move.zero_cost_approval_note, "Traceability note should be stamped on the stock move.")
+        self.assertTrue(
+            done_move.zero_cost_approval_note,
+            "Traceability note should be stamped on the stock move."
+        )
         self.assertIn("Action Forced", done_move.zero_cost_approval_note)
 
     def test_03_standard_user_can_ship_out_zero_cost(self):
         """TEST 3: Standard user can validate a Delivery (OUT) even if cost is 0."""
-        picking = self._create_picking(self.stock_loc, self.customer_loc, self.product_zero)
+        picking = self._create_picking(
+            self.stock_loc, self.customer_loc, self.product_zero
+        )
 
-        # Should not raise any error, goes straight to done (or backorder wizard normally, but here we fulfill all qty)
         res = picking.with_user(self.standard_user).button_validate()
         if res is True or res is None:
             self.assertEqual(picking.state, 'done')
@@ -128,6 +144,14 @@ class TestStockNoZeroCost(TransactionCase):
             'product_id': self.product_zero.id,
             'product_qty': 1.0,
             'product_uom_id': self.product_zero.uom_id.id,
+            'move_raw_ids': [(0, 0, {
+                'name': self.product_price.name,
+                'product_id': self.product_price.id,
+                'product_uom_qty': 1.0,
+                'product_uom': self.product_price.uom_id.id,
+                'location_id': self.stock_loc.id,
+                'location_dest_id': self.product_zero.property_stock_production.id,
+            })]
         })
         mo.action_confirm()
         mo.qty_producing = 1.0

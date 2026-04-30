@@ -21,4 +21,3 @@
     'installable': True,
     'application': False,
 }
-
