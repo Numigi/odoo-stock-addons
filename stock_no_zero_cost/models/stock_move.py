@@ -25,7 +25,7 @@ class StockMove(models.Model):
         if not self.env.context.get('skip_zero_cost_check'):
             for move in self:
                 if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
-                    if move.location_dest_id.usage == 'internal':
+                    if move.location_dest_id.usage in ('internal', 'production'):
                         currency = move.company_id.currency_id or self.env.company.currency_id
                         cost = move.price_unit if move._is_in() else move.product_id.standard_price
 
