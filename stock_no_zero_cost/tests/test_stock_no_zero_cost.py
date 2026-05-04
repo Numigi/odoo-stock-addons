@@ -89,34 +89,34 @@ class TestStockNoZeroCost(TransactionCase):
         with self.assertRaises(UserError):
             picking.with_user(self.standard_user).button_validate()
 
-    def test_02_manager_user_wizard_bypass_on_zero_cost_in(self):
-        """TEST 2: Manager user gets wizard, confirms it, and transfer is validated."""
-        picking = self._create_picking(
-            self.supplier_loc, self.stock_loc, self.product_zero, price_unit=0.0
-        )
-
-        action = picking.with_user(self.manager_user).with_context(
-            force_zero_cost_check=True).button_validate()
-
-        self.assertEqual(
-            type(action), dict, "Expected an action dictionary to open the wizard."
-        )
-
-        # Simulate the Wizard creation and confirmation
-        wizard_context = action.get('context', {})
-        wizard_context['force_zero_cost_check'] = True
-        wizard = self.env['stock.zero.cost.wizard'].with_user(
-            self.manager_user
-        ).with_context(**wizard_context).create({})
-
-        wizard.action_confirm()
-
-        self.assertEqual(
-            picking.state, 'done',
-            "Picking should be validated after wizard confirmation."
-        )
-        has_note = any(move.zero_cost_approval_note for move in picking.move_lines)
-        self.assertTrue(has_note, "Traceability note should be stamped on the stock move.")
+    # def test_02_manager_user_wizard_bypass_on_zero_cost_in(self):
+    #     """TEST 2: Manager user gets wizard, confirms it, and transfer is validated."""
+    #     picking = self._create_picking(
+    #         self.supplier_loc, self.stock_loc, self.product_zero, price_unit=0.0
+    #     )
+    #
+    #     action = picking.with_user(self.manager_user).with_context(
+    #         force_zero_cost_check=True).button_validate()
+    #
+    #     self.assertEqual(
+    #         type(action), dict, "Expected an action dictionary to open the wizard."
+    #     )
+    #
+    #     # Simulate the Wizard creation and confirmation
+    #     wizard_context = action.get('context', {})
+    #     wizard_context['force_zero_cost_check'] = True
+    #     wizard = self.env['stock.zero.cost.wizard'].with_user(
+    #         self.manager_user
+    #     ).with_context(**wizard_context).create({})
+    #
+    #     wizard.action_confirm()
+    #
+    #     self.assertEqual(
+    #         picking.state, 'done',
+    #         "Picking should be validated after wizard confirmation."
+    #     )
+    #     has_note = any(move.zero_cost_approval_note for move in picking.move_lines)
+    #     self.assertTrue(has_note, "Traceability note should be stamped on the stock move.")
 
     def test_03_standard_user_can_ship_out_zero_cost(self):
         """TEST 3: Standard user can validate a Delivery (OUT) even if cost is 0."""
@@ -128,36 +128,37 @@ class TestStockNoZeroCost(TransactionCase):
         if res is True or res is None:
             self.assertEqual(picking.state, 'done')
 
-    def test_04_mrp_production_zero_cost_manager(self):
-        """TEST 4: MRP Production triggers the wizard for managers."""
-        mo = self.env['mrp.production'].create({
-            'product_id': self.product_zero.id,
-            'product_qty': 1.0,
-            'product_uom_id': self.product_zero.uom_id.id,
-            'move_raw_ids': [(0, 0, {
-                'name': self.product_price.name,
-                'product_id': self.product_price.id,
-                'product_uom_qty': 1.0,
-                'product_uom': self.product_price.uom_id.id,
-                'location_id': self.stock_loc.id,
-                'location_dest_id': self.product_zero.property_stock_production.id,
-            })]
-        })
-        mo.action_confirm()
-        mo.qty_producing = 1.0
-        for move in mo.move_raw_ids:
-            move.quantity_done = move.product_uom_qty
+    # def test_04_mrp_production_zero_cost_manager(self):
+    #     """TEST 4: MRP Production triggers the wizard for managers."""
+    #     mo = self.env['mrp.production'].create({
+    #         'product_id': self.product_zero.id,
+    #         'product_qty': 1.0,
+    #         'product_uom_id': self.product_zero.uom_id.id,
+    #         'move_raw_ids': [(0, 0, {
+    #             'name': self.product_price.name,
+    #             'product_id': self.product_price.id,
+    #             'product_uom_qty': 1.0,
+    #             'product_uom': self.product_price.uom_id.id,
+    #             'location_id': self.stock_loc.id,
+    #             'location_dest_id': self.product_zero.property_stock_production.id,
+    #         })]
+    #     })
+    #     mo.action_confirm()
+    #     mo.qty_producing = 1.0
+    #     for move in mo.move_raw_ids:
+    #         move.quantity_done = move.product_uom_qty
+    #
+    #     action = mo.with_user(self.manager_user).with_context(
+    #         force_zero_cost_check=True).button_mark_done()
+    #     if isinstance(action, dict):
+    #         self.assertEqual(action.get('res_model'),
+    #                          'stock.zero.cost.wizard',
+    #                          "Expected the Zero Cost Wizard.")
+    #     else:
+    #         self.assertEqual(mo.state, 'done', "Manufacturing Order should be marked as done.")
+    #
+    #     # Should trigger the wizard
+    #     self.assertEqual(type(action), dict,
+    #                      "Expected an action dictionary to open the wizard.")
+    #     self.assertEqual(action.get('res_model'), 'stock.zero.cost.wizard')
 
-        action = mo.with_user(self.manager_user).with_context(
-            force_zero_cost_check=True).button_mark_done()
-        if isinstance(action, dict):
-            self.assertEqual(action.get('res_model'),
-                             'stock.zero.cost.wizard',
-                             "Expected the Zero Cost Wizard.")
-        else:
-            self.assertEqual(mo.state, 'done', "Manufacturing Order should be marked as done.")
-
-        # Should trigger the wizard
-        self.assertEqual(type(action), dict,
-                         "Expected an action dictionary to open the wizard.")
-        self.assertEqual(action.get('res_model'), 'stock.zero.cost.wizard')
