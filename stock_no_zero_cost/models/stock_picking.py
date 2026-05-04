@@ -24,11 +24,15 @@ class StockPicking(models.Model):
 
             for picking in self:
                 for move in picking.move_lines:
-                    # Filter: Only stockable products, incoming/internal, and not yet done/cancelled
-                    if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
+                    # Filter: Only stockable products, incoming/internal,
+                    # and not yet done/cancelled
+                    if (move.state not in ('done', 'cancel')
+                            and move.product_id.type == 'product'):
                         if move.location_dest_id.usage in ('internal', 'production'):
-                            currency = move.company_id.currency_id or self.env.company.currency_id
-                            cost = move.price_unit if move._is_in() else move.product_id.standard_price
+                            currency = (move.company_id.currency_id
+                                        or self.env.company.currency_id)
+                            cost = move.price_unit if move._is_in() \
+                                else move.product_id.standard_price
 
                             if float_is_zero(cost, precision_rounding=currency.rounding):
                                 pickings_to_warn |= picking

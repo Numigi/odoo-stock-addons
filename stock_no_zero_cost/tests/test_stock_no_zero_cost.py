@@ -155,10 +155,10 @@ class TestStockNoZeroCost(TransactionCase):
     #                          'stock.zero.cost.wizard',
     #                          "Expected the Zero Cost Wizard.")
     #     else:
-    #         self.assertEqual(mo.state, 'done', "Manufacturing Order should be marked as done.")
+    #         self.assertEqual(mo.state, 'done',
+    #         "Manufacturing Order should be marked as done.")
     #
     #     # Should trigger the wizard
     #     self.assertEqual(type(action), dict,
     #                      "Expected an action dictionary to open the wizard.")
     #     self.assertEqual(action.get('res_model'), 'stock.zero.cost.wizard')
-
