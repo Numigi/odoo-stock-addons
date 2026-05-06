@@ -34,7 +34,7 @@ class StockMove(models.Model):
                 if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
                     if move.location_dest_id.usage in ('internal', 'production'):
                         currency = move.company_id.currency_id or self.env.company.currency_id
-                        if self.env.context.get('active_model',False) in (
+                        if self.env.context.get('active_model', False) in (
                                 'product.template', 'product.product'
                         ):
                             cost = move.product_id.standard_price
