@@ -28,19 +28,16 @@ class StockMove(models.Model):
             return super(StockMove, self)._action_done(
                 cancel_backorder=cancel_backorder
             )
-
         if not self.env.context.get('skip_zero_cost_check'):
             for move in self:
                 if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
                     if move.location_dest_id.usage in ('internal', 'production'):
                         currency = move.company_id.currency_id or self.env.company.currency_id
-                        if self.env.context.get('active_model', False) in (
-                                'product.template', 'product.product'
-                        ):
+                        if move.location_id.usage == 'supplier':
+                            cost = move.price_unit
+                        else:
+                            # Inventory / Interne
                             cost = move.product_id.standard_price
-                        else :
-                            cost = move.price_unit if move._is_in() \
-                                else move.product_id.standard_price
                         if float_is_zero(cost, precision_rounding=currency.rounding):
                             raise UserError(_(
                                 "Validation Blocked: Product '%s' has a zero cost. "
@@ -49,4 +46,9 @@ class StockMove(models.Model):
                                 "contact your inventory manager."
                             ) % move.product_id.display_name)
 
-        return super(StockMove, self)._action_done(cancel_backorder=cancel_backorder)
+        res = super(StockMove, self)._action_done(cancel_backorder=cancel_backorder)
+        note = self.env.context.get('zero_cost_approval_note')
+        if note:
+            res.write({'zero_cost_approval_note': note})
+
+        return res

@@ -10,7 +10,6 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     def _pre_action_done_hook(self):
-        # --- BYPASS POUR LES TESTS STANDARDS ODOO ---
         if tools.config['test_enable'] and not self.env.context.get(
             'force_zero_cost_check'
         ):
@@ -31,8 +30,10 @@ class StockPicking(models.Model):
                         if move.location_dest_id.usage in ('internal', 'production'):
                             currency = (move.company_id.currency_id
                                         or self.env.company.currency_id)
-                            cost = move.price_unit if move._is_in() \
-                                else move.product_id.standard_price
+                            if move.location_id.usage == 'supplier':
+                                cost = move.price_unit
+                            else:
+                                cost = move.product_id.standard_price
 
                             if float_is_zero(cost, precision_rounding=currency.rounding):
                                 pickings_to_warn |= picking
