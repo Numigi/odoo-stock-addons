@@ -22,7 +22,6 @@ class StockMove(models.Model):
         Hard block as a final defense line. It ensures programmatic validations
         cannot bypass the required manual approval wizard.
         """
-        # --- BYPASS POUR LES TESTS STANDARDS ODOO ---
         if tools.config['test_enable'] and not self.env.context.get(
             'force_zero_cost_check'
         ):
@@ -35,9 +34,13 @@ class StockMove(models.Model):
                 if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
                     if move.location_dest_id.usage in ('internal', 'production'):
                         currency = move.company_id.currency_id or self.env.company.currency_id
-                        cost = move.price_unit if move._is_in() \
-                            else move.product_id.standard_price
-
+                        if self.env.context.get('active_model', False) in (
+                                'product.template', 'product.product'
+                        ):
+                            cost = move.product_id.standard_price
+                        else :
+                            cost = move.price_unit if move._is_in() \
+                                else move.product_id.standard_price
                         if float_is_zero(cost, precision_rounding=currency.rounding):
                             raise UserError(_(
                                 "Validation Blocked: Product '%s' has a zero cost. "
