@@ -13,7 +13,6 @@ class StockInventory(models.Model):
         """
         Intercept Inventory Adjustment to prevent incoming positive stock at 0 cost.
         """
-        # --- BYPASS POUR LES TESTS STANDARDS ODOO ---
         if tools.config['test_enable'] and not self.env.context.get(
             'force_zero_cost_check'
         ):
@@ -35,7 +34,6 @@ class StockInventory(models.Model):
                             or self.env.company.currency_id
                         )
                         cost = line.product_id.standard_price
-
                         if float_is_zero(cost, precision_rounding=currency.rounding):
                             inventories_to_warn |= inventory
                             products_with_zero_cost.append(line.product_id.display_name)
