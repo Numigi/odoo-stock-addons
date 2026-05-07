@@ -1,26 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * stock_no_zero_cost
-#
+# 	* stock_no_zero_cost
+# By AB
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-14 12:30+0000\n"
-"PO-Revision-Date: 2026-04-14 12:30+0000\n"
+"POT-Creation-Date: 2026-05-07 14:04+0000\n"
+"PO-Revision-Date: 2026-05-07 14:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: stock_no_zero_cost
 #: code:addons/stock_no_zero_cost/wizard/stock_zero_cost_wizard.py:0
 #, python-format
 msgid "Action Forced: Zero cost valuation explicitly approved by %s on %s."
-msgstr "Action forcée : Valorisation à coût nul explicitement approuvée par %s le %s."
+msgstr ""
+"Action forcée : Valorisation à coût nul explicitement approuvée par %s le "
+"%s."
 
 #. module: stock_no_zero_cost
 #: model:res.groups,name:stock_no_zero_cost.group_allow_zero_cost_move
@@ -144,13 +145,21 @@ msgstr ""
 #. module: stock_no_zero_cost
 #: model:ir.model.fields,help:stock_no_zero_cost.field_stock_move__zero_cost_approval_note
 msgid "Traces the user and date when a zero cost was explicitly approved."
-msgstr "Trace l'utilisateur et la date à laquelle un coût nul a été explicitement approuvé."
+msgstr ""
+"Trace l'utilisateur et la date à laquelle un coût nul a été explicitement "
+"approuvé."
 
 #. module: stock_no_zero_cost
 #: model:ir.model,name:stock_no_zero_cost.model_stock_picking
 #: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__picking_id
 msgid "Transfer"
 msgstr "Transfert"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/mrp_production.py:0
+#, python-format
+msgid "Unknown Product"
+msgstr "Article inconnu"
 
 #. module: stock_no_zero_cost
 #: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.view_stock_zero_cost_wizard_form
@@ -178,12 +187,12 @@ msgstr "Avertissement"
 #: code:addons/stock_no_zero_cost/models/mrp_production.py:0
 #, python-format
 msgid ""
-"You are about to produce stockable products with a cost of 0.00: \n"
+"You are about to produce or consume stockable products with a cost of 0.00: \n"
 "- %s\n"
 "\n"
 "Do you want to explicitly force this validation?"
 msgstr ""
-"Vous êtes sur le point de fabriquer des articles stockables avec un coût de 0,00 : \n"
+"Vous êtes sur le point de produire ou consommer des articles stockables avec un coût de 0,00 : \n"
 "- %s\n"
 "\n"
 "Voulez-vous forcer explicitement cette validation ?"
@@ -192,11 +201,12 @@ msgstr ""
 #: code:addons/stock_no_zero_cost/models/mrp_production.py:0
 #, python-format
 msgid ""
-"You are not allowed to validate a Manufacturing Order yielding zero-cost "
-"products (%s). Please contact your inventory manager."
+"You are not allowed to validate a Manufacturing Order yielding or consuming "
+"zero-cost products (%s). Please contact your inventory manager."
 msgstr ""
-"Vous n'êtes pas autorisé à valider un ordre de fabrication générant des "
-"articles à coût nul (%s). Veuillez contacter votre gestionnaire d'inventaire."
+"Vous n'êtes pas autorisé à valider un ordre de fabrication produisant ou "
+"consommant des articles à coût nul (%s). Veuillez contacter votre "
+"gestionnaire d'inventaire."
 
 #. module: stock_no_zero_cost
 #: code:addons/stock_no_zero_cost/models/stock_picking.py:0
@@ -214,12 +224,12 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot validate an inventory adjustment creating positive stock for "
-"zero-cost products (%s). Please either update the product cost on the product "
-"form first, or ask your stock manager to validate this adjustment."
+"zero-cost products (%s). Please either update the product cost on the "
+"product form first, or ask your stock manager to validate this adjustment."
 msgstr ""
 "Vous ne pouvez pas valider un ajustement d'inventaire créant du stock "
-"positif pour des articles à coût nul (%s). Veuillez d'abord revoir le coût sur "
-"la fiche article, ou demander à votre manager de valider."
+"positif pour des articles à coût nul (%s). Veuillez d'abord revoir le coût "
+"sur la fiche article, ou demander à votre manager de valider."
 
 #. module: stock_no_zero_cost
 #: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_move__zero_cost_approval_note
