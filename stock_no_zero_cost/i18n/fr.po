@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* stock_no_zero_cost
-#
+# By AB
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
