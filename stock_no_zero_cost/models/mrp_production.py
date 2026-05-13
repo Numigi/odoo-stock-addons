@@ -31,7 +31,7 @@ class MrpProduction(models.Model):
                         and mo.product_id
                         and mo.product_id.type == 'product'):
                     cost = mo.product_id.standard_price
-                    if float_is_zero(cost, recision_digits=precision):
+                    if float_is_zero(cost, precision_digits=precision):
                         productions_to_warn |= mo
                         if mo.product_id.display_name:
                             products_with_zero_cost.append(
