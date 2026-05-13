@@ -19,29 +19,37 @@ class MrpProduction(models.Model):
             return super(MrpProduction, self).button_mark_done()
 
         if not self.env.context.get('skip_zero_cost_check'):
+            precision = self.env['decimal.precision'].precision_get('Product Price')
             productions_to_warn = self.env['mrp.production']
             products_with_zero_cost = []
 
             for mo in self:
-                currency = mo.company_id.currency_id or self.env.company.currency_id
+                company = mo.company_id or self.env.company
 
                 # 1. Check the finished product
-                if mo.product_id and mo.product_id.type == 'product':
+                if (company.check_zero_cost_production
+                        and mo.product_id
+                        and mo.product_id.type == 'product'):
                     cost = mo.product_id.standard_price
-                    if float_is_zero(cost, precision_rounding=currency.rounding):
+                    if float_is_zero(cost, recision_digits=precision):
                         productions_to_warn |= mo
                         if mo.product_id.display_name:
-                            products_with_zero_cost.append(mo.product_id.display_name)
+                            products_with_zero_cost.append(
+                                "%s (Cost: %s)" % (mo.product_id.display_name, cost))
 
                 # 2. Check the raw materials (components)
-                for raw_move in mo.move_raw_ids:
-                    if (raw_move.product_id.type == 'product'
-                            and raw_move.state not in ('done', 'cancel')):
-                        comp_cost = raw_move.product_id.standard_price
-                        if float_is_zero(comp_cost, precision_rounding=currency.rounding):
-                            productions_to_warn |= mo
-                            if raw_move.product_id.display_name:
-                                products_with_zero_cost.append(raw_move.product_id.display_name)
+                if company.check_zero_cost_consumption:
+                    for raw_move in mo.move_raw_ids:
+                        if (raw_move.product_id.type == 'product'
+                                and raw_move.state not in ('done', 'cancel')):
+                            comp_cost = raw_move.product_id.standard_price
+                            if float_is_zero(comp_cost, precision_digits=precision):
+                                productions_to_warn |= mo
+                                if raw_move.product_id.display_name:
+                                    products_with_zero_cost.append(
+                                        "%s (Cost: %s)" % (
+                                            raw_move.product_id.display_name,
+                                            comp_cost))
 
             if productions_to_warn:
                 # Clean the list to avoid duplicates

@@ -30,21 +30,35 @@ class StockMove(models.Model):
             )
         if not self.env.context.get('skip_zero_cost_check'):
             for move in self:
+                precision = self.env['decimal.precision'].precision_get('Product Price')
                 if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
-                    if move.location_dest_id.usage in ('internal', 'production'):
-                        currency = move.company_id.currency_id or self.env.company.currency_id
-                        if move.location_id.usage == 'supplier':
-                            cost = move.price_unit
-                        else:
-                            # Inventory / Interne
-                            cost = move.product_id.standard_price
-                        if float_is_zero(cost, precision_rounding=currency.rounding):
-                            raise UserError(_(
-                                "Validation Blocked: Product '%s' has a zero cost. "
-                                "Please validate the transfer via the standard "
-                                "interface to access the approval options, or "
-                                "contact your inventory manager."
-                            ) % move.product_id.display_name)
+                    company = move.company_id or self.env.company
+                    check_cost = False
+                    cost = move.product_id.standard_price
+                    # Purchase   (Always bloc)
+                    if move.location_id.usage == 'supplier':
+                        check_cost = True
+                        cost = move.price_unit
+                    # Inventory  (Always bloc)
+                    elif move.location_id.usage == 'inventory':
+                        check_cost = True
+                    # 3. consumption (config)
+                    elif move.location_dest_id.usage == 'production':
+                        check_cost = company.check_zero_cost_consumption
+                    # 4. PRODUCTION (config)
+                    elif move.location_id.usage == 'production':
+                        check_cost = company.check_zero_cost_production
+                    # 5. Internal (config)
+                    elif (move.location_id.usage == 'internal'
+                          and move.location_dest_id.usage == 'internal'):
+                        check_cost = company.check_zero_cost_internal
+                    if check_cost and float_is_zero(cost, precision_digits=precision):
+                        raise UserError(_(
+                            "Validation Blocked: Product '%s' has a zero cost (%s). "
+                            "Please validate the transfer via the standard "
+                            "interface to access the approval options, or "
+                            "contact your inventory manager."
+                        ) % move.product_id.display_name, cost)
 
         res = super(StockMove, self)._action_done(cancel_backorder=cancel_backorder)
         note = self.env.context.get('zero_cost_approval_note')
