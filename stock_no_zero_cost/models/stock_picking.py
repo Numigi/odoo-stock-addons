@@ -16,9 +16,9 @@ class StockPicking(models.Model):
             return super(StockPicking, self)._pre_action_done_hook()
         # If the context tells us to skip, we bypass
         if not self.env.context.get('skip_zero_cost_check'):
+            precision = self.env['decimal.precision'].precision_get('Product Price')
             pickings_to_warn = self.env['stock.picking']
             moves_to_warn = self.env['stock.move']
-
             products_with_zero_cost = []
 
             for picking in self:
@@ -27,29 +27,41 @@ class StockPicking(models.Model):
                     # and not yet done/cancelled
                     if (move.state not in ('done', 'cancel')
                             and move.product_id.type == 'product'):
-                        if move.location_dest_id.usage in ('internal', 'production'):
-                            currency = (move.company_id.currency_id
-                                        or self.env.company.currency_id)
-                            if move.location_id.usage == 'supplier':
-                                cost = move.price_unit
-                            else:
-                                cost = move.product_id.standard_price
+                        company = move.company_id or self.env.company
+                        check_cost = False
+                        cost = move.product_id.standard_price
+                        # Purchase   (Always bloc)
+                        if move.location_id.usage == 'supplier':
+                            check_cost = True
+                            cost = move.price_unit
+                        # Inventory  (Always bloc)
+                        elif move.location_id.usage == 'inventory':
+                            check_cost = True
+                        # 3. consumption (config)
+                        elif move.location_dest_id.usage == 'production':
+                            check_cost = company.check_zero_cost_consumption
+                        # 4. PRODUCTION (config)
+                        elif move.location_id.usage == 'production':
+                            check_cost = company.check_zero_cost_production
+                        # 5. Internal (config)
+                        elif (move.location_id.usage == 'internal'
+                              and move.location_dest_id.usage == 'internal'):
+                            check_cost = company.check_zero_cost_internal
 
-                            if float_is_zero(cost, precision_rounding=currency.rounding):
-                                pickings_to_warn |= picking
-                                moves_to_warn |= move
-                                products_with_zero_cost.append(
-                                    move.product_id.display_name
-                                )
+                        if check_cost and float_is_zero(cost, precision_digits=precision):
+                            pickings_to_warn |= picking
+                            moves_to_warn |= move
+                            products_with_zero_cost.append(
+                                "%s (Cost: %s)" % (move.product_id.display_name, cost)
+                            )
 
             if pickings_to_warn:
                 # Security Check
                 group_xml = 'stock_no_zero_cost.group_allow_zero_cost_move'
                 if not self.env.user.has_group(group_xml):
                     raise UserError(_(
-                        "You are not allowed to validate an Incoming or Internal "
-                        "stock move with a zero cost. Please contact your stock "
-                        "manager to authorize this transfer."
+                        "You are not allowed to validate this movement with a "
+                        "zero cost. Please contact your stock manager."
                     ))
 
                 # Show the Wizard to the authorized manager

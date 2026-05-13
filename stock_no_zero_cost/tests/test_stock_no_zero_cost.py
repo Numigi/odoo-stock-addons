@@ -117,7 +117,6 @@ class TestStockNoZeroCost(TransactionCase):
             "Picking should be validated after wizard confirmation."
         )
 
-        # --- CORRECTION DU CACHE : On force la recherche en base de données ---
         done_moves = self.env['stock.move'].search([('picking_id', '=', picking.id)])
         has_note = any(move.zero_cost_approval_note for move in done_moves)
         self.assertTrue(
@@ -136,7 +135,10 @@ class TestStockNoZeroCost(TransactionCase):
             self.assertEqual(picking.state, 'done')
 
     def test_04_mrp_production_zero_cost_manager(self):
-        """TEST 4: MRP Production triggers the wizard for managers."""
+        """TEST 4: MRP Production triggers the wizard for managers (if setting is ON)."""
+        self.env.company.check_zero_cost_production = True
+        self.env.company.check_zero_cost_consumption = True
+
         mo = self.env['mrp.production'].create({
             'product_id': self.product_zero.id,
             'product_qty': 1.0,
@@ -169,3 +171,32 @@ class TestStockNoZeroCost(TransactionCase):
                 mo.state, 'done',
                 "Manufacturing Order should be marked as done."
             )
+
+    def test_05_mrp_production_allowed_by_default(self):
+        """TEST 5: Standard user can validate MRP with 0 cost by default (TA#84365)."""
+        self.env.company.check_zero_cost_production = False
+        self.env.company.check_zero_cost_consumption = False
+
+        mo = self.env['mrp.production'].create({
+            'product_id': self.product_zero.id,
+            'product_qty': 1.0,
+            'product_uom_id': self.product_zero.uom_id.id,
+            'move_raw_ids': [(0, 0, {
+                'name': self.product_price.name,
+                'product_id': self.product_price.id,
+                'product_uom_qty': 1.0,
+                'product_uom': self.product_price.uom_id.id,
+                'location_id': self.stock_loc.id,
+                'location_dest_id': self.product_zero.property_stock_production.id,
+            })]
+        })
+        mo.action_confirm()
+        mo.qty_producing = 1.0
+        for move in mo.move_raw_ids:
+            move.quantity_done = move.product_uom_qty
+
+        action = mo.with_user(self.standard_user).with_context(
+            force_zero_cost_check=True).button_mark_done()
+
+        self.assertNotIsInstance(action, dict, "Wizard should not be triggered.")
+        self.assertEqual(mo.state, 'done', "MO should be validated without block.")

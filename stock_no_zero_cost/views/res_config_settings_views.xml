@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.stock.no.zero.cost</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='stock']" position="inside">
+                <h2>Zero Cost Valuation Protection</h2>
+                <div class="row mt16 o_settings_container" id="stock_no_zero_cost_settings">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="check_zero_cost_consumption"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="check_zero_cost_consumption"/>
+                            <div class="text-muted">
+                                Block consumption of zero-cost components in MRP.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="check_zero_cost_production"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="check_zero_cost_production"/>
+                            <div class="text-muted">
+                                Block production of zero-cost finished products.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="check_zero_cost_internal"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="check_zero_cost_internal"/>
+                            <div class="text-muted">
+                                Block internal transfers of zero-cost products.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
