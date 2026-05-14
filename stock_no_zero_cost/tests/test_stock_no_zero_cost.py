@@ -210,6 +210,7 @@ class TestStockNoZeroCost(TransactionCase):
             'picking_type_id': self.env.ref('stock.picking_type_in').id,
         })
 
+        # Line 1: ZERO cost product
         move_zero = self.env['stock.move'].create({
             'name': self.product_zero.name,
             'product_id': self.product_zero.id,
@@ -221,6 +222,7 @@ class TestStockNoZeroCost(TransactionCase):
             'price_unit': 0.0,
         })
 
+        # Line 2: Product with a standard PRICE
         move_price = self.env['stock.move'].create({
             'name': self.product_price.name,
             'product_id': self.product_price.id,
@@ -233,11 +235,17 @@ class TestStockNoZeroCost(TransactionCase):
         })
 
         picking.action_confirm()
+
+        # The warehouse worker ONLY receives the priced product
         move_zero.quantity_done = 0.0
         move_price.quantity_done = 1.0
+
+        # A standard user validates. If the logic was wrong, it would raise a UserError.
         action = picking.with_user(self.standard_user).with_context(
             force_zero_cost_check=True).button_validate()
 
+        # Odoo will likely return the native "Create Backorder" Wizard dictionary.
+        # The important thing is that it is NOT our zero-cost Wizard.
         if isinstance(action, dict):
             self.assertNotEqual(
                 action.get('res_model'), 'stock.zero.cost.wizard',
@@ -245,16 +253,24 @@ class TestStockNoZeroCost(TransactionCase):
             )
 
     def test_07_partial_production_ignores_unprocessed_zero_cost_components(self):
-        """TEST 7: A production order leaving zero-cost components u
-        nconsumed should NOT block."""
-
+        """TEST 7: A production order leaving zero-cost components
+         unconsumed should NOT block."""
+        # Explicitly enable the locks for this test
         self.env.company.check_zero_cost_production = True
         self.env.company.check_zero_cost_consumption = True
 
+        # Create a distinct finished product
+        product_finished = self.env['product.product'].create({
+            'name': 'Test Finished Product',
+            'type': 'product',
+            'standard_price': 50.0,
+        })
+
         mo = self.env['mrp.production'].create({
-            'product_id': self.product_price.id,
+            # Use the newly created finished product
+            'product_id': product_finished.id,
             'product_qty': 1.0,
-            'product_uom_id': self.product_price.uom_id.id,
+            'product_uom_id': product_finished.uom_id.id,
             'move_raw_ids': [
                 (0, 0, {
                     'name': self.product_price.name,
@@ -262,7 +278,7 @@ class TestStockNoZeroCost(TransactionCase):
                     'product_uom_qty': 1.0,
                     'product_uom': self.product_price.uom_id.id,
                     'location_id': self.stock_loc.id,
-                    'location_dest_id': self.product_price.property_stock_production.id,
+                    'location_dest_id': product_finished.property_stock_production.id,
                 }),
                 (0, 0, {
                     'name': self.product_zero.name,
@@ -270,12 +286,16 @@ class TestStockNoZeroCost(TransactionCase):
                     'product_uom_qty': 1.0,
                     'product_uom': self.product_zero.uom_id.id,
                     'location_id': self.stock_loc.id,
-                    'location_dest_id': self.product_zero.property_stock_production.id,
+                    'location_dest_id': product_finished.property_stock_production.id,
                 })
             ]
         })
         mo.action_confirm()
+
+        # We successfully produce the final item
         mo.qty_producing = 1.0
+
+        # But we ONLY consume the priced component (the free one is left at 0)
         mo.move_raw_ids.filtered(
             lambda m: m.product_id == self.product_price).quantity_done = 1.0
         mo.move_raw_ids.filtered(
@@ -284,6 +304,7 @@ class TestStockNoZeroCost(TransactionCase):
         action = mo.with_user(self.manager_user).with_context(
             force_zero_cost_check=True).button_mark_done()
 
+        # Our custom Wizard must absolutely not appear
         if isinstance(action, dict):
             self.assertNotEqual(
                 action.get('res_model'), 'stock.zero.cost.wizard',
