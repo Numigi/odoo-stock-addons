@@ -21,6 +21,14 @@ class ResCompany(models.Model):
         help="Determine the number of decimal places used to consider a product cost as zero.",
         default=lambda self: self.env.ref("product.decimal_price", raise_if_not_found=False),
     )
+    zero_qty_precision_id = fields.Many2one(
+        comodel_name="decimal.precision",
+        string="Quantity Precision",
+        help="Determine the number of decimal places used to consider "
+             "a product quantity as zero.",
+        default=lambda self: self.env.ref("product.decimal_product_uom",
+                                          raise_if_not_found=False),
+    )
 
     def _get_zero_cost_precision_digits(self):
         """
@@ -30,4 +38,11 @@ class ResCompany(models.Model):
         self.ensure_one()
         precision_record = self.sudo().zero_cost_precision_id
         precision_name = precision_record.name if precision_record else "Product Price"
+        return self.env["decimal.precision"].precision_get(precision_name)
+
+    def _get_zero_qty_precision_digits(self):
+        self.ensure_one()
+        precision_record = self.sudo().zero_qty_precision_id
+        precision_name = precision_record.name if precision_record \
+            else "Product Unit of Measure"
         return self.env["decimal.precision"].precision_get(precision_name)

@@ -31,8 +31,12 @@ class StockMove(models.Model):
         if not self.env.context.get('skip_zero_cost_check'):
             for move in self:
                 company = move.company_id or self.env.company
-                precision = company._get_zero_cost_precision_digits()
-                if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
+                cost_precision = company._get_zero_cost_precision_digits()
+                qty_precision = company._get_zero_qty_precision_digits()
+                if ((move.state not in ('done', 'cancel')
+                        and move.product_id.type == 'product')
+                        and not float_is_zero(move.quantity_done,
+                                              precision_digits=qty_precision)):
                     check_cost = False
                     cost = move.product_id.standard_price
                     # Purchase   (Always bloc)
@@ -52,7 +56,7 @@ class StockMove(models.Model):
                     elif (move.location_id.usage == 'internal'
                           and move.location_dest_id.usage == 'internal'):
                         check_cost = company.check_zero_cost_internal
-                    if check_cost and float_is_zero(cost, precision_digits=precision):
+                    if check_cost and float_is_zero(cost, precision_digits=cost_precision):
                         raise UserError(_(
                             "Validation Blocked: Product '%s' has a zero cost (%s). "
                             "Please validate the transfer via the standard "
