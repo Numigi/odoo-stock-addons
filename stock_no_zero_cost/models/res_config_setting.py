@@ -14,3 +14,8 @@ class ResConfigSettings(models.TransientModel):
         related='company_id.check_zero_cost_production', readonly=False)
     check_zero_cost_internal = fields.Boolean(
         related='company_id.check_zero_cost_internal', readonly=False)
+    zero_cost_precision_id = fields.Many2one(
+        related="company_id.zero_cost_precision_id",
+        readonly=False,
+        string="Zero Cost Precision",
+    )

@@ -30,9 +30,9 @@ class StockMove(models.Model):
             )
         if not self.env.context.get('skip_zero_cost_check'):
             for move in self:
-                precision = self.env['decimal.precision'].precision_get('Product Price')
+                company = move.company_id or self.env.company
+                precision = company._get_zero_cost_precision_digits()
                 if move.state not in ('done', 'cancel') and move.product_id.type == 'product':
-                    company = move.company_id or self.env.company
                     check_cost = False
                     cost = move.product_id.standard_price
                     # Purchase   (Always bloc)
@@ -58,7 +58,7 @@ class StockMove(models.Model):
                             "Please validate the transfer via the standard "
                             "interface to access the approval options, or "
                             "contact your inventory manager."
-                        ) % move.product_id.display_name, cost)
+                        ) % (move.product_id.display_name, cost))
 
         res = super(StockMove, self)._action_done(cancel_backorder=cancel_backorder)
         note = self.env.context.get('zero_cost_approval_note')

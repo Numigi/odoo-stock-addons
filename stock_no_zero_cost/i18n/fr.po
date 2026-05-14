@@ -1,19 +1,60 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * stock_no_zero_cost
+# 	* stock_no_zero_cost
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 08:58+0000\n"
-"PO-Revision-Date: 2026-05-13 08:58+0000\n"
+"POT-Creation-Date: 2026-05-13 23:20+0000\n"
+"PO-Revision-Date: 2026-05-13 23:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_inventory.py:0
+#: code:addons/stock_no_zero_cost/models/stock_picking.py:0
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Do you want to explicitly force this validation?"
+msgstr ""
+"\n"
+"\n"
+"Voulez-vous forcer explicitement cette validation ?"
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_picking.py:0
+#, python-format
+msgid ""
+"\n"
+" \n"
+" You are not allowed to validate this picking with prodcuts having zero cost. \n"
+"  Please either update the product cost first ,or ask your stock manager to validate this internal picking"
+msgstr ""
+"\n"
+" \n"
+" Vous n'êtes pas autorisé à valider ce transfert avec des articles ayant un coût nul. \n"
+"  Veuillez d'abord mettre à jour le coût de l'article, ou demander à votre responsable des stocks de valider ce transfert interne."
+
+#. module: stock_no_zero_cost
+#: code:addons/stock_no_zero_cost/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"\n"
+" \n"
+" You cannot validate an inventory adjustment  with prodcuts having zero cost. \n"
+"Please either update the product cost first ,or ask your stock manager to validate this adjustment."
+msgstr ""
+"\n"
+" \n"
+" Vous ne pouvez pas valider un ajustement d'inventaire avec des articles ayant un coût nul. \n"
+"Veuillez d'abord mettre à jour le coût de l'article, ou demander à votre responsable des stocks de valider cet ajustement."
 
 #. module: stock_no_zero_cost
 #: code:addons/stock_no_zero_cost/wizard/stock_zero_cost_wizard.py:0
@@ -168,28 +209,24 @@ msgstr "Mouvement de stock"
 #, python-format
 msgid ""
 "The following products have a 0.00 cost and will result in a zero valuation for the newly discovered stock: \n"
-"- %s\n"
 "\n"
-"Do you want to explicitly force this validation?"
+"- %s"
 msgstr ""
 "Les articles suivants ont un coût de 0,00 et entraîneront une valorisation nulle pour le stock nouvellement découvert : \n"
-"- %s\n"
 "\n"
-"Voulez-vous forcer explicitement cette validation ?"
+"- %s"
 
 #. module: stock_no_zero_cost
 #: code:addons/stock_no_zero_cost/models/stock_picking.py:0
 #, python-format
 msgid ""
 "The following products have a 0.00 cost and will result in a zero valuation for this transfer: \n"
-"- %s\n"
 "\n"
-"Do you want to explicitly force this validation?"
+"- %s"
 msgstr ""
 "Les articles suivants ont un coût de 0,00 et entraîneront une valorisation nulle pour ce transfert : \n"
-"- %s\n"
 "\n"
-"Voulez-vous forcer explicitement cette validation ?"
+"- %s"
 
 #. module: stock_no_zero_cost
 #: model:ir.model.fields,help:stock_no_zero_cost.field_stock_move__zero_cost_approval_note
@@ -203,12 +240,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_zero_cost_wizard__picking_id
 msgid "Transfer"
 msgstr "Transfert"
-
-#. module: stock_no_zero_cost
-#: code:addons/stock_no_zero_cost/models/mrp_production.py:0
-#, python-format
-msgid "Unknown Product"
-msgstr "Article inconnu"
 
 #. module: stock_no_zero_cost
 #: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.view_stock_zero_cost_wizard_form
@@ -250,34 +281,17 @@ msgstr ""
 #: code:addons/stock_no_zero_cost/models/mrp_production.py:0
 #, python-format
 msgid ""
-"You are not allowed to validate a Manufacturing Order yielding or consuming "
-"zero-cost products (%s). Please contact your inventory manager."
+"You are not allowed to validate a Manufacturing Order yielding or consuming zero-cost products  \n"
+"\n"
+" - %s  \n"
+" \n"
+" Please either update the product cost first ,or ask your stock manager to validate this Manufacturing Order"
 msgstr ""
-"Vous n'êtes pas autorisé à valider un ordre de fabrication produisant ou "
-"consommant des articles à coût nul (%s). Veuillez contacter votre "
-"gestionnaire d'inventaire."
-
-#. module: stock_no_zero_cost
-#: code:addons/stock_no_zero_cost/models/stock_picking.py:0
-#, python-format
-msgid ""
-"You are not allowed to validate this movement with a zero cost. Please "
-"contact your stock manager."
-msgstr ""
-"Vous n'êtes pas autorisé à valider ce mouvement avec un coût nul. Veuillez "
-"contacter votre gestionnaire de stock."
-
-#. module: stock_no_zero_cost
-#: code:addons/stock_no_zero_cost/models/stock_inventory.py:0
-#, python-format
-msgid ""
-"You cannot validate an inventory adjustment creating positive stock for "
-"zero-cost products (%s). Please either update the product cost on the "
-"product form first, or ask your stock manager to validate this adjustment."
-msgstr ""
-"Vous ne pouvez pas valider un ajustement d'inventaire créant du stock "
-"positif pour des articles à coût nul (%s). Veuillez d'abord revoir le coût "
-"sur la fiche article, ou demander à votre manager de valider."
+"Vous n'êtes pas autorisé à valider un ordre de fabrication générant ou consommant des articles à coût nul\n"
+"\n"
+" - %s \n"
+" \n"
+" Veuillez d'abord mettre à jour le coût de l'article, ou demander à votre responsable des stocks de valider cet ordre de fabrication."
 
 #. module: stock_no_zero_cost
 #: model:ir.model.fields,field_description:stock_no_zero_cost.field_stock_move__zero_cost_approval_note

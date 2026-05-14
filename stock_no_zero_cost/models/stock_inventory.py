@@ -29,24 +29,30 @@ class StockInventory(models.Model):
                         line.product_id.type == 'product'
                         and line.product_qty > line.theoretical_qty
                     ):
-                        currency = (
-                            inventory.company_id.currency_id
-                            or self.env.company.currency_id
+                        company = (
+                            inventory.company_id
+                            or self.env.company
                         )
+                        precision = company._get_zero_cost_precision_digits()
                         cost = line.product_id.standard_price
-                        if float_is_zero(cost, precision_rounding=currency.rounding):
+                        if float_is_zero(cost, precision_digits=precision):
                             inventories_to_warn |= inventory
-                            products_with_zero_cost.append(line.product_id.display_name)
+                            products_with_zero_cost.append(
+                                "%s (Cost: %s)" % (line.product_id.display_name, cost)
+                            )
 
             if inventories_to_warn:
+                message = _("The following products have a 0.00 cost and will "
+                            "result in a zero valuation for the newly discovered stock: \n"
+                            "\n- %s"
+                            ) % "\n- ".join(set(products_with_zero_cost))
                 group_xml = 'stock_no_zero_cost.group_allow_zero_cost_move'
                 if not self.env.user.has_group(group_xml):
-                    raise UserError(_(
-                        "You cannot validate an inventory adjustment creating positive "
-                        "stock for zero-cost products (%s). Please either update the "
-                        "product cost on the product form first, or ask your stock "
-                        "manager to validate this adjustment."
-                    ) % ", ".join(set(products_with_zero_cost)))
+                    raise UserError(message + _(
+                        "\n \n You cannot validate an inventory adjustment  "
+                        "with prodcuts having zero cost. \n"
+                        "Please either update the product cost first ,"
+                        "or ask your stock manager to validate this adjustment."))
 
                 return {
                     'name': _('Zero Cost Valuation Warning (Inventory)'),
@@ -57,11 +63,9 @@ class StockInventory(models.Model):
                     'target': 'new',
                     'context': {
                         'default_inventory_id': inventories_to_warn[0].id,
-                        'default_message': _(
-                            "The following products have a 0.00 cost and will result "
-                            "in a zero valuation for the newly discovered stock: "
-                            "\n- %s\n\nDo you want to explicitly force this validation?"
-                        ) % "\n- ".join(set(products_with_zero_cost))
+                        'default_message': message + _(
+                            "\n\nDo you want to explicitly force this validation?"
+                        )
                     }
                 }
 

@@ -41,6 +41,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mt16">
+                        <label for="zero_cost_precision_id" class="o_light_label" string="Zero Cost Decimal Precision"/>
+                        <field name="zero_cost_precision_id" class="oe_inline"/>
+                        <div class="text-muted">
+                            Select the decimal accuracy used when validating zero-cost products.
+                        </div>
+                    </div>
                 </div>
             </xpath>
         </field>
