@@ -17,7 +17,8 @@ class StockPicking(models.Model):
         # If the context tells us to skip, we bypass
         if not self.env.context.get('skip_zero_cost_check'):
             company = self.company_id or self.env.company
-            precision = company._get_zero_cost_precision_digits()
+            cost_precision = company._get_zero_cost_precision_digits()
+            qty_precision = company._get_zero_qty_precision_digits()
             pickings_to_warn = self.env['stock.picking']
             moves_to_warn = self.env['stock.move']
             products_with_zero_cost = []
@@ -27,7 +28,9 @@ class StockPicking(models.Model):
                     # Filter: Only stockable products, incoming/internal,
                     # and not yet done/cancelled
                     if (move.state not in ('done', 'cancel')
-                            and move.product_id.type == 'product'):
+                            and move.product_id.type == 'product')\
+                            and not float_is_zero(move.quantity_done,
+                                                  precision_digits=qty_precision):
                         company = move.company_id or self.env.company
                         check_cost = False
                         cost = move.product_id.standard_price
@@ -49,7 +52,7 @@ class StockPicking(models.Model):
                               and move.location_dest_id.usage == 'internal'):
                             check_cost = company.check_zero_cost_internal
 
-                        if check_cost and float_is_zero(cost, precision_digits=precision):
+                        if check_cost and float_is_zero(cost, precision_digits=cost_precision):
                             pickings_to_warn |= picking
                             moves_to_warn |= move
                             products_with_zero_cost.append(

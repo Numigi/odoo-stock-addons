@@ -200,3 +200,113 @@ class TestStockNoZeroCost(TransactionCase):
 
         self.assertNotIsInstance(action, dict, "Wizard should not be triggered.")
         self.assertEqual(mo.state, 'done', "MO should be validated without block.")
+
+    def test_06_partial_receipt_ignores_unprocessed_zero_cost_lines(self):
+        """TEST 6: A partial receipt leaving a zero-cost product
+        as backorder should NOT block."""
+        picking = self.env['stock.picking'].create({
+            'location_id': self.supplier_loc.id,
+            'location_dest_id': self.stock_loc.id,
+            'picking_type_id': self.env.ref('stock.picking_type_in').id,
+        })
+
+        # Line 1: ZERO cost product
+        move_zero = self.env['stock.move'].create({
+            'name': self.product_zero.name,
+            'product_id': self.product_zero.id,
+            'product_uom_qty': 1.0,
+            'product_uom': self.product_zero.uom_id.id,
+            'picking_id': picking.id,
+            'location_id': self.supplier_loc.id,
+            'location_dest_id': self.stock_loc.id,
+            'price_unit': 0.0,
+        })
+
+        # Line 2: Product with a standard PRICE
+        move_price = self.env['stock.move'].create({
+            'name': self.product_price.name,
+            'product_id': self.product_price.id,
+            'product_uom_qty': 1.0,
+            'product_uom': self.product_price.uom_id.id,
+            'picking_id': picking.id,
+            'location_id': self.supplier_loc.id,
+            'location_dest_id': self.stock_loc.id,
+            'price_unit': 15.0,
+        })
+
+        picking.action_confirm()
+
+        # The warehouse worker ONLY receives the priced product
+        move_zero.quantity_done = 0.0
+        move_price.quantity_done = 1.0
+
+        # A standard user validates. If the logic was wrong, it would raise a UserError.
+        action = picking.with_user(self.standard_user).with_context(
+            force_zero_cost_check=True).button_validate()
+
+        # Odoo will likely return the native "Create Backorder" Wizard dictionary.
+        # The important thing is that it is NOT our zero-cost Wizard.
+        if isinstance(action, dict):
+            self.assertNotEqual(
+                action.get('res_model'), 'stock.zero.cost.wizard',
+                "Zero cost wizard should not appear for unprocessed lines."
+            )
+
+    def test_07_partial_production_ignores_unprocessed_zero_cost_components(self):
+        """TEST 7: A production order leaving zero-cost components
+         unconsumed should NOT block."""
+        # Explicitly enable the locks for this test
+        self.env.company.check_zero_cost_production = True
+        self.env.company.check_zero_cost_consumption = True
+
+        # Create a distinct finished product
+        product_finished = self.env['product.product'].create({
+            'name': 'Test Finished Product',
+            'type': 'product',
+            'standard_price': 50.0,
+        })
+
+        mo = self.env['mrp.production'].create({
+            # Use the newly created finished product
+            'product_id': product_finished.id,
+            'product_qty': 1.0,
+            'product_uom_id': product_finished.uom_id.id,
+            'move_raw_ids': [
+                (0, 0, {
+                    'name': self.product_price.name,
+                    'product_id': self.product_price.id,
+                    'product_uom_qty': 1.0,
+                    'product_uom': self.product_price.uom_id.id,
+                    'location_id': self.stock_loc.id,
+                    'location_dest_id': product_finished.property_stock_production.id,
+                }),
+                (0, 0, {
+                    'name': self.product_zero.name,
+                    'product_id': self.product_zero.id,
+                    'product_uom_qty': 1.0,
+                    'product_uom': self.product_zero.uom_id.id,
+                    'location_id': self.stock_loc.id,
+                    'location_dest_id': product_finished.property_stock_production.id,
+                })
+            ]
+        })
+        mo.action_confirm()
+
+        # We successfully produce the final item
+        mo.qty_producing = 1.0
+
+        # But we ONLY consume the priced component (the free one is left at 0)
+        mo.move_raw_ids.filtered(
+            lambda m: m.product_id == self.product_price).quantity_done = 1.0
+        mo.move_raw_ids.filtered(
+            lambda m: m.product_id == self.product_zero).quantity_done = 0.0
+
+        action = mo.with_user(self.manager_user).with_context(
+            force_zero_cost_check=True).button_mark_done()
+
+        # Our custom Wizard must absolutely not appear
+        if isinstance(action, dict):
+            self.assertNotEqual(
+                action.get('res_model'), 'stock.zero.cost.wizard',
+                "Zero cost wizard should not appear for unprocessed components."
+            )

@@ -19,3 +19,8 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
         string="Zero Cost Precision",
     )
+    zero_qty_precision_id = fields.Many2one(
+        related="company_id.zero_qty_precision_id",
+        readonly=False,
+        string="Quantity Precision",
+    )

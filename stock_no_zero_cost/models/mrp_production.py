@@ -25,14 +25,16 @@ class MrpProduction(models.Model):
 
             for mo in self:
                 company = mo.company_id or self.env.company
-                precision = company._get_zero_cost_precision_digits()
-
+                cost_precision = company._get_zero_cost_precision_digits()
+                qty_precision = company._get_zero_qty_precision_digits()
                 # 1. Check the finished product
                 if (company.check_zero_cost_production
                         and mo.product_id
-                        and mo.product_id.type == 'product'):
+                        and mo.product_id.type == 'product'
+                        and not float_is_zero(mo.qty_producing,
+                                              precision_digits=qty_precision)):
                     cost = mo.product_id.standard_price
-                    if float_is_zero(cost, precision_digits=precision):
+                    if float_is_zero(cost, precision_digits=cost_precision):
                         productions_to_warn |= mo
                         if mo.product_id.display_name:
                             products_with_zero_cost.append(
@@ -42,9 +44,11 @@ class MrpProduction(models.Model):
                 if company.check_zero_cost_production:
                     for raw_move in mo.move_raw_ids:
                         if (raw_move.product_id.type == 'product'
-                                and raw_move.state not in ('done', 'cancel')):
+                                and raw_move.state not in ('done', 'cancel')
+                                and not float_is_zero(raw_move.quantity_done,
+                                                      precision_digits=qty_precision)):
                             comp_cost = raw_move.product_id.standard_price
-                            if float_is_zero(comp_cost, precision_digits=precision):
+                            if float_is_zero(comp_cost, precision_digits=cost_precision):
                                 productions_to_warn |= mo
                                 if raw_move.product_id.display_name:
                                     products_with_zero_cost.append(

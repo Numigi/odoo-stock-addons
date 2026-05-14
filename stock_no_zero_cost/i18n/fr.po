@@ -352,3 +352,25 @@ msgstr "Précision décimale de coût nul"
 #: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.res_config_settings_view_form
 msgid "Select the decimal accuracy used when validating zero-cost products."
 msgstr "Sélectionnez la précision décimale utilisée lors de la validation d'articles à coût nul."
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_res_company__zero_qty_precision_id
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_res_config_settings__zero_qty_precision_id
+msgid "Quantity Precision"
+msgstr "Précision de quantité"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,help:stock_no_zero_cost.field_res_company__zero_qty_precision_id
+#: model:ir.model.fields,help:stock_no_zero_cost.field_res_config_settings__zero_qty_precision_id
+msgid "Determine the number of decimal places used to consider a product quantity as zero."
+msgstr "Détermine le nombre de décimales utilisé pour considérer une quantité d'article comme nulle."
+
+#. module: stock_no_zero_cost
+#: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.res_config_settings_view_form
+msgid "Quantity Decimal Precision"
+msgstr "Précision décimale de quantité"
+
+#. module: stock_no_zero_cost
+#: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.res_config_settings_view_form
+msgid "Select the decimal accuracy used when evaluating quantities."
+msgstr "Sélectionnez la précision décimale utilisée lors de l'évaluation des quantités."
