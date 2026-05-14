@@ -16,7 +16,8 @@ class StockPicking(models.Model):
             return super(StockPicking, self)._pre_action_done_hook()
         # If the context tells us to skip, we bypass
         if not self.env.context.get('skip_zero_cost_check'):
-            precision = self.env['decimal.precision'].precision_get('Product Price')
+            company = self.company_id or self.env.company
+            precision = company._get_zero_cost_precision_digits()
             pickings_to_warn = self.env['stock.picking']
             moves_to_warn = self.env['stock.move']
             products_with_zero_cost = []
@@ -57,11 +58,17 @@ class StockPicking(models.Model):
 
             if pickings_to_warn:
                 # Security Check
+                message = _("The following products have a 0.00 cost and will "
+                            "result in a zero valuation for this transfer: \n"
+                            "\n- %s"
+                            ) % "\n- ".join(set(products_with_zero_cost))
                 group_xml = 'stock_no_zero_cost.group_allow_zero_cost_move'
                 if not self.env.user.has_group(group_xml):
-                    raise UserError(_(
-                        "You are not allowed to validate this movement with a "
-                        "zero cost. Please contact your stock manager."
+                    raise UserError(message + _(
+                        "\n \n You are not allowed to validate this picking "
+                        "with prodcuts having zero cost. \n "
+                        " Please either update the product cost first ,"
+                        "or ask your stock manager to validate this internal picking"
                     ))
 
                 # Show the Wizard to the authorized manager
@@ -75,11 +82,8 @@ class StockPicking(models.Model):
                     'context': {
                         'default_picking_id': pickings_to_warn[0].id,
                         'default_move_ids': [(6, 0, moves_to_warn.ids)],
-                        'default_message': _(
-                            "The following products have a 0.00 cost and will "
-                            "result in a zero valuation for this transfer: "
-                            "\n- %s\n\nDo you want to explicitly force this validation?"
-                        ) % "\n- ".join(set(products_with_zero_cost))
+                        'default_message': message + _(
+                            "\n\nDo you want to explicitly force this validation?")
                     }
                 }
 

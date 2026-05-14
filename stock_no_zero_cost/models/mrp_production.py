@@ -19,12 +19,13 @@ class MrpProduction(models.Model):
             return super(MrpProduction, self).button_mark_done()
 
         if not self.env.context.get('skip_zero_cost_check'):
-            precision = self.env['decimal.precision'].precision_get('Product Price')
+
             productions_to_warn = self.env['mrp.production']
             products_with_zero_cost = []
 
             for mo in self:
                 company = mo.company_id or self.env.company
+                precision = company._get_zero_cost_precision_digits()
 
                 # 1. Check the finished product
                 if (company.check_zero_cost_production
@@ -38,7 +39,7 @@ class MrpProduction(models.Model):
                                 "%s (Cost: %s)" % (mo.product_id.display_name, cost))
 
                 # 2. Check the raw materials (components)
-                if company.check_zero_cost_consumption:
+                if company.check_zero_cost_production:
                     for raw_move in mo.move_raw_ids:
                         if (raw_move.product_id.type == 'product'
                                 and raw_move.state not in ('done', 'cancel')):
@@ -53,16 +54,16 @@ class MrpProduction(models.Model):
 
             if productions_to_warn:
                 # Clean the list to avoid duplicates
-                products_names = ", ".join(filter(
-                    None,
-                    set(products_with_zero_cost))) or _("Unknown Product")
+                products_names = " \n- ".join(set(products_with_zero_cost))
 
                 group_xml = 'stock_no_zero_cost.group_allow_zero_cost_move'
                 if not self.env.user.has_group(group_xml):
                     raise UserError(_(
                         "You are not allowed to validate a Manufacturing Order "
-                        "yielding or consuming zero-cost products (%s). "
-                        "Please contact your inventory manager."
+                        "yielding or consuming zero-cost products  \n"
+                        "\n - %s "
+                        " \n \n Please either update the product cost first ,"
+                        "or ask your stock manager to validate this Manufacturing Order"
                     ) % products_names)
 
                 # Show Wizard for authorized managers

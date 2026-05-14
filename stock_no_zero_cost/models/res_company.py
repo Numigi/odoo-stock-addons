@@ -14,3 +14,23 @@ class ResCompany(models.Model):
         string="Check Zero Cost on Production", default=False)
     check_zero_cost_internal = fields.Boolean(
         string="Check Zero Cost on Internal Transfers", default=False)
+
+    zero_cost_precision_id = fields.Many2one(
+        comodel_name="decimal.precision",
+        string="Zero Cost Precision",
+        help="Determine the number of decimal places used to consider a product cost as zero.",
+        default=lambda self: self.env.ref("product.decimal_price", raise_if_not_found=False),
+    )
+
+    def _get_zero_cost_precision_digits(self):
+        """
+        Retrieve the decimal precision digits configured for the current company.
+        Fallback to the standard 'Product Price' precision if none is configured.
+        """
+        self.ensure_one()
+        precision_record = self.zero_cost_precision_id
+
+        # Determine the technical name to fetch
+        precision_name = precision_record.name if precision_record else "Product Price"
+
+        return self.env["decimal.precision"].precision_get(precision_name)
