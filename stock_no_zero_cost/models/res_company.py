@@ -28,9 +28,6 @@ class ResCompany(models.Model):
         Fallback to the standard 'Product Price' precision if none is configured.
         """
         self.ensure_one()
-        precision_record = self.zero_cost_precision_id
-
-        # Determine the technical name to fetch
+        precision_record = self.sudo().zero_cost_precision_id
         precision_name = precision_record.name if precision_record else "Product Price"
-
         return self.env["decimal.precision"].precision_get(precision_name)
