@@ -330,3 +330,25 @@ msgstr "Avertissement de valorisation à coût nul (Fabrication)"
 #, python-format
 msgid "Zero Cost Valuation Warning (Transfer)"
 msgstr "Avertissement de valorisation à coût nul (Transfert)"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_res_company__zero_cost_precision_id
+#: model:ir.model.fields,field_description:stock_no_zero_cost.field_res_config_settings__zero_cost_precision_id
+msgid "Zero Cost Precision"
+msgstr "Précision de coût nul"
+
+#. module: stock_no_zero_cost
+#: model:ir.model.fields,help:stock_no_zero_cost.field_res_company__zero_cost_precision_id
+#: model:ir.model.fields,help:stock_no_zero_cost.field_res_config_settings__zero_cost_precision_id
+msgid "Determine the number of decimal places used to consider a product cost as zero."
+msgstr "Détermine le nombre de décimales utilisé pour considérer un coût d'article comme nul."
+
+#. module: stock_no_zero_cost
+#: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.res_config_settings_view_form
+msgid "Zero Cost Decimal Precision"
+msgstr "Précision décimale de coût nul"
+
+#. module: stock_no_zero_cost
+#: model_terms:ir.ui.view,arch_db:stock_no_zero_cost.res_config_settings_view_form
+msgid "Select the decimal accuracy used when validating zero-cost products."
+msgstr "Sélectionnez la précision décimale utilisée lors de la validation d'articles à coût nul."
