@@ -3,7 +3,7 @@
 
 {
     'name': 'Stock Zero Cost Protection',
-    'version': '14.0.2.5.0',
+    'version': '14.0.2.4.0',
     'category': 'Inventory/Inventory',
     'summary': 'Prevent zero cost valuation on stock moves with a security bypass',
     "maintainer": "numigi",
@@ -12,7 +12,6 @@
     'depends': [
         'stock',
         'stock_account',
-        'purchase_stock',
     ],
     'data': [
         'security/res_groups.xml',

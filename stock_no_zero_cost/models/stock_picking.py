@@ -38,8 +38,6 @@ class StockPicking(models.Model):
                         if move.location_id.usage == 'supplier':
                             check_cost = True
                             cost = move.price_unit
-                            if move.purchase_line_id:
-                                cost = move.purchase_line_id.price_unit
                         # Inventory  (Always bloc)
                         elif move.location_id.usage == 'inventory':
                             check_cost = True
