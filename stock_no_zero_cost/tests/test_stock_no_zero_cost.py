@@ -315,11 +315,9 @@ class TestStockNoZeroCost(TransactionCase):
     def test_08_purchase_micro_cost_allowed(self):
         """TEST 8: A receipt from a Purchase Order with a micro-cost (e.g. 0.001)
         should NOT block, even if the stock move's price_unit is rounded to 0.0."""
-
-        # We only run this test if the 'purchase' module is installed
-        if 'purchase_line_id' not in self.env['stock.move']._fields:
-            return
-
+        decimal_price = self.env.ref('product.decimal_price')
+        decimal_price.digits = 4
+        self.env.company.zero_cost_precision_id = decimal_price.id
         partner = self.env['res.partner'].create({'name': 'Vendor Test'})
 
         # 1. Create a Purchase Order with a micro-cost of 0.001
