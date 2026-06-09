@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import pytest
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, ValidationError
 from .common import StockMoveCase
 
 
@@ -143,3 +143,17 @@ class TestStockMoves(StockMoveCase):
 
         with pytest.raises(ValidationError):
             self.move_serial_number(self.serial_1, self.location_2, self.location_3)
+
+    def test_worker_cannot_write_bypass_field(self):
+        # Ensure a standard stock user raises an AccessError when modifying the field
+        with pytest.raises(AccessError):
+            self.warehouse_3.with_user(self.user_stock_worker).write(
+                {"bypass_serial_single_quant": True}
+            )
+
+    def test_manager_can_write_bypass_field(self):
+        # Ensure a stock manager can successfully modify the field
+        self.warehouse_3.with_user(self.user_stock_manager).write(
+            {"bypass_serial_single_quant": True}
+        )
+        assert self.warehouse_3.bypass_serial_single_quant is True
