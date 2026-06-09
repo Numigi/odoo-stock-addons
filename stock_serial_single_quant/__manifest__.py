@@ -1,6 +1,9 @@
 # © Numigi (tm) and all its contributors (https://numigi.com/r/home)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+# pylint: disable=pointless-statement
+# noqa: B018
+
 {
     "name": "Stock Serial Single Quant",
     "summary": "Add constraints on serial numbers",
