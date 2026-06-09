@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_warehouse_inherit_stock_serial_single_quant" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.inherit.serial.single.quant</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='resupply_wh_ids']" position="after">
+                <field name="bypass_serial_single_quant"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

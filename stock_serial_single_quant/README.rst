@@ -53,6 +53,16 @@ If the serial number has a quant, the owner of the stock move line must match th
 
 .. image:: static/description/wrong_owner_message.png
 
+Configuration
+-------------
+To bypass the constraints for a specific warehouse:
+
+1. Go to **Inventory > Configuration > Warehouses**.
+2. Select the warehouse you want to configure.
+3. Check the box **Bypass Serial Constraints**.
+
+When this option is enabled, stock moves destined to this warehouse will not be subject to the single quant constraints. This is particularly useful for specific logistical flows (like quarantine or transit zones).
+
 Contributors
 ------------
 

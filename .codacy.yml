@@ -1,0 +1,11 @@
+# .codacy.yml
+# Exclude folders and heavy files from Codacy static analysis to prevent Diff/Deltas timeout
+exclude_paths:
+  - '**/data/**'
+  - '**/static/lib/**'
+  - '**/tests/**'
+  - '**/doc/**'
+  - '**/i18n/**'
+  - '**/*.csv'
+  - '**/*.po'
+  - '**/*.pot'
