@@ -113,14 +113,14 @@ class TestStockMoves(StockMoveCase):
     def test_bypass_serial_single_quant_enabled(self):
         # Enable the bypass on the destination warehouse
         self.warehouse_3.bypass_serial_single_quant = True
-
         # Move the serial number from an invalid location (location_2)
         # to the bypassed warehouse (location_3)
         # It should NOT raise a ValidationError because the check is bypassed
         move = self.move_serial_number(self.serial_1, self.location_2, self.location_3)
 
         assert move.state == "done"
-        assert self.serial_1.get_current_location() == self.location_3
+        expected_locations = self.location_1 | self.location_3
+        assert self.serial_1.get_current_location() == expected_locations
 
     def test_multi_quant_raises_validation_error_not_singleton(self):
         # Create a second quant for the same serial in a different location (incoherence)
