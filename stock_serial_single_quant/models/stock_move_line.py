@@ -58,17 +58,27 @@ class StockMoveLine(models.Model):
         self._check_serial_number_source_package()
         self._check_serial_number_source_owner()
 
+    def _requires_serial_check(self):
+        dest_warehouse = self.location_dest_id.get_warehouse()
+        is_bypassed = dest_warehouse.bypass_serial_single_quant
+        has_quants = bool(self.lot_id.sudo().get_positive_quants())
+        return not is_bypassed and has_quants
+
     def _check_serial_number_source_location(self):
-        serial_location = self.lot_id.get_current_location()
-        if serial_location != self.location_id:
-            raise ValidationError(
-                _(WRONG_LOCATION_MESSAGE).format(
-                    serial=self.lot_id.name,
-                    product=self.product_id.display_name,
-                    location=self.location_id.display_name,
-                    serial_location=serial_location.display_name,
-                )
+        serial_locations = self.lot_id.get_current_location()
+        if self.location_id not in serial_locations:
+            self._raise_wrong_location_error(serial_locations)
+
+    def _raise_wrong_location_error(self, serial_locations):
+        location_names = ", ".join(serial_locations.mapped("display_name"))
+        raise ValidationError(
+            _(WRONG_LOCATION_MESSAGE).format(
+                serial=self.lot_id.name,
+                product=self.product_id.display_name,
+                location=self.location_id.display_name,
+                serial_location=location_names,
             )
+        )
 
     def _check_serial_number_source_package(self):
         serial_package = self.lot_id.get_current_package()
