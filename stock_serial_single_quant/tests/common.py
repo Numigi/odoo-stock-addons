@@ -38,6 +38,41 @@ class StockMoveCase(common.SavepointCase):
         cls.owner_1 = cls.make_owner("Owner 1")
         cls.owner_2 = cls.make_owner("Owner 2")
 
+        cls.user_stock_worker = cls.env["res.users"].create(
+            {
+                "name": "Standard Stock User",
+                "login": "stock_worker_test",
+                "groups_id": [
+                    (
+                        6,
+                        0,
+                        [
+                            cls.env.ref("base.group_user").id,
+                            cls.env.ref("stock.group_stock_user").id,
+                        ],
+                    )
+                ],
+            }
+        )
+
+        # Create an inventory manager user
+        cls.user_stock_manager = cls.env["res.users"].create(
+            {
+                "name": "Stock Manager User",
+                "login": "stock_manager_test",
+                "groups_id": [
+                    (
+                        6,
+                        0,
+                        [
+                            cls.env.ref("base.group_user").id,
+                            cls.env.ref("stock.group_stock_manager").id,
+                        ],
+                    )
+                ],
+            }
+        )
+
     def move_serial_number(
         self,
         serial,
