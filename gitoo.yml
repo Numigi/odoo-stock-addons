@@ -11,6 +11,12 @@
   includes:
     - account_asset_management
 
+- url: https://github.com/OCA/dms
+  branch: "14.0"
+  includes:
+    - dms
+
+
 - url: https://github.com/oca/queue
   branch: "14.0"
   includes: ["queue_job"]
@@ -40,6 +46,12 @@
   branch: "14.0"
   includes:
     - onchange_helper
+    - auditlog
+
+- url: https://github.com/OCA/server-ux
+  branch: "14.0"
+  includes:
+    - mass_editing
 
 - url: https://github.com/OCA/stock-logistics-warehouse
   branch: "14.0"
