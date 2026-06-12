@@ -10,5 +10,5 @@ class StockWarehouse(models.Model):
     bypass_serial_single_quant = fields.Boolean(
         string="Bypass Serial Constraints",
         default=False,
-        groups="stock.group_stock_manager",
+        groups="stock_serial_single_quant.group_bypass_serial_single_quant",
     )
