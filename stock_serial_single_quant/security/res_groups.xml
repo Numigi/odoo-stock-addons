@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_bypass_serial_single_quant" model="res.groups">
+        <field name="name">Bypass Serial Constraints</field>
+        <field name="category_id" ref="base.module_category_inventory_inventory"/>
+        <field name="comment">Allows the user to enable the bypass of serial number constraints on a warehouse.</field>
+    </record>
+</odoo>
