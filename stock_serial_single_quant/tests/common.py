@@ -55,7 +55,7 @@ class StockMoveCase(common.SavepointCase):
             }
         )
 
-        # Create an inventory manager user
+        # Create an inventory manager user and grant him the specific bypass group
         cls.user_stock_manager = cls.env["res.users"].create(
             {
                 "name": "Stock Manager User",
@@ -66,6 +66,7 @@ class StockMoveCase(common.SavepointCase):
                         0,
                         [
                             cls.env.ref("base.group_user").id,
+                            cls.env.ref("stock.group_stock_manager").id,
                             cls.env.ref(
                                 "stock_serial_single_quant.group_bypass_serial_single_quant"
                             ).id,
