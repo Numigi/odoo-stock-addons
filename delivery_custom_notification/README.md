@@ -37,16 +37,36 @@ This module enables sending custom delivery notification emails to designated co
 
 **Tip**: Use the search filter "Delivery Contacts" to quickly find all tagged contacts in your system.
 
-### Step 3: Configure Delivery Carrier
+### Step 3: Configure Email Template
+
+Before configuring carriers, create your delivery notification email template:
+
+1. Navigate to **Settings > Technical > Email > Email Templates**
+2. Create a new template with these settings:
+   - **Name**: e.g., "Delivery Notification - 2Ship"
+   - **Applies to**: `stock.picking` (Transfers)
+   - **Email From**: Configure if using alternative server (e.g., Mailgun)
+   - **Outgoing Mail Server**: Select alternative server if needed
+   - **⚠️ CRITICAL - Leave EMPTY**:
+     - "To (Emails)" field
+     - "To (Partners)" field
+     - "CC" field
+   - **Subject**: Your custom subject line
+   - **Body**: Your custom HTML/text content (see example below)
+
+**Why leave recipients empty?**
+- The module programmatically sets the recipient (delivery contact or partner)
+- This prevents duplicate emails if template has preconfigured recipients
+- This ensures emails appear in the delivery order's Chatter (message history)
+- Operations teams can see email sending history directly on the picking
+
+### Step 4: Configure Delivery Carrier
 
 1. Navigate to **Inventory > Configuration > Delivery > Shipping Methods**
 2. Open a delivery carrier form
 3. Go to the new **Notifications** tab
 4. Check **Send Delivery Notification**
-5. Select a **Delivery Notification Template**
-   - Template must be configured for the `stock.picking` model
-   - You can create custom templates with tracking URLs and custom content
-   - Templates can specify alternative mail servers
+5. Select your **Delivery Notification Template** (created in Step 3)
 
 ### Email Template Example (for 2Ship integration)
 
@@ -63,8 +83,6 @@ Available fields in template:
 * `${object.carrier_tracking_ref}` - Tracking number
 * `${object.partner_id.ref}` - Customer reference
 
-**CRITICAL**: When creating the email template, **leave all recipient fields empty** (To, CC, Partner IDs). The module forces recipients programmatically to prevent duplicate emails.
-
 ## Usage
 
 Once configured, the system automatically handles notification sending:
@@ -75,6 +93,7 @@ Once configured, the system automatically handles notification sending:
 4. The system automatically sends the notification email to:
    - The configured delivery contact (if set), OR
    - The main partner (fallback)
+5. **Email Traceability**: The sent email appears in the delivery order's Chatter (message history at the bottom of the form), allowing operations teams to verify the notification was sent and to whom
 
 ## Technical Details
 

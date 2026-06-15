@@ -31,17 +31,14 @@ class StockPicking(models.Model):
             # Determine recipient: delivery contact if set, otherwise main partner
             recipient = picking.partner_id.delivery_contact_id or picking.partner_id
 
-            # Send email using the configured template
-            # Using send_mail() with email_values to force recipient and override any
-            # recipients configured in the template itself (avoids duplicate recipients)
+            # Send email using the configured template and post to chatter for traceability
+            # IMPORTANT: The email template should NOT have preconfigured recipients
+            # (leave "To" and "Partner IDs" fields empty in template configuration)
             template = picking.carrier_id.delivery_notification_template_id
-            template.send_mail(
-                picking.id,
-                force_send=True,
-                email_values={
-                    'recipient_ids': [(6, 0, recipient.ids)],
-                },
-                notif_layout='mail.mail_notification_light',
+            picking.with_context(force_send=True).message_post_with_template(
+                template.id,
+                email_layout_xmlid='mail.mail_notification_light',
+                partner_ids=recipient.ids,
             )
 
         # Call super for remaining pickings (standard behavior)
