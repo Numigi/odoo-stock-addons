@@ -6,6 +6,9 @@ This module enables sending custom delivery notification emails to designated co
 
 ## Features
 
+* **Contact Typing**: Tag contacts as "Delivery Contacts" using a dedicated boolean field
+* **Filtered Selection**: Only tagged delivery contacts appear in the selection dropdown
+* **Easy Search**: Filter and find all delivery contacts via the search view
 * **Delivery Contact Configuration**: Set a specific contact per partner who will receive delivery notifications
 * **Carrier-Level Configuration**: Enable/disable custom notifications and configure email templates per delivery carrier
 * **Intelligent Recipient Selection**: Automatically sends to delivery contact if configured, otherwise falls back to main partner
@@ -15,14 +18,26 @@ This module enables sending custom delivery notification emails to designated co
 
 ## Configuration
 
-### Partner Configuration
+### Step 1: Tag Delivery Contacts
 
-1. Navigate to **Contacts** and open a partner form
+1. Navigate to **Contacts** and open a contact record (not a company)
+2. Go to the **Sales & Purchase** tab
+3. In the **Sale** section, check the **Is Delivery Contact** checkbox
+4. This tags the contact as eligible for receiving delivery notifications
+
+**Note**: The "Is Delivery Contact" checkbox is only visible on contact records, not on company records.
+
+### Step 2: Assign Delivery Contact to Partner
+
+1. Navigate to **Contacts** and open a partner/company form
 2. Go to the **Sales & Purchase** tab
 3. In the **Misc** section, set the **Delivery Contact** field
-4. Select a contact from the partner's child contacts who should receive notifications
+4. The dropdown will only show child contacts that have been tagged as "Delivery Contacts"
+5. You can create a new delivery contact on-the-fly, and it will be automatically tagged
 
-### Delivery Carrier Configuration
+**Tip**: Use the search filter "Delivery Contacts" to quickly find all tagged contacts in your system.
+
+### Step 3: Configure Delivery Carrier
 
 1. Navigate to **Inventory > Configuration > Delivery > Shipping Methods**
 2. Open a delivery carrier form
