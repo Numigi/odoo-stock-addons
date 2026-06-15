@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Delivery Custom Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        .feature-list {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .feature-list li {
+            margin: 10px 0;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delivery Custom Notification</h1>
+
+    <div>
+        <span class="badge">Odoo 14.0</span>
+        <span class="badge">Inventory</span>
+        <span class="badge">Delivery</span>
+        <span class="badge">Email Automation</span>
+    </div>
+
+    <h2>Overview</h2>
+    <p>
+        Send custom delivery notification emails to designated contacts when deliveries are validated.
+        This module provides carrier-level control over notification emails, with support for custom
+        templates and alternative email servers.
+    </p>
+
+    <h2>Key Features</h2>
+    <div class="feature-list">
+        <ul>
+            <li><strong>Delivery Contact per Partner:</strong> Configure a specific contact who will receive all delivery notifications</li>
+            <li><strong>Carrier-Specific Templates:</strong> Each delivery method can have its own notification template</li>
+            <li><strong>Intelligent Fallback:</strong> Automatically sends to delivery contact if set, otherwise to main partner</li>
+            <li><strong>Alternative Mail Servers:</strong> Templates can be configured to use services like Mailgun</li>
+            <li><strong>Tracking URL Support:</strong> Include dynamic tracking links in notifications (compatible with 2Ship and others)</li>
+            <li><strong>Selective Application:</strong> Only affects configured carriers, preserving standard behavior for others</li>
+        </ul>
+    </div>
+
+    <h2>Use Cases</h2>
+    <ul>
+        <li>Send delivery notifications to warehouse contacts instead of accounting contacts</li>
+        <li>Use different notification templates for different carriers (standard, express, freight)</li>
+        <li>Integrate with third-party tracking systems via custom template URLs</li>
+        <li>Route delivery emails through dedicated transactional email services</li>
+        <li>Provide customers with branded tracking experiences</li>
+    </ul>
+
+    <h2>Configuration</h2>
+    <ol>
+        <li><strong>Partner Setup:</strong> Set the Delivery Contact in the Sales & Purchase tab</li>
+        <li><strong>Carrier Setup:</strong> Enable notifications and select template in the Notifications tab</li>
+        <li><strong>Template Creation:</strong> Create custom email templates with your branding and tracking URLs</li>
+    </ol>
+
+    <h2>Technical Information</h2>
+    <p><strong>Dependencies:</strong> delivery, stock</p>
+    <p><strong>License:</strong> LGPL-3.0</p>
+
+    <h2>Credits</h2>
+    <p><strong>Maintainer:</strong> Numigi</p>
+</body>
+</html>

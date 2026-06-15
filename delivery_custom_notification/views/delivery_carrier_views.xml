@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2026 Numigi -->
+<!-- License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+
+    <record id="view_delivery_carrier_form_notification" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.notification</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="notifications" string="Notifications">
+                    <group>
+                        <group name="notification_settings" string="Notification Settings">
+                            <field name="send_delivery_notification"/>
+                            <field name="delivery_notification_template_id"
+                                   attrs="{'invisible': [('send_delivery_notification', '=', False)],
+                                          'required': [('send_delivery_notification', '=', True)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <div class="text-muted" style="margin-top: 8px;">
+                            <strong>How it works:</strong>
+                            <ul>
+                                <li>When enabled, outgoing deliveries using this carrier will trigger a custom notification email</li>
+                                <li>The email will be sent to the partner's Delivery Contact (if configured), otherwise to the main partner</li>
+                                <li>The email template can be configured to use alternative mail servers (e.g., Mailgun)</li>
+                                <li>Only applies to delivery orders (WH/OUT), not other operation types</li>
+                            </ul>
+                        </div>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
