@@ -41,7 +41,10 @@ class StockPicking(models.Model):
                 partner_ids=recipient.ids,
             )
 
-        # Call super for remaining pickings (standard behavior)
-        remaining_pickings = self - custom_notification_pickings
+        # Call super for remaining outgoing pickings (standard behavior)
+        # Only process outgoing deliveries to avoid triggering notifications on PICK/PACK operations
+        remaining_pickings = (self - custom_notification_pickings).filtered(
+            lambda p: p.picking_type_id.code == 'outgoing'
+        )
         if remaining_pickings:
             super(StockPicking, remaining_pickings)._send_confirmation_email()

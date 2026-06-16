@@ -1,0 +1,100 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_custom_notification
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-15 21:00:00+0000\n"
+"PO-Revision-Date: 2026-06-15 21:00:00+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_custom_notification
+#: model:ir.model.fields,field_description:delivery_custom_notification.field_delivery_carrier__delivery_notification_template_id
+msgid "Delivery Notification Template"
+msgstr "Modèle de notification de livraison"
+
+#. module: delivery_custom_notification
+#: model:ir.model.fields,help:delivery_custom_notification.field_delivery_carrier__delivery_notification_template_id
+msgid "Email template used for delivery notifications. Must be configured for stock.picking model."
+msgstr "Modèle de courriel utilisé pour les notifications de livraison. Doit être configuré pour le modèle stock.picking."
+
+#. module: delivery_custom_notification
+#: model:ir.model.fields,field_description:delivery_custom_notification.field_res_partner__delivery_contact_id
+msgid "Delivery Contact"
+msgstr "Contact de livraison"
+
+#. module: delivery_custom_notification
+#: model:ir.model.fields.selection,name:delivery_custom_notification.selection__res_partner__type__delivery_contact
+msgid "Delivery Contact"
+msgstr "Contact de livraison"
+
+#. module: delivery_custom_notification
+#: model:ir.model.fields,help:delivery_custom_notification.field_res_partner__delivery_contact_id
+msgid "Contact who will receive delivery notifications instead of the main partner. Only contacts with type \"Delivery Contact\" are available for selection."
+msgstr "Contact qui recevra les notifications de livraison au lieu du partenaire principal. Seuls les contacts de type \"Contact de livraison\" sont disponibles pour la sélection."
+
+#. module: delivery_custom_notification
+#: model:ir.model.fields,field_description:delivery_custom_notification.field_delivery_carrier__send_delivery_notification
+msgid "Send Delivery Notification"
+msgstr "Envoyer la notification de livraison"
+
+#. module: delivery_custom_notification
+#: model:ir.model.fields,help:delivery_custom_notification.field_delivery_carrier__send_delivery_notification
+msgid "When enabled, a custom notification email will be sent when deliveries using this carrier are validated."
+msgstr "Lorsque activé, un courriel de notification personnalisé sera envoyé lorsque les livraisons utilisant ce transporteur sont validées."
+
+#. module: delivery_custom_notification
+#: model:ir.ui.view,arch_db:delivery_custom_notification.view_delivery_carrier_form_notification
+msgid "Notifications"
+msgstr "Notifications"
+
+#. module: delivery_custom_notification
+#: model:ir.ui.view,arch_db:delivery_custom_notification.view_delivery_carrier_form_notification
+msgid "How it works:"
+msgstr "Comment ça fonctionne :"
+
+#. module: delivery_custom_notification
+#: model:ir.ui.view,arch_db:delivery_custom_notification.view_delivery_carrier_form_notification
+msgid "When enabled, outgoing deliveries using this carrier will trigger a custom notification email"
+msgstr "Lorsque activé, les livraisons sortantes utilisant ce transporteur déclencheront un courriel de notification personnalisé"
+
+#. module: delivery_custom_notification
+#: model:ir.ui.view,arch_db:delivery_custom_notification.view_delivery_carrier_form_notification
+msgid "The email will be sent to the partner's Delivery Contact (if configured), otherwise to the main partner"
+msgstr "Le courriel sera envoyé au contact de livraison du partenaire (si configuré), sinon au partenaire principal"
+
+#. module: delivery_custom_notification
+#: model:ir.ui.view,arch_db:delivery_custom_notification.view_delivery_carrier_form_notification
+msgid "The email template can be configured to use alternative mail servers (e.g., Mailgun)"
+msgstr "Le modèle de courriel peut être configuré pour utiliser des serveurs de messagerie alternatifs (ex: Mailgun)"
+
+#. module: delivery_custom_notification
+#: model:ir.ui.view,arch_db:delivery_custom_notification.view_delivery_carrier_form_notification
+msgid "Only applies to delivery orders (WH/OUT), not other operation types"
+msgstr "S'applique uniquement aux bons de livraison (WH/OUT), pas aux autres types d'opérations"
+
+#. module: delivery_custom_notification
+#: model:ir.ui.view,arch_db:delivery_custom_notification.view_res_partner_filter_delivery_contact
+msgid "Delivery Contacts"
+msgstr "Contacts de livraison"
+
+#. module: delivery_custom_notification
+#: model:ir.model,name:delivery_custom_notification.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Méthodes d'expédition"
+
+#. module: delivery_custom_notification
+#: model:ir.model,name:delivery_custom_notification.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: delivery_custom_notification
+#: model:ir.model,name:delivery_custom_notification.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
