@@ -5,21 +5,19 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    """Extend partner to add delivery contact fields."""
+    """Extend partner to add delivery contact type and field."""
 
     _inherit = 'res.partner'
 
-    is_delivery_contact = fields.Boolean(
-        string='Is Delivery Contact',
-        default=False,
-        help='Check this box to mark this contact as a delivery contact. '
-             'Delivery contacts can be selected to receive delivery notifications.',
+    type = fields.Selection(
+        selection_add=[('delivery_contact', 'Delivery Contact')],
+        ondelete={'delivery_contact': 'set default'},
     )
     delivery_contact_id = fields.Many2one(
         'res.partner',
         string='Delivery Contact',
-        domain="[('parent_id', '=', id), ('is_delivery_contact', '=', True)]",
+        domain="[('parent_id', '=', id), ('type', '=', 'delivery_contact')]",
         help='Contact who will receive delivery notifications instead of the main partner. '
-             'Only contacts with the "Is Delivery Contact" flag checked are available for selection.',
+             'Only contacts with type "Delivery Contact" are available for selection.',
         check_company=True,
     )

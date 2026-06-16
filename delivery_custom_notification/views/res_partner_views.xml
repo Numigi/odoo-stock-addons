@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <record id="view_partner_form_is_delivery_contact" model="ir.ui.view">
-        <field name="name">res.partner.form.is.delivery.contact</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//group[@name='sale']" position="inside">
-                <field name="is_delivery_contact"
-                       attrs="{'invisible': [('company_type', '=', 'company')]}"/>
-            </xpath>
-        </field>
-    </record>
-
     <record id="view_partner_form_delivery_contact" model="ir.ui.view">
         <field name="name">res.partner.form.delivery.contact</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='sales_purchases']//group[@name='misc']" position="inside">
+            <field name="property_delivery_carrier_id" position="after">
                 <field name="delivery_contact_id"
-                       domain="[('parent_id', '=', id), ('is_delivery_contact', '=', True)]"
-                       context="{'default_is_delivery_contact': True, 'default_parent_id': id, 'default_type': 'contact'}"/>
-            </xpath>
+                       domain="[('parent_id', '=', id), ('type', '=', 'delivery_contact')]"
+                       context="{'default_type': 'delivery_contact', 'default_parent_id': id}"/>
+            </field>
         </field>
     </record>
 
@@ -32,9 +20,10 @@
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
             <filter name="inactive" position="before">
-                <filter name="is_delivery_contact"
+                <separator/>
+                <filter name="delivery_contact"
                         string="Delivery Contacts"
-                        domain="[('is_delivery_contact', '=', True)]"/>
+                        domain="[('type', '=', 'delivery_contact')]"/>
             </filter>
         </field>
     </record>

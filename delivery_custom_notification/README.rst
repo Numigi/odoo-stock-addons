@@ -6,8 +6,8 @@ It provides fine-grained control over delivery notifications at the carrier leve
 
 Features
 --------
-* **Contact Typing**: Tag contacts as "Delivery Contacts" using a dedicated boolean field
-* **Filtered Selection**: Only tagged delivery contacts appear in the selection dropdown
+* **Contact Typing**: Use native Odoo contact types with new "Delivery Contact" option
+* **Filtered Selection**: Only contacts with type "Delivery Contact" appear in the selection dropdown
 * **Easy Search**: Filter and find all delivery contacts via the search view
 * **Carrier-Level Configuration**: Enable/disable custom notifications and configure email templates per delivery carrier
 * **Intelligent Recipient Selection**: Automatically sends to delivery contact if configured, otherwise falls back to main partner
@@ -19,24 +19,25 @@ Features
 Configuration
 -------------
 
-Step 1: Tag Delivery Contacts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. Navigate to **Contacts** and open a contact record (not a company)
-2. Go to the **Sales & Purchase** tab
-3. In the **Sale** section, check the **Is Delivery Contact** checkbox
-4. This tags the contact as eligible for receiving delivery notifications
+Step 1: Create Delivery Contact
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Navigate to **Contacts** and open a partner/company form
+2. Create a new contact (or open an existing child contact)
+3. In the contact form, set the **Type** field to **"Delivery Contact"**
+4. Fill in the contact's email address
+5. Save the contact
 
-**Note**: The "Is Delivery Contact" checkbox is only visible on contact records, not on company records.
+**Note**: The "Delivery Contact" type appears in the standard Odoo Type field (same as Invoice Address, Delivery Address, etc.).
 
 Step 2: Assign Delivery Contact to Partner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. Navigate to **Contacts** and open a partner/company form
 2. Go to the **Sales & Purchase** tab
 3. In the **Misc** section, set the **Delivery Contact** field
-4. The dropdown will only show child contacts that have been tagged as "Delivery Contacts"
-5. You can create a new delivery contact on-the-fly, and it will be automatically tagged
+4. The dropdown will only show child contacts with type "Delivery Contact"
+5. You can create a new delivery contact on-the-fly by clicking "Create and Edit"
 
-**Tip**: Use the search filter "Delivery Contacts" to quickly find all tagged contacts in your system.
+**Tip**: Use the search filter "Delivery Contacts" to quickly find all contacts of this type in your system.
 
 Step 3: Configure Email Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,7 +107,7 @@ Technical Details
 
 Models Extended
 ~~~~~~~~~~~~~~~
-* **res.partner**: Adds ``is_delivery_contact`` and ``delivery_contact_id`` fields
+* **res.partner**: Extends ``type`` selection with new "Delivery Contact" option and adds ``delivery_contact_id`` field
 * **delivery.carrier**: Adds ``send_delivery_notification`` and ``delivery_notification_template_id`` fields
 * **stock.picking**: Overrides ``_send_confirmation_email()`` method
 
