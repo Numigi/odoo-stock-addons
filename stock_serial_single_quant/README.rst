@@ -55,6 +55,21 @@ If the serial number has a quant, the owner of the stock move line must match th
 
 Configuration
 -------------
+
+Security Group
+~~~~~~~~~~~~~~
+Access to the bypass configuration is controlled by the security group **Bypass Serial Constraints**.
+
+To grant a user access to configure the bypass option:
+
+1. Go to **Settings > Users & Companies > Users**.
+2. Select the user you want to configure.
+3. In the **Inventory** section, enable the **Bypass Serial Constraints** permission.
+
+Only users with this permission can view and modify the bypass settings on warehouses.
+
+Bypass by Warehouse
+~~~~~~~~~~~~~~~~~~~
 To bypass the constraints for a specific warehouse:
 
 1. Go to **Inventory > Configuration > Warehouses**.
