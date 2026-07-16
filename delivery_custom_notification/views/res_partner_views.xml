@@ -8,8 +8,8 @@
         <field name="arch" type="xml">
             <field name="property_delivery_carrier_id" position="after">
                 <field name="delivery_contact_id"
-                       domain="[('parent_id', '=', id), ('type', '=', 'delivery_contact')]"
-                       context="{'default_type': 'delivery_contact', 'default_parent_id': id}"/>
+                       domain="[('parent_id', '=', id)]"
+                       context="{'default_parent_id': id, 'default_type': 'contact'}"/>
             </field>
         </field>
     </record>
@@ -23,7 +23,7 @@
                 <separator/>
                 <filter name="delivery_contact"
                         string="Delivery Contacts"
-                        domain="[('type', '=', 'delivery_contact')]"/>
+                        domain="[('delivery_contact_for_partner_ids', '!=', False)]"/>
             </filter>
         </field>
     </record>

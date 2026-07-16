@@ -6,9 +6,9 @@ It provides fine-grained control over delivery notifications at the carrier leve
 
 Features
 --------
-* **Contact Typing**: Use native Odoo contact types with new "Delivery Contact" option
-* **Filtered Selection**: Only contacts with type "Delivery Contact" appear in the selection dropdown
-* **Easy Search**: Filter and find all delivery contacts via the search view
+* **Dynamic Contact Selection**: Any partner can be selected as a delivery contact - no manual tagging required
+* **Smart Search Filter**: Automatically find all contacts currently used as delivery contacts across your system
+* **Flexible Assignment**: Select child contacts or any other partner as the delivery notification recipient
 * **Carrier-Level Configuration**: Enable/disable custom notifications and configure email templates per delivery carrier
 * **Intelligent Recipient Selection**: Automatically sends to delivery contact if configured, otherwise falls back to main partner
 * **Template Flexibility**: Use custom email templates with support for alternative mail servers (e.g., Mailgun)
@@ -19,27 +19,20 @@ Features
 Configuration
 -------------
 
-Step 1: Create Delivery Contact
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. Navigate to **Contacts** and open a partner/company form
-2. Create a new contact (or open an existing child contact)
-3. In the contact form, set the **Type** field to **"Delivery Contact"**
-4. Fill in the contact's email address
-5. Save the contact
-
-**Note**: The "Delivery Contact" type appears in the standard Odoo Type field (same as Invoice Address, Delivery Address, etc.).
-
-Step 2: Assign Delivery Contact to Partner
+Step 1: Assign Delivery Contact to Partner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. Navigate to **Contacts** and open a partner/company form
 2. Go to the **Sales & Purchase** tab
 3. In the **Misc** section, set the **Delivery Contact** field
-4. The dropdown will only show child contacts with type "Delivery Contact"
-5. You can create a new delivery contact on-the-fly by clicking "Create and Edit"
+4. The dropdown will show all child contacts of the current partner
+5. You can create a new contact on-the-fly by clicking "Create and Edit"
+6. Ensure the selected contact has a valid email address
 
-**Tip**: Use the search filter "Delivery Contacts" to quickly find all contacts of this type in your system.
+**Important**: Any partner can be selected as a delivery contact. There is no special tagging or type required - simply select the contact who should receive delivery notifications.
 
-Step 3: Configure Email Template
+**Dynamic Search Filter**: Use the "Delivery Contacts" search filter to find all partners currently being used as delivery contacts across your entire system. This filter dynamically shows any contact that is set as a delivery contact for at least one other partner.
+
+Step 2: Configure Email Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Before configuring carriers, create your delivery notification email template:
 
@@ -66,13 +59,13 @@ Before configuring carriers, create your delivery notification email template:
 - This ensures emails appear in the delivery order's Chatter (message history)
 - Operations teams can see email sending history directly on the picking
 
-Step 4: Configure Delivery Carrier
+Step 3: Configure Delivery Carrier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. Navigate to **Inventory > Configuration > Delivery > Shipping Methods**
 2. Open a delivery carrier form
 3. Go to the new **Notifications** tab
 4. Check **Send Delivery Notification**
-5. Select your **Delivery Notification Template** (created in Step 3)
+5. Select your **Delivery Notification Template** (created in Step 2)
 
 Email Template Example (2Ship Integration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,7 +100,7 @@ Technical Details
 
 Models Extended
 ~~~~~~~~~~~~~~~
-* **res.partner**: Extends ``type`` selection with new "Delivery Contact" option and adds ``delivery_contact_id`` field
+* **res.partner**: Adds ``delivery_contact_id`` Many2one field and ``delivery_contact_for_partner_ids`` One2many reverse relation field
 * **delivery.carrier**: Adds ``send_delivery_notification`` and ``delivery_notification_template_id`` fields
 * **stock.picking**: Overrides ``_send_confirmation_email()`` method
 
