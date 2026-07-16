@@ -3,13 +3,13 @@
 
 {
     "name": "Delivery Custom Notification",
-    "version": "14.0.1.2.0",
+    "version": "14.0.1.3.0",
     "author": "Numigi",
     "maintainer": "Numigi",
     "website": "https://numigi.com/r/home",
     "license": "LGPL-3",
     "category": "Inventory",
-    "summary": "Send custom delivery notifications to specific contacts",
+    "summary": "Send custom delivery notifications to dynamically selected delivery contacts",
     "depends": [
         "delivery",
         "stock",
