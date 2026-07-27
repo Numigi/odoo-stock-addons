@@ -12,12 +12,14 @@ class DeliveryCarrier(models.Model):
     send_delivery_notification = fields.Boolean(
         string='Send Delivery Notification',
         default=False,
-        help='When enabled, a custom notification email will be sent when deliveries using this carrier are validated.',
+        help='When enabled, a custom notification email will be sent '
+             'when deliveries using this carrier are validated.',
     )
     delivery_notification_template_id = fields.Many2one(
         'mail.template',
         string='Delivery Notification Template',
         domain="[('model', '=', 'stock.picking')]",
-        help='Email template used for delivery notifications. Must be configured for stock.picking model.',
+        help='Email template used for delivery notifications. '
+             'Must be configured for stock.picking model.',
         check_company=True,
     )

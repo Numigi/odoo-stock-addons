@@ -7,18 +7,21 @@ from odoo import models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    def _action_done(self, cancel_backorder=False):
-        moves_with_serial_numbers = self.filtered(lambda m: m._has_serialized_product())
-        for move in moves_with_serial_numbers:
-            move._check_serial_number_constraints()
-        return super()._action_done(cancel_backorder=cancel_backorder)
+    def _action_done(self, **kwargs):
+        self._check_all_serial_number_constraints()
+        return super()._action_done(**kwargs)
 
-    def _has_serialized_product(self):
-        return self.product_id.tracking == "serial"
+    def _check_all_serial_number_constraints(self):
+        moves = self._get_serialized_moves()
+        for move in moves:
+            move._check_serial_number_constraints()
+
+    def _get_serialized_moves(self):
+        return self.filtered(lambda m: m.product_id.tracking == "serial")
 
     def _check_serial_number_constraints(self):
-        lines_to_check = self._get_lines_to_check()
-        for line in lines_to_check:
+        lines = self._get_lines_to_check()
+        for line in lines:
             line.check_serial_number_constraints()
 
     def _get_lines_to_check(self):

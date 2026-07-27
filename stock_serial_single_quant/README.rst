@@ -1,4 +1,4 @@
-Stock Serial Single Quant
+rrrrrrrrrrrrrStock Serial Single Quant
 =========================
 This module prevents having multiple quants with the same serial number.
 
