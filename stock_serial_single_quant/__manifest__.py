@@ -7,7 +7,7 @@
 {
     "name": "Stock Serial Single Quant",
     "summary": "Add constraints on serial numbers",
-    "version": "14.0.1.3.0",
+    "version": "14.0.1.4.0",
     "category": "Inventory",
     "author": "Numigi",
     "license": "LGPL-3",
