@@ -12,4 +12,3 @@ class StockWarehouse(models.Model):
         default=False,
         groups="stock_serial_single_quant.group_bypass_serial_single_quant",
     )
-
