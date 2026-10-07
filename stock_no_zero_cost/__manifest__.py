@@ -6,9 +6,10 @@
     'version': '14.0.2.4.0',
     'category': 'Inventory/Inventory',
     'summary': 'Prevent zero cost valuation on stock moves with a security bypass',
-    "maintainer": "numigi",
-    "website": "https://numigi.com/r/home",
-    "license": "LGPL-3",
+    'maintainer': 'Numigi',
+    'author': 'Numigi',
+    'website': 'https://numigi.com/r/home',
+    'license': 'LGPL-3',
     'depends': [
         'stock',
         'stock_account',
