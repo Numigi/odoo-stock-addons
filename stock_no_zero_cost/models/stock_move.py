@@ -42,7 +42,7 @@ class StockMove(models.Model):
                     # Purchase   (Always bloc)
                     if move.location_id.usage == 'supplier':
                         check_cost = True
-                        cost = move.price_unit
+                        cost = move._get_price_unit()
                     # Inventory  (Always bloc)
                     elif move.location_id.usage == 'inventory':
                         check_cost = True

@@ -37,7 +37,13 @@ class StockPicking(models.Model):
                         # Purchase   (Always bloc)
                         if move.location_id.usage == 'supplier':
                             check_cost = True
-                            cost = move.price_unit
+                            # Use the effective valuation price rather than the
+                            # raw price_unit field. On return moves (e.g.
+                            # receiving a supplier return), price_unit is always
+                            # 0 (copy=False), but _get_price_unit() recovers the
+                            # real cost from the original move's valuation layers
+                            # or standard_price.
+                            cost = move._get_price_unit()
                         # Inventory  (Always bloc)
                         elif move.location_id.usage == 'inventory':
                             check_cost = True
