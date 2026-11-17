@@ -3,7 +3,6 @@
     <data noupdate="1">
         <record id="group_allow_zero_cost_move" model="res.groups">
             <field name="name">Allow zero cost stock moves</field>
-            <field name="category_id" ref="base.module_category_inventory_inventory"/>
             <field name="comment">Allows users to validate stock moves (receipts, transfers, adjustments) even if the product valuation is zero.</field>
         </record>
     </data>
